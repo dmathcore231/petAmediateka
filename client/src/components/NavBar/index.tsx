@@ -80,20 +80,17 @@ export function NavBar(): JSX.Element {
         </ul>
       </div>
       <div className="nav-bar__item">
-        <Btn
-          type="button"
-          className="btn_primary"
-          onClick={() => { }}
-        >
-          Регистрация
-        </Btn>
-        <Btn
-          type="button"
-          className="btn_primary"
-          onClick={() => { }}
-        >
-          Вход
-        </Btn>
+        <div className="nav-bar__wrapper">
+          <Link to="/" className="btn btn_secondary btn_size_sm btn_margin_right_20">
+            Ввести промокод
+          </Link>
+          <Link to="/" className="btn btn_secondary btn_size_xsm">
+            Войти
+          </Link>
+          <Link to="/" className="btn btn_primary btn_size_sm">
+            Попробовать за 1₽
+          </Link>
+        </div>
       </div>
     </nav>
   )

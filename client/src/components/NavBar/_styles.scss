@@ -1,6 +1,6 @@
 .nav-bar {
   @include flex-between;
-  padding: 1.563rem 0;
+  padding: 1.563rem 2.5rem;
 
   &__logo {
     @include flex-center;
@@ -8,20 +8,20 @@
 
   &-list {
     @include flex-center;
-    gap: 1.563rem;
+    gap: 2.5rem;
 
     &__link {
       @include flex-center;
       gap: 1rem;
-      fill: $white-color;
+      fill: $color-white;
 
       &_active {
         @include flex-center;
         gap: 1rem;
-        fill: $warning-color;
+        fill: $color-primary;
 
         &>span {
-          color: $warning-color;
+          color: $color-primary;
         }
       }
     }
@@ -29,6 +29,17 @@
 
   &__item {
     @include flex-center;
-    gap: 2.5rem;
+    gap: 5rem;
+
+    &_gap {
+
+      &_sm {
+        gap: 1.563rem;
+      }
+    }
+  }
+
+  &__wrapper {
+    @include flex-center;
   }
 }

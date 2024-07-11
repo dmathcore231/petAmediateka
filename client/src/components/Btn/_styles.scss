@@ -1,38 +1,37 @@
 .btn {
-  --btn-color: white;
-  --btn-color-hover: black;
-  --btn-color-active: black;
+  --btn-width: 15rem;
+  --btn-height: 100%;
+
+  --btn-color: $color-white;
+  --btn-color-hover: $color-black;
+  --btn-color-active: $color-black;
 
   --btn-bg-color: transparent;
   --btn-bg-color-hover: transparent;
   --btn-bg-color-active: transparent;
 
-  --btn-border-size: 1px;
+  --btn-border-size: 2px;
   --btn-border-color: transparent;
   --btn-border-color-hover: transparent;
   --btn-border-color-active: transparent;
 
   --btn-radius: 0.5rem;
 
-  --btn-font-size: 1.375rem;
+  --btn-font-size: 1.125rem;
   --btn-font-weight: 400;
-  --btn-line-height: 1.75rem;
+  --btn-line-height: 1.5rem;
 
-  --btn-padding: 0.75rem 1rem;
+  --btn-padding: 0.625rem 0;
 
-  --btn-transition-time: 0.4s;
+  --btn-transition: background-color 0.4s ease-in-out, opacity 0.4s ease-in-out, color 0.4s ease, border-color 0.4s ease;
 
-  --btn-fill: black;
-  --btn-fill-hover: black;
-  --btn-fill-active: black;
+  --btn-fill: $color-black;
+  --btn-fill-hover: $color-black;
+  --btn-fill-active: $color-black;
 
-  --btn-focus-visibility: 0px 0px 8px 3px rgba(0, 0, 0, 0.6);
-  --btn-hover-box-shadow: none;
-
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  text-transform: capitalize;
+  width: var(--btn-width);
+  height: var(--btn-height);
+  @include flex-center;
   color: var(--btn-color);
   background-color: var(--btn-bg-color);
   border: var(--btn-border-size) solid var(--btn-border-color);
@@ -41,9 +40,8 @@
   font-weight: var(--btn-font-weight);
   line-height: var(--btn-line-height);
   padding: var(--btn-padding);
-  width: 100%;
   cursor: pointer;
-  transition: background-color var(--btn-transition-time);
+  transition: var(--btn-transition);
   fill: var(--btn-fill);
 
   &:hover {
@@ -51,7 +49,6 @@
     background-color: var(--btn-bg-color-hover);
     border-color: var(--btn-border-color-hover);
     fill: var(--btn-fill-hover);
-    box-shadow: var(--btn-hover-box-shadow);
   }
 
   &:active {
@@ -59,26 +56,47 @@
     background-color: var(--btn-bg-color-active);
     border-color: var(--btn-border-color-active);
     fill: var(--btn-fill-active);
-    transition: border-color var(--btn-transition-time);
-  }
-
-  &:focus-visible {
-    outline: none;
-    box-shadow: var(--btn-focus-visibility);
   }
 
   &_primary {
-    --btn-bg-color: var(--black-color);
-    --btn-border-size: 2px;
-    --btn-border-color: var(--black-color);
+    --btn-color: #{$color-black};
+    --btn-bg-color: #{$color-primary};
 
-    --btn-color-hover: var(--black-color);
-    --btn-border-color-hover: var(--black-color);
-    --btn-hover-box-shadow: 0px 0px 8px 3px rgba(0, 0, 0, 0.6);
+    --btn-color-hover: #{$color-black};
+    --btn-bg-color-hover: #{$color-primary-hover};
+
+    --btn-color-active: #{$color-black};
+    --btn-bg-color-active: #{$color-primary-active};
   }
 
-  &_disabled {
-    pointer-events: none;
-    opacity: 0.7;
+  &_secondary {
+    --btn-bg-color: #{$color-secondary};
+
+    --btn-bg-color-hover: #{$color-secondary-hover};
+
+    --btn-bg-color-active: #{$color-secondary-active};
+  }
+
+  &_size {
+
+    &_sm {
+      --btn-width: 11.75rem;
+      --btn-padding: 0.375rem 0;
+    }
+
+    &_xsm {
+      --btn-width: 6.875rem;
+      --btn-padding: 0.375rem 0;
+    }
+  }
+
+  &_margin {
+
+    &_right {
+
+      &_20 {
+        margin-right: 1.25rem;
+      }
+    }
   }
 }

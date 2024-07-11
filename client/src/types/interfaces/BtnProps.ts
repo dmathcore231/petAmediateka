@@ -2,8 +2,8 @@ import { ReactNode, MouseEventHandler } from "react"
 
 export interface BtnProps {
   type: "button" | "submit"
-  className: string
   children: ReactNode
+  className: string
   onClick?: MouseEventHandler<HTMLButtonElement>
   disabled?: boolean
 }
