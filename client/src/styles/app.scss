@@ -1,0 +1,21 @@
+@import "./scaffold";
+@import "./variables";
+@import "./mixins";
+@import "./typography";
+
+@import "../components/App/styles";
+@import "../components/Layout/styles";
+@import "../components/Header/styles";
+@import "../components/Main/styles";
+@import "../components/Footer/styles";
+@import "../components/NavBar/styles";
+@import "../components/Btn/styles";
+
+@import "../pages/Home/styles";
+@import "../pages/Series/styles";
+@import "../pages/Movies/styles";
+@import "../pages/Collections/styles";
+@import "../pages/Trailers/styles";
+@import "../pages/Kino1tv/styles";
+@import "../pages/Tv/styles";
+@import "../pages/Search/styles";

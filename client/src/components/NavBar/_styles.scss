@@ -1,0 +1,34 @@
+.nav-bar {
+  @include flex-between;
+  padding: 1.563rem 0;
+
+  &__logo {
+    @include flex-center;
+  }
+
+  &-list {
+    @include flex-center;
+    gap: 1.563rem;
+
+    &__link {
+      @include flex-center;
+      gap: 1rem;
+      fill: $white-color;
+
+      &_active {
+        @include flex-center;
+        gap: 1rem;
+        fill: $warning-color;
+
+        &>span {
+          color: $warning-color;
+        }
+      }
+    }
+  }
+
+  &__item {
+    @include flex-center;
+    gap: 2.5rem;
+  }
+}
