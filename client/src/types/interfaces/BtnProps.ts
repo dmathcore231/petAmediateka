@@ -4,6 +4,6 @@ export interface BtnProps {
   type: "button" | "submit"
   children: ReactNode
   className: string
-  onClick?: MouseEventHandler<HTMLButtonElement>
+  onClick: MouseEventHandler<HTMLButtonElement>
   disabled?: boolean
 }

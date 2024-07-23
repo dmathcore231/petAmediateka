@@ -77,6 +77,12 @@
     --btn-bg-color-active: #{$color-secondary-active};
   }
 
+  &_transparent {
+    --btn-width: 100%;
+    --btn-height: 100%;
+    --btn-padding: 0;
+  }
+
   &_size {
 
     &_sm {

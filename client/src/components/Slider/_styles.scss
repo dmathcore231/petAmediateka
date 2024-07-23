@@ -1,0 +1,69 @@
+.slider {
+  --animation-time: .4s;
+  --transition: transform var(--animation-time) ease-in-out 0ms;
+  --transitionNone: none;
+
+  position: relative;
+  width: 100%;
+  height: 100%;
+  stroke: white;
+  fill: transparent;
+  overflow: hidden;
+
+  &__btn {
+    position: absolute;
+    top: 40%;
+    z-index: 5;
+
+    &_prev {
+      left: 0;
+    }
+
+    &_next {
+      right: 0;
+    }
+  }
+
+  &__list {
+    @include flex-center;
+    justify-content: flex-start;
+    transition: var(--transition);
+
+  }
+
+  &__item {
+    position: relative;
+    @include flex-center;
+    width: calc(100% - 200px);
+    height: 820px;
+    flex-shrink: 0;
+    border-radius: 24px;
+    transition: transform var(--animation-time) ease-in-out 0ms;
+    margin: 0 100px;
+
+    &:first-child {}
+
+    &:last-child {}
+
+    &_next {
+      left: -200px;
+      transform: scale(0.95);
+    }
+
+    &_active {
+      transform: scale(1);
+    }
+
+    &_prev {
+      left: 200px;
+      transform: scale(0.95);
+    }
+  }
+
+  &__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 24px;
+  }
+}

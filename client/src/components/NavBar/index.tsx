@@ -8,7 +8,7 @@ export function NavBar(): JSX.Element {
     <nav className="nav-bar">
       <div className="nav-bar__item">
         <Link to="/" className="nav-bar__logo">
-          <Logo width="168px" height="16px" />
+          <Logo width={168} height={16} />
         </Link>
         <ul className="nav-bar-list">
           <li className="nav-bar-list__item">
@@ -44,7 +44,7 @@ export function NavBar(): JSX.Element {
                 isActive ? "nav-bar-list__link_active" : "nav-bar-list__link"
               }
             >
-              <span>Трейлеры</span>
+              <span className="title">Трейлеры</span>
             </NavLink>
           </li>
           <li className="nav-bar-list__item">
@@ -71,7 +71,7 @@ export function NavBar(): JSX.Element {
                 isActive ? "nav-bar-list__link_active" : "nav-bar-list__link"
               }
             >
-              <SearchIcon width="14px" height="14px" />
+              <SearchIcon width={20} height={20} />
               <span className="title">
                 Поиск
               </span>
