@@ -1,0 +1,17 @@
+.badge {
+  @include flex-center;
+  color: $color-black;
+  text-transform: uppercase;
+  padding: 3px 8px 1px;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 20px;
+
+  &_primary {
+    background-color: $color-primary;
+  }
+
+  &_secondary {
+    background-color: $color-orangeBrown;
+  }
+}

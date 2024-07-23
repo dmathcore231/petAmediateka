@@ -158,7 +158,7 @@ export function Slider({ size, dataSlide, scaleHover, pagenation, autoSwipe, pla
               key={index}
               className={setClassSlide(index)}
             >
-              <img src={slide.imgBg} alt="slide" className="slider__img" />
+              <Card size={size} data={slide} />
             </li>
           ))}
         </ul>
