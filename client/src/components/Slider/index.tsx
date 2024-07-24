@@ -5,7 +5,7 @@ import { SliderProps } from "../../types/interfaces/SliderProps"
 import { ArrowLeftIcon } from "../../assets/icons/ArrowLeftIcon"
 import { ArrowRightIcon } from "../../assets/icons/ArrowRightIcon"
 
-export function Slider({ size, dataSlide, scaleHover, pagenation, autoSwipe, playbacBgHover, lastSwipe }: SliderProps): JSX.Element {
+export function Slider({ dataSlide, scaleHover, pagenation, autoSwipe, playbacBgHover, lastSwipe }: SliderProps): JSX.Element {
 
   const animatedTime = 400
 
@@ -158,7 +158,7 @@ export function Slider({ size, dataSlide, scaleHover, pagenation, autoSwipe, pla
               key={index}
               className={setClassSlide(index)}
             >
-              <Card size={size} data={slide} />
+              <Card size={'lg'} data={slide} />
             </li>
           ))}
         </ul>

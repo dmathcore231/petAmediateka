@@ -5,7 +5,6 @@ import { temporarySlide } from "../../helpers"
 export function Home(): JSX.Element {
 
   const sliderProps: SliderProps = {
-    size: "lg",
     dataSlide: temporarySlide,
     scaleHover: false,
     pagenation: true,
