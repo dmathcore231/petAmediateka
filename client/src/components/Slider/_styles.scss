@@ -52,4 +52,33 @@
       transform: scale(0.95);
     }
   }
+
+  &-pagination {
+    position: relative;
+    bottom: 50px;
+    z-index: 5;
+    @include flex-center;
+    gap: 1rem;
+    padding: 0 160px;
+
+    &__item {
+      height: 4px;
+      background-color: $color-secondary;
+      border-radius: 8px;
+      flex-grow: 1;
+      transition: all .5s ease;
+
+      &_active {
+        background-color: $color-secondary-hover;
+        flex-grow: 2;
+      }
+    }
+
+    &__active-line {
+      transition: all .5s ease;
+      height: 100%;
+      background-color: $color-white;
+      border-radius: 8px;
+    }
+  }
 }

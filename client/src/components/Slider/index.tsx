@@ -8,6 +8,7 @@ import { ArrowRightIcon } from "../../assets/icons/ArrowRightIcon"
 export function Slider({ dataSlide, scaleHover, pagenation, autoSwipe, playbacBgHover, lastSwipe }: SliderProps): JSX.Element {
 
   const animatedTime = 400
+  const autoSwipeTime = 100
 
   const [stateSlider, setStateSlider] = useState({
     prevSlide: dataSlide.length - 1,
@@ -17,6 +18,7 @@ export function Slider({ dataSlide, scaleHover, pagenation, autoSwipe, playbacBg
     indexSlide: 0,
     isAnimated: false,
   })
+  const [progress, setProgress] = useState<number>(0)
 
   const sliderListRef = useRef<HTMLUListElement>(null)
 
@@ -89,6 +91,28 @@ export function Slider({ dataSlide, scaleHover, pagenation, autoSwipe, playbacBg
     }
   }, [stateSlider.indexSlide, dataSlide])
 
+  useEffect(() => {
+    let interval: number
+
+    if (autoSwipe) {
+      interval = setInterval(() => {
+        setProgress((prevProgress) => {
+          if (prevProgress >= 100) {
+            handleClickBtnNext()
+            return 0
+          }
+          return prevProgress + 1
+        })
+      }, autoSwipeTime)
+    }
+
+    return () => {
+      if (interval) {
+        clearInterval(interval)
+      }
+    }
+  }, [autoSwipe])
+
   const setClassSlide = (index: number) => {
     if (index === stateSlider.indexSlide) {
       return "slider__item slider__item_active"
@@ -110,6 +134,8 @@ export function Slider({ dataSlide, scaleHover, pagenation, autoSwipe, playbacBg
       indexSlide: prev.activeSlide + 1,
       isAnimated: true,
     }))
+
+    setProgress(0)
   }
 
   const handleClickBtnPrev = () => {
@@ -121,6 +147,8 @@ export function Slider({ dataSlide, scaleHover, pagenation, autoSwipe, playbacBg
       indexSlide: ((prev.activeSlide - 1 + dataSlide.length) % dataSlide.length) + 1,
       isAnimated: true,
     }))
+
+    setProgress(0)
   }
 
   return (
@@ -159,6 +187,22 @@ export function Slider({ dataSlide, scaleHover, pagenation, autoSwipe, playbacBg
               className={setClassSlide(index)}
             >
               <Card size={'lg'} data={slide} />
+            </li>
+          ))}
+        </ul>
+        <ul className="slider-pagination">
+          {dataSlide.map((slide, index) => (
+            <li
+              key={index}
+              className={`${stateSlider.activeSlide === index ? 'slider-pagination__item slider-pagination__item_active' : 'slider-pagination__item'}`}
+            >
+              {stateSlider.activeSlide === index && (
+                <div className="slider-pagination__active-line"
+                  style={{
+                    width: `${progress}%`,
+                  }}
+                ></div>
+              )}
             </li>
           ))}
         </ul>
