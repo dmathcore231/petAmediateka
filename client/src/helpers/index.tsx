@@ -49,3 +49,10 @@ export const temporarySlide: Array<CardData> = [
     ageRestriction: 18,
   }
 ]
+
+export const temporaryBannerListItem: Array<string> = [
+  'В единой подписке',
+  'На любых устройствах',
+  'В отличном качестве',
+  'Без рекламы'
+]

@@ -1,0 +1,57 @@
+.banner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  @include flex-column-start;
+  border: 0.125rem solid $color-primary;
+  border-radius: 1rem;
+
+  &__item {
+    width: 100%;
+    height: 100%;
+    @include flex-column-start;
+    padding: 30px 48px;
+    gap: 1rem;
+
+    &_position_absolute {
+      position: absolute;
+      bottom: 1rem;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: right center;
+      pointer-events: none;
+      padding: 0
+    }
+  }
+
+  &-list {
+    @include flex-center;
+    gap: 1.25rem;
+
+    &__item {
+      position: relative;
+
+      &:not(:first-child):not(:last-child)::before {
+        content: "";
+        position: absolute;
+        width: 3px;
+        height: 3px;
+        top: 50%;
+        left: -11px;
+        pointer-events: none;
+        border-radius: 50%;
+        background-color: hsla(0, 0%, 100%, .4);
+        transform: translateY(-50%);
+      }
+
+      &:last-child {
+        padding: 0.063rem 0.375rem;
+        border: 0.063rem solid hsla(0, 0%, 100%, .08);
+        border-radius: 0.313rem;
+        color: hsla(0, 0%, 100%, .4);
+      }
+    }
+  }
+}

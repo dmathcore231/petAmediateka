@@ -11,7 +11,9 @@ export function Card({ size, data }: CardProps): JSX.Element {
     return (
       <div className="card">
         <div className={`card-image-bg card-image-bg_${size}`}>
-          <img src={data.imgBg} alt={data.title} className="card-image-bg__img" />
+          <picture className="card-picture">
+            <img src={data.imgBg} alt={data.title} className="card-image-bg__img" />
+          </picture>
         </div>
         <div className="card-content">
           <div className="card-content__age-restriction">
