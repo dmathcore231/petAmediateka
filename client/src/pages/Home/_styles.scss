@@ -1,4 +1,12 @@
 .home {
   @include flex-column;
   gap: 4.375rem;
+
+  &-item {
+    width: 100%;
+
+    &__title {
+      @include flex-column-start;
+    }
+  }
 }

@@ -56,3 +56,51 @@ export const temporaryBannerListItem: Array<string> = [
   'В отличном качестве',
   'Без рекламы'
 ]
+
+export const temporarySlideWatchingNow: Array<CardData> = [
+  {
+    link: "/",
+    imgBg: '/watchingNow/1.jpg',
+    title: 'Игра престолов',
+  },
+  {
+    link: "/",
+    imgBg: '/watchingNow/2.jpg',
+    title: 'Дом Дракона',
+  },
+  {
+    link: "/",
+    imgBg: '/watchingNow/3.jpg',
+    title: 'Обреченные на славу',
+  },
+  {
+    link: "/",
+    imgBg: '/watchingNow/4.jpg',
+    title: 'Секс в большом городе',
+  },
+  {
+    link: "/",
+    imgBg: '/watchingNow/5.jpg',
+    title: 'Алекс Лютый',
+  },
+  {
+    link: "/",
+    imgBg: '/watchingNow/6.jpg',
+    title: 'Рим',
+  },
+  {
+    link: "/",
+    imgBg: '/watchingNow/7.jpg',
+    title: 'Сопрано',
+  },
+  {
+    link: "/",
+    imgBg: '/watchingNow/8.jpg',
+    title: 'Декстер®',
+  },
+  {
+    link: "/",
+    imgBg: '/watchingNow/9.jpg',
+    title: 'Настоящий детектив',
+  }
+]

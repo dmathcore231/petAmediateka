@@ -3,6 +3,16 @@
   --transition: transform var(--animation-time) ease-in-out 0ms;
   --transitionNone: none;
 
+  --slider-list-padding: 0;
+  --slider-list-gap: 0;
+
+  --slider-item-width: calc(100% - 200px);
+  --slider-item-margin: 0 100px;
+  --slider-item-next-left: -200px;
+  --slider-item-prev-left: 200px;
+  --slider-item-next-scale: 0.95;
+  --slider-item-prev-scale: 0.95;
+
   position: relative;
   width: 100%;
   height: 100%;
@@ -12,8 +22,21 @@
 
   &__btn {
     position: absolute;
-    top: 40%;
+    top: 0;
+    height: 100%;
     z-index: 5;
+    opacity: 1;
+    transform: scale(1);
+    transition: all var(--animation-time) ease-in-out 0ms;
+
+    &:hover {
+      transform: scale(1.2);
+    }
+
+    &_disabled {
+      opacity: 0;
+      pointer-events: none;
+    }
 
     &_prev {
       left: 0;
@@ -27,20 +50,22 @@
   &__list {
     @include flex-center;
     justify-content: flex-start;
+    gap: var(--slider-list-gap);
     transition: var(--transition);
+    padding: var(--slider-list-padding);
   }
 
   &__item {
     position: relative;
     @include flex-center;
-    width: calc(100% - 200px);
+    width: var(--slider-item-width);
     flex-shrink: 0;
     transition: transform var(--animation-time) ease-in-out 0ms;
-    margin: 0 100px;
+    margin: var(--slider-item-margin);
 
     &_next {
-      left: -200px;
-      transform: scale(0.95);
+      left: var(--slider-item-next-left);
+      transform: scale(var(--slider-item-next-scale));
     }
 
     &_active {
@@ -48,8 +73,8 @@
     }
 
     &_prev {
-      left: 200px;
-      transform: scale(0.95);
+      left: var(--slider-item-prev-left);
+      transform: scale(var(--slider-item-prev-scale));
     }
   }
 
@@ -80,5 +105,19 @@
       background-color: $color-white;
       border-radius: 8px;
     }
+  }
+
+  &_multi {
+    --slider-list-padding: 0 100px;
+    --slider-list-gap: 1rem;
+
+    --slider-item-width: 330px;
+    --slider-item-margin: 0;
+
+    --slider-item-next-left: 0;
+    --slider-item-prev-left: 0;
+
+    --slider-item-next-scale: 1;
+    --slider-item-prev-scale: 1;
   }
 }

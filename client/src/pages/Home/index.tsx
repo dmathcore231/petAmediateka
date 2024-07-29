@@ -2,17 +2,20 @@ import { Banner } from "../../components/Banner"
 import { Slider } from "../../components/Slider"
 import { SliderProps } from "../../types/interfaces/SliderProps"
 import { BannerProps } from "../../types/interfaces/BannerProps"
-import { temporarySlide, temporaryBannerListItem } from "../../helpers"
+import { temporarySlide, temporaryBannerListItem, temporarySlideWatchingNow } from "../../helpers"
 
 export function Home(): JSX.Element {
 
   const sliderProps: SliderProps = {
+    typeSlider: "default",
     dataSlide: temporarySlide,
+    slideSize: "lg",
     scaleHover: false,
     pagenation: true,
     autoSwipe: true,
     playbacBgHover: false,
-    lastSwipe: true
+    lastSwipe: false,
+    quantityListItems: 1
   }
 
   const bannerProps: BannerProps = {
@@ -23,11 +26,29 @@ export function Home(): JSX.Element {
     ageRestriction: 18
   }
 
+  const sliderPropsWatchingNow: SliderProps = {
+    typeSlider: "multi",
+    dataSlide: temporarySlideWatchingNow,
+    slideSize: "sm",
+    scaleHover: true,
+    pagenation: false,
+    autoSwipe: false,
+    playbacBgHover: false,
+    lastSwipe: true,
+    quantityListItems: 5
+  }
+
   return (
     <div className="home">
       <Slider {...sliderProps} />
-      <section className="home__item container">
+      <section className="home-item container">
         <Banner {...bannerProps} />
+      </section>
+      <section className="home-item">
+        <div className="home-item__title container">
+          <h2>Сейчас смотрят</h2>
+        </div>
+        <Slider {...sliderPropsWatchingNow} />
       </section>
     </div>
   )

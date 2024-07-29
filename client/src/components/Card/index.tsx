@@ -61,7 +61,11 @@ export function Card({ size, data }: CardProps): JSX.Element {
   } else if (size === 'sm') {
     return (
       <div className="card">
-        Card sm
+        <div className="card-image-bg">
+          <picture className="card-picture">
+            <img src={data.imgBg} alt="" className="card-image-bg__img" />
+          </picture>
+        </div>
       </div>
     )
   } else {
