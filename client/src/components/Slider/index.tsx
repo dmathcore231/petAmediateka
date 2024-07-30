@@ -10,7 +10,7 @@ export function Slider({ typeSlider, dataSlide, slideSize, scaleHover, pagenatio
 
   const animatedTime = 400
   const autoSwipeTime = 100
-  const sliderItemWidth = 330
+  const sliderItemWidth = 327
   const sliderListGap = 16
 
   const [stateSlider, setStateSlider] = useState<SlideState>({
