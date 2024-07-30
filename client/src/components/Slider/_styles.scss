@@ -4,7 +4,6 @@
   --transitionNone: none;
 
   --slider-list-padding: 0;
-  --slider-list-gap: 0;
 
   --slider-item-width: calc(100% - 200px);
   --slider-item-margin: 0 100px;
@@ -14,6 +13,7 @@
   --slider-item-next-scale: 0.95;
   --slider-item-prev-left: 200px;
   --slider-item-prev-scale: 0.95;
+  --slider-item-gap: 0;
 
   --slider-btn-width: 60px;
 
@@ -63,8 +63,8 @@
 
   &__item {
     position: relative;
-    @include flex-center;
     width: var(--slider-item-width);
+    @include flex-center;
     flex-shrink: 0;
     transition: transform var(--animation-time) ease-in-out 0ms;
     margin: var(--slider-item-margin);
@@ -143,7 +143,7 @@
     --slider-list-padding: 0 100px;
     --slider-list-gap: 1rem;
 
-    --slider-item-width: 327px;
+    --slider-item-width: 327px; // 327px
     --slider-item-margin: 0;
     --slider-item-before-bg-color: rgba(0, 0, 0, 0.5);
     --slider-item-hover-scale: scale(1.02);

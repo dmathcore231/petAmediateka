@@ -1,0 +1,45 @@
+.age-restriction-badge {
+  --badge-width: 1rem;
+  --badge-height: 1rem;
+
+  --badge-font-size: 1rem;
+  --badge-line-height: 1rem;
+
+  --badge-bg-color: transparent;
+
+  --badge-border-radius: 0.5rem;
+
+  @include flex-center;
+  width: var(--badge-width);
+  height: var(--badge-height);
+  border: 0.063rem solid $color-secondary-active;
+  border-radius: var(--badge-border-radius);
+  font-size: var(--badge-font-size);
+  line-height: var(--badge-line-height);
+  background-color: var(--badge-bg-color);
+
+  &_size {
+
+    &_lg {
+      --badge-width: 3rem;
+      --badge-height: 3rem;
+      --badge-font-size: 1.125rem;
+      --badge-line-height: 1.5rem;
+    }
+
+    &_sm {
+      align-items: flex-start;
+      --badge-width: 1.5rem;
+      --badge-height: 1rem;
+
+      --badge-font-size: 0.75rem;
+      --badge-line-height: 1rem;
+      --badge-font-size: 0.625rem;
+
+      --badge-bg-color: rgba(0, 0, 0, .3);
+
+      --badge-border-radius: 0.313rem;
+
+    }
+  }
+}

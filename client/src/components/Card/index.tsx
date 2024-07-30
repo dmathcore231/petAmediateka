@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 import { Btn } from "../Btn"
 import { Badge } from "../Badge"
+import { AgeRestrictionBadge } from "../AgeRestrictionBadge"
 import { CardProps } from "../../types/interfaces/CardProps"
 import { PlayIcon } from "../../assets/icons/PlayIcon"
 import { AddFavoriteIcon } from "../../assets/icons/AddFavoriteIcon"
@@ -16,9 +17,9 @@ export function Card({ size, data }: CardProps): JSX.Element {
           </picture>
         </div>
         <div className="card-content">
-          <div className="card-content__age-restriction">
-            {`${data.ageRestriction}+`}
-          </div>
+          {data.ageRestriction && (
+            < AgeRestrictionBadge size="lg" data={data.ageRestriction} />
+          )}
           <div className="card-body">
             {data.badge && (
               <div className="card-body__badge">
@@ -62,9 +63,17 @@ export function Card({ size, data }: CardProps): JSX.Element {
     return (
       <div className="card card_size_sm">
         <div className="card-image-bg">
+          {data.ageRestriction && (
+            <div className="card-image-bg__badge-wrapper">
+              < AgeRestrictionBadge size="sm" data={data.ageRestriction} />
+            </div>
+          )}
           <picture className="card-picture">
             <img src={data.imgBg} alt="" className="card-image-bg__img" />
           </picture>
+        </div>
+        <div className="card__title title">
+          {data.title}
         </div>
       </div>
     )
