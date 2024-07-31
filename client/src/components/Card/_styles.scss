@@ -5,15 +5,25 @@
   --width-before: 50%;
   --height-before: 100%;
 
-  --card-border-radius: 1.5rem;
   --card-gap: 0;
+
+  --card-img-border-radius: 1.5rem;
+
+  --card-body-width: 100%;
+  --card-body-position: relative;
+  --card-body-padding: 0;
+
+  --card-title-img-width: 100%;
+  --card-title-img-height: 100%;
+
+  --card-badge-wrapper-left: 1rem;
+  --card-badge-wrapper-right: none;
 
   position: relative;
   width: 100%;
   height: 100%;
   @include flex-center;
   gap: var(--card-gap);
-  border-radius: var(--card-border-radius);
   overflow: hidden;
 
   &::before {
@@ -26,6 +36,8 @@
     height: var(--height-before);
     background-image: var(--bg-img-before);
     background: var(--bg-color-before);
+    border-radius: var(--card-img-border-radius);
+    z-index: 2;
   }
 
   &::after {
@@ -36,6 +48,7 @@
     width: 100%;
     height: 60%;
     background-image: var(--bg-img-after);
+    border-radius: var(--card-img-border-radius);
   }
 
   &-picture {
@@ -45,9 +58,10 @@
   }
 
   &-image-bg {
+    position: relative;
     width: 100%;
     height: 100%;
-    border-radius: 1.5rem;
+    border-radius: var(--card-img-border-radius);
     overflow: hidden;
 
     &__img {
@@ -64,7 +78,8 @@
     &__badge-wrapper {
       position: absolute;
       top: 1rem;
-      left: 1rem;
+      left: var(--card-badge-wrapper-left);
+      right: var(--card-badge-wrapper-right);
     }
   }
 
@@ -82,16 +97,23 @@
   }
 
   &-body {
+    position: var(--card-body-position);
+    left: 0;
+    bottom: 0;
     @include flex-column;
     align-items: flex-start;
     gap: 1.25rem;
-    max-width: 32.5rem;
+    max-width: var(--card-body-width);
+    padding: var(--card-body-padding);
+    z-index: 2;
 
     &__title {
 
       &-img {
-        max-width: 620px;
-        max-height: 200px;
+        max-width: var(--card-title-img-width);
+        max-height: var(--card-title-img-height);
+        z-index: 4;
+        margin-top: auto;
       }
     }
 
@@ -136,6 +158,29 @@
   }
 
   &_size {
+    &_lg {
+      --card-body-width: 32.5rem;
+      --card-title-img-width: 38.75rem;
+      --card-title-img-height: 12.5rem;
+    }
+
+    &_md {
+      --card-border-radius: 0;
+      --card-body-position: absolute;
+      --card-body-padding: 1.5rem;
+
+      --card-img-border-radius: 0;
+
+      --card-title-img-height: auto;
+
+      --bg-img-before: linear-gradient(0deg, rgba(17, 17, 19, 1), rgba(17, 17, 19, 0));
+      --bg-img-after: linear-gradient(30deg, rgba(17, 17, 19, 1), rgba(17, 17, 19, 0) 50%);
+
+      --card-badge-wrapper-left: none;
+      --card-badge-wrapper-right: 1rem;
+
+      clip-path: polygon(0 5%, 100% 0, 100% 100%, 0% 100%);
+    }
 
 
     &_sm {

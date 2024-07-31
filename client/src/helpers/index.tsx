@@ -113,3 +113,48 @@ export const temporarySlideWatchingNow: Array<CardData> = [
     ageRestriction: 18
   }
 ]
+
+export const temporartSlideNewRelease: Array<CardData> = [
+  {
+    link: "/",
+    title: "/newRelease/1/title.png",
+    imgBg: "/newRelease/1/bg.jpg",
+    ageRestriction: 18
+  },
+  {
+    link: "/",
+    title: "/newRelease/2/title.png",
+    imgBg: "/newRelease/2/bg.jpg",
+    ageRestriction: 18
+  },
+  {
+    link: "/",
+    title: "/newRelease/3/title.png",
+    imgBg: "/newRelease/3/bg.jpg",
+    ageRestriction: 18
+  },
+  {
+    link: "/",
+    title: "/newRelease/4/title.png",
+    imgBg: "/newRelease/4/bg.jpg",
+    ageRestriction: 18
+  },
+  {
+    link: "/",
+    title: "/newRelease/5/title.png",
+    imgBg: "/newRelease/5/bg.jpg",
+    ageRestriction: 18
+  },
+  {
+    link: "/",
+    title: "/newRelease/6/title.png",
+    imgBg: "/newRelease/6/bg.jpg",
+    ageRestriction: 18
+  },
+  {
+    link: "/",
+    title: "/newRelease/7/title.png",
+    imgBg: "/newRelease/7/bg.jpg",
+    ageRestriction: 18
+  }
+]

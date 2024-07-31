@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react"
+import { useEffect, useState, useRef, CSSProperties } from "react"
 import { Btn } from "../Btn"
 import { Card } from "../Card"
 import { SliderProps } from "../../types/interfaces/SliderProps"
@@ -10,7 +10,6 @@ export function Slider({ typeSlider, dataSlide, slideSize, scaleHover, pagenatio
 
   const animatedTime = 400
   const autoSwipeTime = 100
-  const sliderItemWidth = 327
   const sliderListGap = 16
 
   const [stateSlider, setStateSlider] = useState<SlideState>({
@@ -30,9 +29,16 @@ export function Slider({ typeSlider, dataSlide, slideSize, scaleHover, pagenatio
     isAnimated: false,
   })
   const [progress, setProgress] = useState<number>(0)
+  const [sliderItemWidth, setSliderItemWidth] = useState<number>(0)
 
   const sliderListRef = useRef<HTMLUListElement>(null)
   const sliderItemRef = useRef<HTMLLIElement>(null)
+
+  useEffect(() => {
+    if (sliderItemRef.current) {
+      setSliderItemWidth(sliderItemRef.current.offsetWidth)
+    }
+  }, [sliderItemRef.current])
 
   useEffect(() => {
     const { isAnimated } = typeSlider === 'default' ? stateSlider : multiStateSlider
@@ -135,15 +141,24 @@ export function Slider({ typeSlider, dataSlide, slideSize, scaleHover, pagenatio
 
   const setClassSlide = (index: number) => {
     const { indexSlide, prevSlide, nextSlide } = typeSlider === 'default' ? stateSlider : multiStateSlider
+    let classValue = ''
+
+    if (scaleHover) {
+      classValue = 'slider__item slider__item_hover_scale'
+    } else if (playbacBgHover) {
+      classValue = 'slider__item slider__item_hover_playback'
+    } else {
+      classValue = 'slider__item'
+    }
 
     if (index === indexSlide && typeSlider === 'default') {
-      return "slider__item slider__item_active"
+      return `slider__item_active ${classValue}`
     } else if (index === prevSlide) {
-      return "slider__item slider__item_prev"
+      return `slider__item_prev ${classValue}`
     } else if (index === nextSlide) {
-      return "slider__item slider__item_next"
+      return `slider__item_next ${classValue}`
     } else {
-      return "slider__item"
+      return `${classValue}`
     }
   }
 
@@ -177,7 +192,7 @@ export function Slider({ typeSlider, dataSlide, slideSize, scaleHover, pagenatio
         activeSlide: prev.prevSlide,
         nextSlide: prev.activeSlide,
         translateX: prev.translateX + 100,
-        indexSlide: ((prev.activeSlide - 1 + dataSlide.length) % dataSlide.length) + 1,
+        indexSlide: ((prev.activeSlide - 1 + (dataSlide.length + 1)) % (dataSlide.length + 1)),
         isAnimated: true,
       }))
       setProgress(0)
@@ -212,7 +227,7 @@ export function Slider({ typeSlider, dataSlide, slideSize, scaleHover, pagenatio
           return 'slider__btn slider__btn_prev'
         }
       } else {
-        if (multiStateSlider.nextSlide >= dataSlide.length) {
+        if (multiStateSlider.nextSlide === dataSlide.length) {
           return 'slider__btn slider__btn_disabled slider__btn_next'
         } else {
           return 'slider__btn slider__btn_next'
@@ -228,7 +243,13 @@ export function Slider({ typeSlider, dataSlide, slideSize, scaleHover, pagenatio
   }
 
   return (
-    <div className={typeSlider === 'default' ? 'slider' : 'slider slider_multi'}>
+    <div className={typeSlider === 'default' ? 'slider container' : 'slider slider_multi container'}
+      style={
+        {
+          '--slider-item-per-view': `${quantityListItems}`,
+        } as CSSProperties
+      }
+    >
       <div className={setClassSliderBtn('prev')}>
         <Btn
           type="button"
@@ -267,7 +288,20 @@ export function Slider({ typeSlider, dataSlide, slideSize, scaleHover, pagenatio
               className={setClassSlide(index)}
               ref={sliderItemRef}
             >
-              <Card size={slideSize} data={slide} />
+              {playbacBgHover
+                ? (
+                  <>
+                    <div className="slider__item-bg"></div>
+                    <div className="slider__item-wrapper">
+                      <Card size={slideSize} data={slide} />
+                    </div>
+                  </>
+                )
+                : (
+                  <Card size={slideSize} data={slide} />
+                )
+              }
+
             </li>
           ))}
         </ul>
