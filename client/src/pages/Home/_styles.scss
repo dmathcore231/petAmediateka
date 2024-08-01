@@ -6,7 +6,7 @@
     width: 100%;
 
     &__title {
-      @include flex-column-start;
+      @include flex-between;
     }
   }
 }

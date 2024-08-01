@@ -17,11 +17,33 @@
   padding: 0;
   margin: 0;
   scroll-behavior: smooth;
-  transition: background-color 280ms ease;
+  transition: all .4s ease-in-out 0ms;
   color: $color-white;
 }
 
 .container {
   width: 100%;
   padding: 0 6.25rem;
+}
+
+.link {
+  font-size: 1.125rem;
+  color: $color-secondary;
+
+  &:hover {
+    color: $color-secondary-hover;
+  }
+
+  &:active {
+    color: $color-secondary-active;
+  }
+
+  &_primary {
+    color: $color-secondary-active;
+
+    &:hover {
+      color: $color-primary;
+    }
+
+  }
 }

@@ -57,7 +57,7 @@ export const temporaryBannerListItem: Array<string> = [
   'Без рекламы'
 ]
 
-export const temporarySlideWatchingNow: Array<CardData> = [
+export const temporarySlidesWatchingNow: Array<CardData> = [
   {
     link: "/",
     imgBg: '/watchingNow/1.jpg',
@@ -114,7 +114,7 @@ export const temporarySlideWatchingNow: Array<CardData> = [
   }
 ]
 
-export const temporartSlideNewRelease: Array<CardData> = [
+export const temporarySlidesNewRelease: Array<CardData> = [
   {
     link: "/",
     title: "/newRelease/1/title.png",
@@ -156,5 +156,95 @@ export const temporartSlideNewRelease: Array<CardData> = [
     title: "/newRelease/7/title.png",
     imgBg: "/newRelease/7/bg.jpg",
     ageRestriction: 18
+  }
+]
+
+export const temporarySlidesDetectiveSeries: Array<CardData> = [
+  {
+    link: "/",
+    title: "Месье Спейд",
+    imgBg: "/detectiveSeries/1.jpg",
+    ageRestriction: 18
+  },
+  {
+    link: "/",
+    title: "Поймай мне убийцу",
+    imgBg: "/detectiveSeries/2.jpg",
+    ageRestriction: 18
+  },
+  {
+    link: "/",
+    title: "Капкан",
+    imgBg: "/detectiveSeries/3.jpg",
+    ageRestriction: 18
+  },
+  {
+    link: "/",
+    title: "Босх",
+    imgBg: "/detectiveSeries/4.jpg",
+    ageRestriction: 18
+  },
+  {
+    link: "/",
+    title: "Парижская полиция 1905",
+    imgBg: "/detectiveSeries/5.jpg",
+    ageRestriction: 18
+  },
+  {
+    link: "/",
+    title: "Отправление",
+    imgBg: "/detectiveSeries/6.jpg",
+    ageRestriction: 18
+  },
+  {
+    link: "/",
+    title: "Соммердаль",
+    imgBg: "/detectiveSeries/7.jpg",
+    ageRestriction: 18
+  },
+  {
+    link: "/",
+    title: "Найди меня",
+    imgBg: "/detectiveSeries/8.jpg",
+    ageRestriction: 18
+  }
+
+]
+
+
+export const temporaryThoseAboutToDie: Array<CardData> = [
+  {
+    link: "/",
+    title: "/promoLine/title.png",
+    imgBg: "/promoLine/1.jpg",
+    ageRestriction: 18
+  },
+  {
+    link: "/",
+    imgBg: "/promoLine/2.jpg",
+  },
+  {
+    link: "/",
+    imgBg: "/promoLine/3.jpg",
+  },
+  {
+    link: "/",
+    imgBg: "/promoLine/4.jpg",
+  },
+  {
+    link: "/",
+    imgBg: "/promoLine/5.jpg",
+  },
+  {
+    link: "/",
+    imgBg: "/promoLine/6.jpg",
+  },
+  {
+    link: "/",
+    imgBg: "/promoLine/7.jpg",
+  },
+  {
+    link: "/",
+    imgBg: "/promoLine/8.jpg",
   }
 ]

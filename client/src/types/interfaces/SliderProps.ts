@@ -10,4 +10,5 @@ export interface SliderProps {
   playbacBgHover: boolean
   lastSwipe: boolean
   quantityListItems: number
+  boxShadow: boolean
 }

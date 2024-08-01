@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef, CSSProperties } from "react"
+import { Link } from "react-router-dom"
 import { Btn } from "../Btn"
 import { Card } from "../Card"
 import { SliderProps } from "../../types/interfaces/SliderProps"
@@ -6,7 +7,7 @@ import { SlideState, MultiSlideState } from "../../types/SlideState"
 import { ArrowLeftIcon } from "../../assets/icons/ArrowLeftIcon"
 import { ArrowRightIcon } from "../../assets/icons/ArrowRightIcon"
 
-export function Slider({ typeSlider, dataSlide, slideSize, scaleHover, pagenation, autoSwipe, playbacBgHover, lastSwipe, quantityListItems }: SliderProps): JSX.Element {
+export function Slider({ typeSlider, dataSlide, slideSize, scaleHover, pagenation, autoSwipe, playbacBgHover, lastSwipe, quantityListItems, boxShadow }: SliderProps): JSX.Element {
 
   const animatedTime = 400
   const autoSwipeTime = 100
@@ -292,7 +293,9 @@ export function Slider({ typeSlider, dataSlide, slideSize, scaleHover, pagenatio
                 ? (
                   <>
                     <div className="slider__item-bg"></div>
-                    <div className="slider__item-wrapper">
+                    <div className={boxShadow
+                      ? 'slider__item-wrapper'
+                      : 'slider__item-wrapper slider__item-wrapper_box-shadow_none'}>
                       <Card size={slideSize} data={slide} />
                     </div>
                   </>

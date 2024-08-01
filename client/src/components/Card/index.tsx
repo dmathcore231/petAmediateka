@@ -67,9 +67,11 @@ export function Card({ size, data }: CardProps): JSX.Element {
           </picture>
         </div>
         <div className="card-body">
-          <div className="card-body__title">
-            <img src={data.title} alt="" className="card-body__title-img" />
-          </div>
+          {data.title && (
+            <div className="card-body__title">
+              <img src={data.title} alt="" className="card-body__title-img" />
+            </div>
+          )}
         </div>
       </div>
     )

@@ -31,6 +31,13 @@ h3 {
       font-size: 0.875rem;
     }
   }
+
+  &_color {
+
+    &_gray {
+      color: $color-gray;
+    }
+  }
 }
 
 .text {
