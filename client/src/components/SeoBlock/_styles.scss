@@ -1,0 +1,6 @@
+.seo-block {
+  @include flex-between;
+  border-top: 1px solid $color-secondary-hover;
+  border-bottom: 1px solid $color-secondary-hover;
+  padding: 1rem 0;
+}

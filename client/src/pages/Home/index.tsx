@@ -1,7 +1,9 @@
 import { Banner } from "../../components/Banner"
 import { Slider } from "../../components/Slider"
+import { SeoBlock } from "../../components/SeoBlock"
 import { SliderProps } from "../../types/interfaces/SliderProps"
 import { BannerProps } from "../../types/interfaces/BannerProps"
+import { SeoBlockProps } from "../../types/interfaces/SeoBlockProps"
 import { temporarySlide, temporaryBannerListItem, temporarySlideWatchingNow, temporartSlideNewRelease } from "../../helpers"
 
 export function Home(): JSX.Element {
@@ -50,8 +52,13 @@ export function Home(): JSX.Element {
     quantityListItems: 4
   }
 
+  const seoBlockProps: SeoBlockProps = {
+    title: "Смотреть лучшие фильмы и сериалы онлайн — Amediatekа",
+    text: "Новинки кино и сериалов в HD-качестве в онлайн-кинотеатре Амедиатека. Смотреть лучшие сериалы и фильмы по подписке."
+  }
+
   return (
-    <div className="home">
+    <div className="home" >
       <Slider {...sliderProps} />
       <section className="home-item container">
         <Banner {...bannerProps} />
@@ -68,6 +75,9 @@ export function Home(): JSX.Element {
         </div>
         <Slider {...sliderPropsNewRelease} />
       </section>
-    </div>
+      <section className="home-item container">
+        <SeoBlock {...seoBlockProps} />
+      </section>
+    </div >
   )
 }

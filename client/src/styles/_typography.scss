@@ -32,3 +32,15 @@ h3 {
     }
   }
 }
+
+.text {
+  font-size: 1rem;
+  line-height: 1.5rem;
+
+  &_color {
+
+    &_secondary {
+      color: $color-secondary;
+    }
+  }
+}
