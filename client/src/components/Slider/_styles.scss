@@ -19,6 +19,8 @@
   --slider-item-prev-scale: 0.95;
   --slider-item-per-view: 0;
 
+  --item-before-clip-path: none;
+
 
   position: relative;
   width: 100%;
@@ -90,6 +92,7 @@
         height: 100%;
         background-color: var(--slider-item-before-bg-color);
         z-index: 2;
+        clip-path: var(--item-before-clip-path);
       }
     }
 
@@ -119,13 +122,17 @@
           transform: var(--slider-item-hover-scale);
         }
       }
+
+      &_playback {
+        --item-before-clip-path: #{$main-clip-path};
+      }
     }
 
     &-bg {
       position: absolute;
       width: 99%;
       height: 99%;
-      clip-path: polygon(0 5%, 100% 0, 100% 100%, 0% 100%);
+      clip-path: $main-clip-path;
       background-color: $color-primary;
     }
 

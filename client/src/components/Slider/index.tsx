@@ -118,27 +118,27 @@ export function Slider({ typeSlider, dataSlide, slideSize, scaleHover, pagenatio
     }
   }, [stateSlider.indexSlide, dataSlide])
 
-  useEffect(() => {
-    let interval: number
+  // useEffect(() => {
+  //   let interval: number
 
-    if (autoSwipe) {
-      interval = setInterval(() => {
-        setProgress((prevProgress) => {
-          if (prevProgress >= 100) {
-            handleClickBtnNext()
-            return 0
-          }
-          return prevProgress + 1
-        })
-      }, autoSwipeTime)
-    }
+  //   if (autoSwipe) {
+  //     interval = setInterval(() => {
+  //       setProgress((prevProgress) => {
+  //         if (prevProgress >= 100) {
+  //           handleClickBtnNext()
+  //           return 0
+  //         }
+  //         return prevProgress + 1
+  //       })
+  //     }, autoSwipeTime)
+  //   }
 
-    return () => {
-      if (interval) {
-        clearInterval(interval)
-      }
-    }
-  }, [autoSwipe])
+  //   return () => {
+  //     if (interval) {
+  //       clearInterval(interval)
+  //     }
+  //   }
+  // }, [autoSwipe])
 
   const setClassSlide = (index: number) => {
     const { indexSlide, prevSlide, nextSlide } = typeSlider === 'default' ? stateSlider : multiStateSlider

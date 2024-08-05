@@ -127,6 +127,15 @@ export function Home(): JSX.Element {
       <section className="home-item">
         <PromoLine {...promoLineProps} />
       </section>
+      <section className="home-item">
+        <div className="home-item__title container">
+          <h2>Популярные жанры</h2>
+          <div className="home-item__title-wrapper">
+            <Link to="/#" className="link link_primary">Сериалы</Link>
+            <Link to="/#" className="link link_primary">Фильмы</Link>
+          </div>
+        </div>
+      </section>
     </div >
   )
 }

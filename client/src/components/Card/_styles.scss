@@ -1,120 +1,109 @@
 .card {
-  --bg-img-before: linear-gradient(90deg, rgba(17, 17, 19, .6), rgba(17, 17, 19, 0));
-  --bg-img-after: linear-gradient(180deg, rgba(31, 33, 37, 0) 0, rgba(31, 33, 37, .8));
-  --bg-color-before: transparent;
-  --width-before: 50%;
-  --height-before: 100%;
+  --border-radius: 1.5rem;
+  --border-top-radius: 1.5rem;
+  --gap: 0;
 
-  --card-gap: 0;
+  --body-padding: 1rem;
+  --body-top: 0;
+  --body-jc: flex-start;
 
-  --card-img-border-radius: 1.5rem;
+  --bg-img-border-radius: 1.5rem;
+  --bg-title-max-height: 100%;
+  --bg-title-max-width: 100%;
+  --bg-before-width: 100%;
+  --bg-before-height: 100%;
+  --bg-before-top: 0;
+  --bg-before-bottom: none;
+  --bg-before-bg-color: transparent;
+  --bg-after-content: none;
+  --bg-after-bg-color: transparent;
 
-  --card-body-width: 100%;
-  --card-body-position: relative;
-  --card-body-padding: 0;
-
-  --card-title-img-width: 100%;
-  --card-title-img-height: 100%;
-
-  --card-badge-wrapper-left: 1rem;
-  --card-badge-wrapper-right: none;
+  --age-restriction-padding-bottom: 0;
 
   position: relative;
   width: 100%;
   height: 100%;
-  @include flex-center;
-  gap: var(--card-gap);
+  @include flex-column;
+  gap: var(--gap);
   overflow: hidden;
+  border-radius: var(--border-radius);
 
-  &::before {
-    content: "";
-    position: absolute;
-    pointer-events: none;
-    top: 0;
-    left: 0;
-    width: var(--width-before);
-    height: var(--height-before);
-    background-image: var(--bg-img-before);
-    background: var(--bg-color-before);
-    border-radius: var(--card-img-border-radius);
-    z-index: 2;
-  }
 
-  &::after {
-    content: "";
-    position: absolute;
-    pointer-events: none;
-    bottom: 0;
-    width: 100%;
-    height: 60%;
-    background-image: var(--bg-img-after);
-    border-radius: var(--card-img-border-radius);
-  }
-
-  &-picture {
-    width: 100%;
-    height: 100%;
-    display: block;
-  }
-
-  &-image-bg {
+  &-bg {
     position: relative;
     width: 100%;
     height: 100%;
-    border-radius: var(--card-img-border-radius);
-    overflow: hidden;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: var(--bg-before-top);
+      bottom: var(--bg-before-bottom);
+      left: 0;
+      width: var(--bg-before-width);
+      height: var(--bg-before-height);
+      background: var(--bg-before-bg-color);
+    }
+
+    &::after {
+      content: var(--bg-after-content);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--bg-after-bg-color);
+    }
+
+    &__picture {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
 
     &__img {
       width: 100%;
       height: 100%;
       display: block;
       object-fit: cover;
+      border-radius: var(--bg-img-border-radius);
     }
-
-    &_lg {
-      height: 51.25rem;
-    }
-
-    &__badge-wrapper {
-      position: absolute;
-      top: 1rem;
-      left: var(--card-badge-wrapper-left);
-      right: var(--card-badge-wrapper-right);
-    }
-  }
-
-  &-content {
-    position: absolute;
-    top: 6.75rem;
-    width: 100%;
-    height: 100%;
-    z-index: 3;
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    gap: 8.75rem;
-    padding: 0 3.75rem;
   }
 
   &-body {
-    position: var(--card-body-position);
+    position: absolute;
+    top: var(--body-top);
     left: 0;
-    bottom: 0;
-    @include flex-column;
-    align-items: flex-start;
-    gap: 1.25rem;
-    max-width: var(--card-body-width);
-    padding: var(--card-body-padding);
-    z-index: 2;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    @include flex-column-start;
+    justify-content: var(--body-jc);
+    gap: 1rem;
+    padding: var(--body-padding);
+
+    &__age-restriction {
+      width: 100%;
+      @include flex-start;
+      padding-bottom: var(--age-restriction-padding-bottom);
+
+      &_jc {
+        &_fe {
+          @include flex-end;
+        }
+      }
+    }
 
     &__title {
 
       &-img {
-        max-width: var(--card-title-img-width);
-        max-height: var(--card-title-img-height);
-        z-index: 4;
-        margin-top: auto;
+        max-height: var(--bg-title-max-height);
+        max-width: var(--bg-title-max-width);
       }
+    }
+
+    &__description {
+      max-width: 520px;
     }
 
     &__btn {
@@ -122,6 +111,7 @@
       @include flex-start;
       gap: 2rem;
       stroke: $color-black;
+      padding-top: 4.5rem;
 
       &-wrapper {
         @include flex-center;
@@ -157,44 +147,53 @@
     }
   }
 
+  &-title {
+    width: 100%;
+  }
+
   &_size {
+
     &_lg {
-      --card-body-width: 32.5rem;
-      --card-title-img-width: 38.75rem;
-      --card-title-img-height: 12.5rem;
+      --border-top-radius: 0;
+
+      --body-top: 3.125rem;
+      --body-padding: 3.75rem;
+
+      --age-restriction-padding-bottom: 7.938rem;
+
+      --bg-title-max-height: 200px;
+      --bg-title-max-width: 620px;
+      --bg-before-width: 50%;
+      --bg-before-bg-color: linear-gradient(90deg, rgba(17, 17, 19, .6), rgba(17, 17, 19, 0));
+      --bg-after-content: '';
+      --bg-after-bg-color: linear-gradient(180deg, rgba(31, 33, 37, 0) 0, rgba(31, 33, 37, .8));
     }
 
     &_md {
-      --card-border-radius: 0;
-      --card-body-position: absolute;
-      --card-body-padding: 1.5rem;
+      clip-path: $main-clip-path;
 
-      --card-img-border-radius: 0;
+      --border-radius: 0;
 
-      --card-title-img-height: auto;
+      --body-jc: space-between;
 
-      --bg-img-before: linear-gradient(0deg, rgba(17, 17, 19, 1), rgba(17, 17, 19, 0));
-      --bg-img-after: linear-gradient(30deg, rgba(17, 17, 19, 1), rgba(17, 17, 19, 0) 50%);
+      --bg-img-border-radius: 0;
 
-      --card-badge-wrapper-left: none;
-      --card-badge-wrapper-right: 1rem;
-
-      clip-path: polygon(0 5%, 100% 0, 100% 100%, 0% 100%);
+      --bg-before-height: 66%;
+      --bg-before-top: none;
+      --bg-before-bottom: 0;
+      --bg-before-bg-color: linear-gradient(0deg, rgba(31, 33, 37, 1), rgba(31, 33, 37, 0));
     }
 
-
     &_sm {
-      @include flex-column-start;
-      --card-border-radius: 0;
-      --bg-img-before: transparent;
-      --bg-img-after: transparent;
-      --width-before: 100%;
-      --height-before: 88%;
+      --border-radius: 0;
+      --gap: 0.5rem;
 
-      --card-gap: 1rem;
+      --body-padding: 0.5rem;
+
+      --bg-img-border-radius: 0.75rem;
 
       &:hover {
-        --bg-color-before: rgba(0, 0, 0, .5);
+        --bg-before-bg-color: rgba(0, 0, 0, .5);
       }
     }
   }
