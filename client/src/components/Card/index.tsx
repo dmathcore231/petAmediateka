@@ -6,6 +6,7 @@ import { CardProps } from "../../types/interfaces/CardProps"
 import { PlayIcon } from "../../assets/icons/PlayIcon"
 import { AddFavoriteIcon } from "../../assets/icons/AddFavoriteIcon"
 
+
 export function Card({ size, data }: CardProps): JSX.Element {
 
   return (
