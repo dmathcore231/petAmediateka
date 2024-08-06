@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { Link } from "react-router-dom"
 import { Banner } from "../../components/Banner"
 import { Slider } from "../../components/Slider"
@@ -6,10 +7,12 @@ import { PromoLine } from "../../components/PromoLine"
 import { SliderProps } from "../../types/interfaces/SliderProps"
 import { BannerProps } from "../../types/interfaces/BannerProps"
 import { SeoBlockProps } from "../../types/interfaces/SeoBlockProps"
-import { temporarySlide, temporaryBannerListItem, temporarySlidesWatchingNow, temporarySlidesNewRelease, temporarySlidesDetectiveSeries, temporaryThoseAboutToDie } from "../../helpers"
+import { temporarySlide, temporaryBannerListItem, temporarySlidesWatchingNow, temporarySlidesNewRelease, temporarySlidesDetectiveSeries, temporaryThoseAboutToDie, temporaryPopularGenresSeries, temporaryPopularGenresMovies } from "../../helpers"
 import { PromoLineProps } from "../../types/interfaces/PromoLineProps"
 
 export function Home(): JSX.Element {
+
+  const [activeLinkPopularGenres, setActiveLinkPopularGenres] = useState<number>(0)
 
   const sliderProps: SliderProps = {
     typeSlider: "default",
@@ -94,6 +97,18 @@ export function Home(): JSX.Element {
     sliderProps: sliderProrsPromoLine
   }
 
+  const sliderPropsPopularGenres: SliderProps = {
+    typeSlider: "multi",
+    dataSlide: activeLinkPopularGenres === 0 ? temporaryPopularGenresSeries : temporaryPopularGenresMovies,
+    slideSize: "md",
+    scaleHover: false,
+    pagenation: false,
+    autoSwipe: false,
+    playbacBgHover: true,
+    lastSwipe: true,
+    quantityListItems: 5,
+    boxShadow: true
+  }
 
   return (
     <div className="home" >
@@ -131,10 +146,19 @@ export function Home(): JSX.Element {
         <div className="home-item__title container">
           <h2>Популярные жанры</h2>
           <div className="home-item__title-wrapper">
-            <Link to="/#" className="link link_primary">Сериалы</Link>
-            <Link to="/#" className="link link_primary">Фильмы</Link>
+            <span className={`link link_primary ${activeLinkPopularGenres === 0 ? 'link_active' : ''}`}
+              onClick={() => setActiveLinkPopularGenres(0)}
+            >
+              Сериалы
+            </span>
+            <span className={`link link_primary ${activeLinkPopularGenres === 1 ? 'link_active' : ''}`}
+              onClick={() => setActiveLinkPopularGenres(1)}
+            >
+              Фильмы
+            </span>
           </div>
         </div>
+        <Slider {...sliderPropsPopularGenres} />
       </section>
     </div >
   )

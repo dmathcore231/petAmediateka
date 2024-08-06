@@ -298,7 +298,6 @@ export const temporarySlidesDetectiveSeries: Array<CardData> = [
 
 ]
 
-
 export const temporaryThoseAboutToDie: Array<CardData> = [
   {
     link: "/",
@@ -337,4 +336,78 @@ export const temporaryThoseAboutToDie: Array<CardData> = [
     link: "/",
     imgBg: "/promoLine/8.jpg",
   }
+]
+
+export const temporaryPopularGenresSeries: Array<CardData> = [
+  {
+    link: "/",
+    imgBg: "/popularGenres/series/1.jpg",
+  },
+  {
+    link: "/",
+    imgBg: "/popularGenres/series/2.jpg",
+  },
+  {
+    link: "/",
+    imgBg: "/popularGenres/series/3.jpg",
+  },
+  {
+    link: "/",
+    imgBg: "/popularGenres/series/4.jpg",
+  },
+  {
+    link: "/",
+    imgBg: "/popularGenres/series/5.jpg",
+  },
+  {
+    link: "/",
+    imgBg: "/popularGenres/series/6.jpg",
+  },
+  {
+    link: "/",
+    imgBg: "/popularGenres/series/7.jpg",
+  },
+  {
+    link: "/",
+    imgBg: "/popularGenres/series/8.jpg",
+  },
+  {
+    link: "/",
+    imgBg: "/popularGenres/series/9.jpg",
+  }
+]
+
+export const temporaryPopularGenresMovies: Array<CardData> = [
+  {
+    link: "/",
+    imgBg: "/popularGenres/movies/1.jpg",
+  },
+  {
+    link: "/",
+    imgBg: "/popularGenres/movies/2.jpg",
+  },
+  {
+    link: "/",
+    imgBg: "/popularGenres/movies/3.jpg",
+  },
+  {
+    link: "/",
+    imgBg: "/popularGenres/movies/4.jpg",
+  },
+  {
+    link: "/",
+    imgBg: "/popularGenres/movies/5.jpg",
+  },
+  {
+    link: "/",
+    imgBg: "/popularGenres/movies/6.jpg",
+  },
+  {
+    link: "/",
+    imgBg: "/popularGenres/movies/7.jpg",
+  },
+  {
+    link: "/",
+    imgBg: "/popularGenres/movies/8.jpg",
+  },
 ]

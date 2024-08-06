@@ -29,6 +29,7 @@
 .link {
   font-size: 1.125rem;
   color: $color-secondary;
+  cursor: pointer;
 
   &:hover {
     color: $color-secondary-hover;
@@ -45,5 +46,9 @@
       color: $color-primary;
     }
 
+  }
+
+  &_active {
+    color: $color-gray;
   }
 }

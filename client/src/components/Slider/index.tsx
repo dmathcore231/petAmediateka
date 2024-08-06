@@ -118,27 +118,38 @@ export function Slider({ typeSlider, dataSlide, slideSize, scaleHover, pagenatio
     }
   }, [stateSlider.indexSlide, dataSlide])
 
-  // useEffect(() => {
-  //   let interval: number
+  useEffect(() => {
+    setMultiStateSlider({
+      prevSlide: -1,
+      activeSlide: [0, quantityListItems],
+      nextSlide: quantityListItems,
+      translateX: 0,
+      indexSlide: 0,
+      isAnimated: false,
+    })
+  }, [dataSlide])
 
-  //   if (autoSwipe) {
-  //     interval = setInterval(() => {
-  //       setProgress((prevProgress) => {
-  //         if (prevProgress >= 100) {
-  //           handleClickBtnNext()
-  //           return 0
-  //         }
-  //         return prevProgress + 1
-  //       })
-  //     }, autoSwipeTime)
-  //   }
+  useEffect(() => {
+    let interval: number
 
-  //   return () => {
-  //     if (interval) {
-  //       clearInterval(interval)
-  //     }
-  //   }
-  // }, [autoSwipe])
+    if (autoSwipe) {
+      interval = setInterval(() => {
+        setProgress((prevProgress) => {
+          if (prevProgress >= 100) {
+            handleClickBtnNext()
+            return 0
+          }
+          return prevProgress + 1
+        })
+      }, autoSwipeTime)
+    }
+
+    return () => {
+      if (interval) {
+        clearInterval(interval)
+      }
+    }
+  }, [autoSwipe])
 
   const setClassSlide = (index: number) => {
     const { indexSlide, prevSlide, nextSlide } = typeSlider === 'default' ? stateSlider : multiStateSlider
@@ -296,12 +307,12 @@ export function Slider({ typeSlider, dataSlide, slideSize, scaleHover, pagenatio
                     <div className={boxShadow
                       ? 'slider__item-wrapper'
                       : 'slider__item-wrapper slider__item-wrapper_box-shadow_none'}>
-                      <Card size={slideSize} data={slide} />
+                      <Card size={slideSize} data={slide} cardLinkType={slideSize === 'lg' ? 'title' : 'allCard'} />
                     </div>
                   </>
                 )
                 : (
-                  <Card size={slideSize} data={slide} />
+                  <Card size={slideSize} data={slide} cardLinkType={slideSize === 'lg' ? 'title' : 'allCard'} />
                 )
               }
 
