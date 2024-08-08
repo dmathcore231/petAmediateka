@@ -6,13 +6,16 @@ import { CardProps } from "../../types/interfaces/CardProps"
 import { PlayIcon } from "../../assets/icons/PlayIcon"
 import { AddFavoriteIcon } from "../../assets/icons/AddFavoriteIcon"
 
-export function Card({ size, data, cardLinkType }: CardProps): JSX.Element {
+export function Card({ data, styles }: CardProps): JSX.Element {
+
+  const { link, imgBg, title, ageRestriction, description, badge, tags } = data
+  const { cardSize, flex, clipPath, ageRestrictionBadge, btnGroup, boxShadow, hover } = styles
 
   const renderCardContentLinkWrapper = (children: JSX.Element): JSX.Element => {
-    if (cardLinkType === 'allCard') {
+    if (link.type === 'allCard') {
       return (
         <Link
-          to={data.link}
+          to={link.value}
           className="card__link"
         >
           {children}
@@ -28,45 +31,45 @@ export function Card({ size, data, cardLinkType }: CardProps): JSX.Element {
       <>
         <div className="card-bg">
           <picture className="card-bg__picture">
-            <img src={data.imgBg} alt="" className="card-bg__img" />
+            <img src={imgBg} alt="" className="card-bg__img" />
           </picture>
         </div>
-        <div className="card-body">
-          {data.ageRestriction && (
-            <div className={size === 'md'
+        <div className={`card-body card-body_flex_jc_${flex.body.justifyContent}`}>
+          {data.ageRestriction && ageRestrictionBadge && (
+            <div className={ageRestrictionBadge.position === 'right'
               ? "card-body__age-restriction card-body__age-restriction_jc_fe"
               : "card-body__age-restriction"
             }>
-              <AgeRestrictionBadge size={size} data={data.ageRestriction} />
+              <AgeRestrictionBadge size={ageRestrictionBadge.size} data={data.ageRestriction} />
             </div>
           )
           }
-          {data.badge && (
+          {badge && (
             <div className="card-body__badge">
-              <Badge type={data.badge.type} title={data.badge.title} />
+              <Badge type={badge.type} title={badge.title} />
             </div>
           )}
-          {data.title && data.title.type === 'img' && (
+          {title && title.type === 'img' && (
             <div className="card-body__title">
               {
-                cardLinkType === 'title'
+                link.type === 'title'
                   ? (
-                    <Link to={data.link} className="card__link">
-                      <img src={data.title.value} alt="" className="card-body__title-img" />
+                    <Link to={link.value} className="card__link">
+                      <img src={title.value} alt="" className="card-body__title-img" />
                     </Link>
                   )
                   : (
-                    <img src={data.title.value} alt="" className="card-body__title-img" />
+                    <img src={title.value} alt="" className="card-body__title-img" />
                   )
               }
             </div>
           )}
-          {data.description && (
+          {description && (
             <div className="card-body__description title title_align_left">
               {data.description}
             </div>
           )}
-          {size === 'lg' && (
+          {btnGroup === true && (
             <div className="card-body__btn">
               <Link to='#' className="btn btn_primary card-body__btn-link">
                 <div className="card-body__btn-wrapper">
@@ -95,9 +98,30 @@ export function Card({ size, data, cardLinkType }: CardProps): JSX.Element {
     )
   }
 
-  return (
-    <div className={`card card_size_${size}`}>
-      {renderCardContentLinkWrapper(renderCardContent())}
-    </div>
-  )
+  const setClassesCard = (): string => {
+    let classes = `card card_size_${cardSize}`
+    if (hover?.shadow) classes += ' card_hover_shadow'
+    if (hover?.scale) classes += ' card_hover_scale'
+    if (clipPath) classes += ` card_clip-path_main`
+    if (hover?.playBack.value) classes += ' card_hover_playback'
+    if (hover && hover.playBack.type === 'bottom-more') classes += ' card_hover_playback_bottom_more'
+    return classes
+  }
+
+  if (hover?.playBack.value) {
+    return (
+      <>
+        <div className="card-playback-bg"></div>
+        <div className={setClassesCard()}>
+          {renderCardContentLinkWrapper(renderCardContent())}
+        </div>
+      </>
+    )
+  } else {
+    return (
+      <div className={setClassesCard()}>
+        {renderCardContentLinkWrapper(renderCardContent())}
+      </div>
+    )
+  }
 }

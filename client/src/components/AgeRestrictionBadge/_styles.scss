@@ -27,6 +27,20 @@
       --badge-line-height: 1.5rem;
     }
 
+    &_lm {
+      align-items: flex-end;
+      --badge-width: 1.8rem;
+      --badge-height: 1.3rem;
+
+      --badge-font-size: 0.75rem;
+      --badge-line-height: 1rem;
+      --badge-font-size: 0.625rem;
+
+      --badge-bg-color: rgba(0, 0, 0, .3);
+
+      --badge-border-radius: 0.313rem;
+    }
+
     &_md {
       align-items: flex-end;
       --badge-width: 1.8rem;

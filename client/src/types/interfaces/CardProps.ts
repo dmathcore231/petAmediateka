@@ -1,7 +1,7 @@
-import { CardData } from "../CardData"
+import { CardStyles } from "../Card"
+import { CardData } from "../Card"
 
 export interface CardProps {
-  size: "lg" | "md" | "sm"
-  cardLinkType: "allCard" | "title"
   data: CardData
+  styles: CardStyles
 }

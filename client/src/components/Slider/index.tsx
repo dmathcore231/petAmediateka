@@ -3,18 +3,19 @@ import { Link } from "react-router-dom"
 import { Btn } from "../Btn"
 import { Card } from "../Card"
 import { SliderProps } from "../../types/interfaces/SliderProps"
-import { SlideState, MultiSlideState } from "../../types/SlideState"
+import { SlideState, MultiSlideState } from "../../types/Slider"
 import { ArrowLeftIcon } from "../../assets/icons/ArrowLeftIcon"
 import { ArrowRightIcon } from "../../assets/icons/ArrowRightIcon"
 
-export function Slider({ typeSlider, dataSlide, slideSize, scaleHover, pagenation, autoSwipe, playbacBgHover, lastSwipe, quantityListItems, boxShadow }: SliderProps): JSX.Element {
-
+export function Slider({ sliderSettings, slidesData, cardStyles }: SliderProps): JSX.Element {
   const animatedTime = 400
   const autoSwipeTime = 100
   const sliderListGap = 16
 
+  const { typeSlider, pagenation, autoSwipe, lastSwipe, quantityListItems } = sliderSettings
+
   const [stateSlider, setStateSlider] = useState<SlideState>({
-    prevSlide: dataSlide.length - 1,
+    prevSlide: slidesData.length - 1,
     activeSlide: 0,
     nextSlide: 1,
     translateX: 0,
@@ -69,13 +70,13 @@ export function Slider({ typeSlider, dataSlide, slideSize, scaleHover, pagenatio
       const firstChild = sliderListRef.current.firstChild as HTMLLIElement
       const lastChild = sliderListRef.current.lastChild as HTMLLIElement
       if (firstChild
-        && stateSlider.indexSlide > dataSlide.length - 1
+        && stateSlider.indexSlide > slidesData.length - 1
         && stateSlider.activeSlide === 0) {
         firstChild.style.left = `${Math.abs(stateSlider.translateX)}%`
       } else if (lastChild
-        && stateSlider.indexSlide === dataSlide.length
-        && stateSlider.activeSlide === dataSlide.length - 1) {
-        lastChild.style.left = `${dataSlide.length * -100}%`
+        && stateSlider.indexSlide === slidesData.length
+        && stateSlider.activeSlide === slidesData.length - 1) {
+        lastChild.style.left = `${slidesData.length * -100}%`
       } else {
         firstChild.style.left = ``
         lastChild.style.left = ``
@@ -84,10 +85,10 @@ export function Slider({ typeSlider, dataSlide, slideSize, scaleHover, pagenatio
   }, [stateSlider.indexSlide, stateSlider.translateX])
 
   useEffect(() => {
-    if (stateSlider.indexSlide > dataSlide.length - 1 && stateSlider.activeSlide === 0) {
+    if (stateSlider.indexSlide > slidesData.length - 1 && stateSlider.activeSlide === 0) {
       const timerId = setTimeout(() => {
         setStateSlider({
-          prevSlide: dataSlide.length - 1,
+          prevSlide: slidesData.length - 1,
           activeSlide: 0,
           nextSlide: 1,
           translateX: 0,
@@ -99,15 +100,15 @@ export function Slider({ typeSlider, dataSlide, slideSize, scaleHover, pagenatio
       return () => {
         clearTimeout(timerId)
       }
-    } else if (stateSlider.indexSlide === dataSlide.length
-      && stateSlider.activeSlide === dataSlide.length - 1) {
+    } else if (stateSlider.indexSlide === slidesData.length
+      && stateSlider.activeSlide === slidesData.length - 1) {
       const timerId = setTimeout(() => {
         setStateSlider({
-          prevSlide: dataSlide.length - 2,
-          activeSlide: dataSlide.length - 1,
+          prevSlide: slidesData.length - 2,
+          activeSlide: slidesData.length - 1,
           nextSlide: 0,
-          translateX: (dataSlide.length - 1) * -100,
-          indexSlide: dataSlide.length - 1,
+          translateX: (slidesData.length - 1) * -100,
+          indexSlide: slidesData.length - 1,
           isAnimated: false,
         })
       }, animatedTime)
@@ -116,7 +117,7 @@ export function Slider({ typeSlider, dataSlide, slideSize, scaleHover, pagenatio
         clearTimeout(timerId)
       }
     }
-  }, [stateSlider.indexSlide, dataSlide])
+  }, [stateSlider.indexSlide, slidesData])
 
   useEffect(() => {
     setMultiStateSlider({
@@ -127,7 +128,7 @@ export function Slider({ typeSlider, dataSlide, slideSize, scaleHover, pagenatio
       indexSlide: 0,
       isAnimated: false,
     })
-  }, [dataSlide])
+  }, [slidesData])
 
   useEffect(() => {
     let interval: number
@@ -153,15 +154,7 @@ export function Slider({ typeSlider, dataSlide, slideSize, scaleHover, pagenatio
 
   const setClassSlide = (index: number) => {
     const { indexSlide, prevSlide, nextSlide } = typeSlider === 'default' ? stateSlider : multiStateSlider
-    let classValue = ''
-
-    if (scaleHover) {
-      classValue = 'slider__item slider__item_hover_scale'
-    } else if (playbacBgHover) {
-      classValue = 'slider__item slider__item_hover_playback'
-    } else {
-      classValue = 'slider__item'
-    }
+    let classValue = 'slider__item'
 
     if (index === indexSlide && typeSlider === 'default') {
       return `slider__item_active ${classValue}`
@@ -179,7 +172,7 @@ export function Slider({ typeSlider, dataSlide, slideSize, scaleHover, pagenatio
       setStateSlider(prev => ({
         prevSlide: prev.activeSlide,
         activeSlide: prev.nextSlide,
-        nextSlide: (prev.nextSlide + 1) % dataSlide.length,
+        nextSlide: (prev.nextSlide + 1) % slidesData.length,
         translateX: prev.translateX - 100,
         indexSlide: prev.activeSlide + 1,
         isAnimated: true,
@@ -200,11 +193,11 @@ export function Slider({ typeSlider, dataSlide, slideSize, scaleHover, pagenatio
   const handleClickBtnPrev = () => {
     if (typeSlider === 'default') {
       setStateSlider(prev => ({
-        prevSlide: (prev.prevSlide - 1 + dataSlide.length) % dataSlide.length,
+        prevSlide: (prev.prevSlide - 1 + slidesData.length) % slidesData.length,
         activeSlide: prev.prevSlide,
         nextSlide: prev.activeSlide,
         translateX: prev.translateX + 100,
-        indexSlide: ((prev.activeSlide - 1 + (dataSlide.length + 1)) % (dataSlide.length + 1)),
+        indexSlide: ((prev.activeSlide - 1 + (slidesData.length + 1)) % (slidesData.length + 1)),
         isAnimated: true,
       }))
       setProgress(0)
@@ -239,7 +232,7 @@ export function Slider({ typeSlider, dataSlide, slideSize, scaleHover, pagenatio
           return 'slider__btn slider__btn_prev'
         }
       } else {
-        if (multiStateSlider.nextSlide === dataSlide.length) {
+        if (multiStateSlider.nextSlide === slidesData.length) {
           return 'slider__btn slider__btn_disabled slider__btn_next'
         } else {
           return 'slider__btn slider__btn_next'
@@ -294,34 +287,19 @@ export function Slider({ typeSlider, dataSlide, slideSize, scaleHover, pagenatio
               : multiStateSlider.isAnimated ? 'var(--transition)' : 'none',
           }}
         >
-          {dataSlide.map((slide, index) => (
+          {slidesData.map((slide, index) => (
             <li
               key={index}
               className={setClassSlide(index)}
               ref={sliderItemRef}
             >
-              {playbacBgHover
-                ? (
-                  <>
-                    <div className="slider__item-bg"></div>
-                    <div className={boxShadow
-                      ? 'slider__item-wrapper'
-                      : 'slider__item-wrapper slider__item-wrapper_box-shadow_none'}>
-                      <Card size={slideSize} data={slide} cardLinkType={slideSize === 'lg' ? 'title' : 'allCard'} />
-                    </div>
-                  </>
-                )
-                : (
-                  <Card size={slideSize} data={slide} cardLinkType={slideSize === 'lg' ? 'title' : 'allCard'} />
-                )
-              }
-
+              <Card styles={cardStyles} data={slide} />
             </li>
           ))}
         </ul>
         {pagenation && (
           <ul className="slider-pagination">
-            {dataSlide.map((slide, index) => (
+            {slidesData.map((_, index) => (
               <li
                 key={index}
                 className={`${stateSlider.activeSlide === index ? 'slider-pagination__item slider-pagination__item_active' : 'slider-pagination__item'}`}

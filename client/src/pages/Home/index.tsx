@@ -4,10 +4,11 @@ import { Banner } from "../../components/Banner"
 import { Slider } from "../../components/Slider"
 import { SeoBlock } from "../../components/SeoBlock"
 import { PromoLine } from "../../components/PromoLine"
+import { CoverPromo } from "../../components/CoverPromo"
+import { temporarySlide, temporaryBannerListItem, temporarySlidesWatchingNow, temporarySlidesNewRelease, temporarySlidesDetectiveSeries, temporaryThoseAboutToDie, temporaryPopularGenresSeries, temporaryPopularGenresMovies } from "../../helpers"
 import { SliderProps } from "../../types/interfaces/SliderProps"
 import { BannerProps } from "../../types/interfaces/BannerProps"
 import { SeoBlockProps } from "../../types/interfaces/SeoBlockProps"
-import { temporarySlide, temporaryBannerListItem, temporarySlidesWatchingNow, temporarySlidesNewRelease, temporarySlidesDetectiveSeries, temporaryThoseAboutToDie, temporaryPopularGenresSeries, temporaryPopularGenresMovies } from "../../helpers"
 import { PromoLineProps } from "../../types/interfaces/PromoLineProps"
 
 export function Home(): JSX.Element {
@@ -15,16 +16,37 @@ export function Home(): JSX.Element {
   const [activeLinkPopularGenres, setActiveLinkPopularGenres] = useState<number>(0)
 
   const sliderProps: SliderProps = {
-    typeSlider: "default",
-    dataSlide: temporarySlide,
-    slideSize: "lg",
-    scaleHover: false,
-    pagenation: true,
-    autoSwipe: true,
-    playbacBgHover: false,
-    lastSwipe: false,
-    quantityListItems: 1,
-    boxShadow: false
+    sliderSettings: {
+      typeSlider: "default",
+      pagenation: true,
+      autoSwipe: false,
+      lastSwipe: false,
+      quantityListItems: 1
+    },
+    slidesData: temporarySlide,
+    cardStyles: {
+      cardSize: 'lg',
+      flex: {
+        body: {
+          justifyContent: 'flex-start'
+        }
+      },
+      clipPath: false,
+      ageRestrictionBadge: {
+        position: 'left',
+        size: 'lg'
+      },
+      boxShadow: false,
+      btnGroup: true,
+      hover: {
+        scale: false,
+        playBack: {
+          value: false,
+          type: null
+        },
+        shadow: false
+      }
+    }
   }
 
   const bannerProps: BannerProps = {
@@ -36,54 +58,71 @@ export function Home(): JSX.Element {
   }
 
   const sliderPropsWatchingNow: SliderProps = {
-    typeSlider: "multi",
-    dataSlide: temporarySlidesWatchingNow,
-    slideSize: "sm",
-    scaleHover: true,
-    pagenation: false,
-    autoSwipe: false,
-    playbacBgHover: false,
-    lastSwipe: true,
-    quantityListItems: 5,
-    boxShadow: false
+    sliderSettings: {
+      typeSlider: 'multi',
+      pagenation: false,
+      autoSwipe: false,
+      lastSwipe: true,
+      quantityListItems: 5
+    },
+    slidesData: temporarySlidesWatchingNow,
+    cardStyles: {
+      cardSize: 'md',
+      flex: {
+        body: {
+          justifyContent: 'space-between'
+        }
+      },
+      clipPath: false,
+      ageRestrictionBadge: {
+        position: 'left',
+        size: 'sm'
+      },
+      boxShadow: false,
+      btnGroup: false,
+      hover: {
+        scale: true,
+        playBack: {
+          value: false,
+          type: null
+        },
+        shadow: true
+      }
+    }
   }
 
   const sliderPropsNewRelease: SliderProps = {
-    typeSlider: "multi",
-    dataSlide: temporarySlidesNewRelease,
-    slideSize: "md",
-    scaleHover: false,
-    pagenation: false,
-    autoSwipe: false,
-    playbacBgHover: true,
-    lastSwipe: true,
-    quantityListItems: 4,
-    boxShadow: true
-  }
-
-  const sliderProrsPromoLine: SliderProps = {
-    typeSlider: "multi",
-    dataSlide: temporaryThoseAboutToDie,
-    slideSize: "md",
-    scaleHover: false,
-    pagenation: false,
-    autoSwipe: false,
-    playbacBgHover: true,
-    lastSwipe: true,
-    quantityListItems: 4,
-    boxShadow: false
-  }
-  const sliderProprsDetectiveSeries: SliderProps = {
-    typeSlider: "multi",
-    dataSlide: temporarySlidesDetectiveSeries,
-    slideSize: "sm",
-    scaleHover: true,
-    pagenation: false,
-    autoSwipe: false,
-    playbacBgHover: false,
-    lastSwipe: true,
-    quantityListItems: 5,
-    boxShadow: false
+    sliderSettings: {
+      typeSlider: 'multi',
+      pagenation: false,
+      autoSwipe: false,
+      lastSwipe: true,
+      quantityListItems: 4
+    },
+    slidesData: temporarySlidesNewRelease,
+    cardStyles: {
+      cardSize: 'lm',
+      flex: {
+        body: {
+          justifyContent: 'space-between'
+        }
+      },
+      clipPath: true,
+      ageRestrictionBadge: {
+        position: 'right',
+        size: 'lm'
+      },
+      boxShadow: true,
+      btnGroup: false,
+      hover: {
+        scale: false,
+        playBack: {
+          value: true,
+          type: 'default'
+        },
+        shadow: false
+      }
+    }
   }
 
   const seoBlockProps: SeoBlockProps = {
@@ -91,6 +130,73 @@ export function Home(): JSX.Element {
     text: "Новинки кино и сериалов в HD-качестве в онлайн-кинотеатре Амедиатека. Смотреть лучшие сериалы и фильмы по подписке."
   }
 
+  const sliderProprsDetectiveSeries: SliderProps = {
+    sliderSettings: {
+      typeSlider: 'multi',
+      pagenation: false,
+      autoSwipe: false,
+      lastSwipe: true,
+      quantityListItems: 5
+    },
+    slidesData: temporarySlidesDetectiveSeries,
+    cardStyles: {
+      cardSize: 'md',
+      flex: {
+        body: {
+          justifyContent: 'space-between'
+        }
+      },
+      clipPath: false,
+      ageRestrictionBadge: {
+        position: 'left',
+        size: 'sm'
+      },
+      boxShadow: false,
+      btnGroup: false,
+      hover: {
+        scale: true,
+        playBack: {
+          value: false,
+          type: null
+        },
+        shadow: true
+      }
+    }
+  }
+
+  const sliderProrsPromoLine: SliderProps = {
+    sliderSettings: {
+      typeSlider: 'multi',
+      pagenation: false,
+      autoSwipe: false,
+      lastSwipe: true,
+      quantityListItems: 4
+    },
+    slidesData: temporaryThoseAboutToDie,
+    cardStyles: {
+      cardSize: 'lm',
+      flex: {
+        body: {
+          justifyContent: 'space-between'
+        }
+      },
+      clipPath: true,
+      ageRestrictionBadge: {
+        position: 'right',
+        size: 'sm'
+      },
+      boxShadow: false,
+      btnGroup: false,
+      hover: {
+        scale: false,
+        playBack: {
+          value: true,
+          type: 'default'
+        },
+        shadow: false
+      }
+    }
+  }
   const promoLineProps: PromoLineProps = {
     title: "Историческая драма «Обреченные на славу»",
     subtitle: "Погрузитесь в суровый мир гладиаторских боев и дворцовых интриг, где борьба за власть идет не на жизнь, а на смерть.",
@@ -98,16 +204,37 @@ export function Home(): JSX.Element {
   }
 
   const sliderPropsPopularGenres: SliderProps = {
-    typeSlider: "multi",
-    dataSlide: activeLinkPopularGenres === 0 ? temporaryPopularGenresSeries : temporaryPopularGenresMovies,
-    slideSize: "md",
-    scaleHover: false,
-    pagenation: false,
-    autoSwipe: false,
-    playbacBgHover: true,
-    lastSwipe: true,
-    quantityListItems: 5,
-    boxShadow: true
+    sliderSettings: {
+      typeSlider: 'multi',
+      pagenation: false,
+      autoSwipe: false,
+      lastSwipe: true,
+      quantityListItems: 5
+    },
+    slidesData: activeLinkPopularGenres === 0 ? temporaryPopularGenresSeries : temporaryPopularGenresMovies,
+    cardStyles: {
+      cardSize: 'sm',
+      flex: {
+        body: {
+          justifyContent: 'space-between'
+        }
+      },
+      clipPath: true,
+      ageRestrictionBadge: {
+        position: 'right',
+        size: 'sm'
+      },
+      boxShadow: false,
+      btnGroup: false,
+      hover: {
+        scale: false,
+        playBack: {
+          value: true,
+          type: 'default'
+        },
+        shadow: false
+      }
+    }
   }
 
   return (
@@ -159,6 +286,9 @@ export function Home(): JSX.Element {
           </div>
         </div>
         <Slider {...sliderPropsPopularGenres} />
+      </section>
+      <section className="home-item container">
+        <CoverPromo />
       </section>
     </div >
   )

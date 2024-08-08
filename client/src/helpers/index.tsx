@@ -1,8 +1,11 @@
-import { CardData } from "../types/CardData"
+import { CardData } from "../types/Card"
 
 export const temporarySlide: Array<CardData> = [
   {
-    link: "/",
+    link: {
+      type: "title",
+      value: "/"
+    },
     imgBg: "/slideImg/1/bg.jpg",
     title: {
       type: "img",
@@ -16,7 +19,10 @@ export const temporarySlide: Array<CardData> = [
     },
   },
   {
-    link: "/",
+    link: {
+      type: "title",
+      value: "/"
+    },
     imgBg: "/slideImg/2/bg.jpg",
     title: {
       type: "img",
@@ -30,7 +36,10 @@ export const temporarySlide: Array<CardData> = [
     }
   },
   {
-    link: "/",
+    link: {
+      type: "title",
+      value: "/"
+    },
     imgBg: "/slideImg/3/bg.jpg",
     title: {
       type: "img",
@@ -44,7 +53,10 @@ export const temporarySlide: Array<CardData> = [
     }
   },
   {
-    link: "/",
+    link: {
+      type: "title",
+      value: "/"
+    },
     imgBg: "/slideImg/4/bg.jpg",
     title: {
       type: "img",
@@ -54,7 +66,10 @@ export const temporarySlide: Array<CardData> = [
     ageRestriction: 18,
   },
   {
-    link: "/",
+    link: {
+      type: "title",
+      value: "/"
+    },
     imgBg: "/slideImg/5/bg.jpg",
     title: {
       type: "img",
@@ -74,16 +89,22 @@ export const temporaryBannerListItem: Array<string> = [
 
 export const temporarySlidesWatchingNow: Array<CardData> = [
   {
-    link: "/",
+    link: {
+      type: 'allCard',
+      value: '/'
+    },
     imgBg: '/watchingNow/1.jpg',
     title: {
       type: 'text',
       value: 'Игра престолов',
     },
-    ageRestriction: 18
+    ageRestriction: 18,
   },
   {
-    link: '/',
+    link: {
+      type: 'allCard',
+      value: '/'
+    },
     imgBg: '/watchingNow/2.jpg',
     title: {
       type: 'text',
@@ -92,7 +113,10 @@ export const temporarySlidesWatchingNow: Array<CardData> = [
     ageRestriction: 18
   },
   {
-    link: "/",
+    link: {
+      type: 'allCard',
+      value: '/'
+    },
     imgBg: '/watchingNow/3.jpg',
     title: {
       type: 'text',
@@ -101,7 +125,10 @@ export const temporarySlidesWatchingNow: Array<CardData> = [
     ageRestriction: 18
   },
   {
-    link: "/",
+    link: {
+      type: 'allCard',
+      value: '/'
+    },
     imgBg: '/watchingNow/4.jpg',
     title: {
       type: 'text',
@@ -110,7 +137,10 @@ export const temporarySlidesWatchingNow: Array<CardData> = [
     ageRestriction: 18
   },
   {
-    link: "/",
+    link: {
+      type: 'allCard',
+      value: '/'
+    },
     imgBg: '/watchingNow/5.jpg',
     title: {
       type: 'text',
@@ -119,7 +149,10 @@ export const temporarySlidesWatchingNow: Array<CardData> = [
     ageRestriction: 18
   },
   {
-    link: "/",
+    link: {
+      type: 'allCard',
+      value: '/'
+    },
     imgBg: '/watchingNow/6.jpg',
     title: {
       type: 'text',
@@ -128,7 +161,10 @@ export const temporarySlidesWatchingNow: Array<CardData> = [
     ageRestriction: 18
   },
   {
-    link: "/",
+    link: {
+      type: 'allCard',
+      value: '/'
+    },
     imgBg: '/watchingNow/7.jpg',
     title: {
       type: 'text',
@@ -137,7 +173,10 @@ export const temporarySlidesWatchingNow: Array<CardData> = [
     ageRestriction: 18
   },
   {
-    link: "/",
+    link: {
+      type: 'allCard',
+      value: '/'
+    },
     imgBg: '/watchingNow/8.jpg',
     title: {
       type: 'text',
@@ -146,7 +185,10 @@ export const temporarySlidesWatchingNow: Array<CardData> = [
     ageRestriction: 18
   },
   {
-    link: "/",
+    link: {
+      type: 'allCard',
+      value: '/'
+    },
     imgBg: '/watchingNow/9.jpg',
     title: {
       type: 'text',
@@ -158,7 +200,10 @@ export const temporarySlidesWatchingNow: Array<CardData> = [
 
 export const temporarySlidesNewRelease: Array<CardData> = [
   {
-    link: "/",
+    link: {
+      type: 'allCard',
+      value: '/'
+    },
     title: {
       type: "img",
       value: "/newRelease/1/title.png"
@@ -167,7 +212,10 @@ export const temporarySlidesNewRelease: Array<CardData> = [
     ageRestriction: 18
   },
   {
-    link: "/",
+    link: {
+      type: 'allCard',
+      value: '/'
+    },
     title: {
       type: "img",
       value: "/newRelease/2/title.png"
@@ -176,7 +224,10 @@ export const temporarySlidesNewRelease: Array<CardData> = [
     ageRestriction: 18
   },
   {
-    link: "/",
+    link: {
+      type: 'allCard',
+      value: '/'
+    },
     title: {
       type: "img",
       value: "/newRelease/3/title.png"
@@ -185,7 +236,10 @@ export const temporarySlidesNewRelease: Array<CardData> = [
     ageRestriction: 18
   },
   {
-    link: "/",
+    link: {
+      type: 'allCard',
+      value: '/'
+    },
     title: {
       type: "img",
       value: "/newRelease/4/title.png"
@@ -194,7 +248,10 @@ export const temporarySlidesNewRelease: Array<CardData> = [
     ageRestriction: 18
   },
   {
-    link: "/",
+    link: {
+      type: 'allCard',
+      value: '/'
+    },
     title: {
       type: "img",
       value: "/newRelease/5/title.png"
@@ -203,7 +260,10 @@ export const temporarySlidesNewRelease: Array<CardData> = [
     ageRestriction: 18
   },
   {
-    link: "/",
+    link: {
+      type: 'allCard',
+      value: '/'
+    },
     title: {
       type: "img",
       value: "/newRelease/6/title.png"
@@ -212,7 +272,10 @@ export const temporarySlidesNewRelease: Array<CardData> = [
     ageRestriction: 18
   },
   {
-    link: "/",
+    link: {
+      type: 'allCard',
+      value: '/'
+    },
     title: {
       type: "img",
       value: "/newRelease/7/title.png"
@@ -224,7 +287,10 @@ export const temporarySlidesNewRelease: Array<CardData> = [
 
 export const temporarySlidesDetectiveSeries: Array<CardData> = [
   {
-    link: "/",
+    link: {
+      type: 'allCard',
+      value: '/'
+    },
     title: {
       type: "text",
       value: "Месье Спейд"
@@ -233,7 +299,10 @@ export const temporarySlidesDetectiveSeries: Array<CardData> = [
     ageRestriction: 18
   },
   {
-    link: "/",
+    link: {
+      type: 'allCard',
+      value: '/'
+    },
     title: {
       type: "text",
       value: "Поймай мне убийцу"
@@ -242,7 +311,10 @@ export const temporarySlidesDetectiveSeries: Array<CardData> = [
     ageRestriction: 18
   },
   {
-    link: "/",
+    link: {
+      type: 'allCard',
+      value: '/'
+    },
     title: {
       type: "text",
       value: "Капкан"
@@ -251,7 +323,10 @@ export const temporarySlidesDetectiveSeries: Array<CardData> = [
     ageRestriction: 18
   },
   {
-    link: "/",
+    link: {
+      type: 'allCard',
+      value: '/'
+    },
     title: {
       type: "text",
       value: "Босх"
@@ -260,7 +335,10 @@ export const temporarySlidesDetectiveSeries: Array<CardData> = [
     ageRestriction: 18
   },
   {
-    link: "/",
+    link: {
+      type: 'allCard',
+      value: '/'
+    },
     title: {
       type: "text",
       value: "Парижская полиция 1905"
@@ -269,7 +347,10 @@ export const temporarySlidesDetectiveSeries: Array<CardData> = [
     ageRestriction: 18
   },
   {
-    link: "/",
+    link: {
+      type: 'allCard',
+      value: '/'
+    },
     title: {
       type: "text",
       value: "Отправление"
@@ -278,7 +359,10 @@ export const temporarySlidesDetectiveSeries: Array<CardData> = [
     ageRestriction: 18
   },
   {
-    link: "/",
+    link: {
+      type: 'allCard',
+      value: '/'
+    },
     title: {
       type: "text",
       value: "Соммердаль"
@@ -287,7 +371,10 @@ export const temporarySlidesDetectiveSeries: Array<CardData> = [
     ageRestriction: 18
   },
   {
-    link: "/",
+    link: {
+      type: 'allCard',
+      value: '/'
+    },
     title: {
       type: "text",
       value: "Найди меня"
@@ -300,7 +387,10 @@ export const temporarySlidesDetectiveSeries: Array<CardData> = [
 
 export const temporaryThoseAboutToDie: Array<CardData> = [
   {
-    link: "/",
+    link: {
+      type: 'allCard',
+      value: '/'
+    },
     title: {
       type: "img",
       value: "/promoLine/title.png"
@@ -309,105 +399,177 @@ export const temporaryThoseAboutToDie: Array<CardData> = [
     ageRestriction: 18
   },
   {
-    link: "/",
+    link: {
+      type: 'allCard',
+      value: '/'
+    },
     imgBg: "/promoLine/2.jpg",
   },
   {
-    link: "/",
+    link: {
+      type: 'allCard',
+      value: '/'
+    },
     imgBg: "/promoLine/3.jpg",
   },
   {
-    link: "/",
+    link: {
+      type: 'allCard',
+      value: '/'
+    },
     imgBg: "/promoLine/4.jpg",
   },
   {
-    link: "/",
+    link: {
+      type: 'allCard',
+      value: '/'
+    },
     imgBg: "/promoLine/5.jpg",
   },
   {
-    link: "/",
+    link: {
+      type: 'allCard',
+      value: '/'
+    },
     imgBg: "/promoLine/6.jpg",
   },
   {
-    link: "/",
+    link: {
+      type: 'allCard',
+      value: '/'
+    },
     imgBg: "/promoLine/7.jpg",
   },
   {
-    link: "/",
+    link: {
+      type: 'allCard',
+      value: '/'
+    },
     imgBg: "/promoLine/8.jpg",
   }
 ]
 
 export const temporaryPopularGenresSeries: Array<CardData> = [
   {
-    link: "/",
+    link: {
+      type: 'allCard',
+      value: '/'
+    },
     imgBg: "/popularGenres/series/1.jpg",
   },
   {
-    link: "/",
+    link: {
+      type: 'allCard',
+      value: '/'
+    },
     imgBg: "/popularGenres/series/2.jpg",
   },
   {
-    link: "/",
+    link: {
+      type: 'allCard',
+      value: '/'
+    },
     imgBg: "/popularGenres/series/3.jpg",
   },
   {
-    link: "/",
+    link: {
+      type: 'allCard',
+      value: '/'
+    },
     imgBg: "/popularGenres/series/4.jpg",
   },
   {
-    link: "/",
+    link: {
+      type: 'allCard',
+      value: '/'
+    },
     imgBg: "/popularGenres/series/5.jpg",
   },
   {
-    link: "/",
+    link: {
+      type: 'allCard',
+      value: '/'
+    },
     imgBg: "/popularGenres/series/6.jpg",
   },
   {
-    link: "/",
+    link: {
+      type: 'allCard',
+      value: '/'
+    },
     imgBg: "/popularGenres/series/7.jpg",
   },
   {
-    link: "/",
+    link: {
+      type: 'allCard',
+      value: '/'
+    },
     imgBg: "/popularGenres/series/8.jpg",
   },
   {
-    link: "/",
+    link: {
+      type: 'allCard',
+      value: '/'
+    },
     imgBg: "/popularGenres/series/9.jpg",
   }
 ]
 
 export const temporaryPopularGenresMovies: Array<CardData> = [
   {
-    link: "/",
+    link: {
+      type: 'allCard',
+      value: '/'
+    },
     imgBg: "/popularGenres/movies/1.jpg",
   },
   {
-    link: "/",
+    link: {
+      type: 'allCard',
+      value: '/'
+    },
     imgBg: "/popularGenres/movies/2.jpg",
   },
   {
-    link: "/",
+    link: {
+      type: 'allCard',
+      value: '/'
+    },
     imgBg: "/popularGenres/movies/3.jpg",
   },
   {
-    link: "/",
+    link: {
+      type: 'allCard',
+      value: '/'
+    },
     imgBg: "/popularGenres/movies/4.jpg",
   },
   {
-    link: "/",
+    link: {
+      type: 'allCard',
+      value: '/'
+    },
     imgBg: "/popularGenres/movies/5.jpg",
   },
   {
-    link: "/",
+    link: {
+      type: 'allCard',
+      value: '/'
+    },
     imgBg: "/popularGenres/movies/6.jpg",
   },
   {
-    link: "/",
+    link: {
+      type: 'allCard',
+      value: '/'
+    },
     imgBg: "/popularGenres/movies/7.jpg",
   },
   {
-    link: "/",
+    link: {
+      type: 'allCard',
+      value: '/'
+    },
     imgBg: "/popularGenres/movies/8.jpg",
   },
 ]

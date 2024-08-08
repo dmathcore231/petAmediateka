@@ -1,14 +1,8 @@
-import { CardData } from "../CardData"
+import { CardData, CardStyles } from "../Card"
+import { SliderSettings } from "../Slider"
 
 export interface SliderProps {
-  typeSlider: "default" | "multi"
-  dataSlide: Array<CardData>
-  slideSize: "lg" | "md" | "sm"
-  scaleHover: boolean
-  pagenation: boolean
-  autoSwipe: boolean
-  playbacBgHover: boolean
-  lastSwipe: boolean
-  quantityListItems: number
-  boxShadow: boolean
+  sliderSettings: SliderSettings
+  slidesData: Array<CardData>
+  cardStyles: CardStyles
 }

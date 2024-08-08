@@ -6,7 +6,7 @@ export function SeoBlock({ title, text }: SeoBlockProps): JSX.Element {
       <div className="seo-block__item title">
         {title}
       </div>
-      <div className="seo-block__item text text_color_secondary">
+      <div className="seo-block__item text text_color_gray">
         {text}
       </div>
     </div>

@@ -1,5 +1,5 @@
 
 export interface AgeRestrictionBadgeProps {
-  size: 'lg' | 'md' | 'sm'
+  size: 'lg' | 'lm' | 'md' | 'sm'
   data: number
 }

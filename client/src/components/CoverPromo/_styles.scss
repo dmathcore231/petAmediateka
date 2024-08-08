@@ -1,0 +1,8 @@
+.cover-promo {
+  @include flex-center;
+  gap: 1rem;
+
+  &__item {
+    position: relative;
+  }
+}
