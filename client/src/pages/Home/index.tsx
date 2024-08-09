@@ -5,6 +5,7 @@ import { Slider } from "../../components/Slider"
 import { SeoBlock } from "../../components/SeoBlock"
 import { PromoLine } from "../../components/PromoLine"
 import { CoverPromo } from "../../components/CoverPromo"
+import { Blog } from "../../components/Blog"
 import { temporarySlide, temporaryBannerListItem, temporarySlidesWatchingNow, temporarySlidesNewRelease, temporarySlidesDetectiveSeries, temporaryThoseAboutToDie, temporaryPopularGenresSeries, temporaryPopularGenresMovies } from "../../helpers"
 import { SliderProps } from "../../types/interfaces/SliderProps"
 import { BannerProps } from "../../types/interfaces/BannerProps"
@@ -38,6 +39,7 @@ export function Home(): JSX.Element {
       },
       boxShadow: false,
       btnGroup: true,
+      titleOutside: false,
       hover: {
         scale: false,
         playBack: {
@@ -80,6 +82,7 @@ export function Home(): JSX.Element {
       },
       boxShadow: false,
       btnGroup: false,
+      titleOutside: true,
       hover: {
         scale: true,
         playBack: {
@@ -114,6 +117,7 @@ export function Home(): JSX.Element {
       },
       boxShadow: true,
       btnGroup: false,
+      titleOutside: false,
       hover: {
         scale: false,
         playBack: {
@@ -153,6 +157,7 @@ export function Home(): JSX.Element {
       },
       boxShadow: false,
       btnGroup: false,
+      titleOutside: false,
       hover: {
         scale: true,
         playBack: {
@@ -187,6 +192,7 @@ export function Home(): JSX.Element {
       },
       boxShadow: false,
       btnGroup: false,
+      titleOutside: false,
       hover: {
         scale: false,
         playBack: {
@@ -226,6 +232,7 @@ export function Home(): JSX.Element {
       },
       boxShadow: false,
       btnGroup: false,
+      titleOutside: false,
       hover: {
         scale: false,
         playBack: {
@@ -289,6 +296,13 @@ export function Home(): JSX.Element {
       </section>
       <section className="home-item container">
         <CoverPromo />
+      </section>
+      <section className="home-item">
+        <div className="home-item__title container">
+          <h2>Блог Амедиатеки</h2>
+          <Link to="/#" className="link link_primary">Показать еще</Link>
+        </div>
+        <Blog />
       </section>
     </div >
   )

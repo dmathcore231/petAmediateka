@@ -10,7 +10,7 @@ import { AddFavoriteIcon } from "../../assets/icons/AddFavoriteIcon"
 export function Card({ data, styles }: CardProps): JSX.Element {
 
   const { link, imgBg, title, ageRestriction, description, badge, tags } = data
-  const { cardSize, flex, clipPath, ageRestrictionBadge, btnGroup, boxShadow, hover } = styles
+  const { cardSize, flex, clipPath, ageRestrictionBadge, btnGroup, hover, boxShadow, titleOutside } = styles
 
   const renderCardContentLinkWrapper = (children: JSX.Element): JSX.Element => {
     if (link.type === 'allCard') {
@@ -30,7 +30,7 @@ export function Card({ data, styles }: CardProps): JSX.Element {
   const renderCardContent = (): JSX.Element => {
     return (
       <>
-        <div className="card-bg">
+        <div className={boxShadow ? "card-bg card-bg_shadow" : "card-bg"}>
           <picture className="card-bg__picture">
             <img src={imgBg} alt="" className="card-bg__img" />
           </picture>
@@ -65,6 +65,11 @@ export function Card({ data, styles }: CardProps): JSX.Element {
               }
             </div>
           )}
+          {title && title.type === 'text' && !titleOutside && (
+            <div className="card-body__title">
+              {title.value}
+            </div>
+          )}
           {description && (
             <div className="card-body__description title title_align_left">
               {data.description}
@@ -93,9 +98,9 @@ export function Card({ data, styles }: CardProps): JSX.Element {
             </div>
           )}
         </div>
-        {data.title && data.title.type === 'text' && (
+        {title && title.type === 'text' && titleOutside && (
           <div className="card-title title title_align_left">
-            {data.title.value}
+            {title.value}
           </div>
         )}
       </>
