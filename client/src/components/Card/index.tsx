@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 import { Btn } from "../Btn"
 import { Badge } from "../Badge"
 import { AgeRestrictionBadge } from "../AgeRestrictionBadge"
+import { Tags } from "../Tags"
 import { CardProps } from "../../types/interfaces/CardProps"
 import { PlayIcon } from "../../assets/icons/PlayIcon"
 import { AddFavoriteIcon } from "../../assets/icons/AddFavoriteIcon"
@@ -35,12 +36,12 @@ export function Card({ data, styles }: CardProps): JSX.Element {
           </picture>
         </div>
         <div className={`card-body card-body_flex_jc_${flex.body.justifyContent}`}>
-          {data.ageRestriction && ageRestrictionBadge && (
+          {ageRestriction && ageRestrictionBadge && (
             <div className={ageRestrictionBadge.position === 'right'
               ? "card-body__age-restriction card-body__age-restriction_jc_fe"
               : "card-body__age-restriction"
             }>
-              <AgeRestrictionBadge size={ageRestrictionBadge.size} data={data.ageRestriction} />
+              <AgeRestrictionBadge size={ageRestrictionBadge.size} data={ageRestriction} />
             </div>
           )
           }
@@ -68,6 +69,9 @@ export function Card({ data, styles }: CardProps): JSX.Element {
             <div className="card-body__description title title_align_left">
               {data.description}
             </div>
+          )}
+          {tags && (
+            <Tags data={tags} />
           )}
           {btnGroup === true && (
             <div className="card-body__btn">

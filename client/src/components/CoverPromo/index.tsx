@@ -25,6 +25,12 @@ export function CoverPromo(): JSX.Element {
     },
     imgBg: "/coverPromo/bg-card.jpg",
     description: "Арт-эксперт в эмоциональном упадке и торговец антиквариатом объединяются, чтобы обогатиться. Смогут ли они выйти сухими из воды?",
+    tags: {
+      raiting: 8,
+      ageRestriction: 18,
+      dateRelease: '2023',
+      genres: ['Драма', 'Триллер']
+    }
   }
 
   const cardStyles: CardStyles[] = [

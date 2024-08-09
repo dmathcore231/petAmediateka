@@ -15,11 +15,8 @@ export type CardTitle = {
 export type TagsCard = {
   raiting: number
   ageRestriction: number
-  dateRelease: {
-    type: 'series' | 'movie'
-    value: string
-  }
-  genres: string[]
+  dateRelease: string
+  genres?: string[]
 }
 
 export type CardData = {

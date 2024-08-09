@@ -1,0 +1,29 @@
+.tags {
+  position: relative;
+  width: 100%;
+
+  &-list {
+    @include flex-start;
+    gap: 0.5rem;
+
+    &__item {
+      @include flex-center;
+      gap: 0.5rem;
+    }
+
+    &__badge {
+      @include flex-center;
+      gap: 0.5rem;
+      background-color: $color-secondary;
+      border-radius: 0.25rem;
+      padding: 0 0.5rem;
+
+      &_raiting {
+        background-color: transparent;
+        border: 0.063rem solid $color-secondary;
+        padding: 0;
+        border-top-left-radius: 300% 128px;
+      }
+    }
+  }
+}
