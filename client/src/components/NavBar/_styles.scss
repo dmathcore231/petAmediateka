@@ -25,6 +25,19 @@
         }
       }
     }
+
+    &_gap {
+      &_sm {
+        gap: 1.563rem;
+      }
+    }
+
+    &_padding {
+
+      &_top {
+        padding-top: 2rem
+      }
+    }
   }
 
   &__item {

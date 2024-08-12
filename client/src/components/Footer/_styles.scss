@@ -1,0 +1,16 @@
+.footer {
+  @include flex-between-start;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+
+
+  &__item {
+    @include flex-column;
+    gap: 0.5rem;
+  }
+
+  &-nav-bar {
+    @include flex-column;
+    gap: 0.5rem;
+  }
+}

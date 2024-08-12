@@ -17,7 +17,6 @@
   padding: 0;
   margin: 0;
   scroll-behavior: smooth;
-  transition: all .4s ease-in-out 0ms;
   color: $color-white;
 }
 
@@ -27,6 +26,9 @@
 }
 
 .link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 1.125rem;
   color: $color-secondary;
   cursor: pointer;
@@ -50,5 +52,15 @@
 
   &_active {
     color: $color-gray;
+  }
+
+  &_social {
+    fill: #868FA0;
+    border-radius: 5px;
+    background-color: $color-black-light;
+
+    &:hover {
+      fill: $color-white;
+    }
   }
 }
