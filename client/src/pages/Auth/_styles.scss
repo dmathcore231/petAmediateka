@@ -61,11 +61,12 @@
 
   &__side-bar {
     position: relative;
+    width: 33.5rem;
     z-index: 11;
     height: 100%;
     padding: 2.5rem 3.5rem;
     box-sizing: border-box;
-    background-color: $color-black-light-01;
+    background-color: $color-dark-02;
     overflow-y: auto;
   }
 

@@ -1,10 +1,14 @@
+import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Btn } from '../../components/Btn'
+import { Input } from '../../components/Input'
 import { Logo } from '../../assets/icons/Logo'
 import { CloseIcon } from '../../assets/icons/CloseIcon'
 
 export function Auth(): JSX.Element {
   const navigate = useNavigate()
+
+  const [email, setEmail] = useState('')
 
   return (
     <div className="auth">
@@ -37,9 +41,17 @@ export function Auth(): JSX.Element {
             <h1>или войдите в аккаунт</h1>
           </div>
           <div className="auth-menu__item">
-            <form className="form">
-
-            </form>
+            <div className="form">
+              <Input
+                type="email"
+                id="email"
+                label={{ value: null, labelInvisible: true }}
+                required
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
           </div>
         </div>
       </article>
