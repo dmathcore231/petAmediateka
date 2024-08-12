@@ -1,5 +1,5 @@
 .btn {
-  --btn-width: 15rem;
+  --btn-width: 100%;
   --btn-height: 100%;
 
   --btn-color: $color-white;
@@ -56,6 +56,11 @@
     background-color: var(--btn-bg-color-active);
     border-color: var(--btn-border-color-active);
     fill: var(--btn-fill-active);
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: default;
   }
 
   &_primary {

@@ -10,6 +10,16 @@ export function Auth(): JSX.Element {
 
   const [email, setEmail] = useState('')
 
+  const toggleDisableBtn = () => {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+
+    if (re.test(String(email).toLowerCase())) {
+      return false
+    } else {
+      return true
+    }
+  }
+
   return (
     <div className="auth">
       <div className="auth__content">
@@ -51,6 +61,14 @@ export function Auth(): JSX.Element {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
+              <Btn
+                type="submit"
+                className="btn_primary"
+                onClick={() => console.log('click')}
+                disabled={toggleDisableBtn()}
+              >
+                Продолжить
+              </Btn>
             </div>
           </div>
         </div>

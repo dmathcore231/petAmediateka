@@ -80,7 +80,7 @@ export function Card({ data, styles }: CardProps): JSX.Element {
           )}
           {btnGroup === true && (
             <div className="card-body__btn">
-              <Link to='#' className="btn btn_primary card-body__btn-link">
+              <Link to='#' className={`btn btn_primary card-body__btn-link card-body__btn-link_size_${styles.cardSize}`}>
                 <div className="card-body__btn-wrapper">
                   <PlayIcon width={28} height={28} />
                   <span className="card-body__btn-text">Смотреть</span>
