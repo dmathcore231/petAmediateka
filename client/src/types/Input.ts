@@ -1,6 +1,6 @@
 
 export type errorData = {
-  field: "email"
+  field: "email" | "password"
   message: string | null
 }
 

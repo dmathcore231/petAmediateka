@@ -15,4 +15,5 @@ export interface InputProps {
   name?: string
   error?: boolean
   btnInInput?: JSX.Element
+  checkPassword?: boolean
 }

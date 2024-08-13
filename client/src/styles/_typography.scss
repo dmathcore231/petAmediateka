@@ -27,6 +27,11 @@ h3 {
 
   &_size {
 
+    &_lg {
+      font-size: 2rem;
+      line-height: 3rem;
+    }
+
     &_md {
       font-size: 1rem;
     }
@@ -52,6 +57,10 @@ h3 {
 
     &_secondary {
       color: $color-secondary;
+
+      &-active {
+        color: $color-secondary-active;
+      }
     }
 
     &_gray {

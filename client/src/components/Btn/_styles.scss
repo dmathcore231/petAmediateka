@@ -110,4 +110,13 @@
       }
     }
   }
+
+  &_font {
+    &_size {
+
+      &_md {
+        --btn-font-size: 1rem;
+      }
+    }
+  }
 }
