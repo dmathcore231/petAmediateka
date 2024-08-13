@@ -2,6 +2,7 @@ import { useState, FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Input } from '../../../components/Input'
 import { Btn } from '../../../components/Btn'
+import { Checkbox } from '../../../components/Checkbox'
 import { AuthPassProps } from '../../../types/interfaces/AuthProps'
 import { CloseIcon } from '../../../assets/icons/CloseIcon'
 
@@ -81,6 +82,7 @@ export function AuthPass({ setPassValue, email }: AuthPassProps): JSX.Element {
             onChange={(e) => setPassword(e.target.value)}
             checkPassword
           />
+          <Checkbox />
           <Btn
             type="submit"
             className="btn_primary"

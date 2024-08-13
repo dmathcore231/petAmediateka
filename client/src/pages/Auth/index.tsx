@@ -1,14 +1,11 @@
 import { useState, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { Btn } from '../../components/Btn'
+import { Link } from 'react-router-dom'
 import { AuthEmail } from './AuthEmail'
 import { AuthPass } from './AuthPass'
 import { AuthState } from '../../types/AuthState'
 import { Logo } from '../../assets/icons/Logo'
-import { CloseIcon } from '../../assets/icons/CloseIcon'
 
 export function Auth(): JSX.Element {
-  const navigate = useNavigate()
 
   const defaultAuthState: AuthState = {
     email: null,
