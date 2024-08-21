@@ -1,11 +1,12 @@
-import { Link, NavLink } from "react-router-dom"
-import { Btn } from "../Btn"
+import { Link, NavLink, useLocation } from "react-router-dom"
 import { Logo } from "../../assets/icons/Logo"
 import { SearchIcon } from "../../assets/icons/SearchIcon"
 
 export function NavBar(): JSX.Element {
+  const location = useLocation()
+
   return (
-    <nav className="nav-bar">
+    <nav className={`nav-bar ${location.pathname === "/" ? "" : "nav-bar_padding-horizontal_none"}`}>
       <div className="nav-bar__item">
         <Link to="/" className="nav-bar__logo">
           <Logo width={168} height={16} />
