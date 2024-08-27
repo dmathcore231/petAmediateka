@@ -1,5 +1,7 @@
-import { useState, FormEvent } from "react"
+import { useState, useEffect, FormEvent } from "react"
 import { useNavigate } from "react-router-dom"
+import { useAppDispatch } from "../../../hooks"
+import { fetchSignUpEmail } from "../../../redux/authSlice"
 import { Input } from "../../../components/Input"
 import { Btn } from "../../../components/Btn"
 import { AuthEmailProps } from "../../../types/interfaces/AuthProps"
@@ -7,8 +9,19 @@ import { CloseIcon } from "../../../assets/icons/CloseIcon"
 
 export function AuthEmail({ setEmailValue }: AuthEmailProps): JSX.Element {
   const navigate = useNavigate()
+  const dispatch = useAppDispatch()
 
   const [email, setEmail] = useState('')
+  const [submitEvent, setSubmitEvent] = useState<FormEvent<HTMLFormElement> | null>(null)
+
+  useEffect(() => {
+    if (email) {
+      const formData = new FormData()
+      formData.append('type', 'authSignUpEmail')
+      formData.append('email', email)
+      dispatch(fetchSignUpEmail(formData))
+    }
+  }, [submitEvent])
 
   const toggleDisableBtn = () => {
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -23,6 +36,7 @@ export function AuthEmail({ setEmailValue }: AuthEmailProps): JSX.Element {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setEmailValue((prev) => ({ ...prev, email }))
+    setSubmitEvent(e)
   }
 
   return (

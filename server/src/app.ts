@@ -1,6 +1,8 @@
 import express, { Request, Response, NextFunction } from 'express'
 import path from 'path'
 import mongoose from 'mongoose'
+import { initLocalDataState } from './middlewares/initLocalDataState'
+import { authRouter } from './routes/Auth'
 
 const app = express()
 
@@ -14,6 +16,9 @@ app.use((_: Request, res: Response, next: NextFunction) => {
 })
 
 app.use('/public', express.static(path.join(__dirname, '..', 'public')))
+
+app.use(initLocalDataState)
+app.use(authRouter)
 
 
 async function main() {

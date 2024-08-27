@@ -1,8 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit"
+import { statusResponseReducer } from "./statusResponseSlice"
 
 export const store = configureStore({
   reducer: {
-
+    statusResponse: statusResponseReducer
   },
 
 })
