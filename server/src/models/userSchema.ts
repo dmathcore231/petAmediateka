@@ -3,9 +3,18 @@ import { UserSubscription } from '../types/UserSubscription'
 const userSchema = new Schema({
 
   userData: {
-    firstName: String,
-    lastName: String,
-    profileName: String,
+    firstName: {
+      type: String || null,
+      default: null
+    },
+    lastName: {
+      type: String || null,
+      default: null
+    },
+    profileName: {
+      type: String,
+      default: 'Мой профиль'
+    },
     userBirthDay: {
       type: String || null,
       default: null

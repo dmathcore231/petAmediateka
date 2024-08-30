@@ -13,6 +13,12 @@ export function Input({ type, id, label, required, onChange, value, placeholder,
     }
   }, [value])
 
+  useEffect(() => {
+    if (error) {
+      setErrorState(error)
+    }
+  })
+
   const handleValidEmail = () => {
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     if (re.test(String(value).toLowerCase()) || value === '') {
@@ -90,8 +96,9 @@ export function Input({ type, id, label, required, onChange, value, placeholder,
       {label.value && (
         <label
           htmlFor={id}
-          className={"input__label" + (label.labelInvisible ? " input__label_invisible" : "") +
-            " text text_size_sm text_color_secondary-active"}
+          className={"input__label" + (label.labelInvisible ? " input__label_invisible" : "")
+            + (error && error.value ? " input__label_error" : "")
+            + " text text_size_sm text_color_secondary-active"}
         >
           {label.value}
         </label>

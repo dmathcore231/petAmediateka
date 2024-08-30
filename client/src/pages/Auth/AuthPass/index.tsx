@@ -10,13 +10,15 @@ export function AuthPass({ setPassValue, email }: AuthPassProps): JSX.Element {
   const navigate = useNavigate()
 
   const [password, setPassword] = useState('')
+  const [isChecked, setIsChecked] = useState(false)
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    setPassValue(prev => ({ ...prev, password }))
   }
 
   const toggleDisableBtn = () => {
-    if (password.length < 6) {
+    if (password.length < 6 || !isChecked) {
       return true
     } else {
       return false
@@ -25,11 +27,7 @@ export function AuthPass({ setPassValue, email }: AuthPassProps): JSX.Element {
 
   const handleClickBtnBack = () => {
     setPassword('')
-    setPassValue({
-      email: null,
-      password: null,
-      visibleContent: 'email'
-    })
+    setPassValue(prev => ({ ...prev, password: null, visibleContent: 'email' }))
   }
 
   return (
@@ -82,7 +80,7 @@ export function AuthPass({ setPassValue, email }: AuthPassProps): JSX.Element {
             onChange={(e) => setPassword(e.target.value)}
             checkPassword
           />
-          <Checkbox />
+          <Checkbox getCheckedValue={setIsChecked} />
           <Btn
             type="submit"
             className="btn_primary"

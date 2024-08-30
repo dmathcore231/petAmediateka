@@ -1,4 +1,5 @@
-import { ChangeEvent } from "react"
+import { ChangeEvent, SetStateAction, Dispatch } from "react"
+import { InputErrorState } from "../../types/Input"
 
 export interface InputProps {
   type: "email" | "text" | "password"
@@ -13,7 +14,7 @@ export interface InputProps {
   placeholder?: string
   className?: string
   name?: string
-  error?: boolean
+  error?: InputErrorState | null
   btnInInput?: JSX.Element
   checkPassword?: boolean
 }

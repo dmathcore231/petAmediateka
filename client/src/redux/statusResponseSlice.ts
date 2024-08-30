@@ -1,21 +1,16 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { StateStatusResponse } from "../types/interfaces/InitialStatesSlice"
-
-const initialState: StateStatusResponse = {
-  status: null,
-  error: null,
-  loading: false
-}
+import { initialStateStatusResponse } from "../helpers/initStates"
 
 export const statusResponseSlice = createSlice({
   name: 'statusResponse',
-  initialState,
+  initialState: initialStateStatusResponse,
   reducers: {
 
     setStatusResponse: (state, action: PayloadAction<StateStatusResponse>) => {
       state.status = action.payload.status
       state.error = action.payload.error
-      state.loading = action.payload.loading
+      state.message = action.payload.message
     },
 
     getStatusReponse: (state) => {
@@ -25,7 +20,7 @@ export const statusResponseSlice = createSlice({
     resetStatusResponse: (state) => {
       state.status = null
       state.error = null
-      state.loading = false
+      state.message = null
     }
   },
 })

@@ -1,5 +1,6 @@
 
-export type ErrorDataInResponse = {
+export type ErrorMain = {
+  status: number
   numberError: number
   message: string
   value?: string

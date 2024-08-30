@@ -19,6 +19,15 @@
     -webkit-transition-delay: 9999s;
   }
 
+  &__label {
+    @include flex-start;
+    padding: 4px 0 0 16px;
+
+    &_error {
+      color: $color-danger;
+    }
+  }
+
   &-wrapper {
     width: 100%;
   }
@@ -59,11 +68,5 @@
     top: 1rem;
     right: 1rem;
     cursor: pointer;
-  }
-
-  &__label {
-    @include flex-start;
-    padding: 4px 0 0 16px;
-    // color: #565c67;
   }
 }

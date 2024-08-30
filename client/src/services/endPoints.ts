@@ -1,2 +1,2 @@
 export const authEndPoint = "/auth"
-export const signInEndPoint = `${authEndPoint}/sign_in`
+export const signInEndPoint = `${authEndPoint}/sign_up`
