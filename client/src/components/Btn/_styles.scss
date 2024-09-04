@@ -1,5 +1,5 @@
 .btn {
-  --btn-width: 15rem;
+  --btn-width: 100%;
   --btn-height: 100%;
 
   --btn-color: $color-white;
@@ -58,6 +58,11 @@
     fill: var(--btn-fill-active);
   }
 
+  &:disabled {
+    opacity: 0.4;
+    cursor: default;
+  }
+
   &_primary {
     --btn-color: #{$color-black};
     --btn-bg-color: #{$color-primary};
@@ -102,6 +107,15 @@
 
       &_20 {
         margin-right: 1.25rem;
+      }
+    }
+  }
+
+  &_font {
+    &_size {
+
+      &_md {
+        --btn-font-size: 1rem;
       }
     }
   }

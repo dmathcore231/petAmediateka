@@ -1,11 +1,12 @@
-import { Link, NavLink } from "react-router-dom"
-import { Btn } from "../Btn"
+import { Link, NavLink, useLocation } from "react-router-dom"
 import { Logo } from "../../assets/icons/Logo"
 import { SearchIcon } from "../../assets/icons/SearchIcon"
 
 export function NavBar(): JSX.Element {
+  const location = useLocation()
+
   return (
-    <nav className="nav-bar">
+    <nav className={`nav-bar ${location.pathname === "/" ? "" : "nav-bar_padding-horizontal_none"}`}>
       <div className="nav-bar__item">
         <Link to="/" className="nav-bar__logo">
           <Logo width={168} height={16} />
@@ -84,10 +85,10 @@ export function NavBar(): JSX.Element {
           <Link to="/" className="btn btn_secondary btn_size_sm btn_margin_right_20">
             Ввести промокод
           </Link>
-          <Link to="/" className="btn btn_secondary btn_size_xsm">
+          <Link to="/auth/signin" className="btn btn_secondary btn_size_xsm">
             Войти
           </Link>
-          <Link to="/" className="btn btn_primary btn_size_sm">
+          <Link to="/auth/signup" className="btn btn_primary btn_size_sm">
             Попробовать за 1₽
           </Link>
         </div>

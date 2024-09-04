@@ -39,6 +39,7 @@ export type CardStyles = {
   clipPath: boolean
   boxShadow: boolean
   btnGroup: boolean
+  titleOutside: boolean
   ageRestrictionBadge?: {
     position: 'right' | 'left'
     size: Size

@@ -1,5 +1,9 @@
 $color-white: #fff;
 $color-black: #111113;
+$color-black-opacity: #111113CC;
+$color-dark: rgba(17, 17, 19, .8);
+$color-dark-01: rgba(25, 26, 29, .8);
+$color-dark-02: rgba(31, 33, 37, .8);
 $color-primary: #feba2b;
 $color-primary-hover: #e19900;
 $color-primary-active: #E19900CC;
@@ -8,5 +12,8 @@ $color-secondary-hover: #565C67A4;
 $color-secondary-active: #565C67CC;
 $color-orangeBrown: #D4A977;
 $color-gray: #878e9c;
-
+$color-gray-01: rgba(86, 92, 103, .24);
+$color-medium-gray: #aaa;
+$color-danger: #c10e00;
 $main-clip-path: polygon(0 5%, 100% 0, 100% 100%, 0% 100%);
+$main-transition: all .4s ease-in-out 0ms;

@@ -1,4 +1,21 @@
 import { CardData } from "../types/Card"
+import { UserData } from "../types/interfaces/User"
+
+export const setDataInLocalStorage = (key: string, data: string | null | UserData): void => {
+  if (data) {
+    localStorage.setItem(key, JSON.stringify(data))
+  } else {
+    localStorage.removeItem(key)
+  }
+}
+
+export const getDataFromLocalStorage = (key: string): UserData | null => {
+  const data = localStorage.getItem(key)
+  if (data) {
+    return JSON.parse(data)
+  }
+  return null
+}
 
 export const temporarySlide: Array<CardData> = [
   {
@@ -572,4 +589,92 @@ export const temporaryPopularGenresMovies: Array<CardData> = [
     },
     imgBg: "/popularGenres/movies/8.jpg",
   },
+]
+
+export const temporaryBlog: Array<CardData> = [
+  {
+    link: {
+      type: 'allCard',
+      value: '/'
+    },
+    imgBg: "/blog/1.jpg",
+    title: {
+      type: "text",
+      value: "Барби, подвинься, Рим наступает: как Ancient Roman Core захватил модников в 2024-м"
+    },
+    description: "Разбираемся в основах нового «кора» и изучаем римскую эстетику."
+  },
+  {
+    link: {
+      type: 'allCard',
+      value: '/'
+    },
+    imgBg: "/blog/2.jpg",
+    title: {
+      type: "text",
+      value: "«Мифические создания и как их готовят» – история о том, как важно хорошо есть и не тревожиться"
+    },
+    description: "Дегустируем, насколько вкусными могут быть существа из китайской мифологии."
+  },
+  {
+    link: {
+      type: 'allCard',
+      value: '/'
+    },
+    imgBg: "/blog/3.jpg",
+    title: {
+      type: "text",
+      value: "HBO готовит семь новых спин-оффов «Игры престолов» — сообщает Джордж Мартин"
+    },
+    description: "Больше экранизаций фанатам литературной вселенной прославленного писателя."
+  },
+  {
+    link: {
+      type: 'allCard',
+      value: '/'
+    },
+    imgBg: "/blog/4.jpg",
+    title: {
+      type: "text",
+      value: "Как создается магия: 3 доксериала об истории фантастики, хоррора и комиксов"
+    },
+    description: "Эти проекты подробно изучают разные грани популярных жанров."
+  },
+  {
+    link: {
+      type: 'allCard',
+      value: '/'
+    },
+    imgBg: "/blog/5.jpg",
+    title: {
+      type: "text",
+      value: "«Обреченные на славу»: как всё было на самом деле? Разбираем героев сериала вместе с историком"
+    },
+    description: "Реки крови в Колизее, добродушный император Веспасиан — правда или миф?"
+  },
+  {
+    link: {
+      type: 'allCard',
+      value: '/'
+    },
+    imgBg: "/blog/6.jpg",
+    title: {
+      type: "text",
+      value: "«Мама» Поттера и «папа» Страйка отмечает день рождения"
+    },
+    description: "Британская писательница, сценаристка и кинопродюсер Джоан Роулинг празднует свой день рождения 31 июля."
+  },
+  {
+    link: {
+      type: 'allCard',
+      value: '/'
+    },
+    imgBg: "/blog/7.jpg",
+    title: {
+      type: "text",
+      value: "Это разборка императорская: 7 сериалов о королевских страстях и интригах"
+    },
+    description: "Исторические личности и выдуманные правители, с которыми лучше не связываться."
+  },
+
 ]

@@ -1,6 +1,9 @@
 .nav-bar {
+  --padding: 1.563rem 2.5rem;
+
+
   @include flex-between;
-  padding: 1.563rem 2.5rem;
+  padding: var(--padding);
 
   &__logo {
     @include flex-center;
@@ -25,6 +28,19 @@
         }
       }
     }
+
+    &_gap {
+      &_sm {
+        gap: 1.563rem;
+      }
+    }
+
+    &_padding {
+
+      &_top {
+        padding-top: 2rem
+      }
+    }
   }
 
   &__item {
@@ -41,5 +57,15 @@
 
   &__wrapper {
     @include flex-center;
+  }
+
+  &_padding {
+
+    &-horizontal {
+
+      &_none {
+        --padding: 1.563rem 0;
+      }
+    }
   }
 }

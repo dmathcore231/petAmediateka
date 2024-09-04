@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom"
 import { Layout } from "../components/Layout"
+import { Auth } from "../pages/Auth"
 import { Home } from "../pages/Home"
 import { Series } from "../pages/Series"
 import { Movies } from "../pages/Movies"
@@ -8,6 +9,7 @@ import { Trailers } from "../pages/Trailers"
 import { Kino1tv } from "../pages/Kino1tv"
 import { Tv } from "../pages/Tv"
 import { Search } from "../pages/Search"
+
 
 export const router = createBrowserRouter([
   {
@@ -46,5 +48,18 @@ export const router = createBrowserRouter([
         element: <Search />,
       }
     ],
+  },
+  {
+
+    children: [
+      {
+        path: "/auth/signin",
+        element: <Auth pageState="signIn" />,
+      },
+      {
+        path: "/auth/signup",
+        element: <Auth pageState="signUp" />,
+      }
+    ]
   }
 ])
