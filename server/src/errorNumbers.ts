@@ -1,7 +1,9 @@
 
 export const errorNumbers = {
   101: 'User with this email already exists',
-  102: 'Bad request: email or password is empty',
+  102: 'Bad request',
+  103: 'User with this email does not exist',
+  104: 'Wrong password',
   500: 'Internal server error'
 }
 

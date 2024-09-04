@@ -1,4 +1,21 @@
 import { CardData } from "../types/Card"
+import { UserData } from "../types/interfaces/User"
+
+export const setDataInLocalStorage = (key: string, data: string | null | UserData): void => {
+  if (data) {
+    localStorage.setItem(key, JSON.stringify(data))
+  } else {
+    localStorage.removeItem(key)
+  }
+}
+
+export const getDataFromLocalStorage = (key: string): UserData | null => {
+  const data = localStorage.getItem(key)
+  if (data) {
+    return JSON.parse(data)
+  }
+  return null
+}
 
 export const temporarySlide: Array<CardData> = [
   {

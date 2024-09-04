@@ -85,10 +85,10 @@ export function NavBar(): JSX.Element {
           <Link to="/" className="btn btn_secondary btn_size_sm btn_margin_right_20">
             Ввести промокод
           </Link>
-          <Link to="/auth" className="btn btn_secondary btn_size_xsm">
+          <Link to="/auth/signin" className="btn btn_secondary btn_size_xsm">
             Войти
           </Link>
-          <Link to="/auth" className="btn btn_primary btn_size_sm">
+          <Link to="/auth/signup" className="btn btn_primary btn_size_sm">
             Попробовать за 1₽
           </Link>
         </div>

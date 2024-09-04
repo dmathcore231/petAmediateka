@@ -1,16 +1,25 @@
-import { useState, FormEvent } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useState, useEffect, FormEvent } from 'react'
+import { useNavigate, Link } from 'react-router-dom'
+import { useAppDispatch, useAppSelector } from "../../../hooks"
+import { resetStatusResponse } from "../../../redux/statusResponseSlice"
 import { Input } from '../../../components/Input'
 import { Btn } from '../../../components/Btn'
 import { Checkbox } from '../../../components/Checkbox'
 import { AuthPassProps } from '../../../types/interfaces/AuthProps'
+import { InputErrorState } from "../../../types/Input"
 import { CloseIcon } from '../../../assets/icons/CloseIcon'
 
-export function AuthPass({ setPassValue, email }: AuthPassProps): JSX.Element {
+export function AuthPass({ setPassValue, email, type }: AuthPassProps): JSX.Element {
   const navigate = useNavigate()
+  const dispatch = useAppDispatch()
 
+  const { error } = useAppSelector(state => state.statusResponse)
   const [password, setPassword] = useState('')
   const [isChecked, setIsChecked] = useState(false)
+
+  useEffect(() => {
+    dispatch(resetStatusResponse())
+  }, [])
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -30,27 +39,46 @@ export function AuthPass({ setPassValue, email }: AuthPassProps): JSX.Element {
     setPassValue(prev => ({ ...prev, password: null, visibleContent: 'email' }))
   }
 
+  const toggleInputError = () => {
+    if (error && error.numberError === 104 && password === error.value) {
+      console.log('sad')
+      const err: InputErrorState = {
+        value: true,
+        errorData: {
+          field: "password",
+          message: error.message
+        }
+      }
+      return err
+    } else {
+      return { value: false, errorData: null }
+    }
+  }
+
   return (
     <div className="auth-menu">
       <div className="auth-menu__item">
-        <h4 className="auth-menu__pre-title">Вход или регистрация</h4>
+        <h4 className="auth-menu__pre-title">
+          {type === "signUp" ? "Регистрация" : "Вход"}
+        </h4>
         <div className="auth-menu__close-btn">
-          <Btn
-            type="button"
-            className="btn_transparent"
-            onClick={() => navigate(-1)}
-          >
+          <Link to="/" className="btn btn_transparent auth-menu__close-btn">
             <CloseIcon width={15} height={15} className="auth-menu__close-icon" />
-          </Btn>
+          </Link>
         </div>
       </div>
       <div className="auth-menu__item">
         <h1 className="auth-menu__title title title_size_lg">
-          Регистрация в Амедиатеке
+          {type === "signUp" ? "Создайте аккаунт" : "Войдите в свой аккаунт"}
         </h1>
       </div>
       <div className="auth-menu__item">
-        <h3 className="title">Придумайте пароль для создания аккаунта</h3>
+        <h3 className="title">
+          {type === "signUp"
+            ? "Придумайте пароль для создания аккаунта"
+            : "Введите пароль для входа в свой аккаунт"}
+
+        </h3>
       </div>
       <div className="auth-menu__item">
         <div className="auth-pass">
@@ -78,6 +106,7 @@ export function AuthPass({ setPassValue, email }: AuthPassProps): JSX.Element {
             placeholder="Пароль"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            error={toggleInputError()}
             checkPassword
           />
           <Checkbox getCheckedValue={setIsChecked} />

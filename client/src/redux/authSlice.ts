@@ -1,14 +1,22 @@
 import { createSlice, createAsyncThunk, PayloadAction, Dispatch } from "@reduxjs/toolkit"
-import { requestSignUp } from "../services/auth"
+import { requestSignUp, requestSignIn } from "../services/auth"
 import { setStatusResponse } from "./statusResponseSlice"
+import { setDataInLocalStorage } from "../helpers"
+import { FetchAuthPayload } from "../types/interfaces/FetchPayloads"
 import { ResponseWithoutPayload, ResponseWithUPayload } from "../types/interfaces/Response"
 import { initialStateAuth } from "../helpers/initStates"
 import { AxiosError } from "axios"
 
-export const fetchSignUpEmail = createAsyncThunk<ResponseWithoutPayload, FormData, { rejectValue: ResponseWithoutPayload, dispatch: Dispatch }>('auth/fetchSignUpEmail',
-  async (body: FormData, { dispatch, rejectWithValue }) => {
+export const fetchSignUp = createAsyncThunk<ResponseWithoutPayload, FetchAuthPayload, { rejectValue: ResponseWithoutPayload, dispatch: Dispatch }>('auth/fetchSignUpEmail',
+  async ({ body, typeRequest }, { dispatch, rejectWithValue }) => {
     try {
-      const response = await requestSignUp(body)
+      let response
+      if (typeRequest === 'authSignUp') {
+        response = await requestSignUp(body)
+      } else {
+        response = await requestSignIn(body)
+      }
+
       dispatch(setStatusResponse({
         status: response.status,
         error: response.error,
@@ -30,10 +38,10 @@ export const fetchSignUpEmail = createAsyncThunk<ResponseWithoutPayload, FormDat
     }
   })
 
-export const fetchSignUp = createAsyncThunk<ResponseWithUPayload, FormData, { rejectValue: ResponseWithUPayload, dispatch: Dispatch }>('auth/fetchSignUp',
+export const fetchSignIn = createAsyncThunk<ResponseWithUPayload, FormData, { rejectValue: ResponseWithUPayload, dispatch: Dispatch }>('auth/fetchSignIn',
   async (body: FormData, { dispatch }) => {
     try {
-      const response = await requestSignUp(body)
+      const response = await requestSignIn(body)
       dispatch(setStatusResponse({
         status: response.status,
         error: response.error,
@@ -52,30 +60,34 @@ export const authSlice = createSlice({
 
   extraReducers: (builder) => {
     builder
-      // fetch sign up email
-      .addCase(fetchSignUpEmail.pending, (state) => {
+      // fetch sign up
+      .addCase(fetchSignUp.pending, (state) => {
         state.loading = true
+
       })
-      .addCase(fetchSignUpEmail.fulfilled, (state, action: PayloadAction<ResponseWithoutPayload>) => {
+      .addCase(fetchSignUp.fulfilled, (state, action: PayloadAction<ResponseWithUPayload>) => {
         state.loading = false
+        state.user = action.payload.value
+        setDataInLocalStorage('userData', action.payload.value)
       })
-      .addCase(fetchSignUpEmail.rejected, (state, action) => {
-        const payload = action.payload as ResponseWithoutPayload
+      .addCase(fetchSignUp.rejected, (state, action) => {
+        const payload = action.payload as ResponseWithUPayload
         if (payload) {
           state.loading = false
           state.user = null
         }
       })
 
-      // fetch sign up
-      .addCase(fetchSignUp.pending, (state) => {
+      // fetch sign in
+      .addCase(fetchSignIn.pending, (state) => {
         state.loading = true
       })
-      .addCase(fetchSignUp.fulfilled, (state, action: PayloadAction<ResponseWithUPayload>) => {
+      .addCase(fetchSignIn.fulfilled, (state, action: PayloadAction<ResponseWithUPayload>) => {
         state.loading = false
         state.user = action.payload.value
+        setDataInLocalStorage('userData', action.payload.value)
       })
-      .addCase(fetchSignUp.rejected, (state, action) => {
+      .addCase(fetchSignIn.rejected, (state, action) => {
         const payload = action.payload as ResponseWithUPayload
         if (payload) {
           state.loading = false

@@ -1,14 +1,15 @@
 import { useState, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from "../../hooks"
-import { fetchSignUpEmail, fetchSignUp } from '../../redux/authSlice'
+import { fetchSignUp } from '../../redux/authSlice'
 import { resetStatusResponse } from '../../redux/statusResponseSlice'
+import { AuthProps } from '../../types/interfaces/AuthProps'
 import { AuthEmail } from './AuthEmail'
 import { AuthPass } from './AuthPass'
 import { AuthState } from '../../types/AuthState'
 import { Logo } from '../../assets/icons/Logo'
 
-export function Auth(): JSX.Element {
+export function Auth({ pageState }: AuthProps): JSX.Element {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
@@ -24,13 +25,34 @@ export function Auth(): JSX.Element {
   const [authState, setAuthState] = useState<AuthState>(defaultAuthState)
 
   useEffect(() => {
-    if (authState.email) {
-      const formData = new FormData()
+    const formData = new FormData()
+
+    if (pageState === 'signUp' && authState.email && !authState.password) {
+      console.log('+')
       formData.append('type', 'authSignUpEmail')
       formData.append('email', authState.email)
-      dispatch(fetchSignUpEmail(formData))
+
+      dispatch(fetchSignUp({ body: formData, typeRequest: 'authSignUp' }))
+    } else if (pageState === 'signUp' && authState.email && authState.password) {
+      formData.append('type', 'authSignUp')
+      formData.append('email', authState.email)
+      formData.append('password', authState.password)
+
+      dispatch(fetchSignUp({ body: formData, typeRequest: 'authSignUp' }))
+    } else if (pageState === 'signIn' && authState.email && !authState.password) {
+      formData.append('type', 'authSignInEmail')
+      formData.append('email', authState.email)
+
+      dispatch(fetchSignUp({ body: formData, typeRequest: 'authSignIn' }))
+    } else if (pageState === 'signIn' && authState.email && authState.password) {
+      formData.append('type', 'authSignIn')
+      formData.append('email', authState.email)
+      formData.append('password', authState.password)
+
+      dispatch(fetchSignUp({ body: formData, typeRequest: 'authSignIn' }))
     }
-  }, [authState.email])
+
+  }, [pageState, authState.email, authState.password, dispatch])
 
   useEffect(() => {
     if (authState.email && status === 200 && !loading) {
@@ -39,17 +61,10 @@ export function Auth(): JSX.Element {
   }, [authState.email, status, loading])
 
   useEffect(() => {
-    if (authState.password && authState.email) {
-      const formData = new FormData()
-      formData.append('type', 'authSignUp')
-      formData.append('email', authState.email)
-      formData.append('password', authState.password)
-      dispatch(fetchSignUp(formData))
-    }
-  }, [authState.password])
-
-  useEffect(() => {
-    if (user && status === 201) {
+    if (user && pageState === 'signUp' && status === 201) {
+      navigate('/')
+      dispatch(resetStatusResponse())
+    } else if (user && pageState === 'signIn' && status === 200) {
       navigate('/')
       dispatch(resetStatusResponse())
     }
@@ -71,10 +86,11 @@ export function Auth(): JSX.Element {
         {authState.visibleContent === 'email' && (
           <AuthEmail
             setEmailValue={setAuthState}
+            type={pageState}
           />
         )}
         {authState.visibleContent === 'password' && authState.email && (
-          <AuthPass setPassValue={setAuthState} email={authState.email} />
+          <AuthPass setPassValue={setAuthState} email={authState.email} type={pageState} />
         )}
       </article>
     </div>

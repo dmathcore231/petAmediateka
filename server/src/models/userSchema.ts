@@ -31,7 +31,10 @@ const userSchema = new Schema({
 
   userPersonalData: {
     email: String,
-    password: String,
+    password: {
+      type: String,
+      required: true
+    },
     phone: String || null,
     userCard: {
       type: String || null,

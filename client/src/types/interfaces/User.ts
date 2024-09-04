@@ -1,6 +1,6 @@
 import { UserSubscription } from "../UserSubscription"
 
-export interface User {
+export interface UserData {
   _id: string
   userData: {
     firstName: string | null

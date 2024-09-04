@@ -62,6 +62,20 @@
       fill: $color-white;
     }
   }
+
+  &_color {
+    &_white {
+      color: $color-white;
+    }
+  }
+
+  &_font {
+    &-size {
+      &_sm {
+        font-size: 1rem;
+      }
+    }
+  }
 }
 
 .form {

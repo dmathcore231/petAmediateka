@@ -50,7 +50,16 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    element: <Auth />,
-    path: "/auth",
+
+    children: [
+      {
+        path: "/auth/signin",
+        element: <Auth pageState="signIn" />,
+      },
+      {
+        path: "/auth/signup",
+        element: <Auth pageState="signUp" />,
+      }
+    ]
   }
 ])

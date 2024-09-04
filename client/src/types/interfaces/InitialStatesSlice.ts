@@ -1,5 +1,5 @@
 import { ErrorDataInResponse } from "../Error"
-import { User } from "./User"
+import { UserData } from "./User"
 
 export interface StateStatusResponse {
   status: number | null
@@ -9,5 +9,5 @@ export interface StateStatusResponse {
 
 export interface AuthState {
   loading: boolean
-  user: User | null
+  user: UserData | null
 }
