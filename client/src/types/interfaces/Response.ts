@@ -1,5 +1,5 @@
 import { ErrorDataInResponse } from "../Error"
-import { User } from "./User"
+import { UserData } from "./User"
 
 export interface ResponseStatusData {
   status: number
@@ -11,7 +11,8 @@ export interface ResponseWithoutPayload extends ResponseStatusData {
   value: null
 }
 
-export interface ResponseWithUPayload extends ResponseStatusData {
+export interface ResponseWithPayload extends ResponseStatusData {
   message: string
-  value: User
+  value: UserData | null
+  token? : string
 }

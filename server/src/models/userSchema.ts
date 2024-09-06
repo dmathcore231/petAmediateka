@@ -1,45 +1,51 @@
 import mongoose, { Schema } from 'mongoose'
 import { UserSubscription } from '../types/UserSubscription'
-const userSchema = new Schema({
 
+const userSchema = new Schema({
   userData: {
-    firstName: {
-      type: String || null,
-      default: null
+    type: {
+      firstName: {
+        type: String || null,
+        default: null
+      },
+      lastName: {
+        type: String || null,
+        default: null
+      },
+      profileName: {
+        type: String,
+        default: 'Мой профиль'
+      },
+      userBirthDay: {
+        type: String || null,
+        default: null
+      },
+      userGender: {
+        type: String || null,
+        default: null
+      },
+      userAvatar: {
+        type: String || null,
+        default: null
+      },
     },
-    lastName: {
-      type: String || null,
-      default: null
-    },
-    profileName: {
-      type: String,
-      default: 'Мой профиль'
-    },
-    userBirthDay: {
-      type: String || null,
-      default: null
-    },
-    userGender: {
-      type: String || null,
-      default: null
-    },
-    userAvatar: {
-      type: String || null,
-      default: null
-    },
+    required: true
   },
 
   userPersonalData: {
-    email: String,
-    password: {
-      type: String,
-      required: true
+    type: {
+      email: String,
+      password: {
+        type: String,
+        required: true
+      },
+      phone: String || null,
+      userCard: {
+        type: String || null,
+        default: null
+      }
     },
-    phone: String || null,
-    userCard: {
-      type: String || null,
-      default: null
-    }
+    required: true
   },
 
   userSubscriptions: {

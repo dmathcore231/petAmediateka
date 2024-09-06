@@ -34,7 +34,6 @@ export function checkBadRequestMiddleware(req: Request, res: Response, next: Nex
           break
         }
         case "authSignUp": {
-          console.log(type)
           if (!email || !password) {
             const error: ErrorMain = {
               status: 400,

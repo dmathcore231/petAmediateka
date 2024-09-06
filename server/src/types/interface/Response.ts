@@ -11,7 +11,8 @@ export interface ResponseWithoutPayload extends ResponseStatusData {
   value: null
 }
 
-export interface ResponseWithUPayload extends ResponseStatusData {
+export interface ResponseWithPayload extends ResponseStatusData {
   message: string
   value: Omit<User, 'password' | '__v' | 'userCard'>
+  token?: string | null
 }

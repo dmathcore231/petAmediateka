@@ -3,7 +3,7 @@ import { requestSignUp, requestSignIn } from "../services/auth"
 import { setStatusResponse } from "./statusResponseSlice"
 import { setDataInLocalStorage } from "../helpers"
 import { FetchAuthPayload } from "../types/interfaces/FetchPayloads"
-import { ResponseWithoutPayload, ResponseWithUPayload } from "../types/interfaces/Response"
+import { ResponseWithoutPayload, ResponseWithPayload } from "../types/interfaces/Response"
 import { initialStateAuth } from "../helpers/initStates"
 import { AxiosError } from "axios"
 
@@ -38,7 +38,7 @@ export const fetchSignUp = createAsyncThunk<ResponseWithoutPayload, FetchAuthPay
     }
   })
 
-export const fetchSignIn = createAsyncThunk<ResponseWithUPayload, FormData, { rejectValue: ResponseWithUPayload, dispatch: Dispatch }>('auth/fetchSignIn',
+export const fetchSignIn = createAsyncThunk<ResponseWithPayload, FormData, { rejectValue: ResponseWithPayload, dispatch: Dispatch }>('auth/fetchSignIn',
   async (body: FormData, { dispatch }) => {
     try {
       const response = await requestSignIn(body)
@@ -65,13 +65,16 @@ export const authSlice = createSlice({
         state.loading = true
 
       })
-      .addCase(fetchSignUp.fulfilled, (state, action: PayloadAction<ResponseWithUPayload>) => {
+      .addCase(fetchSignUp.fulfilled, (state, action: PayloadAction<ResponseWithPayload>) => {
         state.loading = false
         state.user = action.payload.value
         setDataInLocalStorage('userData', action.payload.value)
+        if (action.payload.token) {
+          setDataInLocalStorage('token', action.payload.token)
+        }
       })
       .addCase(fetchSignUp.rejected, (state, action) => {
-        const payload = action.payload as ResponseWithUPayload
+        const payload = action.payload as ResponseWithPayload
         if (payload) {
           state.loading = false
           state.user = null
@@ -82,13 +85,18 @@ export const authSlice = createSlice({
       .addCase(fetchSignIn.pending, (state) => {
         state.loading = true
       })
-      .addCase(fetchSignIn.fulfilled, (state, action: PayloadAction<ResponseWithUPayload>) => {
+      .addCase(fetchSignIn.fulfilled, (state, action: PayloadAction<ResponseWithPayload>) => {
         state.loading = false
         state.user = action.payload.value
         setDataInLocalStorage('userData', action.payload.value)
+        if (action.payload.token) {
+          setDataInLocalStorage('token', action.payload.token)
+        } else {
+          setDataInLocalStorage('token', null)
+        }
       })
       .addCase(fetchSignIn.rejected, (state, action) => {
-        const payload = action.payload as ResponseWithUPayload
+        const payload = action.payload as ResponseWithPayload
         if (payload) {
           state.loading = false
           state.user = null
