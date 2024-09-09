@@ -1,0 +1,16 @@
+.profile-switcher {
+  @include flex-center;
+
+  &_margin {
+    margin: 0 1.25rem;
+  }
+
+  &-menu {
+    transition: all var(--animation-time) ease-in-out 0ms;
+
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.1);
+    }
+  }
+}

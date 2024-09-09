@@ -18,7 +18,7 @@ export interface User extends Document {
     userCard: string | null
   },
 
-  userSubscriptions: UserSubscription[] | []
+  userSubscriptions: Array<UserSubscription> | []
 
   userActionsData: {
     liked: [],

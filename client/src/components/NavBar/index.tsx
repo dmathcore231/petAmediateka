@@ -1,9 +1,14 @@
 import { Link, NavLink, useLocation } from "react-router-dom"
+import { useAppSelector } from "../../hooks"
+import { ProfileSwitcher } from "../ProfileSwitcher"
+import { Spinner } from "../Spinner"
 import { Logo } from "../../assets/icons/Logo"
 import { SearchIcon } from "../../assets/icons/SearchIcon"
+import { BurgerMenu } from "../../assets/icons/BurgerMenu"
 
 export function NavBar(): JSX.Element {
   const location = useLocation()
+  const { user, loading } = useAppSelector(state => state.auth)
 
   return (
     <nav className={`nav-bar ${location.pathname === "/" ? "" : "nav-bar_padding-horizontal_none"}`}>
@@ -82,15 +87,28 @@ export function NavBar(): JSX.Element {
       </div>
       <div className="nav-bar__item">
         <div className="nav-bar__wrapper">
-          <Link to="/" className="btn btn_secondary btn_size_sm btn_margin_right_20">
-            Ввести промокод
-          </Link>
-          <Link to="/auth/signin" className="btn btn_secondary btn_size_xsm">
-            Войти
-          </Link>
+          {!user && !loading && (
+            <>
+              <Link to="/" className="btn btn_secondary btn_size_sm btn_margin_right_20">
+                Ввести промокод
+              </Link>
+              <Link to="/auth/signin" className="btn btn_secondary btn_size_xsm">
+                Войти
+              </Link>
+            </>
+          )}
           <Link to="/auth/signup" className="btn btn_primary btn_size_sm">
             Попробовать за 1₽
           </Link>
+          {user && !loading && (
+            <>
+              <ProfileSwitcher className="profile-switcher_margin" />
+              <BurgerMenu width={34} height={34} />
+            </>
+          )}
+          {loading && (
+            <Spinner width={24} height={24} />
+          )}
         </div>
       </div>
     </nav>

@@ -47,6 +47,7 @@ const setResponseSignUp = (req: Request, res: Response) => {
 
     return res.status(response.status).send(response)
   } catch (error: unknown) {
+    console.log(error)
     const response: ResponseWithoutPayload = {
       status: 500,
       error: {
@@ -103,6 +104,7 @@ const setResponseSignIn = (req: Request, res: Response) => {
 
     return res.status(response.status).send(response)
   } catch (error: unknown) {
+    console.log(error)
     const response: ResponseWithoutPayload = {
       status: 500,
       error: {
@@ -117,7 +119,7 @@ const setResponseSignIn = (req: Request, res: Response) => {
   }
 }
 
-authRouter.post("/auth/sign_up", checkBadRequestMiddleware, checkValidAuthFormMiddleware, createUser, setResponseSignUp)
+authRouter.post("/auth/sign_up", checkBadRequestMiddleware, checkValidAuthFormMiddleware, createUser, createJwtMiddleware, setResponseSignUp)
 authRouter.post("/auth/sign_in", checkBadRequestMiddleware, checkValidAuthFormMiddleware, createJwtMiddleware, setResponseSignIn)
 
 export { authRouter }

@@ -1,7 +1,8 @@
 import mongoose, { Schema } from 'mongoose'
 import { UserSubscription } from '../types/UserSubscription'
+import { User } from '../types/interface/User'
 
-const userSchema = new Schema({
+const userSchema = new Schema<User>({
   userData: {
     type: {
       firstName: {
@@ -29,7 +30,8 @@ const userSchema = new Schema({
         default: null
       },
     },
-    required: true
+    default: {},
+    _id: false
   },
 
   userPersonalData: {
@@ -45,12 +47,23 @@ const userSchema = new Schema({
         default: null
       }
     },
-    required: true
+    required: true,
+    _id: false
   },
 
   userSubscriptions: {
-    type: Array<UserSubscription> || [],
-    default: []
+    type: [
+      {
+        type: {
+          type: String,
+          enum: ["oneMonth", "threeMonths", "sixMonths", "oneYear"],
+        },
+        date: {
+          startDate: Number,
+          expirationDate: Number
+        }
+      }
+    ],
   },
 
   userActionsData: {
@@ -65,6 +78,6 @@ const userSchema = new Schema({
     enum: ['user', 'moderator', 'admin'],
     default: 'user'
   }
-}, { id: false })
+})
 
 export const UserModel = mongoose.model('Users', userSchema)
