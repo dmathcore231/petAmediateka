@@ -6,11 +6,46 @@
   }
 
   &-menu {
-    transition: all var(--animation-time) ease-in-out 0ms;
+    position: relative;
 
-    &:hover {
-      cursor: pointer;
-      transform: scale(1.1);
+    --display: none;
+
+    &-list {
+      position: absolute;
+      right: 3.75rem;
+      top: -0.5rem;
+      display: var(--display);
+      gap: 0.625rem;
+      border: 1px solid $color-secondary-active;
+      border-radius: 0.5rem;
+      background-color: $color-black-01;
+      padding: 1.5rem;
+
+      &::after {
+        content: "";
+        position: absolute;
+        right: -0.5rem;
+        top: 1.063rem;
+        width: 0;
+        height: 0;
+        border-top: 0.625rem solid transparent;
+        border-bottom: 0.625rem solid transparent;
+        border-left: 0.625rem solid $color-black-01;
+      }
+
+      &__item {
+        @include flex-center;
+        gap: 1.5rem;
+        color: $color-secondary-active;
+      }
+
+      &__profile-name {
+        text-align: left;
+      }
+    }
+
+    &_active {
+      --display: @include flex-column;
     }
   }
 }

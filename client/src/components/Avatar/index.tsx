@@ -1,6 +1,7 @@
 import { useAppSelector } from "../../hooks"
+import { AvatarProps } from "../../types/interfaces/AvatarProps"
 
-export function Avatar(): JSX.Element {
+export function Avatar({ className }: AvatarProps): JSX.Element {
   const { user, loading } = useAppSelector(state => state.auth)
 
   const setUserAvatar = (): string => {
@@ -13,7 +14,7 @@ export function Avatar(): JSX.Element {
 
   return (
     <div className="avatar">
-      <img src={setUserAvatar()} alt="profile-avatar" className="avatar__img" />
+      <img src={setUserAvatar()} alt="profile-avatar" className={"avatar__img" + (className ? " " + className : "")} />
     </div>
   )
 }
