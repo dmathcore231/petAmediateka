@@ -2,9 +2,9 @@ import { Link, NavLink, useLocation } from "react-router-dom"
 import { useAppSelector } from "../../hooks"
 import { ProfileSwitcher } from "../ProfileSwitcher"
 import { Spinner } from "../Spinner"
+import { BurgerMenu } from "../BurgerMenu"
 import { Logo } from "../../assets/icons/Logo"
 import { SearchIcon } from "../../assets/icons/SearchIcon"
-import { BurgerMenu } from "../../assets/icons/BurgerMenu"
 
 export function NavBar(): JSX.Element {
   const location = useLocation()
@@ -86,24 +86,30 @@ export function NavBar(): JSX.Element {
         </ul>
       </div>
       <div className="nav-bar__item">
-        <div className="nav-bar__wrapper">
+        <div className="nav-bar-wrapper">
           {!user && !loading && (
             <>
-              <Link to="/" className="btn btn_secondary btn_size_sm btn_margin_right_20">
-                Ввести промокод
-              </Link>
-              <Link to="/auth/signin" className="btn btn_secondary btn_size_xsm">
-                Войти
-              </Link>
+              <span className="nav-bar-wrapper__item nav-bar-wrapper__item_margin nav-bar-wrapper__item_width_188">
+                <Link to="/" className="btn btn_secondary btn_size_sm btn_margin_right_20">
+                  Ввести промокод
+                </Link>
+              </span>
+              <span className="nav-bar-wrapper__item">
+                <Link to="/auth/signin" className="btn btn_secondary btn_size_xsm">
+                  Войти
+                </Link>
+              </span>
             </>
           )}
-          <Link to="/auth/signup" className="btn btn_primary btn_size_sm">
-            Попробовать за 1₽
-          </Link>
+          <span className="nav-bar-wrapper__item nav-bar-wrapper__item_width_200">
+            <Link to="/auth/signup" className="btn btn_primary btn_size_sm">
+              Попробовать за 1₽
+            </Link>
+          </span>
           {user && !loading && (
             <>
               <ProfileSwitcher className="profile-switcher_margin" />
-              <BurgerMenu width={34} height={34} />
+              <BurgerMenu />
             </>
           )}
           {loading && (
