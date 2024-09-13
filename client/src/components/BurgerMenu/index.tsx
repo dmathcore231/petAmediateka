@@ -1,5 +1,7 @@
 import { useState, useEffect, MouseEvent } from "react"
-import { useAppSelector } from "../../hooks"
+import { Link } from "react-router-dom"
+import { useAppSelector, useAppDispatch } from "../../hooks"
+import { fetchLogout } from "../../redux/authSlice"
 import { Btn } from "../Btn"
 import { Avatar } from "../Avatar"
 import { BurgerMenuIcon } from "../../assets/icons/BurgerMenuIcon"
@@ -7,6 +9,7 @@ import { CloseIcon } from "../../assets/icons/CloseIcon"
 import { PlusIcon } from "../../assets/icons/PlusIcon"
 
 export function BurgerMenu(): JSX.Element {
+  const dispatch = useAppDispatch()
   const { user, loading } = useAppSelector(state => state.auth)
   const [isActive, setIsActive] = useState(false)
 
@@ -26,6 +29,10 @@ export function BurgerMenu(): JSX.Element {
   const handleClickCloseBtn = (event: MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation()
     setIsActive(false)
+  }
+
+  const handleClickLogout = () => {
+    dispatch(fetchLogout())
   }
 
   return (
@@ -83,25 +90,38 @@ export function BurgerMenu(): JSX.Element {
                 className="btn_secondary btn_size_sm"
                 onClick={() => console.log('click')}
               >
-                Оформить Подписку
+                Активировать промокод
               </Btn>
             </div>
             <nav className="burger-menu-aside-nav-bar">
-              <ul className="burger-menu-aside-nav-bar__list">
-                <li className="burger-menu-aside-nav-bar__item">
-                  Избранное
+              <ul className="burger-menu-aside-nav-bar-list">
+                <li className="burger-menu-aside-nav-bar-list__item">
+                  <Link to="#" className="link link_white title title_size_lm">
+                    Избранное
+                  </Link>
                 </li>
-                <li className="burger-menu-aside-nav-bar__item">
-                  История просмотров
+                <li className="burger-menu-aside-nav-bar-list__item">
+                  <Link to="#" className="link link_white title title_size_lm">
+                    История просмотров
+                  </Link>
                 </li>
-                <li className="burger-menu-aside-nav-bar__item">
-                  Настроики
+                <li className="burger-menu-aside-nav-bar-list__item">
+                  <Link to="#" className="link link_white title title_size_lm">
+                    Настроики
+                  </Link>
                 </li>
-                <li className="burger-menu-aside-nav-bar__item">
-                  Покупки
+                <li className="burger-menu-aside-nav-bar-list__item">
+                  <Link to="#" className="link link_white title title_size_lm">
+                    Покупки
+                  </Link>
                 </li>
-                <li className="burger-menu-aside-nav-bar__item">
-                  Выйти из аккаунта
+                <li className="burger-menu-aside-nav-bar-list__item">
+                  <Link to="#"
+                    className="link link_gray title title_size_lm"
+                    onClick={handleClickLogout}
+                  >
+                    Выйти из аккаунта
+                  </Link>
                 </li>
               </ul>
             </nav>

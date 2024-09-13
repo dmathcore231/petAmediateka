@@ -4,6 +4,7 @@ export const errorNumbers = {
   102: 'Bad request',
   103: 'User with this email does not exist',
   104: 'Wrong password',
+  105: 'Unauthorized',
   500: 'Internal server error'
 }
 

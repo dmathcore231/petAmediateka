@@ -2,6 +2,9 @@ import express, { Request, Response } from 'express'
 import { checkBadRequestMiddleware } from "../middlewares/checkBadRequestMiddleware"
 import { checkValidAuthFormMiddleware } from "../middlewares/checkValidAuthFormMiddleware"
 import { createJwtMiddleware } from '../middlewares/createJwtMiddleware'
+import { logoutUserMiddleware } from "../middlewares/logoutUserMiddleware"
+import { checkAccessTokenMiddleware } from '../middlewares/checkAccessTokenMiddleware'
+import { checkRefreshTokenMiddleware } from "../middlewares/checkRefreshTokenMiddleware"
 import { createUser } from "../controllers/createUser"
 import { ResponseWithoutPayload, ResponseWithPayload } from "../types/interface/Response"
 
@@ -104,7 +107,48 @@ const setResponseSignIn = (req: Request, res: Response) => {
 
     return res.status(response.status).send(response)
   } catch (error: unknown) {
-    console.log(error)
+    const response: ResponseWithoutPayload = {
+      status: 500,
+      error: {
+        numberError: 500,
+        message: "Internal server error"
+      },
+      message: "Reject",
+      value: null
+    }
+
+    return res.status(response.status).send(response)
+  }
+}
+
+const setResponseLogout = (req: Request, res: Response) => {
+  const { error } = res.locals.localDataState
+
+  try {
+    if (error) {
+      const response: ResponseWithoutPayload = {
+        status: error.status,
+        error: {
+          numberError: error.numberError,
+          message: error.message,
+          value: error.value
+        },
+        message: "Reject",
+        value: null
+      }
+    }
+
+    const response: ResponseWithoutPayload = {
+      status: 200,
+      error: null,
+      message: "Success",
+      value: null
+    }
+
+    res.clearCookie('refreshToken')
+    return res.status(response.status).send(response)
+
+  } catch (error: unknown) {
     const response: ResponseWithoutPayload = {
       status: 500,
       error: {
@@ -121,5 +165,6 @@ const setResponseSignIn = (req: Request, res: Response) => {
 
 authRouter.post("/auth/sign_up", checkBadRequestMiddleware, checkValidAuthFormMiddleware, createUser, createJwtMiddleware, setResponseSignUp)
 authRouter.post("/auth/sign_in", checkBadRequestMiddleware, checkValidAuthFormMiddleware, createJwtMiddleware, setResponseSignIn)
+authRouter.get("/auth/logout", checkAccessTokenMiddleware, checkRefreshTokenMiddleware, logoutUserMiddleware, setResponseLogout)
 
 export { authRouter }

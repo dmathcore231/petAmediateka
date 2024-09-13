@@ -49,6 +49,32 @@
 
   }
 
+  &_white {
+    color: $color-white;
+    opacity: 0.8;
+
+    &:hover {
+      color: $color-white;
+      opacity: 1;
+    }
+  }
+
+  &_secondary {
+    color: $color-secondary;
+
+    &:hover {
+      color: $color-secondary-hover;
+    }
+  }
+
+  &_gray {
+    color: $color-gray;
+
+    &:hover {
+      color: $color-medium-gray;
+    }
+  }
+
   &_active {
     color: $color-gray;
   }
@@ -64,6 +90,7 @@
   }
 
   &_color {
+
     &_white {
       color: $color-white;
     }

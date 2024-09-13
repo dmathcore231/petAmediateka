@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction, Dispatch } from "@reduxjs/toolkit"
-import { requestSignUp, requestSignIn } from "../services/auth"
+import { requestSignUp, requestSignIn, requestLogout } from "../services/auth"
 import { setStatusResponse } from "./statusResponseSlice"
 import { setDataInLocalStorage } from "../helpers"
 import { FetchAuthPayload } from "../types/interfaces/FetchPayloads"
@@ -42,6 +42,21 @@ export const fetchSignIn = createAsyncThunk<ResponseWithPayload, FormData, { rej
   async (body: FormData, { dispatch }) => {
     try {
       const response = await requestSignIn(body)
+      dispatch(setStatusResponse({
+        status: response.status,
+        error: response.error,
+        message: response.message
+      }))
+      return response
+    } catch (error) {
+      return error
+    }
+  })
+
+export const fetchLogout = createAsyncThunk<ResponseWithoutPayload, void, { rejectValue: ResponseWithoutPayload, dispatch: Dispatch }>('auth/fetchLogout',
+  async (_, { dispatch }) => {
+    try {
+      const response = await requestLogout()
       dispatch(setStatusResponse({
         status: response.status,
         error: response.error,
@@ -97,6 +112,24 @@ export const authSlice = createSlice({
       })
       .addCase(fetchSignIn.rejected, (state, action) => {
         const payload = action.payload as ResponseWithPayload
+        if (payload) {
+          state.loading = false
+          state.user = null
+        }
+      })
+
+      // fetch logout
+      .addCase(fetchLogout.pending, (state) => {
+        state.loading = true
+      })
+      .addCase(fetchLogout.fulfilled, (state, action: PayloadAction<ResponseWithoutPayload>) => {
+        state.loading = false
+        state.user = action.payload.value
+        setDataInLocalStorage('userData', null)
+        setDataInLocalStorage('token', null)
+      })
+      .addCase(fetchLogout.rejected, (state, action) => {
+        const payload = action.payload as ResponseWithoutPayload
         if (payload) {
           state.loading = false
           state.user = null
