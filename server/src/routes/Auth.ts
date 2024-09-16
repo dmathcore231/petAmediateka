@@ -165,6 +165,6 @@ const setResponseLogout = (req: Request, res: Response) => {
 
 authRouter.post("/auth/sign_up", checkBadRequestMiddleware, checkValidAuthFormMiddleware, createUser, createJwtMiddleware, setResponseSignUp)
 authRouter.post("/auth/sign_in", checkBadRequestMiddleware, checkValidAuthFormMiddleware, createJwtMiddleware, setResponseSignIn)
-authRouter.get("/auth/logout", checkAccessTokenMiddleware, checkRefreshTokenMiddleware, logoutUserMiddleware, setResponseLogout)
+authRouter.get("/auth/logout", logoutUserMiddleware, setResponseLogout)
 
 export { authRouter }

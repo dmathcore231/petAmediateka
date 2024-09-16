@@ -2,26 +2,35 @@ import { Request, Response, NextFunction } from 'express'
 import { JwtPayload, TokenExpiredError, JsonWebTokenError, verify } from 'jsonwebtoken'
 import { SECRET_KEY } from '../helpers/constants'
 import { ErrorMain } from '../types/Error'
+import { UserModel } from '../models/userSchema'
 
 export function checkAccessTokenMiddleware(req: Request, res: Response, next: NextFunction): void {
   const { localDataState } = res.locals
+  const { token, error } = localDataState
   const accessTokenInHeader = req.headers.authorization?.split(' ')[1]
 
   try {
+    if (error) {
+      return next()
+    }
+
     if (!accessTokenInHeader) {
-      const error: ErrorMain = {
-        status: 401,
-        numberError: 105,
-        message: 'Unauthorized',
-        value: null
+      localDataState.token = {
+        ...token,
+        accessToken: {
+          value: null,
+          expirated: false,
+          error: false
+        },
       }
 
-      throw error
+      return next()
     }
 
     const decodeAccessToken = verify(accessTokenInHeader, SECRET_KEY) as JwtPayload
 
     if (decodeAccessToken) {
+      const user = UserModel.findById(decodeAccessToken.id)
       localDataState.token = {
         accessToken: {
           value: accessTokenInHeader,
@@ -34,6 +43,7 @@ export function checkAccessTokenMiddleware(req: Request, res: Response, next: Ne
           error: false
         }
       }
+      localDataState.user = user
     }
 
     return next()
@@ -66,28 +76,6 @@ export function checkAccessTokenMiddleware(req: Request, res: Response, next: Ne
         localDataState.token = null
         localDataState.error = error
         break
-      }
-
-      default: {
-        const error = err as ErrorMain
-
-        if (error && error.status) {
-          res.locals.localDataState = {
-            user: null,
-            token: null,
-            error
-          }
-        } else {
-          res.locals.localDataState = {
-            user: null,
-            token: null,
-            error: {
-              status: 500,
-              numberError: 500,
-              message: 'Internal server error'
-            }
-          }
-        }
       }
     }
 
