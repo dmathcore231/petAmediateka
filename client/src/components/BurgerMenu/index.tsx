@@ -2,6 +2,7 @@ import { useState, useEffect, MouseEvent } from "react"
 import { Link } from "react-router-dom"
 import { useAppSelector, useAppDispatch } from "../../hooks"
 import { fetchLogout } from "../../redux/authSlice"
+import { resetStatusResponse } from "../../redux/statusResponseSlice"
 import { Btn } from "../Btn"
 import { Avatar } from "../Avatar"
 import { BurgerMenuIcon } from "../../assets/icons/BurgerMenuIcon"
@@ -10,7 +11,8 @@ import { PlusIcon } from "../../assets/icons/PlusIcon"
 
 export function BurgerMenu(): JSX.Element {
   const dispatch = useAppDispatch()
-  const { user, loading } = useAppSelector(state => state.auth)
+  const { user } = useAppSelector(state => state.auth)
+
   const [isActive, setIsActive] = useState(false)
 
   useEffect(() => {
@@ -32,7 +34,9 @@ export function BurgerMenu(): JSX.Element {
   }
 
   const handleClickLogout = () => {
+    const layoutElement = document.querySelector('.layout')
     dispatch(fetchLogout())
+    layoutElement?.classList.remove('layout_fixed')
   }
 
   return (

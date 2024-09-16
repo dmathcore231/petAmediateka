@@ -11,3 +11,8 @@ export interface AuthState {
   loading: boolean
   user: UserData | null
 }
+
+export interface ContentState {
+  loading: boolean
+  content: unknown
+}

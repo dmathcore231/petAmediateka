@@ -1,5 +1,4 @@
-import mongoose, { Schema } from 'mongoose'
-import { UserSubscription } from '../types/UserSubscription'
+import { Schema, model } from 'mongoose'
 import { User } from '../types/interface/User'
 
 const userSchema = new Schema<User>({
@@ -80,4 +79,4 @@ const userSchema = new Schema<User>({
   }
 })
 
-export const UserModel = mongoose.model('Users', userSchema)
+export const UserModel = model('Users', userSchema)
