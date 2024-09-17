@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom"
 import { Layout } from "../components/Layout"
 import { Auth } from "../pages/Auth"
 import { Home } from "../pages/Home"
+import { СollectionSeries } from "../pages/СollectionSeries"
 import { Series } from "../pages/Series"
 import { Movies } from "../pages/Movies"
 import { Collections } from "../pages/Collections"
@@ -21,7 +22,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/series",
-        element: <Series />,
+        element: <СollectionSeries />,
       },
       {
         path: "/movies",
@@ -46,6 +47,10 @@ export const router = createBrowserRouter([
       {
         path: "/search",
         element: <Search />,
+      },
+      {
+        path: "/series/:id/:title/:season",
+        element: <Series />
       }
     ],
   },
