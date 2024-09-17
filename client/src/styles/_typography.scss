@@ -55,6 +55,20 @@ h3 {
     &_white-dark {
       color: $color-white-dark;
     }
+
+    &_secondary {
+      color: $color-secondary;
+
+      &-active {
+        color: $color-secondary-active;
+      }
+    }
+  }
+
+  &_weight {
+    &_bold {
+      font-weight: 600;
+    }
   }
 }
 

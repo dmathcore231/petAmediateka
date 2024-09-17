@@ -80,6 +80,38 @@
         border: 0.063rem solid $color-medium-gray;
         border-radius: 0.25rem;
       }
+
+      &__btn {
+        @include flex-center;
+        gap: 0.5rem;
+        font-size: 1.125rem;
+        line-height: 1.5;
+        color: $color-black;
+        fill: transparent;
+        stroke: $color-black;
+
+        &-wrapper {
+          width: 16.563rem;
+
+          &_width {
+
+            &_sm {
+              width: 4.063rem;
+            }
+          }
+        }
+      }
+
+      &-rating {
+        @include flex-center;
+        gap: 1rem;
+
+        &__item {
+          @include flex-center;
+          gap: 0.5rem;
+          fill: $color-secondary-active;
+        }
+      }
     }
   }
 }
