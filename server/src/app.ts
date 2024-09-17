@@ -7,6 +7,7 @@ import { checkAccessTokenMiddleware } from './middlewares/checkAccessTokenMiddle
 import { checkRefreshTokenMiddleware } from './middlewares/checkRefreshTokenMiddleware'
 import { refrechAcccessTokenMiddleware } from './middlewares/refrechAcccessTokenMiddleware'
 import { authRouter } from './routes/Auth'
+import { contentRouter } from './routes/Content'
 
 const app = express()
 app.use(cookieParser())
@@ -27,6 +28,7 @@ app.use(checkAccessTokenMiddleware)
 app.use(checkRefreshTokenMiddleware)
 app.use(refrechAcccessTokenMiddleware)
 app.use(authRouter)
+app.use(contentRouter)
 
 
 async function main() {

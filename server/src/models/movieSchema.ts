@@ -2,11 +2,14 @@ import { Schema, model } from 'mongoose'
 import { Movie } from '../types/interface/Movie'
 
 const movieSchema = new Schema<Movie>({
-  movieData: {
+  data: {
     type: {
       title: {
         type: String,
         required: true
+      },
+      originalTitle: {
+        type: String
       },
       discription: {
         type: String,
@@ -35,12 +38,16 @@ const movieSchema = new Schema<Movie>({
       country: {
         type: String,
         required: true
+      },
+      production: {
+        type: String,
+        required: true
       }
     },
     required: true,
     _id: false
   },
-  movieRating: {
+  rating: {
     type: {
       raitingAmediateka: {
         type: Number,
@@ -54,7 +61,7 @@ const movieSchema = new Schema<Movie>({
     required: true,
     _id: false
   },
-  movieActionsData: {
+  actionsData: {
     type: {
       favorites: {
         type: [String],
@@ -79,6 +86,10 @@ const movieSchema = new Schema<Movie>({
   trailer: {
     type: String,
     default: null
+  },
+  titleImg: {
+    type: String,
+    required: true
   }
 })
 

@@ -1,14 +1,12 @@
-import express, { Request, Response } from 'express'
+import { Request, Response, Router } from 'express'
 import { checkBadRequestMiddleware } from "../middlewares/checkBadRequestMiddleware"
 import { checkValidAuthFormMiddleware } from "../middlewares/checkValidAuthFormMiddleware"
 import { createJwtMiddleware } from '../middlewares/createJwtMiddleware'
 import { logoutUserMiddleware } from "../middlewares/logoutUserMiddleware"
-import { checkAccessTokenMiddleware } from '../middlewares/checkAccessTokenMiddleware'
-import { checkRefreshTokenMiddleware } from "../middlewares/checkRefreshTokenMiddleware"
 import { createUser } from "../controllers/createUser"
 import { ResponseWithoutPayload, ResponseWithPayload } from "../types/interface/Response"
 
-const authRouter = express.Router()
+const authRouter = Router()
 
 const setResponseSignUp = (req: Request, res: Response) => {
   const { type, email, } = req.body

@@ -1,8 +1,9 @@
 import { Document } from "mongoose";
 
 export interface Movie extends Document {
-  movieData: {
+  data: {
     title: string
+    originalTitle?: string
     discription: string
     ageRestriction: number
     dateRelease: string | 'N/A'
@@ -10,16 +11,18 @@ export interface Movie extends Document {
     actors: string[]
     directors: string[]
     country: string | 'N/A'
+    production: string | 'N/A'
   }
-  movieRating: {
+  rating: {
     raitingAmediateka: number | 'N/A'
     ratingImdb: number | 'N/A'
   }
-  movieActionsData: {
+  actionsData: {
     favorites: string[] | []
     liked: string[] | []
     disliked: string[] | []
   }
   imgBg: string
   trailer: string | null
+  titleImg: string
 }
