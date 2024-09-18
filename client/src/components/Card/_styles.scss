@@ -138,6 +138,8 @@
         @include flex-center;
         gap: 0.313rem;
         color: $color-black;
+        fill: $color-black;
+        stroke: transparent;
 
         &-scale {
           width: 100%;
@@ -165,7 +167,7 @@
         &_size {
 
           &_lg {
-            width:  22.5rem;
+            width: 22.5rem;
           }
 
           &_xsm {

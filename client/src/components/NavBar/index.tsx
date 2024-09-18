@@ -18,7 +18,7 @@ export function NavBar(): JSX.Element {
         </Link>
         <ul className="nav-bar-list">
           <li className="nav-bar-list__item">
-            <NavLink to="/series"
+            <NavLink to="/collection-series"
               className={({ isActive }) =>
                 isActive ? "nav-bar-list__link_active" : "nav-bar-list__link"
               }

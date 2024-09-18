@@ -78,7 +78,7 @@ export function AuthEmail({ setEmailValue, type }: AuthEmailProps): JSX.Element 
         </div>
       </div>
       <div className="auth-menu__item">
-        <h1 className="auth-menu__title title title_size_lg">
+        <h1 className="auth-menu__title title title_size_l">
           {type === "signUp" ? "Создайте аккаунт" : "Войдите в свой аккаунт"}
         </h1>
       </div>

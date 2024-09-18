@@ -100,28 +100,28 @@ export function BurgerMenu(): JSX.Element {
             <nav className="burger-menu-aside-nav-bar">
               <ul className="burger-menu-aside-nav-bar-list">
                 <li className="burger-menu-aside-nav-bar-list__item">
-                  <Link to="#" className="link link_white title title_size_lm">
+                  <Link to="#" className="link link_white title title_size_s">
                     Избранное
                   </Link>
                 </li>
                 <li className="burger-menu-aside-nav-bar-list__item">
-                  <Link to="#" className="link link_white title title_size_lm">
+                  <Link to="#" className="link link_white title title_size_s">
                     История просмотров
                   </Link>
                 </li>
                 <li className="burger-menu-aside-nav-bar-list__item">
-                  <Link to="#" className="link link_white title title_size_lm">
+                  <Link to="#" className="link link_white title title_size_s">
                     Настроики
                   </Link>
                 </li>
                 <li className="burger-menu-aside-nav-bar-list__item">
-                  <Link to="#" className="link link_white title title_size_lm">
+                  <Link to="#" className="link link_white title title_size_s">
                     Покупки
                   </Link>
                 </li>
                 <li className="burger-menu-aside-nav-bar-list__item">
                   <Link to="#"
-                    className="link link_gray title title_size_lm"
+                    className="link link_gray title title_size_s"
                     onClick={handleClickLogout}
                   >
                     Выйти из аккаунта

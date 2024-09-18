@@ -11,11 +11,11 @@ export function Banner({ title, bannerListItem, img, titleBtn, ageRestriction }:
           </div>
           <ul className="banner-list">
             {bannerListItem.map((item, index) => (
-              <li key={index} className="banner-list__item title title_size_sm">
+              <li key={index} className="banner-list__item text text_size_s">
                 {item}
               </li>
             ))}
-            <li className="banner-list__item title title_size_sm">
+            <li className="banner-list__item text text_size_s">
               {`${ageRestriction}+`}
             </li>
           </ul>

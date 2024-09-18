@@ -28,7 +28,7 @@ export function Footer(): JSX.Element {
                     isActive ? "nav-bar-list__link_active" : "nav-bar-list__link"
                   }
                 >
-                  <span className="title title_size_sm">Сериалы</span>
+                  <span className="text text_size_s">Сериалы</span>
                 </NavLink>
               </li>
               <li className="nav-bar-list__item">
@@ -37,7 +37,7 @@ export function Footer(): JSX.Element {
                     isActive ? "nav-bar-list__link_active" : "nav-bar-list__link"
                   }
                 >
-                  <span className="title title_size_sm">Фильмы</span>
+                  <span className="text text_size_s">Фильмы</span>
                 </NavLink>
               </li>
               <li className="nav-bar-list__item">
@@ -46,7 +46,7 @@ export function Footer(): JSX.Element {
                     isActive ? "nav-bar-list__link_active" : "nav-bar-list__link"
                   }
                 >
-                  <span className="title title_size_sm">Коллекции</span>
+                  <span className="text text_size_s">Коллекции</span>
                 </NavLink>
               </li>
               <li className="nav-bar-list__item">
@@ -55,7 +55,7 @@ export function Footer(): JSX.Element {
                     isActive ? "nav-bar-list__link_active" : "nav-bar-list__link"
                   }
                 >
-                  <span className="title title_size_sm">Трейлеры</span>
+                  <span className="text text_size_s">Трейлеры</span>
                 </NavLink>
               </li>
               <li className="nav-bar-list__item">
@@ -64,7 +64,7 @@ export function Footer(): JSX.Element {
                     isActive ? "nav-bar-list__link_active" : "nav-bar-list__link"
                   }
                 >
-                  <span className="title title_size_sm">Кино1ТВ</span>
+                  <span className="text text_size_s">Кино1ТВ</span>
                 </NavLink>
               </li>
               <li className="nav-bar-list__item">
@@ -73,7 +73,7 @@ export function Footer(): JSX.Element {
                     isActive ? "nav-bar-list__link_active" : "nav-bar-list__link"
                   }
                 >
-                  <span className="title title_size_sm">Эфир</span>
+                  <span className="text text_size_s">Эфир</span>
                 </NavLink>
               </li>
               <li className="nav-bar-list__item">
@@ -82,7 +82,7 @@ export function Footer(): JSX.Element {
                     isActive ? "nav-bar-list__link_active" : "nav-bar-list__link"
                   }
                 >
-                  <span className="title title_size_sm">Поиск</span>
+                  <span className="text text_size_s">Поиск</span>
                 </NavLink>
               </li>
               <li className="nav-bar-list__item">
@@ -91,7 +91,7 @@ export function Footer(): JSX.Element {
                     isActive ? "nav-bar-list__link_active" : "nav-bar-list__link"
                   }
                 >
-                  <span className="title title_size_sm">Блог</span>
+                  <span className="text text_size_s">Блог</span>
                 </NavLink>
               </li>
             </ul>
@@ -102,7 +102,7 @@ export function Footer(): JSX.Element {
                     isActive ? "nav-bar-list__link_active" : "nav-bar-list__link"
                   }
                 >
-                  <span className="title title_size_sm title_color_gray">
+                  <span className="text text_size_s title_color_gray">
                     Пользовательское соглашение
                   </span>
                 </NavLink>
@@ -113,7 +113,7 @@ export function Footer(): JSX.Element {
                     isActive ? "nav-bar-list__link_active" : "nav-bar-list__link"
                   }
                 >
-                  <span className="title title_size_sm title_color_gray">
+                  <span className="text text_size_s title_color_gray">
                     FAQ
                   </span>
                 </NavLink>
@@ -124,7 +124,7 @@ export function Footer(): JSX.Element {
                     isActive ? "nav-bar-list__link_active" : "nav-bar-list__link"
                   }
                 >
-                  <span className="title title_size_sm title_color_gray">
+                  <span className="text text_size_s title_color_gray">
                     Контакты
                   </span>
                 </NavLink>
@@ -135,7 +135,7 @@ export function Footer(): JSX.Element {
                     isActive ? "nav-bar-list__link_active" : "nav-bar-list__link"
                   }
                 >
-                  <span className="title title_size_sm title_color_gray">
+                  <span className="text text_size_s title_color_gray">
                     Партнерская программа
                   </span>
                 </NavLink>
@@ -146,7 +146,7 @@ export function Footer(): JSX.Element {
                     isActive ? "nav-bar-list__link_active" : "nav-bar-list__link"
                   }
                 >
-                  <span className="title title_size_sm title_color_gray">
+                  <span className="text text_size_s title_color_gray">
                     В Амедиатеке применяются рекомендательные технологии
                   </span>
                 </NavLink>
@@ -234,7 +234,7 @@ export function Footer(): JSX.Element {
       </div>
       <div className="footer__item">
         <Link to="/" className="footer__link">
-          <span className="title title_size_md title_color_gray">
+          <span className="title title_color_gray">
             Поддержка
           </span>
         </Link>

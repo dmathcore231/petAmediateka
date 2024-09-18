@@ -21,7 +21,7 @@ export const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/series",
+        path: "/collection-series",
         element: <СollectionSeries />,
       },
       {
@@ -49,8 +49,14 @@ export const router = createBrowserRouter([
         element: <Search />,
       },
       {
-        path: "/series/:id/:title/:season",
-        element: <Series />
+        element: <Series />,
+        path: "/series/:id/:title",
+        children: [
+          {
+            path: ":season",
+            element: <Series />,
+          }
+        ]
       }
     ],
   },

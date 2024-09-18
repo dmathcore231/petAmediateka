@@ -1,0 +1,27 @@
+.meta-data {
+  width: 100%;
+
+  &-list {
+    @include flex-start;
+    gap: 3.75rem;
+
+    &__wrapper {
+      @include flex-center;
+      gap: 1rem;
+
+      &_gap {
+        &_size {
+          &_lg {
+            gap: 2rem;
+          }
+        }
+      }
+    }
+
+    &__item {
+      @include flex-center;
+      gap: 0.5rem;
+      fill: $color-secondary-active;
+    }
+  }
+}
