@@ -1,20 +1,19 @@
 import { Movie } from "./Movie";
 
 export interface Series extends Movie {
-  seasons: Seasons
+  seasons: Season[]
 }
 
-export type Seasons = {
+export interface Season {
   numberOfSeasons: number
-  episodes: EpdisodesSeries[]
+  episodes: EpisodesSeries[]
   imgBg: string
   discription?: string
 }
 
-export type EpdisodesSeries = {
+export type EpisodesSeries = {
   link: string
   episodeNumber: number
-  seasonsNumber: number
   img: string
   title?: string
 }

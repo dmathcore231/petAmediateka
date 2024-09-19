@@ -1,0 +1,35 @@
+.show-more {
+  @include flex-column-start;
+  gap: 1rem;
+
+  &__title {
+    @include flex-column-start;
+  }
+
+  &__discription {
+    text-align: left;
+    max-width: 55%;
+    max-height: 140px;
+    overflow-y: hidden;
+
+    &_show {
+      max-height: 100%;
+    }
+  }
+
+  &__btn {
+    @include flex-center;
+    gap: 0.5rem;
+    color: $color-gray;
+    stroke: $color-gray;
+
+    &:hover {
+      color: $color-white;
+      stroke: $color-white;
+    }
+
+    &-wrapper {
+      padding-top: 1rem;
+    }
+  }
+}

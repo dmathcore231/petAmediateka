@@ -1,0 +1,35 @@
+.media-player {
+
+  &-preview {
+    position: relative;
+    width: 100%;
+    height: auto;
+    cursor: pointer;
+    @include flex-center;
+    border: 1px solid hsla(0, 0%, 100%, .08);
+    border-radius: 10px;
+    box-sizing: border-box;
+    background-image: linear-gradient(-180deg, rgba(17, 17, 19, 0), rgba(17, 17, 19, .5));
+    box-shadow: 0 6px 8px 0 rgba(0, 0, 0, .2);
+    overflow: hidden;
+
+    &__img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    &__btn-play {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      transition: $main-transition;
+      z-index: 5;
+
+      &:hover {
+        transform: translate(-50%, -50%) scale(1.1);
+      }
+    }
+  }
+}

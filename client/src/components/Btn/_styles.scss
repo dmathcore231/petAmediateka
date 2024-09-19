@@ -86,6 +86,12 @@
     --btn-width: 100%;
     --btn-height: 100%;
     --btn-padding: 0;
+
+    &_color {
+      &_gray {
+        --btn-color: #{$color-gray};
+      }
+    }
   }
 
   &_size {

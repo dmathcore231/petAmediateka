@@ -175,6 +175,11 @@
         flex: 0.93 0;
       }
     }
+
+    &-body {
+      width: 100%;
+      @include flex-column;
+    }
   }
 
   &-seasons-line {
@@ -197,6 +202,42 @@
       &:hover {
         opacity: 1;
         border: 0.063rem solid $color-white-dark;
+      }
+    }
+  }
+
+  &-meta-data {
+    width: 100%;
+    @include flex-center;
+    align-items: flex-start;
+
+    &-trailer {
+      @include flex-column-start;
+      gap: 1.875rem;
+    }
+
+    &__item {
+      flex: 1 0;
+    }
+
+    &-description {
+      @include flex-column-start;
+      gap: 1.875rem;
+      padding-left: 5rem;
+
+      &-body {
+        @include flex-column-start;
+        gap: 2.5rem;
+      }
+    }
+
+    &-info {
+      @include flex-start;
+      gap: 2.813rem;
+
+      &__col {
+        @include flex-column-start;
+        gap: 0.8rem;
       }
     }
   }
