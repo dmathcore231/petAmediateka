@@ -1,5 +1,6 @@
 import { ErrorDataInResponse } from "../Error"
 import { UserData } from "./User"
+import { PlayerStatus } from "../PlayerStatus"
 
 export interface StateStatusResponse {
   status: number | null
@@ -15,4 +16,14 @@ export interface AuthState {
 export interface ContentState {
   loading: boolean
   content: unknown
+}
+
+export interface MediaPlayerState {
+  loading: boolean
+  isShow: boolean
+  error: {
+    number: number
+    message: string
+  } | null
+  playerStatus: PlayerStatus
 }

@@ -51,7 +51,6 @@ export function AuthEmail({ setEmailValue, type }: AuthEmailProps): JSX.Element 
 
   const toggleInputError = () => {
     if (error && (error.numberError === 101 || 103) && email === error.value) {
-      console.log(email)
       const err: InputErrorState = {
         value: true,
         errorData: {

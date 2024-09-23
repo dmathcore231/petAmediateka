@@ -124,4 +124,10 @@
       }
     }
   }
+
+  &_stroke {
+    &_white {
+      stroke: #{$color-white};
+    }
+  }
 }

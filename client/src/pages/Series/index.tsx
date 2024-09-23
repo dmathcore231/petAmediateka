@@ -108,8 +108,7 @@ export function Series(): JSX.Element {
                   </div>
                 </Btn>
               </div>
-              <div className="series-content-header__btn-wrapper series-content-header__btn-wrapper_fill_transparent
-              series-content-header__btn-wrapper_stroke_white">
+              <div className="series-content-header__btn-wrapper series-content-header__btn-wrapper_fill_transparent">
                 <Btn
                   type="button"
                   className="btn_secondary"
@@ -170,7 +169,7 @@ export function Series(): JSX.Element {
                   <h4>Трейлер – 2 сезон</h4>
                 </div>
                 <div className="series-meta-data-trailer__video">
-                  <MediaPlayer />
+                  <MediaPlayer type={'preview'} />
                 </div>
               </div>
             </div>
