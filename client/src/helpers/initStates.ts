@@ -29,7 +29,8 @@ export const initialStateMediaPlayer: MediaPlayerState = {
       total: 0
     },
     volume: {
-      mute: false
+      isMuted: false,
+      value: 1
     }
   }
 }

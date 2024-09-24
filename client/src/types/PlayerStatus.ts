@@ -8,6 +8,7 @@ export type PlayerStatus = {
     total: number
   }
   volume: {
-    mute: boolean
+    isMuted: boolean
+    value: number
   }
 }

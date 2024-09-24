@@ -202,4 +202,69 @@
       }
     }
   }
+
+  &-volume {
+    position: relative;
+    @include flex-center;
+    gap: 0.5rem;
+
+    &__progress {
+      position: relative;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 100%;
+      background-color: $color-primary;
+      border-radius: 0.5rem;
+      z-index: 1;
+      transition: $main-transition;
+    }
+
+    &__item {
+      height: 40px;
+      @include flex-center;
+      transition: $main-transition;
+      cursor: pointer;
+
+      &_opacity {
+        opacity: 0;
+      }
+
+      &_show {
+        opacity: 1;
+      }
+    }
+
+    &__track {
+      position: relative;
+      width: 120px;
+      height: 0.375rem;
+      background-color: $color-gray;
+      border-radius: 0.5rem;
+    }
+
+    &__thumb {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 1rem;
+      height: 1rem;
+      background-color: $color-white;
+      border-radius: 50%;
+      transform: translate(60%, 30%);
+      z-index: 2;
+    }
+
+    &__tooltip {
+      position: absolute;
+      bottom: 8px;
+      left: 0;
+      @include flex-center;
+      z-index: 1;
+      background-color: black;
+      padding: 10px 10px;
+      transform: translate(-30%, 0);
+      border-radius: 5px;
+    }
+  }
 }
