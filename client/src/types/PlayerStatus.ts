@@ -1,6 +1,5 @@
 
 export type PlayerStatus = {
-  loading: boolean
   status: "pause" | "play" | null
   time: {
     current: number,
@@ -10,5 +9,7 @@ export type PlayerStatus = {
   volume: {
     isMuted: boolean
     value: number
+    valueWithMuted: number
   }
+  fullScreen: boolean
 }

@@ -71,6 +71,27 @@
       width: 100%;
       height: 100vh;
       background-color: black;
+
+      &_fullscreen {
+        width: 100vw;
+        height: 100vh;
+      }
+
+      &::-webkit-media-controls {
+        display: none !important;
+      }
+
+      &::-moz-media-controls {
+        display: none !important;
+      }
+
+      &::-ms-media-controls {
+        display: none !important;
+      }
+
+      &::-o-media-controls {
+        display: none !important;
+      }
     }
 
     &-header {
@@ -151,6 +172,11 @@
       }
 
       &__item {
+
+        &:hover {
+          transform: scale(1.1);
+        }
+
         &_padding {
           &_left {
             padding-left: 10rem;

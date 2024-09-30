@@ -21,7 +21,6 @@ export const initialStateMediaPlayer: MediaPlayerState = {
   isShow: false,
   error: null,
   playerStatus: {
-    loading: false,
     status: null,
     time: {
       current: 0,
@@ -30,7 +29,9 @@ export const initialStateMediaPlayer: MediaPlayerState = {
     },
     volume: {
       isMuted: false,
-      value: 1
-    }
+      value: 100,
+      valueWithMuted: 100
+    },
+    fullScreen: false
   }
 }

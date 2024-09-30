@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState, MouseEvent, RefObject } from "react"
 import { useAppDispatch, useAppSelector } from "../../hooks"
-import { updatePlayerStatus, toggleShow, resetStateMediaPlayer } from "../../redux/MediaPlayerSlice"
+import { updatePlayerStatus, toggleShow, resetPlayerStatus } from "../../redux/MediaPlayerSlice"
 import { Btn } from "../Btn"
 import { MediaPlayerProps } from "../../types/interfaces/MediaPlayerProps"
 import { TrackSetting } from "../../types/TrackSetting"
@@ -19,6 +19,7 @@ export function MediaPlayer({ type }: MediaPlayerProps): JSX.Element {
   const videoRef = useRef<HTMLVideoElement>(null)
   const thumbVolumeRef = useRef<HTMLDivElement>(null)
   const trackVolumeRef = useRef<HTMLDivElement>(null)
+  const mediaPlayerMainRef = useRef<HTMLDivElement>(null)
 
   const { isShow, playerStatus } = useAppSelector(state => state.mediaPlayer)
 
@@ -30,10 +31,12 @@ export function MediaPlayer({ type }: MediaPlayerProps): JSX.Element {
 
   useEffect(() => {
     if (videoRef.current && isShow) {
+      dispatch(resetPlayerStatus())
       videoRef.current.play()
+      videoRef.current.currentTime = 0
+      videoRef.current.volume = 1
       dispatch(updatePlayerStatus({
         ...playerStatus, status: "play",
-        volume: { ...playerStatus.volume, isMuted: false }
       }))
     }
   }, [isShow])
@@ -51,8 +54,12 @@ export function MediaPlayer({ type }: MediaPlayerProps): JSX.Element {
   }, [timeVideo])
 
   useEffect(() => {
-    console.log(playerStatus.volume)
-  }, [playerStatus])
+    if (!document.fullscreenElement) {
+      dispatch(updatePlayerStatus({ ...playerStatus, fullScreen: false }))
+    } else {
+      dispatch(updatePlayerStatus({ ...playerStatus, fullScreen: true }))
+    }
+  }, [document.fullscreenElement])
 
   const getFixedTime = (time: number) => {
     return `${Math.floor(time / 60)}:${Math.floor(time % 60) < 10 ? `0${Math.floor(time % 60)}` : Math.floor(time % 60)}`
@@ -71,13 +78,17 @@ export function MediaPlayer({ type }: MediaPlayerProps): JSX.Element {
   }
 
   const handleClickBtnClose = () => {
-    if (videoRef.current) {
+    if (videoRef.current && !playerStatus.fullScreen) {
       videoRef.current.pause()
       videoRef.current.currentTime = 0
+
+      dispatch(resetPlayerStatus())
+      setTimeVideo(0)
+      dispatch(toggleShow(false))
+    } else {
+      dispatch(updatePlayerStatus({ ...playerStatus, fullScreen: false }))
+      document.exitFullscreen()
     }
-    dispatch(resetStateMediaPlayer())
-    setTimeVideo(0)
-    dispatch(toggleShow(false))
   }
 
   const handleClickBtnPlayPause = () => {
@@ -102,13 +113,21 @@ export function MediaPlayer({ type }: MediaPlayerProps): JSX.Element {
         videoRef.current.muted = false
         dispatch(updatePlayerStatus({
           ...playerStatus,
-          volume: { ...playerStatus.volume, isMuted: false }
+          volume: {
+            isMuted: false,
+            value: playerStatus.volume.valueWithMuted,
+            valueWithMuted: playerStatus.volume.valueWithMuted
+          }
         }))
       } else {
         videoRef.current.muted = true
         dispatch(updatePlayerStatus({
           ...playerStatus,
-          volume: { ...playerStatus.volume, isMuted: true }
+          volume: {
+            isMuted: true,
+            value: 0,
+            valueWithMuted: playerStatus.volume.value
+          }
         }))
       }
     }
@@ -152,11 +171,44 @@ export function MediaPlayer({ type }: MediaPlayerProps): JSX.Element {
         const percent = Math.min(Math.round(((currentMouseX - minPos) / (maxPos - minPos)) * 100), 100)
 
         setTrackSetting(prev => ({ ...prev, currentMouseX: percent }))
-        dispatch(updatePlayerStatus({
-          ...playerStatus, volume: { ...playerStatus.volume, value: percent }
-        }))
+        if (percent > 0) {
+          dispatch(updatePlayerStatus({
+            ...playerStatus, volume: { isMuted: false, value: percent, valueWithMuted: percent }
+          }))
+        } else {
+          dispatch(updatePlayerStatus({
+            ...playerStatus, volume: { isMuted: true, value: 0, valueWithMuted: 0 }
+          }))
+        }
         videoRef.current.volume = percent / 100
       }
+    }
+  }
+
+  const handleClickBtnForward = () => {
+    if (videoRef.current) {
+      videoRef.current.currentTime += 10
+    }
+  }
+
+  const handleClickBtnRewind = () => {
+    if (videoRef.current) {
+      videoRef.current.currentTime -= 10
+    }
+  }
+
+  const handleClickBtnFullScreen = () => {
+    if (mediaPlayerMainRef.current) {
+      mediaPlayerMainRef.current.requestFullscreen()
+        .then((result) => {
+          if (result === undefined && !playerStatus.fullScreen) {
+            console.log('+fullsceen')
+            dispatch(updatePlayerStatus({ ...playerStatus, fullScreen: true }))
+          } else {
+            dispatch(updatePlayerStatus({ ...playerStatus, fullScreen: false }))
+            document.exitFullscreen()
+          }
+        })
     }
   }
 
@@ -173,9 +225,13 @@ export function MediaPlayer({ type }: MediaPlayerProps): JSX.Element {
         </div>
       )}
       {type === "player" && (
-        <div className={`media-player-main ${isShow ? "media-player-main_show container" : ""}`}>
+        <div className={`media-player-main`
+          + (isShow ? " media-player-main_show" : "")
+          + (playerStatus.fullScreen ? "" : " container")}
+          ref={mediaPlayerMainRef}
+        >
           <div className="media-player-main__wrapper">
-            <div className="media-player-main-header">
+            <div className={"media-player-main-header" + (playerStatus.fullScreen ? " container" : "")}>
               <div className="media-player-main-header__item">
                 <div className="media-player-age-restriction">
                   <div className="media-player-age-restriction__item title title_size_xl">
@@ -204,7 +260,7 @@ export function MediaPlayer({ type }: MediaPlayerProps): JSX.Element {
               preload="auto"
               muted={playerStatus.volume.isMuted}
               ref={videoRef}
-              className="media-player-main-video"
+              className={"media-player-main-video" + (playerStatus.fullScreen ? " media-player-main-video_fullscreen" : "")}
               onTimeUpdate={(e) => setTimeVideo(Number(e.currentTarget.currentTime.toFixed(2)))}
               onEnded={() => {
                 dispatch(updatePlayerStatus({
@@ -212,7 +268,7 @@ export function MediaPlayer({ type }: MediaPlayerProps): JSX.Element {
                 }))
               }}
             ></video>
-            <div className="media-player-control">
+            <div className={"media-player-control" + (playerStatus.fullScreen ? " container" : "")}>
               <div className="media-player-time-bar">
                 <div className="media-player-time title title_size_m">
                   {getFixedTime(playerStatus.time.current)}
@@ -235,7 +291,7 @@ export function MediaPlayer({ type }: MediaPlayerProps): JSX.Element {
                     <Btn
                       type="button"
                       className="btn_transparent"
-                      onClick={() => console.log('click')}
+                      onClick={handleClickBtnRewind}
                     >
                       <Rewind10Icon width={35} height={35} />
                     </Btn>
@@ -253,7 +309,7 @@ export function MediaPlayer({ type }: MediaPlayerProps): JSX.Element {
                     <Btn
                       type="button"
                       className="btn_transparent"
-                      onClick={() => console.log('click')}
+                      onClick={handleClickBtnForward}
                     >
                       <Forward10Icon width={35} height={35} />
                     </Btn>
@@ -272,7 +328,7 @@ export function MediaPlayer({ type }: MediaPlayerProps): JSX.Element {
                             : (<UnmutedIcon width={35} height={35} />)}
                         </Btn>
                       </div>
-                      <div className={"media-player-volume__item media-player-volume__item_opacity" + (trackSetting ? " media-player-volume__item_show" : "")}
+                      <div className={"media-player-volume__item media-player-volume__item_opacity" + (trackSetting.isShowTrack ? " media-player-volume__item_show" : "")}
                         onMouseEnter={handleHoverBtnMuted}
                         onMouseMove={(e) => handleSetTrackCurrentMouseX(e, trackVolumeRef)}
                         onMouseDown={handleSetVolume}
@@ -305,7 +361,7 @@ export function MediaPlayer({ type }: MediaPlayerProps): JSX.Element {
                     <Btn
                       type="button"
                       className="btn_transparent"
-                      onClick={() => console.log('click')}
+                      onClick={handleClickBtnFullScreen}
                     >
                       <FullScreenIcon width={35} height={35} />
                     </Btn>
