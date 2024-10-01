@@ -17,9 +17,13 @@ export const mediaPlayerSlice = createSlice({
 
     resetPlayerStatus: (state) => {
       state.playerStatus = initialStateMediaPlayer.playerStatus
+    },
+
+    getSrc: (state, action: PayloadAction<string>) => {
+      state.src = action.payload
     }
   }
 })
 
 export const mediaPlayerReducer = mediaPlayerSlice.reducer
-export const { updatePlayerStatus, toggleShow, resetPlayerStatus } = mediaPlayerSlice.actions
+export const { updatePlayerStatus, toggleShow, resetPlayerStatus, getSrc } = mediaPlayerSlice.actions

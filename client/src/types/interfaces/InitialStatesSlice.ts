@@ -25,5 +25,6 @@ export interface MediaPlayerState {
     number: number
     message: string
   } | null
+  src: string | null
   playerStatus: PlayerStatus
 }

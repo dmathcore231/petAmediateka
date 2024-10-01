@@ -1,0 +1,23 @@
+@keyframes fadeInLeft {
+  from {
+    left: 0;
+    opacity: 1;
+  }
+
+  to {
+    left: -50%;
+    opacity: 0;
+  }
+}
+
+@keyframes showInLeft {
+  from {
+    left: -50%;
+    opacity: 0;
+  }
+
+  to {
+    left: 0;
+    opacity: 1;
+  }
+}

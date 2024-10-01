@@ -21,7 +21,7 @@ export const temporarySlide: Array<CardData> = [
   {
     link: {
       type: "title",
-      value: "/"
+      value: "/series/1/test"
     },
     imgBg: "/slideImg/1/bg.jpg",
     title: {

@@ -12,4 +12,5 @@ export type PlayerStatus = {
     valueWithMuted: number
   }
   fullScreen: boolean
+  userInactive: boolean
 }

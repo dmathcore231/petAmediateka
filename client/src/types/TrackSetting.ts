@@ -1,5 +1,11 @@
 
 export type TrackSetting = {
-  isShowTrack: boolean
-  currentMouseX: number
+  isShowTrack: {
+    volume: boolean
+    time: boolean
+  }
+  currentMouseX: {
+    volume: number
+    time: number
+  }
 }
