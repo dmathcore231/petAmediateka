@@ -21,9 +21,13 @@ export const mediaPlayerSlice = createSlice({
 
     getSrc: (state, action: PayloadAction<string>) => {
       state.src = action.payload
+    },
+
+    setVideoQuality: (state, action: PayloadAction<'1080p' | '720p' | '480p' | '360p'>) => {
+      state.videoQuality = action.payload
     }
   }
 })
 
 export const mediaPlayerReducer = mediaPlayerSlice.reducer
-export const { updatePlayerStatus, toggleShow, resetPlayerStatus, getSrc } = mediaPlayerSlice.actions
+export const { updatePlayerStatus, toggleShow, resetPlayerStatus, getSrc, setVideoQuality } = mediaPlayerSlice.actions

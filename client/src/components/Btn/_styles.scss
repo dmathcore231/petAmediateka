@@ -23,11 +23,13 @@
 
   --btn-padding: 0.625rem 0;
 
-  --btn-transition: background-color 0.4s ease-in-out, opacity 0.4s ease-in-out, color 0.4s ease, border-color 0.4s ease;
+  --btn-transition: #{$main-transition};
 
   --btn-fill: $color-black;
   --btn-fill-hover: $color-black;
   --btn-fill-active: $color-black;
+
+  --btn-scale-hover: 1;
 
   width: var(--btn-width);
   height: var(--btn-height);
@@ -49,6 +51,7 @@
     background-color: var(--btn-bg-color-hover);
     border-color: var(--btn-border-color-hover);
     fill: var(--btn-fill-hover);
+    scale: var(--btn-scale-hover);
   }
 
   &:active {
@@ -128,6 +131,14 @@
   &_stroke {
     &_white {
       stroke: #{$color-white};
+    }
+  }
+
+  &_scale {
+    transition: all 2s ease-in-out 0ms;
+
+    &_hover {
+      --btn-scale-hover: 1.2;
     }
   }
 }

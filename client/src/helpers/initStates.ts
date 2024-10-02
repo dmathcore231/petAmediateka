@@ -21,6 +21,7 @@ export const initialStateMediaPlayer: MediaPlayerState = {
   isShow: false,
   error: null,
   src: null,
+  videoQuality: '720p',
   playerStatus: {
     status: null,
     time: {

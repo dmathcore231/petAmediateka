@@ -1,9 +1,10 @@
 import { useRef, useEffect, useState, MouseEvent, RefObject } from "react"
 import { useAppDispatch, useAppSelector } from "../../hooks"
-import { updatePlayerStatus, toggleShow, resetPlayerStatus, getSrc } from "../../redux/MediaPlayerSlice"
+import { updatePlayerStatus, toggleShow, resetPlayerStatus, getSrc, setVideoQuality } from "../../redux/MediaPlayerSlice"
 import { Btn } from "../Btn"
 import { MediaPlayerProps } from "../../types/interfaces/MediaPlayerProps"
 import { TrackSetting } from "../../types/TrackSetting"
+import { VideoQuality } from "../../types/VideoQuality"
 import { MediaPlayIcon } from "../../assets/icons/MediaPlayIcon"
 import { CloseIcon } from "../../assets/icons/CloseIcon"
 import { Rewind10Icon } from "../../assets/icons/Rewind10Icon"
@@ -23,7 +24,7 @@ export function MediaPlayer({ type }: MediaPlayerProps): JSX.Element {
   const trackVideoRef = useRef<HTMLDivElement>(null)
   const mediaPlayerMainRef = useRef<HTMLDivElement>(null)
 
-  const { isShow, playerStatus, src } = useAppSelector(state => state.mediaPlayer)
+  const { isShow, playerStatus, src, videoQuality } = useAppSelector(state => state.mediaPlayer)
 
   const [timeVideo, setTimeVideo] = useState(0)
   const [trackSetting, setTrackSetting] = useState<TrackSetting>({
@@ -37,6 +38,7 @@ export function MediaPlayer({ type }: MediaPlayerProps): JSX.Element {
     },
   })
   const [inactive, setInactive] = useState(true)
+  const [isShowHdList, setIsShowHdList] = useState(false)
   const inactiveTime = 3000
 
   useEffect(() => {
@@ -81,7 +83,7 @@ export function MediaPlayer({ type }: MediaPlayerProps): JSX.Element {
       dispatch(updatePlayerStatus({
         ...playerStatus, status: "play",
       }))
-      dispatch(getSrc('../../../public/hotd/hotdTrailerVideo720.mp4'))
+      dispatch(getSrc('/hotd/hotdTrailerVideo720.mp4'))
     }
   }, [isShow])
 
@@ -105,6 +107,12 @@ export function MediaPlayer({ type }: MediaPlayerProps): JSX.Element {
     }
   }, [document.fullscreenElement])
 
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.currentTime = timeVideo
+    }
+  }, [videoQuality])
+
   const getFixedTime = (time: number) => {
     return `${Math.floor(time / 60)}:${Math.floor(time % 60) < 10 ? `0${Math.floor(time % 60)}` : Math.floor(time % 60)}`
   }
@@ -127,8 +135,9 @@ export function MediaPlayer({ type }: MediaPlayerProps): JSX.Element {
       videoRef.current.currentTime = 0
 
       dispatch(resetPlayerStatus())
-      setTimeVideo(0)
       dispatch(toggleShow(false))
+      setIsShowHdList(false)
+      setTimeVideo(0)
     } else {
       dispatch(updatePlayerStatus({ ...playerStatus, fullScreen: false }))
       document.exitFullscreen()
@@ -310,7 +319,17 @@ export function MediaPlayer({ type }: MediaPlayerProps): JSX.Element {
   }
 
   const handleClickBtnQualityVideo = () => {
-    // добавить выпадающие меню с кнопками качества
+    setIsShowHdList(prev => !prev)
+  }
+
+  const handleClickBtnQualityVideoItem = (quality: VideoQuality) => {
+    if (quality === '360p') {
+      dispatch(getSrc('/hotd/hotdTrailerVideo360.mp4'))
+      dispatch(setVideoQuality('360p'))
+    } else {
+      dispatch(getSrc('/hotd/hotdTrailerVideo720.mp4'))
+      dispatch(setVideoQuality('720p'))
+    }
   }
 
   return (
@@ -352,14 +371,14 @@ export function MediaPlayer({ type }: MediaPlayerProps): JSX.Element {
                 + (inactive ? " media-player-main-header__item_fade" : "")}>
                 <Btn
                   type="button"
-                  className="btn_transparent"
+                  className="btn_transparent btn_scale_hover"
                   onClick={handleClickBtnClose}
                 >
                   <CloseIcon width={30} height={30} />
                 </Btn>
               </div>
             </div>
-            <video src={src ? src : ""}
+            <video src={src!}
               autoPlay
               preload="auto"
               muted={playerStatus.volume.isMuted}
@@ -411,7 +430,7 @@ export function MediaPlayer({ type }: MediaPlayerProps): JSX.Element {
                   <div className="media-player-control-panel__item">
                     <Btn
                       type="button"
-                      className="btn_transparent"
+                      className="btn_transparent btn_scale_hover"
                       onClick={handleClickBtnRewind}
                     >
                       <Rewind10Icon width={35} height={35} />
@@ -420,7 +439,7 @@ export function MediaPlayer({ type }: MediaPlayerProps): JSX.Element {
                   <div className="media-player-control-panel__item">
                     <Btn
                       type="button"
-                      className="btn_transparent"
+                      className="btn_transparent btn_scale_hover"
                       onClick={handleClickBtnPlayPause}
                     >
                       {renderBtnPlayOrPauseIcon()}
@@ -429,7 +448,7 @@ export function MediaPlayer({ type }: MediaPlayerProps): JSX.Element {
                   <div className="media-player-control-panel__item">
                     <Btn
                       type="button"
-                      className="btn_transparent"
+                      className="btn_transparent btn_scale_hover"
                       onClick={handleClickBtnForward}
                     >
                       <Forward10Icon width={35} height={35} />
@@ -442,7 +461,7 @@ export function MediaPlayer({ type }: MediaPlayerProps): JSX.Element {
                         onMouseEnter={() => handleHoverTrack(trackVolumeRef)}>
                         <Btn
                           type="button"
-                          className="btn_transparent btn_stroke_white"
+                          className="btn_transparent btn_stroke_white btn_scale_hover"
                           onClick={handleClickBtnMuted}>
                           {playerStatus.volume.isMuted
                             ? (<MutedIcon width={35} height={35} />)
@@ -479,10 +498,50 @@ export function MediaPlayer({ type }: MediaPlayerProps): JSX.Element {
                 </div>
                 <div className="media-player-control-panel__wrapper">
                   <div className="media-player-control-panel__item">
+                    <div className={"media-player-control-quality"
+                      + (isShowHdList ? " media-player-control-quality_show" : "")}>
+                      <span className="ttitle title_size_m">
+                        Качество
+                      </span>
+                      <ul className="media-player-control-quality__list">
+                        <li className="media-player-control-quality__item">
+                          <Btn
+                            type="button"
+                            className="btn_transparent"
+                            onClick={() => handleClickBtnQualityVideoItem('360p')}
+                          >
+                            <span className={"media-player-control-quality__btn"
+                              + (videoQuality === '360p'
+                                ? " media-player-control-quality__btn_active"
+                                : ""
+                              )
+                              + (" title")}>
+                              SD 360
+                            </span>
+                          </Btn>
+                        </li>
+                        <li className="media-player-control-quality__item">
+                          <Btn
+                            type="button"
+                            className="btn_transparent"
+                            onClick={() => handleClickBtnQualityVideoItem('720p')}
+                          >
+                            <span className={"media-player-control-quality__btn"
+                              + (videoQuality === '720p'
+                                ? " media-player-control-quality__btn_active"
+                                : ""
+                              )
+                              + (" title")}>
+                              HD 720
+                            </span>
+                          </Btn>
+                        </li>
+                      </ul>
+                    </div>
                     <Btn
                       type="button"
-                      className="btn_transparent"
-                      onClick={() => console.log(1)}
+                      className="btn_transparent btn_scale_hover"
+                      onClick={handleClickBtnQualityVideo}
                     >
                       <HdIcon width={40} height={35} />
                     </Btn>
@@ -490,7 +549,7 @@ export function MediaPlayer({ type }: MediaPlayerProps): JSX.Element {
                   <div className="media-player-control-panel__item">
                     <Btn
                       type="button"
-                      className="btn_transparent"
+                      className="btn_transparent btn_scale_hover"
                       onClick={handleClickBtnFullScreen}
                     >
                       <FullScreenIcon width={35} height={35} />

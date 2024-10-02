@@ -1,6 +1,7 @@
 import { ErrorDataInResponse } from "../Error"
 import { UserData } from "./User"
 import { PlayerStatus } from "../PlayerStatus"
+import { VideoQuality } from "../VideoQuality"
 
 export interface StateStatusResponse {
   status: number | null
@@ -26,5 +27,6 @@ export interface MediaPlayerState {
     message: string
   } | null
   src: string | null
+  videoQuality: VideoQuality
   playerStatus: PlayerStatus
 }
