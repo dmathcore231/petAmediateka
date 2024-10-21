@@ -15,6 +15,10 @@ const movieSchema = new Schema<Movie>({
         type: String,
         required: true
       },
+      about: {
+        type: Boolean,
+        default: false
+      },
       ageRestriction: {
         type: Number,
         required: true
@@ -41,7 +45,7 @@ const movieSchema = new Schema<Movie>({
       },
       production: {
         type: String,
-        required: true
+        default: "N/A"
       }
     },
     required: true,
@@ -54,6 +58,10 @@ const movieSchema = new Schema<Movie>({
         default: "N/A"
       },
       ratingImdb: {
+        type: Number,
+        default: "N/A"
+      },
+      ratingKinopoisk: {
         type: Number,
         default: "N/A"
       }
@@ -79,13 +87,38 @@ const movieSchema = new Schema<Movie>({
     required: true,
     _id: false
   },
-  imgBg: {
-    type: String,
-    required: true
+  bg: {
+    type: {
+      type: String,
+      enum: ['img', 'video'],
+      default: 'img'
+    },
+    url: {
+      type: String,
+      default: ""
+    }
   },
   trailer: {
-    type: String,
-    default: null
+    type: {
+      quality360: {
+        type: String,
+        default: null
+      },
+      quality720: {
+        type: String,
+        default: null
+      },
+      quality1080: {
+        type: String,
+        default: null
+      },
+      quality2160: {
+        type: String,
+        default: null
+      }
+    },
+    default: null,
+    _id: false
   },
   titleImg: {
     type: String,
@@ -93,4 +126,4 @@ const movieSchema = new Schema<Movie>({
   }
 })
 
-export default model<Movie>('Movie', movieSchema)
+export const MovieModel = model<Movie>('Movies', movieSchema)

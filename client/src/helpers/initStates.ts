@@ -12,8 +12,11 @@ export const initialStateStatusResponse: StateStatusResponse = {
 }
 
 export const initialStateContent: ContentState = {
-  loading: false,
-  content: null
+  mainSlider: {
+    loading: false,
+    error: null,
+    content: null
+  }
 }
 
 export const initialStateMediaPlayer: MediaPlayerState = {

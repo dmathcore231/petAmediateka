@@ -1,5 +1,7 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
+import { useAppDispatch, useAppSelector } from "../../hooks"
+import { fetchContent } from "../../redux/contentSlice"
 import { Banner } from "../../components/Banner"
 import { Slider } from "../../components/Slider"
 import { SeoBlock } from "../../components/SeoBlock"
@@ -11,10 +13,18 @@ import { SliderProps } from "../../types/interfaces/SliderProps"
 import { BannerProps } from "../../types/interfaces/BannerProps"
 import { SeoBlockProps } from "../../types/interfaces/SeoBlockProps"
 import { PromoLineProps } from "../../types/interfaces/PromoLineProps"
+import { Series } from "../../types/interfaces/Series"
+import { CardData } from "../../types/Card"
 
 export function Home(): JSX.Element {
+  const dispatch = useAppDispatch()
+  const { mainSlider: { content } } = useAppSelector(state => state.content)
 
   const [activeLinkPopularGenres, setActiveLinkPopularGenres] = useState<number>(0)
+
+  useEffect(() => {
+    dispatch(fetchContent({ type: 'mainSlider' }))
+  }, [])
 
   const sliderProps: SliderProps = {
     sliderSettings: {

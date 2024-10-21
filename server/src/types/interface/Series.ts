@@ -1,4 +1,4 @@
-import { Movie } from "./Movie";
+import { Movie } from "./Movie"
 
 export interface Series extends Movie {
   seasons: Season[]
@@ -7,8 +7,6 @@ export interface Series extends Movie {
 export interface Season {
   numberOfSeasons: number
   episodes: EpisodesSeries[]
-  imgBg: string
-  discription?: string
 }
 
 export type EpisodesSeries = {

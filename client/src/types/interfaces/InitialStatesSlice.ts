@@ -2,6 +2,8 @@ import { ErrorDataInResponse } from "../Error"
 import { UserData } from "./User"
 import { PlayerStatus } from "../PlayerStatus"
 import { VideoQuality } from "../VideoQuality"
+import { Series } from "./Series"
+import { Content } from "./Content"
 
 export interface StateStatusResponse {
   status: number | null
@@ -15,8 +17,11 @@ export interface AuthState {
 }
 
 export interface ContentState {
-  loading: boolean
-  content: unknown
+  mainSlider: {
+    loading: boolean
+    error: ErrorDataInResponse | null
+    content: Content | null
+  }
 }
 
 export interface MediaPlayerState {
