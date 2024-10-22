@@ -13,8 +13,6 @@ import { SliderProps } from "../../types/interfaces/SliderProps"
 import { BannerProps } from "../../types/interfaces/BannerProps"
 import { SeoBlockProps } from "../../types/interfaces/SeoBlockProps"
 import { PromoLineProps } from "../../types/interfaces/PromoLineProps"
-import { Series } from "../../types/interfaces/Series"
-import { CardData } from "../../types/Card"
 
 export function Home(): JSX.Element {
   const dispatch = useAppDispatch()

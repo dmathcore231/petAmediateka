@@ -1,10 +1,18 @@
 import { Document } from "mongoose"
 import { Bg } from "../Bg"
+import { EpisodesSeries } from "../EpisodesSeries"
+import { Badge } from "../Badge"
 
-export interface Movie extends Document {
+export interface MediaContent extends Document {
+  type: 'movie' | 'series'
+  seasons: Season[] | null
   data: {
-    title: string
-    originalTitle?: string
+    title: {
+      value: string
+      originalTitle: string
+      linkTitle: string
+    }
+    badge: Badge | null
     discription: string
     about: boolean
     ageRestriction: number
@@ -25,7 +33,7 @@ export interface Movie extends Document {
     liked: string[] | []
     disliked: string[] | []
   }
-  bg: Bg
+  bg: Bg | null
   trailer: {
     quality360: string | null
     quality720: string | null
@@ -33,5 +41,19 @@ export interface Movie extends Document {
     quality2160: string | null
     img: string
   } | null
-  titleImg: string
+  logoImg: string
+}
+
+export interface Season {
+  numberOfSeasons: number
+  episodes: EpisodesSeries[]
+  bg: Bg | null
+  trailer: {
+    quality360: string | null
+    quality720: string | null
+    quality1080: string | null
+    quality2160: string | null
+    img: string
+  } | null
+  discription: string | null
 }

@@ -1,11 +1,19 @@
 import { Bg } from "../Bg"
+import { EpisodesSeries } from "../EpisodesSeries"
+import { BadgeCard } from "../BadgeCard"
 
-export interface Movie {
+export interface MediaContent {
   _id: string
   __v: number
+  type: 'movie' | 'series'
+  seasons: Season[] | null
   data: {
-    title: string
-    originalTitle?: string
+    title: {
+      value: string
+      originalTitle: string
+      linkTitle: string
+    }
+    badge: BadgeCard | null
     discription: string
     about: boolean
     ageRestriction: number
@@ -26,7 +34,7 @@ export interface Movie {
     liked: string[] | []
     disliked: string[] | []
   }
-  bg: Bg
+  bg: Bg | null
   trailer: {
     quality360: string | null
     quality720: string | null
@@ -34,5 +42,19 @@ export interface Movie {
     quality2160: string | null
     img: string
   } | null
-  titleImg: string
+  logoImg: string
+}
+
+export interface Season {
+  numberOfSeasons: number
+  episodes: EpisodesSeries[]
+  bg: Bg | null
+  trailer: {
+    quality360: string | null
+    quality720: string | null
+    quality1080: string | null
+    quality2160: string | null
+    img: string
+  } | null
+  discription: string | null
 }
