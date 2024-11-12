@@ -1,5 +1,6 @@
 
 export type Bg = {
-  type: "img" | "video",
-  url: string
+  imgUrl: string
+  videoUrl: string | null
+  imgResizeUrl?: string
 }

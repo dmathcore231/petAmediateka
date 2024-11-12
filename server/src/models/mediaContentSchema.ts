@@ -37,16 +37,16 @@ const mediaContentSchema = new Schema<MediaContent>({
           required: true
         },
         bg: {
-          type: {
+          imgUrl: {
             type: String,
-            enum: ['img', 'video'],
-            required: false,
+            required: true
+          },
+          videoUrl: {
+            type: String,
             default: null
           },
-          url: {
+          imgResizeUrl: {
             type: String,
-            required: false,
-            default: null
           }
         },
         trailer: {
@@ -71,6 +71,10 @@ const mediaContentSchema = new Schema<MediaContent>({
           default: null,
           _id: false
         },
+        description: {
+          type: String,
+          default: null,
+        }
       }
     ],
     default: null,
@@ -93,7 +97,8 @@ const mediaContentSchema = new Schema<MediaContent>({
             required: true
           }
         },
-        required: true
+        required: true,
+        _id: false
       },
       badge: {
         type: {
@@ -108,9 +113,19 @@ const mediaContentSchema = new Schema<MediaContent>({
           default: null
         },
       },
-      discription: {
-        type: String,
-        required: true
+      description: {
+        type: {
+          mainDescription: {
+            type: String,
+            required: true
+          },
+          prewiewDescription: {
+            type: String,
+            required: true
+          }
+        },
+        required: true,
+        _id: false
       },
       about: {
         type: Boolean,
@@ -185,14 +200,17 @@ const mediaContentSchema = new Schema<MediaContent>({
     _id: false
   },
   bg: {
-    type: {
+    imgUrl: {
       type: String,
-      enum: ['img', 'video'],
-      default: 'img'
+      required: true
     },
-    url: {
+    videoUrl: {
       type: String,
-      default: ""
+      default: null
+    },
+    imgResizeUrl: {
+      type: String,
+      required: true
     }
   },
   trailer: {

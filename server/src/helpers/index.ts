@@ -1,5 +1,6 @@
 import { ErrorMain } from '../types/Error'
 import { MediaContent } from '../types/interface/MediaContent'
+import { Banner } from '../types/interface/Banner'
 
 export function checkBadRequest(fields: string[], errorMessage: string) {
 
@@ -27,76 +28,77 @@ export const temporaryListSeries: Partial<MediaContent>[] = [
           {
             link: '#',
             episodeNumber: 1,
-            imgPreview: '../../public/series/hotd/hotds1e1.jpg',
+            imgPreview: 'http://localhost:3000/public/series/hotd/hotds1e1.jpg',
             title: 'Наследники дракона'
           },
           {
             link: '#',
             episodeNumber: 2,
-            imgPreview: '../../public/series/hotd/hotds1e2.jpg',
+            imgPreview: 'http://localhost:3000/public/series/hotd/hotds1e2.jpg',
             title: 'Порочный принц'
           },
           {
             link: '#',
             episodeNumber: 3,
-            imgPreview: '../../public/series/hotd/hotds1e3.jpg',
+            imgPreview: 'http://localhost:3000/public/series/hotd/hotds1e3.jpg',
             title: 'Второй своего имени'
+
           },
           {
             link: '#',
             episodeNumber: 4,
-            imgPreview: '../../public/series/hotd/hotds1e4.jpg',
+            imgPreview: 'http://localhost:3000/public/series/hotd/hotds1e4.jpg',
             title: 'Король Узкого Моря'
           },
           {
             link: '#',
             episodeNumber: 5,
-            imgPreview: '../../public/series/hotd/hotds1e5.jpg',
+            imgPreview: 'http://localhost:3000/public/series/hotd/hotds1e5.jpg',
             title: 'Мы путь осветим'
           },
           {
             link: '#',
             episodeNumber: 6,
-            imgPreview: '../../public/series/hotd/hotds1e6.jpg',
+            imgPreview: 'http://localhost:3000/public/series/hotd/hotds1e6.jpg',
             title: 'Принцесса и королева'
           },
           {
             link: '#',
             episodeNumber: 7,
-            imgPreview: '../../public/series/hotd/hotds1e7.jpg',
+            imgPreview: 'http://localhost:3000/public/series/hotd/hotds1e7.jpg',
             title: 'Дрифтмарк'
           },
           {
             link: '#',
             episodeNumber: 8,
-            imgPreview: '../../public/series/hotd/hotds1e8.jpg',
+            imgPreview: 'http://localhost:3000/public/series/hotd/hotds1e8.jpg',
             title: 'Лорд Приливов'
           },
           {
             link: '#',
             episodeNumber: 9,
-            imgPreview: '../../public/series/hotd/hotds1e9.jpg',
+            imgPreview: 'http://localhost:3000/public/series/hotd/hotds1e9.jpg',
             title: 'Зеленый Совет'
           },
           {
             link: '#',
             episodeNumber: 10,
-            imgPreview: '../../public/series/hotd/hotds1e10.jpg',
+            imgPreview: 'http://localhost:3000/public/series/hotd/hotds1e10.jpg',
             title: 'Черная королева'
           }
         ],
         bg: {
-          type: 'img',
-          url: '../../public/series/hotd/imgBgHOTDs1.jpg'
+          imgUrl: 'http://localhost:3000/public/series/hotd/imgBgHOTDs1.jpg',
+          videoUrl: null
         },
         trailer: {
-          quality360: '../../public/series/hotd/hotdTrailerVideo360.mp4',
-          quality720: '../../public/series/hotd/hotdTrailerVideo720.mp4',
+          quality360: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo360.mp4',
+          quality720: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4',
           quality1080: null,
           quality2160: null,
-          img: '../../public/series/hotd/hotdTrailer.jpg'
+          img: 'http://localhost:3000/public/series/hotd/hotdTrailer.jpg'
         },
-        discription: null,
+        description: null,
       }
     ],
     data: {
@@ -109,7 +111,10 @@ export const temporaryListSeries: Partial<MediaContent>[] = [
         type: 'secondary',
         title: 'Номинант «Эмми»'
       },
-      discription: 'Долгожданный приквел легендарного сериала «Игра престолов». В основу «Дома Дракона» лег первый том книги Джорджа Р.Р. Мартина «Пламя и кровь», где раскрывается история династии Таргариенов. В частности, семейство ввязывается в жестокую гражданскую войну, которая получила название «Танец драконов». Среди режиссеров сериала — Мигель Сапочник, ранее работавший над «Игрой престолов». Главные роли исполнили Мэтт Смит («Доктор Кто»), Эмма Д’Арси («Мисс Плохое Поведение») и Оливия Кук («Медленные лошади»). Автор оригинальной книги Джордж Мартин описывает сериал «Дом Дракона» как «шекспировскую трагедию», где нет однозначно положительных героев. То есть все в лучших традициях невероятной вселенной «Игры престолов»!',
+      description: {
+        mainDescription: 'Долгожданный приквел легендарного сериала «Игра престолов». В основу «Дома Дракона» лег первый том книги Джорджа Р.Р. Мартина «Пламя и кровь», где раскрывается история династии Таргариенов. В частности, семейство ввязывается в жестокую гражданскую войну, которая получила название «Танец драконов». Среди режиссеров сериала — Мигель Сапочник, ранее работавший над «Игрой престолов». Главные роли исполнили Мэтт Смит («Доктор Кто»), Эмма Д’Арси («Мисс Плохое Поведение») и Оливия Кук («Медленные лошади»). Автор оригинальной книги Джордж Мартин описывает сериал «Дом Дракона» как «шекспировскую трагедию», где нет однозначно положительных героев. То есть все в лучших традициях невероятной вселенной «Игры престолов»!',
+        prewiewDescription: 'Дом Дракона — серия второй серии «Игры престолов».'
+      },
       about: true,
       ageRestriction: 18,
       dateRelease: '2022',
@@ -130,17 +135,18 @@ export const temporaryListSeries: Partial<MediaContent>[] = [
       disliked: []
     },
     bg: {
-      type: 'img',
-      url: '../../public/series/hotd/hotdBgVideo.mp4'
+      imgUrl: 'http://localhost:3000/public/series/hotd/imgBgHOTDs2.jpg',
+      videoUrl: 'http://localhost:3000/public/series/hotd/hotdBgVideo.mp4',
+      imgResizeUrl: 'http://localhost:3000/public/series/hotd/resizeImgBgS2.jpg'
     },
     trailer: {
-      quality360: '../../public/series/hotd/hotdTrailerVideo360.mp4',
-      quality720: '../../public/series/hotd/hotdTrailerVideo720.mp4',
+      quality360: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo360.mp4',
+      quality720: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4',
       quality1080: null,
       quality2160: null,
-      img: '../../public/series/hotd/hotdTrailer.jpg'
+      img: 'http://localhost:3000/public/series/hotd/hotdTrailer.jpg'
     },
-    logoImg: '../../public/series/hotd/logo.png'
+    logoImg: 'http://localhost:3000/public/series/hotd/logo.png'
   },
   {
     type: 'series',
@@ -151,67 +157,70 @@ export const temporaryListSeries: Partial<MediaContent>[] = [
           {
             link: '#',
             episodeNumber: 1,
-            imgPreview: '../../public/series/nightTherapy/s1e1.jpg',
+            imgPreview: 'http://localhost:3000/public/series/nightTherapy/s1e1.jpg',
             title: 'Ночь - это день'
           },
           {
             link: '#',
             episodeNumber: 2,
-            imgPreview: '../../public/series/nightTherapy/s1e2.jpg',
+            imgPreview: 'http://localhost:3000/public/series/nightTherapy/s1e2.jpg',
             title: 'Очень узкий мостик'
           },
           {
             link: '#',
             episodeNumber: 3,
-            imgPreview: '../../public/series/nightTherapy/s1e3.jpg',
+            imgPreview: 'http://localhost:3000/public/series/nightTherapy/s1e3.jpg',
             title: 'В центре бури'
           },
           {
             link: '#',
             episodeNumber: 4,
-            imgPreview: '../../public/series/nightTherapy/s1e4.jpg',
+            imgPreview: 'http://localhost:3000/public/series/nightTherapy/s1e4.jpg',
             title: 'Не замечать до последнего.'
           },
           {
             link: '#',
             episodeNumber: 5,
-            imgPreview: '../../public/series/nightTherapy/s1e5.jpg',
+            imgPreview: 'http://localhost:3000/public/series/nightTherapy/s1e5.jpg',
             title: 'Крах'
           },
           {
             link: '#',
             episodeNumber: 6,
-            imgPreview: '../../public/series/nightTherapy/s1e6.jpg',
+            imgPreview: 'http://localhost:3000/public/series/nightTherapy/s1e6.jpg',
             title: 'Ретроградный Меркурий, часть 1'
           },
           {
             link: '#',
             episodeNumber: 7,
-            imgPreview: '../../public/series/nightTherapy/s1e7.jpg',
+            imgPreview: 'http://localhost:3000/public/series/nightTherapy/s1e7.jpg',
             title: 'Ретроградный Меркурий, часть 2'
           },
           {
             link: '#',
             episodeNumber: 8,
-            imgPreview: '../../public/series/nightTherapy/s1e8.jpg',
+            imgPreview: 'http://localhost:3000/public/series/nightTherapy/s1e8.jpg',
             title: 'Когда придёт время, отпусти'
           },
           {
             link: '#',
             episodeNumber: 9,
-            imgPreview: '../../public/series/nightTherapy/s1e8.jpg',
+            imgPreview: 'http://localhost:3000/public/series/nightTherapy/s1e8.jpg',
             title: 'Линия жизни'
           },
           {
             link: '#',
             episodeNumber: 10,
-            imgPreview: '../../public/series/nightTherapy/s1e10.jpg',
+            imgPreview: 'http://localhost:3000/public/series/nightTherapy/s1e10.jpg',
             title: 'Это только начало'
           }
         ],
-        bg: null,
+        bg: {
+          imgUrl: 'http://localhost:3000/public/series/nightTherapy/bgImg.jpg',
+          videoUrl: null,
+        },
         trailer: null,
-        discription: null
+        description: null
       }
     ],
     data: {
@@ -224,7 +233,10 @@ export const temporaryListSeries: Partial<MediaContent>[] = [
         type: 'primary',
         title: 'Премьера'
       },
-      discription: 'Психологическая драма о поддержке и силе жизни. В центре повествования – психолог Луи Мансур (Юсеф Свейд, «Неортодоксальная»). После самоубийства жены ему приходится самостоятельно справляться с утратой, параллельно воспитывая двоих детей. Чтобы пережить боль, он решает после очередной бессонной ночи изменить время приема своих пациентов и встречаться с ними после заката. Постепенно главный герой погружается в чужие проблемы, наблюдая за человеческими историями, словно невидимый зритель, и учится справляться с собственной болью. Ночная терапия оказывается целительной для всех ее участников. Актриса Шира Хаас («Неортодоксальная») исполнила в сериале роль гениальной компьютерщицы, которая предпочитает не выходить из дома, а режиссером выступил известный израильский документалист Гавриель Библиович.',
+      description: {
+        mainDescription: 'Психологическая драма о поддержке и силе жизни. В центре повествования – психолог Луи Мансур (Юсеф Свейд, «Неортодоксальная»). После самоубийства жены ему приходится самостоятельно справляться с утратой, параллельно воспитывая двоих детей. Чтобы пережить боль, он решает после очередной бессонной ночи изменить время приема своих пациентов и встречаться с ними после заката. Постепенно главный герой погружается в чужие проблемы, наблюдая за человеческими историями, словно невидимый зритель, и учится справляться с собственной болью. Ночная терапия оказывается целительной для всех ее участников. Актриса Шира Хаас («Неортодоксальная») исполнила в сериале роль гениальной компьютерщицы, которая предпочитает не выходить из дома, а режиссером выступил известный израильский документалист Гавриель Библиович.',
+        prewiewDescription: 'Психологическая драма о поддержке и силе жизни'
+      },
       about: false,
       ageRestriction: 18,
       dateRelease: '2024',
@@ -245,17 +257,18 @@ export const temporaryListSeries: Partial<MediaContent>[] = [
       disliked: []
     },
     bg: {
-      type: 'img',
-      url: '../../public/series/nightTherapy/bgImg.jpg'
+      imgUrl: 'http://localhost:3000/public/series/nightTherapy/bgImg.jpg',
+      videoUrl: null,
+      imgResizeUrl: 'http://localhost:3000/public/series/nightTherapy/resizeImgBgS1.jpg'
     },
     trailer: {
-      quality360: '../../public/series/nightTherapy/nTTrailerVideo360.mp4',
-      quality720: '../../public/series/nightTherapy/nTTrailerVideo720.mp4',
+      quality360: 'http://localhost:3000/public/series/nightTherapy/nTTrailerVideo360.mp4',
+      quality720: 'http://localhost:3000/public/series/nightTherapy/nTTrailerVideo720.mp4',
       quality1080: null,
       quality2160: null,
-      img: '../../public/series/nightTherapy/imgTrailer.jpg'
+      img: 'http://localhost:3000/public/series/nightTherapy/imgTrailer.jpg'
     },
-    logoImg: '../../public/series/nightTherapy/imgTitle.png'
+    logoImg: 'http://localhost:3000/public/series/nightTherapy/imgTitle.png'
   },
   {
     type: 'series',
@@ -266,67 +279,70 @@ export const temporaryListSeries: Partial<MediaContent>[] = [
           {
             link: '#',
             episodeNumber: 1,
-            imgPreview: '../../public/series/thoseAboutToDie/s1e1.jpg',
+            imgPreview: 'http://localhost:3000/public/series/thoseAboutToDie/s1e1.jpg',
             title: 'Дерзни или умри'
           },
           {
             link: '#',
             episodeNumber: 2,
-            imgPreview: '../../public/series/thoseAboutToDie/s1e2.jpg',
+            imgPreview: 'http://localhost:3000/public/series/thoseAboutToDie/s1e2.jpg',
             title: 'Не доверяй никому'
           },
           {
             link: '#',
             episodeNumber: 3,
-            imgPreview: '../../public/series/thoseAboutToDie/s1e3.jpg',
+            imgPreview: 'http://localhost:3000/public/series/thoseAboutToDie/s1e3.jpg',
             title: 'На пороге смерти'
           },
           {
             link: '#',
             episodeNumber: 4,
-            imgPreview: '../../public/series/thoseAboutToDie/s1e4.jpg',
+            imgPreview: 'http://localhost:3000/public/series/thoseAboutToDie/s1e4.jpg',
             title: 'Ставка глупца'
           },
           {
             link: '#',
             episodeNumber: 5,
-            imgPreview: '../../public/series/thoseAboutToDie/s1e5.jpg',
+            imgPreview: 'http://localhost:3000/public/series/thoseAboutToDie/s1e5.jpg',
             title: 'Предательство'
           },
           {
             link: '#',
             episodeNumber: 6,
-            imgPreview: '../../public/series/thoseAboutToDie/s1e6.jpg',
+            imgPreview: 'http://localhost:3000/public/series/thoseAboutToDie/s1e6.jpg',
             title: 'Кровные узы'
           },
           {
             link: '#',
             episodeNumber: 7,
-            imgPreview: '../../public/series/thoseAboutToDie/s1e7.jpg',
+            imgPreview: 'http://localhost:3000/public/series/thoseAboutToDie/s1e7.jpg',
             title: 'На смертном одре'
           },
           {
             link: '#',
             episodeNumber: 8,
-            imgPreview: '../../public/series/thoseAboutToDie/s1e8.jpg',
+            imgPreview: 'http://localhost:3000/public/series/thoseAboutToDie/s1e8.jpg',
             title: 'Всё или ничего'
           },
           {
             link: '#',
             episodeNumber: 9,
-            imgPreview: '../../public/series/thoseAboutToDie/s1e9.jpg',
+            imgPreview: 'http://localhost:3000/public/series/thoseAboutToDie/s1e9.jpg',
             title: 'Жребий брошен'
           },
           {
             link: '#',
             episodeNumber: 10,
-            imgPreview: '../../public/series/thoseAboutToDie/s1e10.jpg',
+            imgPreview: 'http://localhost:3000/public/series/thoseAboutToDie/s1e10.jpg',
             title: 'Да начнутся игры'
           }
         ],
-        bg: null,
+        bg: {
+          imgUrl: 'http://localhost:3000/public/series/thoseAboutToDie/bgImg.jpg',
+          videoUrl: null,
+        },
         trailer: null,
-        discription: null
+        description: null
       }
     ],
     data: {
@@ -339,7 +355,10 @@ export const temporaryListSeries: Partial<MediaContent>[] = [
         type: 'primary',
         title: 'Мировая премьера 19 июля'
       },
-      discription: 'Масштабная историческая драма о Римской империи с двукратным обладателем «Оскара» Энтони Хопкинсом в главной роли. Режиссером выступил Роланд Эммерих, известный по фильмам-катастрофам «День независимости», «Послезавтра» и «2012», а сценаристом – номинант на «Оскар» Роберт Родат («Спасти рядового Райана»). Зрителей ждет погружение в суровый мир гладиаторских боев и дворцовых интриг, где борьба за власть идет не на жизнь, а на смерть. Император Веспасиан (Энтони Хопкинс) – опытный воин, взошедший на трон после кровопролитной гражданской войны. Чтобы утихомирить народ, он решает дать ему не только хлеба, но и зрелищ, повелев проводить регулярные битвы гладиаторов на арене, гонки на колесницах и даже публичные казни. «Обреченные на славу» – это не только эпичные битвы и древнеримские страсти, но и звездный актерский состав: Иван Реон («Игра престолов»), Димитри Леонидас («Центурион»), Том Хьюз («Виктория»), Габриэлла Пессион («Соври мне») и многие другие. В основе сериала лежит роман Дэниела Мэнникса «Путь гладиатора».',
+      description: {
+        mainDescription: 'Масштабная историческая драма о Римской империи с двукратным обладателем «Оскара» Энтони Хопкинсом в главной роли. Режиссером выступил Роланд Эммерих, известный по фильмам-катастрофам «День независимости», «Послезавтра» и «2012», а сценаристом – номинант на «Оскар» Роберт Родат («Спасти рядового Райана»). Зрителей ждет погружение в суровый мир гладиаторских боев и дворцовых интриг, где борьба за власть идет не на жизнь, а на смерть. Император Веспасиан (Энтони Хопкинс) – опытный воин, взошедший на трон после кровопролитной гражданской войны. Чтобы утихомирить народ, он решает дать ему не только хлеба, но и зрелищ, повелев проводить регулярные битвы гладиаторов на арене, гонки на колесницах и даже публичные казни. «Обреченные на славу» – это не только эпичные битвы и древнеримские страсти, но и звездный актерский состав: Иван Реон («Игра престолов»), Димитри Леонидас («Центурион»), Том Хьюз («Виктория»), Габриэлла Пессион («Соври мне») и многие другие. В основе сериала лежит роман Дэниела Мэнникса «Путь гладиатора».',
+        prewiewDescription: 'Смотрите в июле масштабную историческую драму о Римской империи с двукратным обладателем «Оскара» Энтони Хопкинсом в главной роли'
+      },
       about: false,
       ageRestriction: 18,
       dateRelease: '2024',
@@ -360,17 +379,18 @@ export const temporaryListSeries: Partial<MediaContent>[] = [
       disliked: []
     },
     bg: {
-      type: 'img',
-      url: '../../public/series/thoseAboutToDie/bgImg.jpg'
+      imgUrl: 'http://localhost:3000/public/series/thoseAboutToDie/bgImg.jpg',
+      videoUrl: null,
+      imgResizeUrl: 'http://localhost:3000/public/series/thoseAboutToDie/resizeImgBgS1.jpg'
     },
     trailer: {
-      quality360: '../../public/series/thoseAboutToDie/tatdTrailerVideo360.mp4',
-      quality720: '../../public/series/thoseAboutToDie/tatdTrailerVideo720.mp4',
+      quality360: 'http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo360.mp4',
+      quality720: 'http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo720.mp4',
       quality1080: null,
       quality2160: null,
-      img: '../../public/series/thoseAboutToDie/imgTrailer.jpg'
+      img: 'http://localhost:3000/public/series/thoseAboutToDie/imgTrailer.jpg'
     },
-    logoImg: '../../public/series/thoseAboutToDie/imgTitle.png'
+    logoImg: 'http://localhost:3000/public/series/thoseAboutToDie/imgTitle.png'
   },
   {
     type: 'series',
@@ -381,67 +401,70 @@ export const temporaryListSeries: Partial<MediaContent>[] = [
           {
             link: '#',
             episodeNumber: 1,
-            imgPreview: '../../public/series/losArtistasPrimerosTrazos/s1e1.jpg',
+            imgPreview: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/s1e1.jpg',
             title: 'Две судьбы'
           },
           {
             link: '#',
             episodeNumber: 2,
-            imgPreview: '../../public/series/losArtistasPrimerosTrazos/s1e2.jpg',
+            imgPreview: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/s1e2.jpg',
             title: 'План в действии'
           },
           {
             link: '#',
             episodeNumber: 3,
-            imgPreview: '../../public/series/losArtistasPrimerosTrazos/s1e3.jpg',
+            imgPreview: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/s1e3.jpg',
             title: 'План изменился'
           },
           {
             link: '#',
             episodeNumber: 4,
-            imgPreview: '../../public/series/losArtistasPrimerosTrazos/s1e4.jpg',
+            imgPreview: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/s1e4.jpg',
             title: 'Неожиданные перемены'
           },
           {
             link: '#',
             episodeNumber: 5,
-            imgPreview: '../../public/series/losArtistasPrimerosTrazos/s1e5.jpg',
+            imgPreview: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/s1e5.jpg',
             title: 'Око за око'
           },
           {
             link: '#',
             episodeNumber: 6,
-            imgPreview: '../../public/series/losArtistasPrimerosTrazos/s1e6.jpg',
+            imgPreview: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/s1e6.jpg',
             title: 'Перемирие'
           },
           {
             link: '#',
             episodeNumber: 7,
-            imgPreview: '../../public/series/losArtistasPrimerosTrazos/s1e7.jpg',
+            imgPreview: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/s1e7.jpg',
             title: 'Каждый своим путем'
           },
           {
             link: '#',
             episodeNumber: 8,
-            imgPreview: '../../public/series/losArtistasPrimerosTrazos/s1e8.jpg',
+            imgPreview: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/s1e8.jpg',
             title: 'По следу'
           },
           {
             link: '#',
             episodeNumber: 9,
-            imgPreview: '../../public/series/losArtistasPrimerosTrazos/s1e9.jpg',
+            imgPreview: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/s1e9.jpg',
             title: 'Жизнь кувырком'
           },
           {
             link: '#',
             episodeNumber: 10,
-            imgPreview: '../../public/series/losArtistasPrimerosTrazos/s1e10.jpg',
+            imgPreview: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/s1e10.jpg',
             title: 'Последний план'
           }
         ],
-        bg: null,
+        bg: {
+          imgUrl: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/imgBg.jpg',
+          videoUrl: null
+        },
         trailer: null,
-        discription: null
+        description: null
       }
     ],
     data: {
@@ -451,7 +474,10 @@ export const temporaryListSeries: Partial<MediaContent>[] = [
         linkTitle: 'los-artistas-primeros-trazos',
       },
       badge: null,
-      discription: 'Красочный сериал «Искусство обмана» расскажет о дуэте обаятельных мошенников, которые решили заработать на глупости богачей. Ката (Химена Ромо), влиятельный арт-эксперт, находится в эмоциональном упадке и близка к профессиональному выгоранию. Красавчик Яго (Макси Иглесиас), торговец антиквариатом, продает за большие деньги безделушки неопытным коллекционерам. Их знакомство приводит к неожиданному результату – они решают организовать общее дело. У героев нет никаких сомнений, что знания и связи помогут продать миллионерам не один десяток поддельных картин, но в какой-то момент их план превращается в капкан… Смогут ли герои обогатиться и выйти сухими из воды?',
+      description: {
+        mainDescription: 'Красочный сериал «Искусство обмана» расскажет о дуэте обаятельных мошенников, которые решили заработать на глупости богачей. Ката (Химена Ромо), влиятельный арт-эксперт, находится в эмоциональном упадке и близка к профессиональному выгоранию. Красавчик Яго (Макси Иглесиас), торговец антиквариатом, продает за большие деньги безделушки неопытным коллекционерам. Их знакомство приводит к неожиданному результату – они решают организовать общее дело. У героев нет никаких сомнений, что знания и связи помогут продать миллионерам не один десяток поддельных картин, но в какой-то момент их план превращается в капкан… Смогут ли герои обогатиться и выйти сухими из воды?',
+        prewiewDescription: 'Красочный сериал «Искусство обмана» расскажет о дуэте обаятельных мошенников, которые решили заработать на глупости богачей'
+      },
       about: false,
       ageRestriction: 18,
       dateRelease: '2023',
@@ -472,17 +498,18 @@ export const temporaryListSeries: Partial<MediaContent>[] = [
       disliked: []
     },
     bg: {
-      type: 'img',
-      url: '../../public/series/losArtistasPrimerosTrazos/imgBg.jpg'
+      imgUrl: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/imgBg.jpg',
+      videoUrl: null,
+      imgResizeUrl: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/resizeImgBgS1.jpg'
     },
     trailer: {
-      quality360: '../../public/series/losArtistasPrimerosTrazos/tatdTrailerVideo360.mp4',
-      quality720: '../../public/series/losArtistasPrimerosTrazos/tatdTrailerVideo720.mp4',
+      quality360: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo360.mp4',
+      quality720: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo720.mp4',
       quality1080: null,
       quality2160: null,
-      img: '../../public/series/losArtistasPrimerosTrazos/imgTrailer.jpg'
+      img: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/imgTrailer.jpg'
     },
-    logoImg: '../../public/series/losArtistasPrimerosTrazos/imgTitle.png'
+    logoImg: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/imgTitle.png'
   },
   {
     type: 'series',
@@ -493,43 +520,46 @@ export const temporaryListSeries: Partial<MediaContent>[] = [
           {
             link: '#',
             episodeNumber: 1,
-            imgPreview: '../../public/series/queensOfMystery/s1e1.jpg',
+            imgPreview: 'http://localhost:3000/public/series/queensOfMystery/s1e1.jpg',
             title: 'Спарринг со смертью: глава первая'
           },
           {
             link: '#',
             episodeNumber: 2,
-            imgPreview: '../../public/series/queensOfMystery/s1e2.jpg',
+            imgPreview: 'http://localhost:3000/public/series/queensOfMystery/s1e2.jpg',
             title: 'Спарринг со смертью: глава последняя'
           },
           {
             link: '#',
             episodeNumber: 3,
-            imgPreview: '../../public/series/queensOfMystery/s1e3.jpg',
+            imgPreview: 'http://localhost:3000/public/series/queensOfMystery/s1e3.jpg',
             title: 'Современное искусство убийства: глава первая'
           },
           {
             link: '#',
             episodeNumber: 4,
-            imgPreview: '../../public/series/queensOfMystery/s1e4.jpg',
+            imgPreview: 'http://localhost:3000/public/series/queensOfMystery/s1e4.jpg',
             title: 'Современное искусство убийства: глава последняя'
           },
           {
             link: '#',
             episodeNumber: 5,
-            imgPreview: '../../public/series/queensOfMystery/s1e5.jpg',
+            imgPreview: 'http://localhost:3000/public/series/queensOfMystery/s1e5.jpg',
             title: 'Ворон: глава первая'
           },
           {
             link: '#',
             episodeNumber: 6,
-            imgPreview: '../../public/series/queensOfMystery/s1e6.jpg',
+            imgPreview: 'http://localhost:3000/public/series/queensOfMystery/s1e6.jpg',
             title: 'Ворон: глава последняя'
           }
         ],
-        bg: null,
+        bg: {
+          imgUrl: 'http://localhost:3000/public/series/queensOfMystery/imgBg.jpg',
+          videoUrl: null
+        },
         trailer: null,
-        discription: null
+        description: null
       }
     ],
     data: {
@@ -539,7 +569,10 @@ export const temporaryListSeries: Partial<MediaContent>[] = [
         linkTitle: 'queens-of-mystery'
       },
       badge: null,
-      discription: 'Атмосферный детективный сериал — номинант на премию «Эмми» — погружает зрителей в мир семейных тайн и хитроумных преступлений, балансируя между теплой комедией и социальной драмой. Матильда Стоун и ее три эпатажные тетушки, которые пишут криминальные романы, расследуют несколько любопытных дел: убийство в оздоровительном центре, загадку из мира современного искусства и кражу рукописи Эдгара Аллана По. Несмотря на то, что в личной жизни Матильды не всё гладко, она добивается значительного успеха в деле о пропаже своей матери. Тетушкам явно это не по душе, и они делают всё, чтобы девушка не узнала шокирующую правду…',
+      description: {
+        mainDescription: 'Атмосферный детективный сериал — номинант на премию «Эмми» — погружает зрителей в мир семейных тайн и хитроумных преступлений, балансируя между теплой комедией и социальной драмой. Матильда Стоун и ее три эпатажные тетушки, которые пишут криминальные романы, расследуют несколько любопытных дел: убийство в оздоровительном центре, загадку из мира современного искусства и кражу рукописи Эдгара Аллана По. Несмотря на то, что в личной жизни Матильды не всё гладко, она добивается значительного успеха в деле о пропаже своей матери. Тетушкам явно это не по душе, и они делают всё, чтобы девушка не узнала шокирующую правду…',
+        prewiewDescription: 'Детективный сериал — номинант на премию «Эмми» — погружает зрителей в мир семейных тайн и хитроумных преступлений, балансируя между комедией и социальной драмой'
+      },
       about: false,
       ageRestriction: 18,
       dateRelease: '2023',
@@ -560,18 +593,30 @@ export const temporaryListSeries: Partial<MediaContent>[] = [
       disliked: []
     },
     bg: {
-      type: 'img',
-      url: '../../public/series/queensOfMystery/imgBg.jpg'
+      imgUrl: 'http://localhost:3000/public/series/queensOfMystery/imgBg.jpg',
+      videoUrl: null,
+      imgResizeUrl: 'http://localhost:3000/public/series/queensOfMystery/resizeImgBgS1.jpg'
     },
     trailer: {
-      quality360: '../../public/series/queensOfMystery/videoTrailer360.mp4',
-      quality720: '../../public/series/queensOfMystery/videoTrailer720.mp4',
+      quality360: 'http://localhost:3000/public/series/queensOfMystery/videoTrailer360.mp4',
+      quality720: 'http://localhost:3000/public/series/queensOfMystery/videoTrailer720.mp4',
       quality1080: null,
       quality2160: null,
-      img: '../../public/series/queensOfMystery/imgTrailer.jpg'
+      img: 'http://localhost:3000/public/series/queensOfMystery/imgTrailer.jpg'
     },
-    logoImg: '../../public/series/queensOfMystery/imgTitle.png'
+    logoImg: 'http://localhost:3000/public/series/queensOfMystery/imgTitle.png'
   },
 ]
+
+export const temporaryBanner: Banner = {
+  title: "Мировые премьеры и любимые сериалы",
+  bannerListItem: ['В единой подписке',
+    'На любых устройствах',
+    'В отличном качестве',
+    'Без рекламы'],
+  img: "/bannerImg.png",
+  titleBtn: "Попробовать за 1₽",
+  ageRestriction: 18
+}
 
 

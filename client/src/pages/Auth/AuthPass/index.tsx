@@ -41,7 +41,7 @@ export function AuthPass({ setPassValue, email, type }: AuthPassProps): JSX.Elem
 
   const toggleInputError = () => {
     if (error && error.numberError === 104 && password === error.value) {
-      console.log('sad')
+
       const err: InputErrorState = {
         value: true,
         errorData: {

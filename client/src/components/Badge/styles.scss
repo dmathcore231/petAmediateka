@@ -2,10 +2,10 @@
   @include flex-center;
   color: $color-black;
   text-transform: uppercase;
-  padding: 3px 8px 1px;
-  border-radius: 4px;
-  font-size: 14px;
-  line-height: 20px;
+  padding: 0.188rem 0.5rem 0.063rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
 
   &_primary {
     background-color: $color-primary;
@@ -13,5 +13,13 @@
 
   &_secondary {
     background-color: $color-orangeBrown;
+  }
+
+  &_loading {
+    width: 10.25rem;
+    height: 1.5rem;
+    @include flex-center;
+    background-color: $color-secondary;
+    animation: $loading-animation;
   }
 }

@@ -1,4 +1,6 @@
 import { AuthState, StateStatusResponse, ContentState, MediaPlayerState } from "../types/interfaces/InitialStatesSlice"
+import { ContentTypeEnum } from "../types/interfaces/Content"
+import { ContentTypes } from "../types/interfaces/InitialStatesSlice"
 
 export const initialStateAuth: AuthState = {
   loading: false,
@@ -12,10 +14,17 @@ export const initialStateStatusResponse: StateStatusResponse = {
 }
 
 export const initialStateContent: ContentState = {
-  mainSlider: {
-    loading: false,
-    error: null,
-    content: null
+  [ContentTypeEnum.MainSlider]: {
+    loading: false, error: null, content: null
+  },
+  [ContentTypeEnum.WatchingNow]: {
+    loading: false, error: null, content: null
+  },
+  [ContentTypeEnum.Banner]: {
+    loading: false, error: null, content: null
+  },
+  [ContentTypeEnum.Series]: {
+    loading: false, error: null, content: null
   }
 }
 

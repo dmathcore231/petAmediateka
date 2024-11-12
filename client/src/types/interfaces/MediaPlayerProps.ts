@@ -1,4 +1,5 @@
+import { MediaContent } from "./MediaContent"
 
 export interface MediaPlayerProps {
-  type: "player" | "preview"
+  data: MediaContent
 }

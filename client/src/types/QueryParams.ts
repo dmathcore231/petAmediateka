@@ -1,7 +1,9 @@
+import { ContentTypeEnum } from "./interfaces/Content"
 
 export type QueryParams = {
-  type: "mainSlider" | "watchingNow"
+  type: ContentTypeEnum
   limit?: number
   offset?: number
   getAll?: boolean
+  id?: string
 }

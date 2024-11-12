@@ -14,7 +14,10 @@ export interface MediaContent {
       linkTitle: string
     }
     badge: BadgeCard | null
-    discription: string
+    description: {
+      mainDescription: string
+      prewiewDescription: string
+    }
     about: boolean
     ageRestriction: number
     dateRelease: string | 'N/A'
@@ -56,5 +59,5 @@ export interface Season {
     quality2160: string | null
     img: string
   } | null
-  discription: string | null
+  description: string | null
 }

@@ -4,14 +4,12 @@ import { Content } from '../types/interface/Content'
 const contentSchema = new Schema<Content>({
   type: {
     type: String,
+    enum: ["mainSlider", "watchingNow", "banner"],
     required: true,
     _id: false
   },
   data: {
-    type: [{
-      type: Schema.Types.ObjectId,
-      ref: ['Movie', 'Series'],
-    }],
+    type: Schema.Types.Mixed,
     required: true,
     _id: false
   }

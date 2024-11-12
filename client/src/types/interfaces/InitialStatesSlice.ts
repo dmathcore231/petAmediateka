@@ -2,8 +2,19 @@ import { ErrorDataInResponse } from "../Error"
 import { UserData } from "./User"
 import { PlayerStatus } from "../PlayerStatus"
 import { VideoQuality } from "../VideoQuality"
-import { Series } from "./Series"
 import { Content } from "./Content"
+import { MediaContent } from "./MediaContent"
+import { ContentTypeEnum } from "./Content"
+
+export type ContentTypes = Content | MediaContent | null
+
+export type ContentStateItem<T extends ContentTypes> = {
+  loading: boolean
+  error: ErrorDataInResponse | null
+  content: T
+}
+
+export type ContentState = Record<ContentTypeEnum, ContentStateItem<ContentTypes>>
 
 export interface StateStatusResponse {
   status: number | null
@@ -14,14 +25,6 @@ export interface StateStatusResponse {
 export interface AuthState {
   loading: boolean
   user: UserData | null
-}
-
-export interface ContentState {
-  mainSlider: {
-    loading: boolean
-    error: ErrorDataInResponse | null
-    content: Content | null
-  }
 }
 
 export interface MediaPlayerState {

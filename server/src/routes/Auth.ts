@@ -5,6 +5,7 @@ import { createJwtMiddleware } from '../middlewares/createJwtMiddleware'
 import { logoutUserMiddleware } from "../middlewares/logoutUserMiddleware"
 import { createUser } from "../controllers/createUser"
 import { ResponseWithoutPayload, ResponseWithPayload } from "../types/interface/Response"
+import { User } from '../types/interface/User'
 
 const authRouter = Router()
 
@@ -38,7 +39,7 @@ const setResponseSignUp = (req: Request, res: Response) => {
       return res.status(response.status).send(response)
     }
 
-    const response: ResponseWithPayload = {
+    const response: ResponseWithPayload<Omit<User, 'password' | '__v' | 'userCard'>> = {
       status: 201,
       error: null,
       message: "Success",
@@ -48,7 +49,6 @@ const setResponseSignUp = (req: Request, res: Response) => {
 
     return res.status(response.status).send(response)
   } catch (error: unknown) {
-    console.log(error)
     const response: ResponseWithoutPayload = {
       status: 500,
       error: {
@@ -83,7 +83,7 @@ const setResponseSignIn = (req: Request, res: Response) => {
       return res.status(response.status).send(response)
     }
 
-    const response: ResponseWithPayload = {
+    const response: ResponseWithPayload<Omit<User, 'password' | '__v' | 'userCard'>> = {
       status: 200,
       error: null,
       message: "Success",

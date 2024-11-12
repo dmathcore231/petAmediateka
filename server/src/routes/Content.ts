@@ -1,7 +1,9 @@
 import { Request, Response, Router } from 'express'
 import { checkValidQueryParamsContentMiddleware } from "../middlewares/checkValidQueryParamsContentMiddleware"
 import { getContent } from '../controllers/getContent'
-import { ResponseWithoutPayload } from '../types/interface/Response'
+import { ResponseWithoutPayload, ResponseWithPayload } from '../types/interface/Response'
+import { Content } from '../types/interface/Content'
+import { MediaContent } from '../types/interface/MediaContent'
 
 const contentRouter = Router()
 
@@ -25,7 +27,7 @@ const setResponseContent = async (req: Request, res: Response) => {
       return res.status(error.status).json(response)
     }
 
-    const response: ResponseWithoutPayload = {
+    const response: ResponseWithPayload<Content | MediaContent> = {
       status: 200,
       error: null,
       message: "Accept",

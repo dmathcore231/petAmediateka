@@ -1,43 +1,62 @@
+import { useEffect, useState } from "react"
 import { useParams, Link } from "react-router-dom"
+import { useAppDispatch, useAppSelector } from "../../hooks"
+import { fetchContent } from "../../redux/contentSlice"
 import { LinkBack } from "../../components/LinkBack"
 import { Btn } from "../../components/Btn"
 import { MetaData } from "../../components/MetaData"
 import { MediaPlayer } from "../../components/MediaPlayer"
 import { ShowMore } from "../../components/ShowMore"
-import { temporaryListSeries } from "../../helpers/index"
+import { Spinner } from "../../components/Spinner"
+import { ContentTypeEnum } from "../../types/interfaces/Content"
+import { MediaContent } from "../../types/interfaces/MediaContent"
+import { ContentStateItem, ContentTypes } from "../../types/interfaces/InitialStatesSlice"
 import { HboIcon } from "../../assets/icons/HboIcon"
 import { PlayIcon } from "../../assets/icons/PlayIcon"
 import { ShareIcon } from "../../assets/icons/ShareIcon"
 import { AddFavoriteIcon } from "../../assets/icons/AddFavoriteIcon"
 import { LikeIcon } from "../../assets/icons/LikeIcon"
 import { DislikeIcon } from "../../assets/icons/DislikeIcon"
+import { Trailer } from "../../components/Trailer"
 
 export function Series(): JSX.Element {
   const { id, title, season } = useParams()
+  const dispatch = useAppDispatch()
 
-  const propsMetaData = {
-    rating: {
-      amediateka: temporaryListSeries[0].rating.amediateka,
-      imdb: temporaryListSeries[0].rating.imdb,
-      kinopoisk: temporaryListSeries[0].rating.kinopoisk,
-    },
-    dateRelease: temporaryListSeries[0].data.dateRelease,
-    ageRestriction: temporaryListSeries[0].data.ageRestriction,
-    genres: "Драма",
-  }
+  const { series } = useAppSelector(state => state.content)
+  const { status, error, message } = useAppSelector(state => state.statusResponse)
 
-  const propsShowMore = {
-    data: {
-      title: temporaryListSeries[0].data.aboutSerial.title,
-      discription: temporaryListSeries[0].data.aboutSerial.discription
+  useEffect(() => {
+    if (!season && id) {
+      dispatch(fetchContent({ type: ContentTypeEnum.Series, id }))
     }
-  }
+  }, [])
 
-  const renderBgPage = (): JSX.Element => {
-    if (!season) {
+  // const propsMetaData = {
+  //   rating: {
+  //     amediateka: temporaryListSeries[0].rating.amediateka,
+  //     imdb: temporaryListSeries[0].rating.imdb,
+  //     kinopoisk: temporaryListSeries[0].rating.kinopoisk,
+  //   },
+  //   dateRelease: temporaryListSeries[0].data.dateRelease,
+  //   ageRestriction: temporaryListSeries[0].data.ageRestriction,
+  //   genres: "Драма",
+  // }
+
+  // const propsShowMore = {
+  //   data: {
+  //     title: temporaryListSeries[0].data.aboutSerial.title,
+  //     discription: temporaryListSeries[0].data.aboutSerial.discription
+  //   }
+  // }
+
+  const renderBgPage = (contentData: MediaContent): JSX.Element => {
+    const { bg } = contentData
+
+    if (!season && bg && bg.videoUrl) {
       return (
         <div className="series-bg__video">
-          <video src="/hotd/hotdBgVideo.mp4" className="series-bg__video-item"
+          <video src={bg.videoUrl} className="series-bg__video-item"
             autoPlay
             muted
             playsInline
@@ -48,25 +67,35 @@ export function Series(): JSX.Element {
     } else {
       return (
         <picture className="series-bg__picture">
-          <img src="/hotd/imgBgHOTD.jpg" alt="" className="series-bg__img" />
+          <img src={bg?.imgUrl} alt="" className="series-bg__img" />
         </picture>
       )
     }
   }
 
-  const renderContent = (): JSX.Element => {
+  const renderContent = (contentData: MediaContent | null): JSX.Element => {
+    if (!contentData) {
+      return (
+        <Spinner width={100} height={100} />
+      )
+    }
+    const { actionsData, bg, data, logoImg, rating, seasons, trailer, type, _id } = contentData
+
     return (
       <>
         <div className="series-content-upper">
           <LinkBack activePage="Сериалы" />
-          <div className="series-content-upper__item">
-            <img src="/hotd/logo.png" alt="logo" className="series-content-upper__img" />
-          </div>
+          <Link to={`/series/${_id}/${data.title.linkTitle}`} className="series-content-upper__item">
+            <img src={logoImg}
+              alt={`logo ${data.title.originalTitle}`}
+              className="series-content-upper__img" />
+          </Link>
           <div className="series-content-upper__item">
             <span className="title title_color_white-dark">
-              {temporaryListSeries[0].data.originalTitle}
+              {data.title.value}
             </span>
             <span className="title title_color_white-dark">
+              {/* нужно фиксануть отображение иконок*/}
               <HboIcon width={43} height={18} />
             </span>
           </div>
@@ -76,18 +105,16 @@ export function Series(): JSX.Element {
                 <span className="title">Сезоны:</span>
               </div>
               <ul className="series-seasons-line__list">
-                <li className="series-seasons-line__item">
-                  <Link to={`/series/${id}/${title}/1`} className="series-seasons-line__link
-                title title_weight_bold ">
-                    1
-                  </Link>
-                </li>
-                <li className="series-seasons-line__item">
-                  <Link to={`/series/${id}/${title}/2`} className="series-seasons-line__link
-                title title_weight_bold ">
-                    2
-                  </Link>
-                </li>
+                {seasons?.map((season, index) => {
+                  return (
+                    <li className="series-seasons-line__item" key={_id + index}>
+                      <Link to={`/series/${_id}/${data.title.linkTitle}/season/${season.numberOfSeasons}`} className="series-seasons-line__link
+                      title title_weight_bold ">
+                        {season.numberOfSeasons}
+                      </Link>
+                    </li>
+                  )
+                })}
               </ul>
             </div>
           </div>
@@ -154,7 +181,7 @@ export function Series(): JSX.Element {
             </div>
             <div className="series-content-header__title">
               <h2 className="title title_size_xl title_color_secondary title_weight_light">
-                {temporaryListSeries[0].data.title}
+                {data.title.value}
               </h2>
             </div>
           </div>
@@ -164,23 +191,18 @@ export function Series(): JSX.Element {
         <div className="series-content-body">
           <div className="series-meta-data">
             <div className="series-meta-data__item">
-              <div className="series-meta-data-trailer">
-                <div className="series-meta-data-trailer__title">
-                  <h4>Трейлер – 2 сезон</h4>
-                </div>
-                <div className="series-meta-data-trailer__video">
-                  <MediaPlayer type={'preview'} />
-                </div>
-              </div>
+              {contentData && (
+                <Trailer trailerData={contentData} />
+              )}
             </div>
             <div className="series-meta-data__item">
               <div className="series-meta-data-description">
                 <div className="series-meta-data-description__upper">
-                  <MetaData {...propsMetaData} />
+                  {/* <MetaData {...propsMetaData} /> */}
                 </div>
                 <div className="series-meta-data-description-body">
                   <div className="series-meta-data-description-body__text title title_align_left">
-                    {temporaryListSeries[0].data.discription}
+                    {data.description.mainDescription}
                   </div>
                   <div className="series-meta-data-info">
                     <div className="series-meta-data-info__col">
@@ -199,16 +221,31 @@ export function Series(): JSX.Element {
                     </div>
                     <div className="series-meta-data-info__col">
                       <div className="series-meta-data-info__row title">
-                        {temporaryListSeries[0].data.directors.join(', ')}
+                        {data.directors.map((director, index) => (
+                          <span key={index}>
+                            {director}
+                            {index !== data.directors.length - 1 && ', '}
+                          </span>
+                        ))}
                       </div>
                       <div className="series-meta-data-info__row title">
-                        {temporaryListSeries[0].data.actors.join(', ')}
+                        {data.actors.map((actor, index) => (
+                          <span key={index}>
+                            {actor}
+                            {index !== data.actors.length - 1 && ', '}
+                          </span>
+                        ))}
                       </div>
                       <div className="series-meta-data-info__row title">
-                        {temporaryListSeries[0].data.country}
+                        {data.country}
                       </div>
                       <div className="series-meta-data-info__row title">
-                        {temporaryListSeries[0].data.genres.join(', ')}
+                        {data.genres.map((genre, index) => (
+                          <span key={index}>
+                            {genre}
+                            {index !== data.genres.length - 1 && ', '}
+                          </span>
+                        ))}
                       </div>
                     </div>
                   </div>
@@ -219,7 +256,7 @@ export function Series(): JSX.Element {
         </div>
         <div className="series-content-footer">
           <div className="series-content-footer__item">
-            <ShowMore {...propsShowMore} />
+            {/* <ShowMore {...propsShowMore} /> */}
           </div>
           <div className="series-content-footer__item">
 
@@ -231,12 +268,16 @@ export function Series(): JSX.Element {
 
   return (
     <div className="series">
-      <div className="series-bg">
-        {renderBgPage()}
+      {!series.loading && series.content && series.content.data && (
+        <div className="series-bg">
+          {renderBgPage((series.content as MediaContent))}
+        </div>
+      )}
+      <div className={"series-content"
+        + (series.loading ? " series-content_loading" : "")
+        + " container"}>
+        {renderContent(series.content as MediaContent | null)}
       </div>
-      <div className="series-content container">
-        {renderContent()}
-      </div>
-    </div>
+    </div >
   )
 }

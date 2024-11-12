@@ -1,4 +1,6 @@
 .series {
+  --content-padding-top: 26.875rem;
+
   position: relative;
   width: 100%;
 
@@ -91,7 +93,7 @@
     @include flex-column-start;
     gap: 1rem;
     z-index: 10;
-    padding-top: 26.875rem;
+    padding-top: var(--content-padding-top);
 
     &-upper {
       @include flex-column-start;
@@ -179,6 +181,11 @@
     &-body {
       width: 100%;
       @include flex-column;
+    }
+
+    &_loading {
+      --content-padding-top: 10rem;
+      @include flex-center;
     }
   }
 

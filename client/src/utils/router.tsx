@@ -53,7 +53,7 @@ export const router = createBrowserRouter([
         path: "/series/:id/:title",
         children: [
           {
-            path: ":season",
+            path: "/series/:id/:title/season/:season",
             element: <Series />,
           }
         ]

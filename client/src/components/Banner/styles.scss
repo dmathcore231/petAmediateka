@@ -1,4 +1,40 @@
 .banner {
+  --item-bg-color: transparent;
+  --item-border: 0.125rem solid #{$color-primary};
+  --item-animation: none;
+
+  --title-width: fit-content;
+  --title-height: fit-content;
+  --title-bg-color: transparent;
+  --title-amimation: none;
+
+  --list-width: fit-content;
+  --list-height: fit-content;
+  --list-bg-color: transparent;
+  --list-amimation: none;
+
+  --btn-width: 22.5rem;
+  --btn-height: 100%;
+  --btn-bg-color: transparent;
+  --btn-animation: none;
+
+  &_loading {
+    --item-bg-color: #{$color-secondary};
+    --item-border: none;
+    --item-animation: #{$loading-animation};
+
+    --title-width: 145px;
+    --title-height: 24px;
+    --title-bg-color: #{$color-secondary};
+    --title-amimation: #{$loading-animation};
+
+    --list-width: 235px;
+    --list-height: 24px;
+    --list-bg-color: #{$color-secondary};
+
+    --btn-height: 48px;
+    --btn-bg-color: #{$color-secondary};
+  }
 
   &__wrapper {
     position: relative;
@@ -10,13 +46,20 @@
     justify-content: space-between;
     gap: 1.25rem;
     padding: 1.375rem 3rem 1.875rem;
-    border: 0.125rem solid $color-primary;
+    border: var(--item-border);
     border-radius: 1rem;
+    background-color: var(--item-bg-color);
+    animation: var(--item-animation);
   }
 
   &-list {
+    width: var(--list-width);
+    height: var(--list-height);
     @include flex-center;
     gap: 1.25rem;
+    background-color: var(--list-bg-color);
+    border-radius: 0.5rem;
+    animation: var(--list-amimation);
 
     &__item {
       position: relative;
@@ -49,7 +92,7 @@
     right: 0;
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
     object-position: right center;
     pointer-events: none;
 
@@ -62,6 +105,18 @@
   }
 
   &__btn {
-    width: 22.5rem;
+    width: var(--btn-width);
+    height: var(--btn-height);
+    background-color: var(--btn-bg-color);
+    border-radius: 0.5rem;
+    animation: var(--btn-animation);
+  }
+
+  &__title {
+    width: var(--title-width);
+    height: var(--title-height);
+    background-color: var(--title-bg-color);
+    border-radius: 0.5rem;
+    animation: var(--title-amimation);
   }
 }

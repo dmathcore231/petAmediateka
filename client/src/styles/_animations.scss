@@ -21,3 +21,17 @@
     opacity: 1;
   }
 }
+
+@keyframes loading {
+  0% {
+    background-color: $color-secondary;
+  }
+
+  50% {
+    background-color: $color-secondary-active;
+  }
+
+  100% {
+    background-color: $color-secondary;
+  }
+}

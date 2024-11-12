@@ -1,10 +1,11 @@
 import { Request, Response, NextFunction } from 'express'
 import { ErrorMain } from '../types/Error'
 import { typeGuardQueryCotentType } from '../types/TypeGuards'
+import { MediaContentModel } from '../models/mediaContentSchema'
 
-export function checkValidQueryParamsContentMiddleware(req: Request, res: Response, next: NextFunction): void {
+export async function checkValidQueryParamsContentMiddleware(req: Request, res: Response, next: NextFunction): Promise<void> {
   const { query } = req
-  const { type, limit, offset, getAll } = query
+  const { type, limit, offset, getAll, id } = query
 
   try {
     if (!type) {
@@ -122,6 +123,38 @@ export function checkValidQueryParamsContentMiddleware(req: Request, res: Respon
 
       throw error
     }
+
+    if (type === 'series' && id) {
+      if (typeof id !== 'string') {
+        const error: ErrorMain = {
+          status: 400,
+          numberError: 102,
+          message: 'Bad request: query param id is invalid',
+          value: null
+        }
+
+        throw error
+      }
+
+      const data = await MediaContentModel.findById(id)
+
+      if (!data) {
+        const error: ErrorMain = {
+          status: 404,
+          numberError: 101,
+          message: 'Not found',
+          value: null
+        }
+
+        throw error
+      } else {
+        res.locals.localDataState = {
+          ...res.locals.localDataState,
+          content: data
+        }
+      }
+    }
+
     return next()
   } catch (err: unknown) {
     const error = err as ErrorMain
