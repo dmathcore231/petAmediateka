@@ -17,7 +17,10 @@ export interface MediaContent extends Document {
       mainDescription: string
       prewiewDescription: string
     }
-    about: boolean
+    about: {
+      title: string
+      description: string
+    } | null
     ageRestriction: number
     dateRelease: string | 'N/A'
     genres: string[]

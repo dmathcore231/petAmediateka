@@ -6,6 +6,7 @@ import { LinkBack } from "../../components/LinkBack"
 import { Btn } from "../../components/Btn"
 import { MetaData } from "../../components/MetaData"
 import { Spinner } from "../../components/Spinner"
+import { ShowMore } from "../../components/ShowMore"
 import { ContentTypeEnum } from "../../types/interfaces/Content"
 import { MediaContent } from "../../types/interfaces/MediaContent"
 import { ContentStateItem } from "../../types/interfaces/InitialStatesSlice"
@@ -22,20 +23,13 @@ export function Series(): JSX.Element {
   const { id, season } = useParams()
   const dispatch = useAppDispatch()
 
-  const { content, error, loading } = useAppSelector((state: RootState) => state.content[ContentTypeEnum.Series] as ContentStateItem<MediaContent>)
+  const { content, loading } = useAppSelector((state: RootState) => state.content[ContentTypeEnum.Series] as ContentStateItem<MediaContent>)
 
   useEffect(() => {
     if (!season && id) {
       dispatch(fetchContent({ type: ContentTypeEnum.Series, id }))
     }
   }, [])
-
-  // const propsShowMore = {
-  //   data: {
-  //     title: temporaryListSeries[0].data.aboutSerial.title,
-  //     discription: temporaryListSeries[0].data.aboutSerial.discription
-  //   }
-  // }
 
   const renderBgPage = (): JSX.Element => {
 
@@ -65,7 +59,7 @@ export function Series(): JSX.Element {
         <Spinner width={100} height={100} />
       )
     }
-    const { actionsData, bg, data, logoImg, rating, seasons, trailer, type, _id } = content
+    const { data, logoImg, rating, seasons, _id } = content
 
     return (
       <>
@@ -248,7 +242,9 @@ export function Series(): JSX.Element {
         </div>
         <div className="series-content-footer">
           <div className="series-content-footer__item">
-            {/* <ShowMore {...propsShowMore} /> */}
+            {content.data.about && (
+              <ShowMore data={content.data.about as { title: string; description: string }} />
+            )}
           </div>
           <div className="series-content-footer__item">
 

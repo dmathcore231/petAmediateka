@@ -128,8 +128,18 @@ const mediaContentSchema = new Schema<MediaContent>({
         _id: false
       },
       about: {
-        type: Boolean,
-        default: false
+        type: {
+          title: {
+            type: String,
+            required: false,
+            default: null
+          },
+          description: {
+            type: String,
+            required: false,
+            default: null
+          }
+        },
       },
       ageRestriction: {
         type: Number,
