@@ -7,5 +7,5 @@ export interface MetaDataProps {
   }
   dateRelease: number | string
   ageRestriction: number | string
-  genres: string | string
+  genres: Array<string> | string
 }

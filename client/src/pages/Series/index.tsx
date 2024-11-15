@@ -189,7 +189,7 @@ export function Series(): JSX.Element {
                       rating={rating}
                       dateRelease={data.dateRelease}
                       ageRestriction={data.ageRestriction}
-                      genres={data.genres[0]} />
+                      genres={data.genres} />
                   )}
                 </div>
                 <div className="series-meta-data-description-body">
