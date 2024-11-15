@@ -1,6 +1,5 @@
 import { useRef, useEffect, useState, MouseEvent, RefObject } from "react"
 import { useAppDispatch, useAppSelector } from "../../hooks"
-import { RootState } from "../../redux/store"
 import { updatePlayerStatus, toggleShow, resetPlayerStatus, getSrc, setVideoQuality } from "../../redux/MediaPlayerSlice"
 import { Btn } from "../Btn"
 import { TrackSetting } from "../../types/TrackSetting"
@@ -24,7 +23,7 @@ export function MediaPlayer({ mediaContentData }: MediaPlayerProps): JSX.Element
   const trackVideoRef = useRef<HTMLDivElement>(null)
   const mediaPlayerMainRef = useRef<HTMLDivElement>(null)
 
-  const { isShow, playerStatus, src, videoQuality } = useAppSelector((state: RootState) => state.mediaPlayer)
+  const { isShow, playerStatus, src, videoQuality } = useAppSelector(state => state.mediaPlayer)
 
   const [timeVideo, setTimeVideo] = useState(0)
   const [trackSetting, setTrackSetting] = useState<TrackSetting>({

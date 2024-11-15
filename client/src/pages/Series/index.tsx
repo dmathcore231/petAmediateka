@@ -1,16 +1,14 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { useParams, Link } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "../../hooks"
 import { fetchContent } from "../../redux/contentSlice"
 import { LinkBack } from "../../components/LinkBack"
 import { Btn } from "../../components/Btn"
 import { MetaData } from "../../components/MetaData"
-import { MediaPlayer } from "../../components/MediaPlayer"
-import { ShowMore } from "../../components/ShowMore"
 import { Spinner } from "../../components/Spinner"
 import { ContentTypeEnum } from "../../types/interfaces/Content"
 import { MediaContent } from "../../types/interfaces/MediaContent"
-import { ContentStateItem, ContentTypes } from "../../types/interfaces/InitialStatesSlice"
+import { ContentStateItem } from "../../types/interfaces/InitialStatesSlice"
 import { HboIcon } from "../../assets/icons/HboIcon"
 import { PlayIcon } from "../../assets/icons/PlayIcon"
 import { ShareIcon } from "../../assets/icons/ShareIcon"
@@ -18,27 +16,19 @@ import { AddFavoriteIcon } from "../../assets/icons/AddFavoriteIcon"
 import { LikeIcon } from "../../assets/icons/LikeIcon"
 import { DislikeIcon } from "../../assets/icons/DislikeIcon"
 import { Trailer } from "../../components/Trailer"
+import { RootState } from "../../redux/store"
 
 export function Series(): JSX.Element {
   const { id, season } = useParams()
   const dispatch = useAppDispatch()
 
-  const { series } = useAppSelector(state => state.content)
-  const { status, error, message } = useAppSelector(state => state.statusResponse)
-
-  const [content, setContent] = useState<MediaContent | null>(null)
+  const { content, error, loading } = useAppSelector((state: RootState) => state.content[ContentTypeEnum.Series] as ContentStateItem<MediaContent>)
 
   useEffect(() => {
     if (!season && id) {
       dispatch(fetchContent({ type: ContentTypeEnum.Series, id }))
     }
   }, [])
-
-  useEffect(() => {
-    if (series && !series.loading && series.content) {
-      setContent(series.content as MediaContent)
-    }
-  }, [series, series.content])
 
   // const propsShowMore = {
   //   data: {
@@ -47,13 +37,12 @@ export function Series(): JSX.Element {
   //   }
   // }
 
-  const renderBgPage = (contentData: MediaContent): JSX.Element => {
-    const { bg } = contentData
+  const renderBgPage = (): JSX.Element => {
 
-    if (!season && bg && bg.videoUrl) {
+    if (!season && content.bg?.videoUrl) {
       return (
         <div className="series-bg__video">
-          <video src={bg.videoUrl} className="series-bg__video-item"
+          <video src={content.bg.videoUrl} className="series-bg__video-item"
             autoPlay
             muted
             playsInline
@@ -64,19 +53,19 @@ export function Series(): JSX.Element {
     } else {
       return (
         <picture className="series-bg__picture">
-          <img src={bg?.imgUrl} alt="" className="series-bg__img" />
+          <img src={content.bg?.imgUrl} alt="" className="series-bg__img" />
         </picture>
       )
     }
   }
 
-  const renderContent = (contentData: MediaContent | null): JSX.Element => {
-    if (!contentData) {
+  const renderContent = (): JSX.Element => {
+    if (!content) {
       return (
         <Spinner width={100} height={100} />
       )
     }
-    const { actionsData, bg, data, logoImg, rating, seasons, trailer, type, _id } = contentData
+    const { actionsData, bg, data, logoImg, rating, seasons, trailer, type, _id } = content
 
     return (
       <>
@@ -188,8 +177,8 @@ export function Series(): JSX.Element {
         <div className="series-content-body">
           <div className="series-meta-data">
             <div className="series-meta-data__item">
-              {contentData && (
-                <Trailer trailerData={contentData} />
+              {content && (
+                <Trailer trailerData={content} />
               )}
             </div>
             <div className="series-meta-data__item">
@@ -271,15 +260,15 @@ export function Series(): JSX.Element {
 
   return (
     <div className="series">
-      {!series.loading && series.content && series.content.data && (
+      {!loading && content && (
         <div className="series-bg">
-          {renderBgPage((series.content as MediaContent))}
+          {renderBgPage()}
         </div>
       )}
       <div className={"series-content"
-        + (series.loading ? " series-content_loading" : "")
+        + (loading ? " series-content_loading" : "")
         + " container"}>
-        {renderContent(series.content as MediaContent | null)}
+        {renderContent()}
       </div>
     </div >
   )
