@@ -1,256 +1,298 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
+import { useAppDispatch, useAppSelector } from "../../hooks"
+import { fetchContent } from "../../redux/contentSlice"
 import { Banner } from "../../components/Banner"
 import { Slider } from "../../components/Slider"
 import { SeoBlock } from "../../components/SeoBlock"
 import { PromoLine } from "../../components/PromoLine"
 import { CoverPromo } from "../../components/CoverPromo"
 import { Blog } from "../../components/Blog"
-import { temporarySlide, temporaryBannerListItem, temporarySlidesWatchingNow, temporarySlidesNewRelease, temporarySlidesDetectiveSeries, temporaryThoseAboutToDie, temporaryPopularGenresSeries, temporaryPopularGenresMovies } from "../../helpers"
 import { SliderProps } from "../../types/interfaces/SliderProps"
 import { BannerProps } from "../../types/interfaces/BannerProps"
 import { SeoBlockProps } from "../../types/interfaces/SeoBlockProps"
 import { PromoLineProps } from "../../types/interfaces/PromoLineProps"
+import { MediaContent } from "../../types/interfaces/MediaContent"
+import { ContentTypeEnum } from "../../types/interfaces/Content"
+import { temporaryBannerListItem } from "../../helpers"
 
 export function Home(): JSX.Element {
+  const dispatch = useAppDispatch()
+  const { mainSlider, banner } = useAppSelector(state => state.content)
 
   const [activeLinkPopularGenres, setActiveLinkPopularGenres] = useState<number>(0)
+  const [mainSliderList, setMainSliderList] = useState<MediaContent[] | null>(null)
+  const [bannerList, setBannerList] = useState<BannerProps>(
+    {
+      _id: '1',
+      title: "test title",
+      bannerListItem: ['test1', 'test2', 'test3', 'test4'],
+      img: "/bannerImg.png",
+      titleBtn: "Test btn",
+      ageRestriction: 18,
+      loading: true
+    }
+  )
+
+  useEffect(() => {
+    dispatch(fetchContent({ type: ContentTypeEnum.MainSlider }))
+    dispatch(fetchContent({ type: ContentTypeEnum.Banner }))
+  }, [])
+
+  useEffect(() => {
+    if (mainSlider.content && mainSlider.content.data) {
+      setMainSliderList(mainSlider.content.data as MediaContent[])
+    }
+  }, [mainSlider.content])
+
+  useEffect(() => {
+    if (banner.content && banner.content.data) {
+      setBannerList(banner.content.data as BannerProps)
+    }
+  }, [banner.content])
 
   const sliderProps: SliderProps = {
     sliderSettings: {
       typeSlider: "default",
-      pagenation: true,
+      pagenation: !mainSlider.loading,
       autoSwipe: true,
       lastSwipe: false,
       quantityListItems: 1
     },
-    slidesData: temporarySlide,
-    cardStyles: {
-      cardSize: 'lg',
-      flex: {
-        body: {
-          justifyContent: 'flex-start'
+    sliderData: {
+      data: mainSliderList,
+      cardStyles: {
+        cardSize: 'lg',
+        flex: {
+          body: {
+            justifyContent: 'flex-start'
+          }
+        },
+        clipPath: false,
+        ageRestrictionBadge: {
+          position: 'left',
+          size: 'lg'
+        },
+        boxShadow: false,
+        btnGroup: true,
+        hover: {
+          scale: false,
+          playBack: {
+            value: false,
+            type: null
+          },
+          shadow: false
         }
       },
-      clipPath: false,
-      ageRestrictionBadge: {
-        position: 'left',
-        size: 'lg'
-      },
-      boxShadow: false,
-      btnGroup: true,
-      titleOutside: false,
-      hover: {
-        scale: false,
-        playBack: {
-          value: false,
-          type: null
+      settings: {
+        title: {
+          titleValue: null,
+          titleOutside: false,
+          titleLogoImg: true
         },
-        shadow: false
-      }
-    }
-  }
-
-  const bannerProps: BannerProps = {
-    title: "Мировые премьеры и любимые сериалы",
-    bannerListItem: temporaryBannerListItem,
-    img: "/bannerImg.png",
-    titleBtn: "Попробовать за 1₽",
-    ageRestriction: 18
-  }
-
-  const sliderPropsWatchingNow: SliderProps = {
-    sliderSettings: {
-      typeSlider: 'multi',
-      pagenation: false,
-      autoSwipe: false,
-      lastSwipe: true,
-      quantityListItems: 5
+        link: {
+          linkType: 'title',
+        },
+        descriptionVisible: true,
+        tags: null
+      },
+      loadingData: mainSlider.loading,
+      errorData: false
     },
-    slidesData: temporarySlidesWatchingNow,
-    cardStyles: {
-      cardSize: 'md',
-      flex: {
-        body: {
-          justifyContent: 'space-between'
-        }
-      },
-      clipPath: false,
-      ageRestrictionBadge: {
-        position: 'left',
-        size: 'sm'
-      },
-      boxShadow: false,
-      btnGroup: false,
-      titleOutside: true,
-      hover: {
-        scale: true,
-        playBack: {
-          value: false,
-          type: null
-        },
-        shadow: true
-      }
-    }
   }
 
-  const sliderPropsNewRelease: SliderProps = {
-    sliderSettings: {
-      typeSlider: 'multi',
-      pagenation: false,
-      autoSwipe: false,
-      lastSwipe: true,
-      quantityListItems: 4
-    },
-    slidesData: temporarySlidesNewRelease,
-    cardStyles: {
-      cardSize: 'lm',
-      flex: {
-        body: {
-          justifyContent: 'space-between'
-        }
-      },
-      clipPath: true,
-      ageRestrictionBadge: {
-        position: 'right',
-        size: 'lm'
-      },
-      boxShadow: true,
-      btnGroup: false,
-      titleOutside: false,
-      hover: {
-        scale: false,
-        playBack: {
-          value: true,
-          type: 'default'
-        },
-        shadow: false
-      }
-    }
-  }
+  // const sliderPropsWatchingNow: SliderProps = {
+  //   sliderSettings: {
+  //     typeSlider: 'multi',
+  //     pagenation: false,
+  //     autoSwipe: false,
+  //     lastSwipe: true,
+  //     quantityListItems: 5
+  //   },
+  //   slidesData: temporarySlidesWatchingNow,
+  //   cardStyles: {
+  //     cardSize: 'md',
+  //     flex: {
+  //       body: {
+  //         justifyContent: 'space-between'
+  //       }
+  //     },
+  //     clipPath: false,
+  //     ageRestrictionBadge: {
+  //       position: 'left',
+  //       size: 'sm'
+  //     },
+  //     boxShadow: false,
+  //     btnGroup: false,
+  //     titleOutside: true,
+  //     hover: {
+  //       scale: true,
+  //       playBack: {
+  //         value: false,
+  //         type: null
+  //       },
+  //       shadow: true
+  //     }
+  //   }
+  // }
 
-  const seoBlockProps: SeoBlockProps = {
-    title: "Смотреть лучшие фильмы и сериалы онлайн — Amediatekа",
-    text: "Новинки кино и сериалов в HD-качестве в онлайн-кинотеатре Амедиатека. Смотреть лучшие сериалы и фильмы по подписке."
-  }
+  // const sliderPropsNewRelease: SliderProps = {
+  //   sliderSettings: {
+  //     typeSlider: 'multi',
+  //     pagenation: false,
+  //     autoSwipe: false,
+  //     lastSwipe: true,
+  //     quantityListItems: 4
+  //   },
+  //   slidesData: temporarySlidesNewRelease,
+  //   cardStyles: {
+  //     cardSize: 'lm',
+  //     flex: {
+  //       body: {
+  //         justifyContent: 'space-between'
+  //       }
+  //     },
+  //     clipPath: true,
+  //     ageRestrictionBadge: {
+  //       position: 'right',
+  //       size: 'lm'
+  //     },
+  //     boxShadow: true,
+  //     btnGroup: false,
+  //     titleOutside: false,
+  //     hover: {
+  //       scale: false,
+  //       playBack: {
+  //         value: true,
+  //         type: 'default'
+  //       },
+  //       shadow: false
+  //     }
+  //   }
+  // }
 
-  const sliderProprsDetectiveSeries: SliderProps = {
-    sliderSettings: {
-      typeSlider: 'multi',
-      pagenation: false,
-      autoSwipe: false,
-      lastSwipe: true,
-      quantityListItems: 5
-    },
-    slidesData: temporarySlidesDetectiveSeries,
-    cardStyles: {
-      cardSize: 'md',
-      flex: {
-        body: {
-          justifyContent: 'space-between'
-        }
-      },
-      clipPath: false,
-      ageRestrictionBadge: {
-        position: 'left',
-        size: 'sm'
-      },
-      boxShadow: false,
-      btnGroup: false,
-      titleOutside: false,
-      hover: {
-        scale: true,
-        playBack: {
-          value: false,
-          type: null
-        },
-        shadow: true
-      }
-    }
-  }
+  // const seoBlockProps: SeoBlockProps = {
+  //   title: "Смотреть лучшие фильмы и сериалы онлайн — Amediatekа",
+  //   text: "Новинки кино и сериалов в HD-качестве в онлайн-кинотеатре Амедиатека. Смотреть лучшие сериалы и фильмы по подписке."
+  // }
 
-  const sliderProrsPromoLine: SliderProps = {
-    sliderSettings: {
-      typeSlider: 'multi',
-      pagenation: false,
-      autoSwipe: false,
-      lastSwipe: true,
-      quantityListItems: 4
-    },
-    slidesData: temporaryThoseAboutToDie,
-    cardStyles: {
-      cardSize: 'lm',
-      flex: {
-        body: {
-          justifyContent: 'space-between'
-        }
-      },
-      clipPath: true,
-      ageRestrictionBadge: {
-        position: 'right',
-        size: 'sm'
-      },
-      boxShadow: false,
-      btnGroup: false,
-      titleOutside: false,
-      hover: {
-        scale: false,
-        playBack: {
-          value: true,
-          type: 'default'
-        },
-        shadow: false
-      }
-    }
-  }
-  const promoLineProps: PromoLineProps = {
-    title: "Историческая драма «Обреченные на славу»",
-    subtitle: "Погрузитесь в суровый мир гладиаторских боев и дворцовых интриг, где борьба за власть идет не на жизнь, а на смерть.",
-    sliderProps: sliderProrsPromoLine
-  }
+  // const sliderProprsDetectiveSeries: SliderProps = {
+  //   sliderSettings: {
+  //     typeSlider: 'multi',
+  //     pagenation: false,
+  //     autoSwipe: false,
+  //     lastSwipe: true,
+  //     quantityListItems: 5
+  //   },
+  //   slidesData: temporarySlidesDetectiveSeries,
+  //   cardStyles: {
+  //     cardSize: 'md',
+  //     flex: {
+  //       body: {
+  //         justifyContent: 'space-between'
+  //       }
+  //     },
+  //     clipPath: false,
+  //     ageRestrictionBadge: {
+  //       position: 'left',
+  //       size: 'sm'
+  //     },
+  //     boxShadow: false,
+  //     btnGroup: false,
+  //     titleOutside: false,
+  //     hover: {
+  //       scale: true,
+  //       playBack: {
+  //         value: false,
+  //         type: null
+  //       },
+  //       shadow: true
+  //     }
+  //   }
+  // }
 
-  const sliderPropsPopularGenres: SliderProps = {
-    sliderSettings: {
-      typeSlider: 'multi',
-      pagenation: false,
-      autoSwipe: false,
-      lastSwipe: true,
-      quantityListItems: 5
-    },
-    slidesData: activeLinkPopularGenres === 0 ? temporaryPopularGenresSeries : temporaryPopularGenresMovies,
-    cardStyles: {
-      cardSize: 'sm',
-      flex: {
-        body: {
-          justifyContent: 'space-between'
-        }
-      },
-      clipPath: true,
-      ageRestrictionBadge: {
-        position: 'right',
-        size: 'sm'
-      },
-      boxShadow: false,
-      btnGroup: false,
-      titleOutside: false,
-      hover: {
-        scale: false,
-        playBack: {
-          value: true,
-          type: 'default'
-        },
-        shadow: false
-      }
-    }
-  }
+  // const sliderProrsPromoLine: SliderProps = {
+  //   sliderSettings: {
+  //     typeSlider: 'multi',
+  //     pagenation: false,
+  //     autoSwipe: false,
+  //     lastSwipe: true,
+  //     quantityListItems: 4
+  //   },
+  //   slidesData: temporaryThoseAboutToDie,
+  //   cardStyles: {
+  //     cardSize: 'lm',
+  //     flex: {
+  //       body: {
+  //         justifyContent: 'space-between'
+  //       }
+  //     },
+  //     clipPath: true,
+  //     ageRestrictionBadge: {
+  //       position: 'right',
+  //       size: 'sm'
+  //     },
+  //     boxShadow: false,
+  //     btnGroup: false,
+  //     titleOutside: false,
+  //     hover: {
+  //       scale: false,
+  //       playBack: {
+  //         value: true,
+  //         type: 'default'
+  //       },
+  //       shadow: false
+  //     }
+  //   }
+  // }
+  // const promoLineProps: PromoLineProps = {
+  //   title: "Историческая драма «Обреченные на славу»",
+  //   subtitle: "Погрузитесь в суровый мир гладиаторских боев и дворцовых интриг, где борьба за власть идет не на жизнь, а на смерть.",
+  //   sliderProps: sliderProrsPromoLine
+  // }
+
+  // const sliderPropsPopularGenres: SliderProps = {
+  //   sliderSettings: {
+  //     typeSlider: 'multi',
+  //     pagenation: false,
+  //     autoSwipe: false,
+  //     lastSwipe: true,
+  //     quantityListItems: 5
+  //   },
+  //   slidesData: activeLinkPopularGenres === 0 ? temporaryPopularGenresSeries : temporaryPopularGenresMovies,
+  //   cardStyles: {
+  //     cardSize: 'sm',
+  //     flex: {
+  //       body: {
+  //         justifyContent: 'space-between'
+  //       }
+  //     },
+  //     clipPath: true,
+  //     ageRestrictionBadge: {
+  //       position: 'right',
+  //       size: 'sm'
+  //     },
+  //     boxShadow: false,
+  //     btnGroup: false,
+  //     titleOutside: false,
+  //     hover: {
+  //       scale: false,
+  //       playBack: {
+  //         value: true,
+  //         type: 'default'
+  //       },
+  //       shadow: false
+  //     }
+  //   }
+  // }
 
   return (
     <div className="home" >
       <Slider {...sliderProps} />
       <section className="home-item container">
-        <Banner {...bannerProps} />
+        <Banner {...bannerList} />
       </section>
-      <section className="home-item">
+      {/* <section className="home-item">
         <div className="home-item__title container">
           <h2>Сейчас смотрят</h2>
         </div>
@@ -303,7 +345,7 @@ export function Home(): JSX.Element {
           <Link to="/#" className="link link_primary">Показать еще</Link>
         </div>
         <Blog />
-      </section>
+      </section> */}
     </div >
   )
 }

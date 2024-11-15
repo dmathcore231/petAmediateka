@@ -1,5 +1,7 @@
 import { ErrorMain } from "../Error"
 import { User } from "../interface/User"
+import { Content } from "./Content"
+import { MediaContent } from "./MediaContent"
 
 export interface ResponseStatusData {
   status: number
@@ -11,7 +13,10 @@ export interface ResponseWithoutPayload extends ResponseStatusData {
   value: null
 }
 
-export interface ResponseWithUPayload extends ResponseStatusData {
+export interface ResponseWithPayload<T
+  extends MediaContent | Content | Omit<User, 'password' | '__v' | 'userCard'>>
+  extends ResponseStatusData {
   message: string
-  value: Omit<User, 'password' | '__v' | 'userCard'>
+  value: T
+  token?: string | null
 }

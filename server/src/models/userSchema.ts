@@ -1,50 +1,68 @@
-import mongoose, { Schema } from 'mongoose'
-import { UserSubscription } from '../types/UserSubscription'
-const userSchema = new Schema({
+import { Schema, model } from 'mongoose'
+import { User } from '../types/interface/User'
 
+const userSchema = new Schema<User>({
   userData: {
-    firstName: {
-      type: String || null,
-      default: null
+    type: {
+      firstName: {
+        type: String || null,
+        default: null
+      },
+      lastName: {
+        type: String || null,
+        default: null
+      },
+      profileName: {
+        type: String,
+        default: 'Мой профиль'
+      },
+      userBirthDay: {
+        type: String || null,
+        default: null
+      },
+      userGender: {
+        type: String || null,
+        default: null
+      },
+      userAvatar: {
+        type: String || null,
+        default: null
+      },
     },
-    lastName: {
-      type: String || null,
-      default: null
-    },
-    profileName: {
-      type: String,
-      default: 'Мой профиль'
-    },
-    userBirthDay: {
-      type: String || null,
-      default: null
-    },
-    userGender: {
-      type: String || null,
-      default: null
-    },
-    userAvatar: {
-      type: String || null,
-      default: null
-    },
+    default: {},
+    _id: false
   },
 
   userPersonalData: {
-    email: String,
-    password: {
-      type: String,
-      required: true
+    type: {
+      email: String,
+      password: {
+        type: String,
+        required: true
+      },
+      phone: String || null,
+      userCard: {
+        type: String || null,
+        default: null
+      }
     },
-    phone: String || null,
-    userCard: {
-      type: String || null,
-      default: null
-    }
+    required: true,
+    _id: false
   },
 
   userSubscriptions: {
-    type: Array<UserSubscription> || [],
-    default: []
+    type: [
+      {
+        type: {
+          type: String,
+          enum: ["oneMonth", "threeMonths", "sixMonths", "oneYear"],
+        },
+        date: {
+          startDate: Number,
+          expirationDate: Number
+        }
+      }
+    ],
   },
 
   userActionsData: {
@@ -59,6 +77,6 @@ const userSchema = new Schema({
     enum: ['user', 'moderator', 'admin'],
     default: 'user'
   }
-}, { id: false })
+})
 
-export const UserModel = mongoose.model('Users', userSchema)
+export const UserModel = model('Users', userSchema)

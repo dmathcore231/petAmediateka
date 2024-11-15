@@ -1,0 +1,37 @@
+@keyframes fadeInLeft {
+  from {
+    left: 0;
+    opacity: 1;
+  }
+
+  to {
+    left: -50%;
+    opacity: 0;
+  }
+}
+
+@keyframes showInLeft {
+  from {
+    left: -50%;
+    opacity: 0;
+  }
+
+  to {
+    left: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes loading {
+  0% {
+    background-color: $color-secondary;
+  }
+
+  50% {
+    background-color: $color-secondary-active;
+  }
+
+  100% {
+    background-color: $color-secondary;
+  }
+}

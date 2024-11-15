@@ -1,6 +1,9 @@
 .card {
+  --width: 100%;
+  --height: 100%;
   --border-radius: 1.5rem;
   --border-top-radius: 1.5rem;
+  --bg-color: transparent;
   --before-bg: transparent;
 
   --link-gap: 0;
@@ -24,9 +27,11 @@
   --age-restriction-padding-bottom: 0;
 
   position: relative;
-  width: 100%;
-  height: 100%;
+  width: var(--width);
+  height: var(--height);
+  max-height: var(--height);
   overflow: hidden;
+  background: var(--bg-color);
   border-radius: var(--border-radius);
   transition: $main-transition;
 
@@ -78,6 +83,7 @@
     &__picture {
       width: 100%;
       height: 100%;
+      max-height: var(--picture-max-height);
       display: block;
     }
 
@@ -124,6 +130,14 @@
 
     &__description {
       max-width: 520px;
+
+      &_loading {
+        width: 100%;
+        height: 24px;
+        border-radius: 0.25rem;
+        background-color: $color-secondary;
+        animation: $loading-animation;
+      }
     }
 
     &__btn {
@@ -138,6 +152,8 @@
         @include flex-center;
         gap: 0.313rem;
         color: $color-black;
+        fill: $color-black;
+        stroke: transparent;
 
         &-scale {
           width: 100%;
@@ -164,14 +180,23 @@
 
         &_size {
 
-          &_lm {
-            width: 20rem;
+          &_lg {
+            width: 22.5rem;
           }
 
           &_xsm {
             width: 3.5rem;
           }
         }
+      }
+
+      &_loading {
+        width: 22.5rem;
+        height: 3.25rem;
+        background-color: $color-secondary;
+        border-radius: 0.25rem;
+        padding-top: 0;
+        animation: $loading-animation;
       }
     }
 
@@ -250,6 +275,7 @@
   &_size {
 
     &_lg {
+      --height: 53.25rem;
       --body-top: 3.125rem;
       --body-padding: 3.75rem;
       --body-btn-padding-top: 4.5rem;
@@ -292,5 +318,10 @@
       --border-radius: 0;
       --bg-img-border-radius: 0;
     }
+  }
+
+  &_loading {
+    --bg-color: #{$color-secondary};
+    animation: $loading-animation;
   }
 }

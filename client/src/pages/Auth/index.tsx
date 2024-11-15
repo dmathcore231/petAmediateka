@@ -28,7 +28,6 @@ export function Auth({ pageState }: AuthProps): JSX.Element {
     const formData = new FormData()
 
     if (pageState === 'signUp' && authState.email && !authState.password) {
-      console.log('+')
       formData.append('type', 'authSignUpEmail')
       formData.append('email', authState.email)
 

@@ -51,7 +51,6 @@ export function AuthEmail({ setEmailValue, type }: AuthEmailProps): JSX.Element 
 
   const toggleInputError = () => {
     if (error && (error.numberError === 101 || 103) && email === error.value) {
-      console.log(email)
       const err: InputErrorState = {
         value: true,
         errorData: {
@@ -78,7 +77,7 @@ export function AuthEmail({ setEmailValue, type }: AuthEmailProps): JSX.Element 
         </div>
       </div>
       <div className="auth-menu__item">
-        <h1 className="auth-menu__title title title_size_lg">
+        <h1 className="auth-menu__title title title_size_l">
           {type === "signUp" ? "Создайте аккаунт" : "Войдите в свой аккаунт"}
         </h1>
       </div>

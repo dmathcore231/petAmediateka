@@ -1,5 +1,5 @@
 import { ErrorDataInResponse } from "../Error"
-import { User } from "./User"
+import { PayloadValueType } from "../PayloadValueType"
 
 export interface ResponseStatusData {
   status: number
@@ -11,7 +11,8 @@ export interface ResponseWithoutPayload extends ResponseStatusData {
   value: null
 }
 
-export interface ResponseWithUPayload extends ResponseStatusData {
+export interface ResponseWithPayload<T extends PayloadValueType> extends ResponseStatusData {
   message: string
-  value: User
+  value: T
+  token?: string
 }

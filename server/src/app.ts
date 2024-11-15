@@ -1,10 +1,16 @@
 import express, { Request, Response, NextFunction } from 'express'
 import path from 'path'
 import mongoose from 'mongoose'
+import cookieParser from 'cookie-parser'
 import { initLocalDataState } from './middlewares/initLocalDataState'
+import { checkAccessTokenMiddleware } from './middlewares/checkAccessTokenMiddleware'
+import { checkRefreshTokenMiddleware } from './middlewares/checkRefreshTokenMiddleware'
+import { refrechAcccessTokenMiddleware } from './middlewares/refrechAcccessTokenMiddleware'
 import { authRouter } from './routes/Auth'
+import { contentRouter } from './routes/Content'
 
 const app = express()
+app.use(cookieParser())
 
 app.use((_: Request, res: Response, next: NextFunction) => {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173')
@@ -18,7 +24,11 @@ app.use((_: Request, res: Response, next: NextFunction) => {
 app.use('/public', express.static(path.join(__dirname, '..', 'public')))
 
 app.use(initLocalDataState)
+app.use(checkAccessTokenMiddleware)
+app.use(checkRefreshTokenMiddleware)
+app.use(refrechAcccessTokenMiddleware)
 app.use(authRouter)
+app.use(contentRouter)
 
 
 async function main() {

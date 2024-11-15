@@ -3,13 +3,12 @@ import { Size } from "./Scaffold"
 import { Flex } from "./Scaffold"
 
 export type CardLink = {
-  type: 'allCard' | 'title'
-  value: string
+  linkType: 'allCard' | 'title'
 }
 
 export type CardTitle = {
-  type: "img" | "text"
-  value: string
+  titleType: "img" | "text"
+  titleValue: string
 }
 
 export type TagsCard = {
@@ -39,7 +38,6 @@ export type CardStyles = {
   clipPath: boolean
   boxShadow: boolean
   btnGroup: boolean
-  titleOutside: boolean
   ageRestrictionBadge?: {
     position: 'right' | 'left'
     size: Size
@@ -52,5 +50,16 @@ export type CardStyles = {
     }
     shadow: boolean
   }
+}
+
+export type CardSetting = {
+  title: {
+    titleValue: string | null
+    titleOutside: boolean
+    titleLogoImg: boolean
+  }
+  link: CardLink
+  descriptionVisible: boolean
+  tags: TagsCard | null
 }
 

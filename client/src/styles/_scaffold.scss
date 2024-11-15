@@ -4,7 +4,39 @@
 @font-face {
   font-family: "Circe Regular";
   src: url('../assets/fonts/Circe-Regular.ttf') format('truetype');
+  font-weight: normal;
 }
+
+@font-face {
+  font-family: "Circe Regular";
+  src: url('../assets/fonts/Circe-Thin.ttf') format('truetype');
+  font-weight: 100;
+}
+
+@font-face {
+  font-family: "Circe Regular";
+  src: url('../assets/fonts/Circe-ExtraLight.ttf') format('truetype');
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: "Circe Regular";
+  src: url('../assets/fonts/Circe-Light.ttf') format('truetype');
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "Circe Regular";
+  src: url('../assets/fonts/Circe-Bold.ttf') format('truetype');
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "Circe Regular";
+  src: url('../assets/fonts/Circe-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+}
+
 
 * {
   font-family: "Circe Regular", sans-serif;
@@ -49,6 +81,32 @@
 
   }
 
+  &_white {
+    color: $color-white;
+    opacity: 0.8;
+
+    &:hover {
+      color: $color-white;
+      opacity: 1;
+    }
+  }
+
+  &_secondary {
+    color: $color-secondary;
+
+    &:hover {
+      color: $color-secondary-hover;
+    }
+  }
+
+  &_gray {
+    color: $color-gray;
+
+    &:hover {
+      color: $color-medium-gray;
+    }
+  }
+
   &_active {
     color: $color-gray;
   }
@@ -64,6 +122,7 @@
   }
 
   &_color {
+
     &_white {
       color: $color-white;
     }

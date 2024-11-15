@@ -1,5 +1,5 @@
 
 export type BadgeCard = {
-  type: "primary" | "secondary"
-  title: string
+  type: "primary" | "secondary" | "loading"
+  title?: string
 }

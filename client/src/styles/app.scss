@@ -2,6 +2,7 @@
 @import "./variables";
 @import "./mixins";
 @import "./typography";
+@import "./animations";
 
 @import "../components/App/styles";
 @import "../components/Layout/styles";
@@ -23,9 +24,17 @@
 @import "../components/Input/styles";
 @import "../components/Checkbox/styles";
 @import "../components/LinkBack/styles";
+@import "../components/Avatar/styles";
+@import "../components/ProfileSwitcher/styles";
+@import "../components/Spinner/styles";
+@import "../components/BurgerMenu/styles.scss";
+@import "../components/MetaData/styles";
+@import "../components/MediaPlayer/styles";
+@import "../components/ShowMore/styles";
+@import "../components/Trailer/styles";
 
 @import "../pages/Home/styles";
-@import "../pages/Series/styles";
+@import "../pages/СollectionSeries/styles";
 @import "../pages/Movies/styles";
 @import "../pages/Collections/styles";
 @import "../pages/Trailers/styles";
@@ -34,3 +43,4 @@
 @import "../pages/Search/styles";
 @import "../pages/Auth/styles";
 @import "../pages/Auth/AuthPass/styles";
+@import '../pages/Series/styles';

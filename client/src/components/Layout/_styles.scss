@@ -1,4 +1,9 @@
 .layout {
   background-color: #111113;
   min-height: 100vh;
+
+  &_fixed {
+    position: fixed;
+    width: calc(100% - 1.063rem);
+  }
 }

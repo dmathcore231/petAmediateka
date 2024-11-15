@@ -1,0 +1,8 @@
+.collection-series {
+  padding-top: 7.375rem;
+
+  &-header {
+    @include flex-column-start;
+    gap: 1rem;
+  }
+}
