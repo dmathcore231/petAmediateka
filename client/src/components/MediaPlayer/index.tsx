@@ -1,5 +1,6 @@
 import { useRef, useEffect, useState, MouseEvent, RefObject } from "react"
 import { useAppDispatch, useAppSelector } from "../../hooks"
+import { RootState } from "../../redux/store"
 import { updatePlayerStatus, toggleShow, resetPlayerStatus, getSrc, setVideoQuality } from "../../redux/MediaPlayerSlice"
 import { Btn } from "../Btn"
 import { TrackSetting } from "../../types/TrackSetting"
@@ -15,7 +16,7 @@ import { MutedIcon } from "../../assets/icons/MutedIcon"
 import { UnmutedIcon } from "../../assets/icons/UnmutedIcon"
 import { HdIcon } from "../../assets/icons/HdIcon"
 
-export function MediaPlayer(data: MediaPlayerProps): JSX.Element {
+export function MediaPlayer({ mediaContentData }: MediaPlayerProps): JSX.Element {
   const dispatch = useAppDispatch()
   const videoRef = useRef<HTMLVideoElement>(null)
   const thumbVolumeRef = useRef<HTMLDivElement>(null)
@@ -23,7 +24,7 @@ export function MediaPlayer(data: MediaPlayerProps): JSX.Element {
   const trackVideoRef = useRef<HTMLDivElement>(null)
   const mediaPlayerMainRef = useRef<HTMLDivElement>(null)
 
-  const { isShow, playerStatus, src, videoQuality } = useAppSelector(state => state.mediaPlayer)
+  const { isShow, playerStatus, src, videoQuality } = useAppSelector((state: RootState) => state.mediaPlayer)
 
   const [timeVideo, setTimeVideo] = useState(0)
   const [trackSetting, setTrackSetting] = useState<TrackSetting>({
@@ -76,7 +77,7 @@ export function MediaPlayer(data: MediaPlayerProps): JSX.Element {
   }, [playerStatus.status])
 
   useEffect(() => {
-    if (videoRef.current && isShow) {
+    if (videoRef.current && isShow && mediaContentData?.trailer?.quality720) {
       dispatch(resetPlayerStatus())
       videoRef.current.play()
       videoRef.current.currentTime = 0
@@ -84,7 +85,7 @@ export function MediaPlayer(data: MediaPlayerProps): JSX.Element {
       dispatch(updatePlayerStatus({
         ...playerStatus, status: "play",
       }))
-      dispatch(getSrc('/hotd/hotdTrailerVideo720.mp4'))
+      dispatch(getSrc(mediaContentData.trailer.quality720))
     }
   }, [isShow])
 
@@ -320,11 +321,11 @@ export function MediaPlayer(data: MediaPlayerProps): JSX.Element {
   }
 
   const handleClickBtnQualityVideoItem = (quality: VideoQuality) => {
-    if (quality === '360p') {
-      dispatch(getSrc('/hotd/hotdTrailerVideo360.mp4'))
+    if (quality === '360p' && mediaContentData?.trailer?.quality360) {
+      dispatch(getSrc(mediaContentData.trailer.quality360))
       dispatch(setVideoQuality('360p'))
-    } else {
-      dispatch(getSrc('/hotd/hotdTrailerVideo720.mp4'))
+    } else if (quality === '720p' && mediaContentData?.trailer?.quality720) {
+      dispatch(getSrc(mediaContentData.trailer.quality720))
       dispatch(setVideoQuality('720p'))
     }
   }
@@ -350,7 +351,7 @@ export function MediaPlayer(data: MediaPlayerProps): JSX.Element {
               <div className={"media-player-main-header__title" + (inactive
                 ? " media-player-main-header__title_fade"
                 : " media-player-main-header__title_show")}>
-                <h3>Дом Дракона</h3>
+                <h3>{mediaContentData?.data.title.value}</h3>
               </div>
             </div>
             <div className={"media-player-main-header__item"

@@ -20,11 +20,13 @@ import { DislikeIcon } from "../../assets/icons/DislikeIcon"
 import { Trailer } from "../../components/Trailer"
 
 export function Series(): JSX.Element {
-  const { id, title, season } = useParams()
+  const { id, season } = useParams()
   const dispatch = useAppDispatch()
 
   const { series } = useAppSelector(state => state.content)
   const { status, error, message } = useAppSelector(state => state.statusResponse)
+
+  const [content, setContent] = useState<MediaContent | null>(null)
 
   useEffect(() => {
     if (!season && id) {
@@ -32,16 +34,11 @@ export function Series(): JSX.Element {
     }
   }, [])
 
-  // const propsMetaData = {
-  //   rating: {
-  //     amediateka: temporaryListSeries[0].rating.amediateka,
-  //     imdb: temporaryListSeries[0].rating.imdb,
-  //     kinopoisk: temporaryListSeries[0].rating.kinopoisk,
-  //   },
-  //   dateRelease: temporaryListSeries[0].data.dateRelease,
-  //   ageRestriction: temporaryListSeries[0].data.ageRestriction,
-  //   genres: "Драма",
-  // }
+  useEffect(() => {
+    if (series && !series.loading && series.content) {
+      setContent(series.content as MediaContent)
+    }
+  }, [series, series.content])
 
   // const propsShowMore = {
   //   data: {
@@ -198,7 +195,13 @@ export function Series(): JSX.Element {
             <div className="series-meta-data__item">
               <div className="series-meta-data-description">
                 <div className="series-meta-data-description__upper">
-                  {/* <MetaData {...propsMetaData} /> */}
+                  {rating && (
+                    <MetaData
+                      rating={rating}
+                      dateRelease={data.dateRelease}
+                      ageRestriction={data.ageRestriction}
+                      genres={data.genres[0]} />
+                  )}
                 </div>
                 <div className="series-meta-data-description-body">
                   <div className="series-meta-data-description-body__text title title_align_left">

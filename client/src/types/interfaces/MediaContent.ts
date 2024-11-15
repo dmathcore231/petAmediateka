@@ -28,9 +28,9 @@ export interface MediaContent {
     production: string | 'N/A'
   }
   rating: {
-    raitingAmediateka: number | 'N/A'
-    ratingImdb: number | 'N/A'
-    ratingKinopoisk: number | 'N/A'
+    amediateka: number | 'N/A'
+    imdb: number | 'N/A'
+    kinopoisk: number | 'N/A'
   }
   actionsData: {
     favorites: string[] | []

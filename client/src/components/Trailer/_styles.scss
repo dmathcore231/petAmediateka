@@ -1,5 +1,8 @@
 .trailer {
+  --transgorn-btn: translate(-50%, -50%);
 
+  @include flex-column-start;
+  gap: 1rem;
 
   &-main {
     position: relative;
@@ -14,17 +17,17 @@
     box-shadow: 0 0.375rem 0.5rem 0 rgba(0, 0, 0, .2);
     overflow: hidden;
 
+    &:hover {
+      --transgorn-btn: translate(-50%, -50%) scale(1.1);
+    }
+
     &__btn {
       position: absolute;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%);
+      transform: var(--transgorn-btn);
       transition: $main-transition;
       z-index: 5;
-
-      &:hover {
-        transform: translate(-50%, -50%) scale(1.1);
-      }
     }
 
     &__img {
