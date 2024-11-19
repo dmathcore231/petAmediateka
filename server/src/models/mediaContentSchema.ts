@@ -140,6 +140,7 @@ const mediaContentSchema = new Schema<MediaContent>({
             default: null
           }
         },
+        _id: false
       },
       ageRestriction: {
         type: Number,

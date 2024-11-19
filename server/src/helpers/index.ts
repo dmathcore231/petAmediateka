@@ -91,15 +91,70 @@ export const temporaryListSeries: Partial<MediaContent>[] = [
           imgUrl: 'http://localhost:3000/public/series/hotd/imgBgHOTDs1.jpg',
           videoUrl: null
         },
-        trailer: {
-          quality360: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo360.mp4',
-          quality720: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4',
-          quality1080: null,
-          quality2160: null,
-          img: 'http://localhost:3000/public/series/hotd/hotdTrailer.jpg'
+        trailer: null,
+        description: `
+        Долгожданный приквел легендарного сериала «Игра престолов». В основу «Дома Дракона» лег первый том книги Джорджа Р.Р. Мартина «Пламя и кровь», где раскрывается история династии Таргариенов. В частности, семейство ввязывается в жестокую гражданскую войну, которая получила название «Танец драконов». Среди режиссеров сериала — Мигель Сапочник, ранее работавший над «Игрой престолов». Главные роли исполнили Мэтт Смит («Доктор Кто»), Эмма Д’Арси («Мисс Плохое Поведение») и Оливия Кук («Медленные лошади»). Автор оригинальной книги Джордж Мартин описывает сериал «Дом Дракона» как «шекспировскую трагедию», где нет однозначно положительных героев. То есть все в лучших традициях невероятной вселенной «Игры престолов»!`,
+      },
+      {
+        numberOfSeasons: 2,
+        episodes: [
+          {
+            link: '#',
+            episodeNumber: 1,
+            imgPreview: 'http://localhost:3000/public/series/hotd/hotds2e1.jpg',
+            title: 'Сын за сына'
+          },
+          {
+            link: '#',
+            episodeNumber: 2,
+            imgPreview: 'http://localhost:3000/public/series/hotd/hotds2e2.jpg',
+            title: 'Рейнира Жестокая'
+          },
+          {
+            link: '#',
+            episodeNumber: 3,
+            imgPreview: 'http://localhost:3000/public/series/hotd/hotds2e3.jpg',
+            title: 'Горящая Мельница'
+
+          },
+          {
+            link: '#',
+            episodeNumber: 4,
+            imgPreview: 'http://localhost:3000/public/series/hotd/hotds2e4.jpg',
+            title: 'Красный дракон и золотой'
+          },
+          {
+            link: '#',
+            episodeNumber: 5,
+            imgPreview: 'http://localhost:3000/public/series/hotd/hotds2e5.jpg',
+            title: 'Регент'
+          },
+          {
+            link: '#',
+            episodeNumber: 6,
+            imgPreview: 'http://localhost:3000/public/series/hotd/hotds2e6.jpg',
+            title: 'Простой люд'
+          },
+          {
+            link: '#',
+            episodeNumber: 7,
+            imgPreview: 'http://localhost:3000/public/series/hotd/hotds2e7.jpg',
+            title: 'Красный Посев'
+          },
+          {
+            link: '#',
+            episodeNumber: 8,
+            imgPreview: 'http://localhost:3000/public/series/hotd/hotds2e8.jpg',
+            title: 'Королева на все времена'
+          },
+        ],
+        bg: {
+          imgUrl: 'http://localhost:3000/public/series/hotd/imgBgS2.jpg',
+          videoUrl: null
         },
-        description: null,
-      }
+        trailer: null,
+        description: `Приквел «Игры престолов» возвращается со вторым сезоном, в котором битва за власть в Вестеросе набирает грандиозные обороты. Главные герои «Дома Дракона» – Алисента (Оливия Кук) и Эйгон (Том Глинн-Карни), которые всеми силами пытаются оставить за собой Железный трон, и Рейнира (Эмма Д’Арси) с Деймоном (Мэтт Смит), которые копят силы на Драконьем Камне для захвата власти в королевстве, – готовы начать гражданскую войну. Важную роль в противостоянии «зеленых» и «черных» сыграет Криган (Том Тейлор), предок знаменитых Старков из оригинального сериала. Зрителей ждут заговоры и неожиданные союзы за столом переговоров, эпичные сражения на земле и в небе на огнедышащих драконах, а также любовь, предательства, подвиги и шекспировские страсти – в общем, всё то, за что так любят творчество Джорджа Мартина.`,
+      },
     ],
     data: {
       title: {

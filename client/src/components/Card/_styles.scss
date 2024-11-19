@@ -21,6 +21,7 @@
   --bg-before-top: 0;
   --bg-before-bottom: none;
   --bg-before-bg-color: transparent;
+  --bg-before-border-radius: 0;
   --bg-after-content: none;
   --bg-after-bg-color: transparent;
 
@@ -60,6 +61,7 @@
       width: var(--bg-before-width);
       height: var(--bg-before-height);
       background: var(--bg-before-bg-color);
+      border-radius: var(--bg-before-border-radius);
     }
 
     &::after {
@@ -231,6 +233,7 @@
 
       &:hover {
         --bg-before-bg-color: rgba(0, 0, 0, .5);
+        --bg-before-border-radius: 0.75rem;
       }
     }
 

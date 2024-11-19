@@ -6,6 +6,7 @@ import { SliderProps } from "../../types/interfaces/SliderProps"
 import { SlideState, MultiSlideState } from "../../types/Slider"
 import { ArrowLeftIcon } from "../../assets/icons/ArrowLeftIcon"
 import { ArrowRightIcon } from "../../assets/icons/ArrowRightIcon"
+import { Spinner } from "../Spinner"
 
 export function Slider({ sliderSettings, sliderData: { data, cardStyles, settings, loadingData, errorData } }: SliderProps): JSX.Element {
   const animatedTime = 400
@@ -331,7 +332,9 @@ export function Slider({ sliderSettings, sliderData: { data, cardStyles, setting
         </Btn>
       </div>
       <div className="slider__content">
-        <ul className="slider__list"
+        <ul className={"slider__list" + (typeSlider === 'multi' && loadingData
+          ? " slider__list_loading"
+          : "")}
           ref={sliderListRef}
           style={{
             transform: typeSlider === 'default'
@@ -342,21 +345,26 @@ export function Slider({ sliderSettings, sliderData: { data, cardStyles, setting
               : multiStateSlider?.isAnimated ? 'var(--transition)' : 'none',
           }}
         >
-          {!loadingData && data && !errorData
-            ? (
-              data.map((slide, index) => (
-                <li
-                  key={index}
-                  className={setClassSlide(index)}
-                  ref={sliderItemRef}
-                >
-                  <Card styles={cardStyles} data={slide} settings={settings} loadingCardData={loadingData} error={errorData} />
-                </li>
-              ))
-            )
-            : (
-              <Card styles={cardStyles} data={defaultCardData} settings={settings} loadingCardData={loadingData} error={errorData} />
-            )}
+          {!loadingData && data && !errorData && (
+            data.map((slide, index) => (
+              <li
+                key={index}
+                className={setClassSlide(index)}
+                ref={sliderItemRef}
+              >
+                <Card styles={cardStyles} data={slide} settings={settings} loadingCardData={loadingData} error={errorData} />
+              </li>
+            ))
+          )}
+          {loadingData && !errorData && (
+            typeSlider === 'default'
+              ? (
+                <Card styles={cardStyles} data={defaultCardData} settings={settings} loadingCardData={loadingData} error={errorData} />
+              )
+              : (
+                <Spinner width={50} height={50} />
+              )
+          )}
         </ul>
         {pagenation && data && (
           <ul className="slider-pagination">

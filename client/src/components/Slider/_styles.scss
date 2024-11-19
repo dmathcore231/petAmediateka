@@ -66,6 +66,10 @@
     @include flex-center;
     justify-content: flex-start;
     transition: var(--transition);
+
+    &_loading {
+      justify-content: center;
+    }
   }
 
   &__item {

@@ -1,6 +1,5 @@
 import { AuthState, StateStatusResponse, ContentState, MediaPlayerState } from "../types/interfaces/InitialStatesSlice"
 import { ContentTypeEnum } from "../types/interfaces/Content"
-import { ContentTypes } from "../types/interfaces/InitialStatesSlice"
 
 export const initialStateAuth: AuthState = {
   loading: false,

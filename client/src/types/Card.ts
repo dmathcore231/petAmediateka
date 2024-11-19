@@ -41,7 +41,7 @@ export type CardStyles = {
   ageRestrictionBadge?: {
     position: 'right' | 'left'
     size: Size
-  }
+  } | null
   hover?: {
     scale: boolean
     playBack: {
@@ -54,10 +54,10 @@ export type CardStyles = {
 
 export type CardSetting = {
   title: {
-    titleValue: string | null
     titleOutside: boolean
     titleLogoImg: boolean
   }
+  badgeVisible: boolean
   link: CardLink
   descriptionVisible: boolean
   tags: TagsCard | null

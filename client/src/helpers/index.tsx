@@ -1,3 +1,4 @@
+import { BannerProps } from "../types/interfaces/BannerProps"
 import { MediaContent } from "../types/interfaces/MediaContent"
 import { UserData } from "../types/interfaces/User"
 
@@ -16,13 +17,6 @@ export const getDataFromLocalStorage = (key: string): UserData | null => {
   }
   return null
 }
-
-export const temporaryBannerListItem: Array<string> = [
-  'В единой подписке',
-  'На любых устройствах',
-  'В отличном качестве',
-  'Без рекламы'
-]
 
 export const defaultCardData: MediaContent = {
   _id: '1',
@@ -43,7 +37,7 @@ export const defaultCardData: MediaContent = {
       mainDescription: 'Main description',
       prewiewDescription: 'Prewiew description'
     },
-    about: true,
+    about: null,
     ageRestriction: 18,
     dateRelease: '2022',
     genres: ['Драма', 'Мелодрама', 'Боевик', 'Фэнтези'],
@@ -53,9 +47,9 @@ export const defaultCardData: MediaContent = {
     production: 'HBO'
   },
   rating: {
-    raitingAmediateka: 9.1,
-    ratingImdb: 8.8,
-    ratingKinopoisk: 8.4
+    amediateka: 9.1,
+    imdb: 8.8,
+    kinopoisk: 8.4
   },
   actionsData: {
     favorites: [],
@@ -75,4 +69,14 @@ export const defaultCardData: MediaContent = {
     img: ''
   },
   logoImg: ''
+}
+
+export const defaultBannerData: BannerProps = {
+  _id: '1',
+  title: "test title",
+  bannerListItem: ['test1', 'test2', 'test3', 'test4'],
+  img: "/bannerImg.png",
+  titleBtn: "Test btn",
+  ageRestriction: 18,
+  loading: true
 }

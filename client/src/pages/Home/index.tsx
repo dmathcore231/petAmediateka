@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { Link } from "react-router-dom"
+import { Link, useFetcher } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "../../hooks"
 import { fetchContent } from "../../redux/contentSlice"
 import { Banner } from "../../components/Banner"
@@ -14,42 +14,18 @@ import { SeoBlockProps } from "../../types/interfaces/SeoBlockProps"
 import { PromoLineProps } from "../../types/interfaces/PromoLineProps"
 import { MediaContent } from "../../types/interfaces/MediaContent"
 import { ContentTypeEnum } from "../../types/interfaces/Content"
-import { temporaryBannerListItem } from "../../helpers"
+import { defaultBannerData } from "../../helpers"
 
 export function Home(): JSX.Element {
   const dispatch = useAppDispatch()
-  const { mainSlider, banner } = useAppSelector(state => state.content)
+  const { mainSlider, banner } = useAppSelector((state) => state.content)
 
   const [activeLinkPopularGenres, setActiveLinkPopularGenres] = useState<number>(0)
-  const [mainSliderList, setMainSliderList] = useState<MediaContent[] | null>(null)
-  const [bannerList, setBannerList] = useState<BannerProps>(
-    {
-      _id: '1',
-      title: "test title",
-      bannerListItem: ['test1', 'test2', 'test3', 'test4'],
-      img: "/bannerImg.png",
-      titleBtn: "Test btn",
-      ageRestriction: 18,
-      loading: true
-    }
-  )
 
   useEffect(() => {
     dispatch(fetchContent({ type: ContentTypeEnum.MainSlider }))
     dispatch(fetchContent({ type: ContentTypeEnum.Banner }))
-  }, [])
-
-  useEffect(() => {
-    if (mainSlider.content && mainSlider.content.data) {
-      setMainSliderList(mainSlider.content.data as MediaContent[])
-    }
-  }, [mainSlider.content])
-
-  useEffect(() => {
-    if (banner.content && banner.content.data) {
-      setBannerList(banner.content.data as BannerProps)
-    }
-  }, [banner.content])
+  }, [dispatch])
 
   const sliderProps: SliderProps = {
     sliderSettings: {
@@ -60,7 +36,7 @@ export function Home(): JSX.Element {
       quantityListItems: 1
     },
     sliderData: {
-      data: mainSliderList,
+      data: mainSlider.content ? mainSlider.content.data as MediaContent[] : null,
       cardStyles: {
         cardSize: 'lg',
         flex: {
@@ -86,10 +62,10 @@ export function Home(): JSX.Element {
       },
       settings: {
         title: {
-          titleValue: null,
           titleOutside: false,
           titleLogoImg: true
         },
+        badgeVisible: true,
         link: {
           linkType: 'title',
         },
@@ -101,40 +77,57 @@ export function Home(): JSX.Element {
     },
   }
 
-  // const sliderPropsWatchingNow: SliderProps = {
-  //   sliderSettings: {
-  //     typeSlider: 'multi',
-  //     pagenation: false,
-  //     autoSwipe: false,
-  //     lastSwipe: true,
-  //     quantityListItems: 5
-  //   },
-  //   slidesData: temporarySlidesWatchingNow,
-  //   cardStyles: {
-  //     cardSize: 'md',
-  //     flex: {
-  //       body: {
-  //         justifyContent: 'space-between'
-  //       }
-  //     },
-  //     clipPath: false,
-  //     ageRestrictionBadge: {
-  //       position: 'left',
-  //       size: 'sm'
-  //     },
-  //     boxShadow: false,
-  //     btnGroup: false,
-  //     titleOutside: true,
-  //     hover: {
-  //       scale: true,
-  //       playBack: {
-  //         value: false,
-  //         type: null
-  //       },
-  //       shadow: true
-  //     }
-  //   }
-  // }
+  const sliderPropsWatchingNow: SliderProps = {
+    sliderSettings: {
+      typeSlider: 'multi',
+      pagenation: false,
+      autoSwipe: false,
+      lastSwipe: true,
+      quantityListItems: 5
+    },
+    sliderData: {
+      data: mainSlider.content ? mainSlider.content.data as MediaContent[] : null,
+      cardStyles: {
+        cardSize: 'md',
+        flex: {
+          body: {
+            justifyContent: 'space-between'
+          }
+        },
+        clipPath: false,
+        ageRestrictionBadge: {
+          position: 'left',
+          size: 'sm'
+        },
+        boxShadow: false,
+        btnGroup: false,
+        hover: {
+          scale: true,
+          playBack: {
+            value: false,
+            type: null
+          },
+          shadow: true
+        }
+      },
+      settings: {
+        title: {
+          titleOutside: true,
+          titleLogoImg: false
+        },
+        badgeVisible: false,
+        link: {
+          linkType: 'allCard',
+        },
+        descriptionVisible: false,
+        tags: null
+      },
+      loadingData: mainSlider.loading,
+      errorData: false
+    },
+  }
+
+  const bannerProps: BannerProps = banner.content ? banner.content.data as BannerProps : defaultBannerData
 
   // const sliderPropsNewRelease: SliderProps = {
   //   sliderSettings: {
@@ -290,15 +283,15 @@ export function Home(): JSX.Element {
     <div className="home" >
       <Slider {...sliderProps} />
       <section className="home-item container">
-        <Banner {...bannerList} />
+        <Banner {...bannerProps} />
       </section>
-      {/* <section className="home-item">
+      <section className="home-item">
         <div className="home-item__title container">
           <h2>Сейчас смотрят</h2>
         </div>
         <Slider {...sliderPropsWatchingNow} />
       </section>
-      <section className="home-item">
+      {/* <section className="home-item">
         <div className="home-item__title container">
           <h2>Новое в Амедиатеке</h2>
           <Link to="/#" className="link link_primary">Показать еще</Link>

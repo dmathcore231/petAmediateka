@@ -10,7 +10,7 @@ import { AddFavoriteIcon } from "../../assets/icons/AddFavoriteIcon"
 export function Card({ data, styles, settings, loadingCardData, error }: CardProps): JSX.Element {
   const { _id, type, data: { title, badge, ageRestriction, description: { prewiewDescription } }, bg, logoImg } = data
   const { cardSize, flex, clipPath, ageRestrictionBadge, btnGroup, hover, boxShadow } = styles
-  const { title: { titleValue, titleOutside, titleLogoImg }, link: { linkType }, descriptionVisible, tags } = settings
+  const { title: { titleOutside, titleLogoImg }, badgeVisible, link: { linkType }, descriptionVisible, tags } = settings
 
   const setLinkValue = (): string => {
     return type === 'movie'
@@ -63,7 +63,7 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
             </div>
           )
           }
-          {badge && (
+          {badge && badgeVisible && (
             <div className="card-body__badge">
               {!loadingCardData
                 ? (<Badge type={badge.type} title={badge.title} />)
@@ -73,7 +73,7 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
           {titleLogoImg && (
             <div className="card-body__title">
               {
-                linkType === 'title' && titleValue
+                linkType === 'title'
                   ? (
                     <Link to={setLinkValue()} className="card__link">
                       <img src={logoImg} alt="" className="card-body__title-img" />
@@ -83,11 +83,6 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
                     <img src={logoImg} alt="" className="card-body__title-img" />
                   )
               }
-            </div>
-          )}
-          {!titleLogoImg && !titleOutside && (
-            <div className="card-body__title">
-              {titleValue}
             </div>
           )}
           {descriptionVisible && (

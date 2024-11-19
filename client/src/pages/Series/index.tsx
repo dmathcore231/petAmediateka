@@ -247,7 +247,6 @@ export function Series(): JSX.Element {
             )}
           </div>
           <div className="series-content-footer__item">
-
           </div>
         </div>
       </>
