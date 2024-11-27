@@ -1,8 +1,7 @@
-import { CardStyles, CardSetting } from "../Card"
-import { MediaContent } from "./MediaContent"
+import { CardStyles, CardSetting, CardData } from "../Card"
 
 export interface CardProps {
-  data: MediaContent
+  data: CardData
   loadingCardData: boolean
   error: boolean
   styles: CardStyles

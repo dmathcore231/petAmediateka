@@ -8,21 +8,15 @@ import { PlayIcon } from "../../assets/icons/PlayIcon"
 import { AddFavoriteIcon } from "../../assets/icons/AddFavoriteIcon"
 
 export function Card({ data, styles, settings, loadingCardData, error }: CardProps): JSX.Element {
-  const { _id, type, data: { title, badge, ageRestriction, description: { prewiewDescription } }, bg, logoImg } = data
+  const { _id, type, title, badge, ageRestriction, description, bg, logoImg, link } = data
   const { cardSize, flex, clipPath, ageRestrictionBadge, btnGroup, hover, boxShadow } = styles
   const { title: { titleOutside, titleLogoImg }, badgeVisible, link: { linkType }, descriptionVisible, tags } = settings
-
-  const setLinkValue = (): string => {
-    return type === 'movie'
-      ? `/movie/${_id}/${title.linkTitle}`
-      : `/series/${_id}/${title.linkTitle}`
-  }
 
   const renderCardContentLinkWrapper = (children: JSX.Element): JSX.Element => {
     if (linkType === 'allCard') {
       return (
         <Link
-          to={setLinkValue()}
+          to={link}
           className="card__link"
         >
           {children}
@@ -75,7 +69,7 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
               {
                 linkType === 'title'
                   ? (
-                    <Link to={setLinkValue()} className="card__link">
+                    <Link to={link} className="card__link">
                       <img src={logoImg} alt="" className="card-body__title-img" />
                     </Link>
                   )
@@ -87,7 +81,7 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
           )}
           {descriptionVisible && (
             <div className={"card-body__description" + (loadingCardData ? ' card-body__description_loading' : '') + " title title_align_left"}>
-              {!loadingCardData && prewiewDescription ? prewiewDescription : ''}
+              {!loadingCardData && description ? description : ''}
             </div>
           )}
           {tags && (
@@ -97,7 +91,7 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
             <div className={"card-body__btn" + (loadingCardData ? ' card-body__btn_loading' : '')}>
               {!loadingCardData && (
                 <>
-                  <Link to={setLinkValue()} className={`btn btn_primary card-body__btn-link card-body__btn-link_size_${styles.cardSize}`}>
+                  <Link to={link} className={`btn btn_primary card-body__btn-link card-body__btn-link_size_${styles.cardSize}`}>
                     <div className="card-body__btn-wrapper">
                       <PlayIcon width={28} height={28} />
                       <span className="card-body__btn-text">Смотреть</span>

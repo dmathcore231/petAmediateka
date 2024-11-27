@@ -39,7 +39,7 @@ export interface MediaContent extends Document {
     liked: string[] | []
     disliked: string[] | []
   }
-  bg: Bg | null
+  bg: Bg
   trailer: {
     quality360: string | null
     quality720: string | null

@@ -1,11 +1,11 @@
-import { MediaContent } from "../interfaces/MediaContent"
+import { CardData } from "../Card"
 import { BannerProps } from "./BannerProps"
 
 export type Content = {
   _id: string
   __v: number
   type: ContentTypeEnum
-  data: Array<MediaContent> | BannerProps | null
+  data: Array<CardData> | BannerProps | null
 }
 
 export enum ContentTypeEnum {

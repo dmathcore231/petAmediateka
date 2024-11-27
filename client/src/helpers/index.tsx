@@ -1,3 +1,4 @@
+import { CardData } from "../types/Card"
 import { BannerProps } from "../types/interfaces/BannerProps"
 import { MediaContent } from "../types/interfaces/MediaContent"
 import { UserData } from "../types/interfaces/User"
@@ -18,57 +19,27 @@ export const getDataFromLocalStorage = (key: string): UserData | null => {
   return null
 }
 
-export const defaultCardData: MediaContent = {
+export const defaultCardData: CardData = {
   _id: '1',
-  __v: 0,
   type: 'movie',
-  seasons: null,
-  data: {
-    title: {
-      value: 'Test Title',
-      originalTitle: 'Test Original Title',
-      linkTitle: 'test-title'
-    },
-    badge: {
-      type: 'secondary',
-      title: 'test badge'
-    },
-    description: {
-      mainDescription: 'Main description',
-      prewiewDescription: 'Prewiew description'
-    },
-    about: null,
-    ageRestriction: 18,
-    dateRelease: '2022',
-    genres: ['Драма', 'Мелодрама', 'Боевик', 'Фэнтези'],
-    actors: ['Стив Туссэн', 'Мэтт Смит', 'Эмма Д’Арси', 'Пэдди Консидайн'],
-    directors: ['Грег Яйтанс', 'Мигель Сапочник'],
-    country: 'США',
-    production: 'HBO'
+  title: {
+    value: 'Test Title',
+    originalTitle: 'Test Original Title',
+    linkTitle: 'test-title'
   },
-  rating: {
-    amediateka: 9.1,
-    imdb: 8.8,
-    kinopoisk: 8.4
+  badge: {
+    type: 'secondary',
+    title: 'test badge'
   },
-  actionsData: {
-    favorites: [],
-    liked: [],
-    disliked: []
-  },
+  ageRestriction: 0,
+  description: "Prewiew description",
   bg: {
     imgUrl: '',
     videoUrl: '',
     imgResizeUrl: ''
   },
-  trailer: {
-    quality360: '',
-    quality720: '',
-    quality1080: null,
-    quality2160: null,
-    img: ''
-  },
-  logoImg: ''
+  logoImg: '',
+  link: '',
 }
 
 export const defaultBannerData: BannerProps = {

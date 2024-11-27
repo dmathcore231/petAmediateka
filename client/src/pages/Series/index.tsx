@@ -2,11 +2,14 @@ import { useEffect } from "react"
 import { useParams, Link } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "../../hooks"
 import { fetchContent } from "../../redux/contentSlice"
+import { RootState } from "../../redux/store"
 import { LinkBack } from "../../components/LinkBack"
 import { Btn } from "../../components/Btn"
 import { MetaData } from "../../components/MetaData"
 import { Spinner } from "../../components/Spinner"
 import { ShowMore } from "../../components/ShowMore"
+import { Trailer } from "../../components/Trailer"
+import { Seasons } from "../../components/Seasons"
 import { ContentTypeEnum } from "../../types/interfaces/Content"
 import { MediaContent } from "../../types/interfaces/MediaContent"
 import { ContentStateItem } from "../../types/interfaces/InitialStatesSlice"
@@ -16,8 +19,6 @@ import { ShareIcon } from "../../assets/icons/ShareIcon"
 import { AddFavoriteIcon } from "../../assets/icons/AddFavoriteIcon"
 import { LikeIcon } from "../../assets/icons/LikeIcon"
 import { DislikeIcon } from "../../assets/icons/DislikeIcon"
-import { Trailer } from "../../components/Trailer"
-import { RootState } from "../../redux/store"
 
 export function Series(): JSX.Element {
   const { id, season } = useParams()
@@ -32,8 +33,10 @@ export function Series(): JSX.Element {
   }, [])
 
   const renderBgPage = (): JSX.Element => {
+    const indexSeason = Number(season)
+    const seasonData = content.seasons?.[indexSeason - 1]
 
-    if (!season && content.bg?.videoUrl) {
+    if (!indexSeason && content.bg?.videoUrl) {
       return (
         <div className="series-bg__video">
           <video src={content.bg.videoUrl} className="series-bg__video-item"
@@ -44,10 +47,27 @@ export function Series(): JSX.Element {
             preload="metadata"></video>
         </div>
       )
-    } else {
+    } else if (!indexSeason && content.bg?.imgUrl) {
       return (
         <picture className="series-bg__picture">
           <img src={content.bg?.imgUrl} alt="" className="series-bg__img" />
+        </picture>
+      )
+    } else if (indexSeason && seasonData?.bg?.videoUrl) {
+      return (
+        <div className="series-bg__video">
+          <video src={seasonData.bg.videoUrl} className="series-bg__video-item"
+            autoPlay
+            muted
+            playsInline
+            loop
+            preload="metadata"></video>
+        </div>
+      )
+    } else {
+      return (
+        <picture className="series-bg__picture">
+          <img src={seasonData?.bg?.imgUrl} alt="" className="series-bg__img" />
         </picture>
       )
     }
@@ -63,7 +83,7 @@ export function Series(): JSX.Element {
 
     return (
       <>
-        <div className="series-content-upper">
+        <div className="series-content-upper container">
           <LinkBack activePage="Сериалы" />
           <Link to={`/series/${_id}/${data.title.linkTitle}`} className="series-content-upper__item">
             <img src={logoImg}
@@ -85,12 +105,13 @@ export function Series(): JSX.Element {
                 <span className="title">Сезоны:</span>
               </div>
               <ul className="series-seasons-line__list">
-                {seasons?.map((season, index) => {
+                {seasons?.map((item, index) => {
                   return (
-                    <li className="series-seasons-line__item" key={_id + index}>
-                      <Link to={`/series/${_id}/${data.title.linkTitle}/season/${season.numberOfSeasons}`} className="series-seasons-line__link
+                    <li className={"series-seasons-line__item" + (Number(season) === item.numberOfSeasons ? " series-seasons-line__item_active" : "")}
+                      key={_id + index}>
+                      <Link to={`/series/${_id}/${data.title.linkTitle}/season/${item.numberOfSeasons}`} className="series-seasons-line__link
                       title title_weight_bold ">
-                        {season.numberOfSeasons}
+                        {item.numberOfSeasons}
                       </Link>
                     </li>
                   )
@@ -99,7 +120,7 @@ export function Series(): JSX.Element {
             </div>
           </div>
         </div>
-        <div className="series-content-header">
+        <div className="series-content-header container">
           <div className="series-content-header__row">
             <div className="series-content-header__btn-group">
               <div className="series-content-header__btn-wrapper series-content-header__btn-wrapper_fill_black">
@@ -168,7 +189,7 @@ export function Series(): JSX.Element {
           <div className="series-content-header__row">
           </div>
         </div>
-        <div className="series-content-body">
+        <div className="series-content-body container">
           <div className="series-meta-data">
             <div className="series-meta-data__item">
               {content && (
@@ -241,12 +262,13 @@ export function Series(): JSX.Element {
           </div>
         </div>
         <div className="series-content-footer">
-          <div className="series-content-footer__item">
+          <div className="series-content-footer__item container">
             {content.data.about && (
               <ShowMore data={content.data.about as { title: string; description: string }} />
             )}
           </div>
           <div className="series-content-footer__item">
+            <Seasons seasonsValue={season ? Number(season) : 0} mediaContentData={content} />
           </div>
         </div>
       </>
@@ -261,8 +283,7 @@ export function Series(): JSX.Element {
         </div>
       )}
       <div className={"series-content"
-        + (loading ? " series-content_loading" : "")
-        + " container"}>
+        + (loading ? " series-content_loading" : "")}>
         {renderContent()}
       </div>
     </div >

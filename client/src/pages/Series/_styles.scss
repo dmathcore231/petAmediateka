@@ -183,6 +183,12 @@
       @include flex-column;
     }
 
+    &-footer {
+      &__item {
+        @include flex-center;
+      }
+    }
+
     &_loading {
       --content-padding-top: 10rem;
       @include flex-center;
@@ -209,6 +215,14 @@
       &:hover {
         opacity: 1;
         border: 0.063rem solid $color-white-dark;
+      }
+    }
+
+    &__item {
+      border-radius: 0.25rem;
+
+      &_active {
+        background-color: $color-primary;
       }
     }
   }

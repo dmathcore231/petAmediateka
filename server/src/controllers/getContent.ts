@@ -2,6 +2,9 @@ import { Request, Response, NextFunction } from 'express'
 import { ContentModel } from '../models/contentSchema'
 import { MediaContentModel } from '../models/mediaContentSchema'
 import { BannerModel } from '../models/bannerSchema'
+import { CardData } from '../types/interface/CardData'
+import { MediaContent } from '../types/interface/MediaContent'
+import { formationLink } from '../helpers'
 
 export async function getContent(req: Request, res: Response, next: NextFunction): Promise<void> {
   const { localDataState } = res.locals
@@ -19,7 +22,27 @@ export async function getContent(req: Request, res: Response, next: NextFunction
       model: MediaContentModel
     })
 
-    localDataState.content = series
+    if (series) {
+      const data = series.data as unknown as MediaContent[]
+      const result: Array<CardData> = data.map((item) => {
+        return {
+          _id: item._id as string,
+          type: item.type,
+          title: item.data.title,
+          badge: item.data.badge,
+          ageRestriction: item.data.ageRestriction,
+          description: item.data.description.prewiewDescription,
+          bg: item.bg,
+          logoImg: item.logoImg,
+          link: formationLink(item.type, item._id as string, item.data.title.linkTitle)
+        }
+      })
+
+      localDataState.content = {
+        ...series.toObject(),
+        data: result
+      }
+    }
   } else if (type === 'banner') {
     const data = await ContentModel.findOne({ type: 'banner' }).populate({
       path: 'data',

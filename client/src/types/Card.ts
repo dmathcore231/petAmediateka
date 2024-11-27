@@ -1,4 +1,5 @@
 import { BadgeCard } from "./BadgeCard"
+import { Bg } from "./Bg"
 import { Size } from "./Scaffold"
 import { Flex } from "./Scaffold"
 
@@ -19,13 +20,19 @@ export type TagsCard = {
 }
 
 export type CardData = {
-  link: CardLink,
-  imgBg: string
-  title?: CardTitle
-  ageRestriction?: number
-  description?: string
-  badge?: BadgeCard
-  tags?: TagsCard
+  _id: string
+  type: 'movie' | 'series'
+  title: {
+    value: string
+    originalTitle: string
+    linkTitle: string
+  }
+  badge: BadgeCard | null
+  ageRestriction: number
+  description: string
+  bg: Bg
+  logoImg: string
+  link: string
 }
 
 export type CardStyles = {
@@ -61,5 +68,6 @@ export type CardSetting = {
   link: CardLink
   descriptionVisible: boolean
   tags: TagsCard | null
+  cardSeries: boolean
 }
 

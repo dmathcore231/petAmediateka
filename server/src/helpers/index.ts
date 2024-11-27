@@ -687,4 +687,12 @@ export const temporaryBanner: Banner = {
   ageRestriction: 18
 }
 
+export const formationLink = (typeContent: 'movie' | 'series', _id: string, link: string): string => {
+  if (typeContent === 'movie') {
+    return `/movie/${_id}/${link}`
+  } else {
+    return `/series/${_id}/${link}`
+  }
+}
+
 

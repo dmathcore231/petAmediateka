@@ -1,11 +1,10 @@
-import { CardStyles, CardSetting } from "../Card"
+import { CardStyles, CardSetting, CardData } from "../Card"
 import { SliderSettings } from "../Slider"
-import { MediaContent } from "./MediaContent"
 
 export interface SliderProps {
   sliderSettings: SliderSettings
   sliderData: {
-    data: Array<MediaContent> | null
+    data: Array<CardData> | null
     cardStyles: CardStyles
     settings: CardSetting
     loadingData: boolean

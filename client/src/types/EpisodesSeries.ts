@@ -1,3 +1,4 @@
+import { Bg } from "./Bg"
 
 export type EpisodesSeries = {
   link: string

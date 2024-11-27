@@ -12,9 +12,9 @@ import { SliderProps } from "../../types/interfaces/SliderProps"
 import { BannerProps } from "../../types/interfaces/BannerProps"
 import { SeoBlockProps } from "../../types/interfaces/SeoBlockProps"
 import { PromoLineProps } from "../../types/interfaces/PromoLineProps"
-import { MediaContent } from "../../types/interfaces/MediaContent"
 import { ContentTypeEnum } from "../../types/interfaces/Content"
 import { defaultBannerData } from "../../helpers"
+import { CardData } from "../../types/Card"
 
 export function Home(): JSX.Element {
   const dispatch = useAppDispatch()
@@ -36,7 +36,7 @@ export function Home(): JSX.Element {
       quantityListItems: 1
     },
     sliderData: {
-      data: mainSlider.content ? mainSlider.content.data as MediaContent[] : null,
+      data: mainSlider.content ? mainSlider.content.data as CardData[] : null,
       cardStyles: {
         cardSize: 'lg',
         flex: {
@@ -70,7 +70,8 @@ export function Home(): JSX.Element {
           linkType: 'title',
         },
         descriptionVisible: true,
-        tags: null
+        tags: null,
+        cardSeries: false
       },
       loadingData: mainSlider.loading,
       errorData: false
@@ -86,7 +87,7 @@ export function Home(): JSX.Element {
       quantityListItems: 5
     },
     sliderData: {
-      data: mainSlider.content ? mainSlider.content.data as MediaContent[] : null,
+      data: mainSlider.content ? mainSlider.content.data as CardData[] : null,
       cardStyles: {
         cardSize: 'md',
         flex: {
@@ -120,7 +121,8 @@ export function Home(): JSX.Element {
           linkType: 'allCard',
         },
         descriptionVisible: false,
-        tags: null
+        tags: null,
+        cardSeries: false
       },
       loadingData: mainSlider.loading,
       errorData: false
