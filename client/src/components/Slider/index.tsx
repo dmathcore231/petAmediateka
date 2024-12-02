@@ -19,9 +19,53 @@ export function Slider({ sliderSettings, sliderData: { data, cardStyles, setting
   const [multiStateSlider, setMultiStateSlider] = useState<MultiSlideState | null>(null)
   const [progress, setProgress] = useState<number>(0)
   const [sliderItemWidth, setSliderItemWidth] = useState<number>(0)
+  const [classBtn, setClassBtn] = useState(
+    {
+      prev: '',
+      next: ''
+    }
+  )
 
   const sliderListRef = useRef<HTMLUListElement>(null)
   const sliderItemRef = useRef<HTMLLIElement>(null)
+
+  useEffect(() => {
+    if (data && data.length === quantityListItems) {
+      setClassBtn({
+        prev: 'slider__btn slider__btn_prev slider__btn_disabled',
+        next: 'slider__btn slider__btn_next slider__btn_disabled'
+      })
+    } else if (multiStateSlider && multiStateSlider.prevSlide < 0 && lastSwipe) {
+      const timer = setTimeout(() => {
+        setClassBtn({
+          prev: 'slider__btn slider__btn_prev slider__btn_disabled',
+          next: 'slider__btn slider__btn_next'
+        })
+      }, animatedTime)
+
+      return () => clearTimeout(timer)
+    } else if (multiStateSlider && data && multiStateSlider.nextSlide === data.length && lastSwipe) {
+      const timer = setTimeout(() => {
+        setClassBtn({
+          prev: 'slider__btn slider__btn_prev',
+          next: 'slider__btn slider__btn_next slider__btn_disabled'
+        })
+      }, animatedTime)
+
+      return () => clearTimeout(timer)
+    } else if (typeSlider === 'multi' && !multiStateSlider && lastSwipe) {
+      setClassBtn({
+        prev: 'slider__btn slider__btn_prev slider__btn_disabled',
+        next: 'slider__btn slider__btn_next'
+      })
+    }
+    else {
+      setClassBtn({
+        prev: 'slider__btn slider__btn_prev',
+        next: 'slider__btn slider__btn_next'
+      })
+    }
+  }, [multiStateSlider])
 
   useEffect(() => {
     if (data) {
@@ -191,13 +235,10 @@ export function Slider({ sliderSettings, sliderData: { data, cardStyles, setting
         }
       }
     } else if (typeSlider === 'multi' && multiStateSlider) {
-      const { indexSlide, prevSlide, nextSlide } = multiStateSlider
+      const { prevSlide, nextSlide } = multiStateSlider
       let classValue = 'slider__item'
 
       switch (true) {
-        case (index === indexSlide): {
-          return `slider__item_active ${classValue}`
-        }
         case (index === prevSlide): {
           return `slider__item_prev ${classValue}`
         }
@@ -279,30 +320,6 @@ export function Slider({ sliderSettings, sliderData: { data, cardStyles, setting
     }
   }
 
-  const setClassSliderBtn = (btnType: string) => {
-    if (lastSwipe) {
-      if (btnType === 'prev') {
-        if (multiStateSlider && multiStateSlider.prevSlide < 0) {
-          return 'slider__btn slider__btn_disabled slider__btn_prev'
-        } else {
-          return 'slider__btn slider__btn_prev'
-        }
-      } else {
-        if (multiStateSlider && data && multiStateSlider.nextSlide === data.length) {
-          return 'slider__btn slider__btn_disabled slider__btn_next'
-        } else {
-          return 'slider__btn slider__btn_next'
-        }
-      }
-    } else {
-      if (btnType === 'prev') {
-        return 'slider__btn slider__btn_prev'
-      } else {
-        return 'slider__btn slider__btn_next'
-      }
-    }
-  }
-
   return (
     <div className={typeSlider === 'default' ? 'slider container' : 'slider slider_multi container'}
       style={
@@ -311,7 +328,7 @@ export function Slider({ sliderSettings, sliderData: { data, cardStyles, setting
         } as CSSProperties
       }
     >
-      <div className={setClassSliderBtn('prev')}>
+      <div className={classBtn.prev}>
         <Btn
           type="button"
           className="btn_transparent"
@@ -321,7 +338,7 @@ export function Slider({ sliderSettings, sliderData: { data, cardStyles, setting
           <ArrowLeftIcon width={48} height={48} />
         </Btn>
       </div>
-      <div className={setClassSliderBtn('next')}>
+      <div className={classBtn.next}>
         <Btn
           type="button"
           className="btn_transparent"

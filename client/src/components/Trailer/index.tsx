@@ -3,7 +3,7 @@ import { toggleShow } from "../../redux/MediaPlayerSlice"
 import { TrailerProps } from "../../types/interfaces/TrailerProps"
 import { MediaPlayIcon } from "../../assets/icons/MediaPlayIcon"
 
-export function Trailer({ trailerData }: TrailerProps): JSX.Element {
+export function Trailer({ trailerData, seasonsIndex }: TrailerProps): JSX.Element {
   const dispatch = useAppDispatch()
 
   const { isShow } = useAppSelector(state => state.mediaPlayer)
@@ -18,8 +18,11 @@ export function Trailer({ trailerData }: TrailerProps): JSX.Element {
   return (
     <div className="trailer">
       <div className="trailer__title">
-        {seasons && (
+        {seasons && seasonsIndex === 0 && (
           <h3>{`Трейлер - ${seasons.length} сезон`}</h3>
+        )}
+        {seasons && seasonsIndex > 0 && (
+          <h3>{`Трейлер - ${seasonsIndex} сезон`}</h3>
         )}
       </div>
       <div className="trailer-main" onClick={handleClickBtnPlay}>

@@ -95,6 +95,7 @@
         width: 100%;
         height: 100%;
         background-color: var(--slider-item-before-bg-color);
+        border-radius: 0.5rem;
         z-index: 2;
         clip-path: var(--item-before-clip-path);
       }
@@ -115,6 +116,7 @@
         width: 100%;
         height: 100%;
         background-color: var(--slider-item-before-bg-color);
+        border-radius: 0.5rem;
         z-index: 2;
       }
     }

@@ -1,5 +1,9 @@
 .series {
   --content-padding-top: 26.875rem;
+  --meta-data-description-padding-left: 5rem;
+  --meta-data-description-body-fd: column;
+  --meta-data-description-body-jc: flex-start;
+  --meta-data-description-body-gap: 2.5rem;
 
   position: relative;
   width: 100%;
@@ -184,6 +188,9 @@
     }
 
     &-footer {
+      @include flex-column;
+      gap: 2rem;
+
       &__item {
         @include flex-center;
       }
@@ -244,10 +251,24 @@
     &-description {
       @include flex-column-start;
       gap: 1.875rem;
-      padding-left: 5rem;
+      padding-left: var(--meta-data-description-padding-left);
 
       &-body {
-        @include flex-column-start;
+        display: flex;
+        flex-direction: var(--meta-data-description-body-fd);
+        justify-content: var(--meta-data-description-body-jc);
+        gap: var(--meta-data-description-body-gap);
+
+        &__text {
+          flex: 1 0;
+        }
+      }
+
+      &_no-trailer {
+        --meta-data-description-padding-left: 0;
+        --meta-data-description-body-fd: row;
+        --meta-data-description-body-jc: flex-start;
+        --meta-data-description-body-gap: 5rem;
         gap: 2.5rem;
       }
     }
@@ -255,6 +276,7 @@
     &-info {
       @include flex-start;
       gap: 2.813rem;
+      flex: 1 0;
 
       &__col {
         @include flex-column-start;

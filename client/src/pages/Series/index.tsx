@@ -21,19 +21,27 @@ import { LikeIcon } from "../../assets/icons/LikeIcon"
 import { DislikeIcon } from "../../assets/icons/DislikeIcon"
 
 export function Series(): JSX.Element {
-  const { id, season } = useParams()
+  const { id, seasonIndex } = useParams()
   const dispatch = useAppDispatch()
 
   const { content, loading } = useAppSelector((state: RootState) => state.content[ContentTypeEnum.Series] as ContentStateItem<MediaContent>)
 
   useEffect(() => {
-    if (!season && id) {
-      dispatch(fetchContent({ type: ContentTypeEnum.Series, id }))
+    dispatch(fetchContent({ type: ContentTypeEnum.Series, id }))
+  }, [dispatch])
+
+  const setClassMetaDataDes = (): string => {
+    if (!seasonIndex && content && content.trailer) {
+      return 'series-meta-data-description'
+    } else if (seasonIndex && content && content.seasons && content.seasons[Number(seasonIndex) - 1] && content.seasons[Number(seasonIndex) - 1].trailer) {
+      return 'series-meta-data-description'
+    } else {
+      return 'series-meta-data-description series-meta-data-description_no-trailer'
     }
-  }, [])
+  }
 
   const renderBgPage = (): JSX.Element => {
-    const indexSeason = Number(season)
+    const indexSeason = Number(seasonIndex)
     const seasonData = content.seasons?.[indexSeason - 1]
 
     if (!indexSeason && content.bg?.videoUrl) {
@@ -107,7 +115,7 @@ export function Series(): JSX.Element {
               <ul className="series-seasons-line__list">
                 {seasons?.map((item, index) => {
                   return (
-                    <li className={"series-seasons-line__item" + (Number(season) === item.numberOfSeasons ? " series-seasons-line__item_active" : "")}
+                    <li className={"series-seasons-line__item" + (Number(seasonIndex) === item.numberOfSeasons ? " series-seasons-line__item_active" : "")}
                       key={_id + index}>
                       <Link to={`/series/${_id}/${data.title.linkTitle}/season/${item.numberOfSeasons}`} className="series-seasons-line__link
                       title title_weight_bold ">
@@ -191,13 +199,18 @@ export function Series(): JSX.Element {
         </div>
         <div className="series-content-body container">
           <div className="series-meta-data">
+            {content && content.trailer && !seasonIndex && (
+              <div className="series-meta-data__item">
+                <Trailer trailerData={content} seasonsIndex={0} />
+              </div>
+            )}
+            {content && seasonIndex && content.seasons && content.seasons[Number(seasonIndex) - 1].trailer && (
+              <div className="series-meta-data__item">
+                <Trailer trailerData={content} seasonsIndex={Number(seasonIndex) - 1} />
+              </div>
+            )}
             <div className="series-meta-data__item">
-              {content && (
-                <Trailer trailerData={content} />
-              )}
-            </div>
-            <div className="series-meta-data__item">
-              <div className="series-meta-data-description">
+              <div className={setClassMetaDataDes()} >
                 <div className="series-meta-data-description__upper">
                   {rating && (
                     <MetaData
@@ -209,7 +222,7 @@ export function Series(): JSX.Element {
                 </div>
                 <div className="series-meta-data-description-body">
                   <div className="series-meta-data-description-body__text title title_align_left">
-                    {data.description.mainDescription}
+                    {seasonIndex && content.seasons ? content.seasons[Number(seasonIndex) - 1].description : data.description.mainDescription}
                   </div>
                   <div className="series-meta-data-info">
                     <div className="series-meta-data-info__col">
@@ -268,12 +281,14 @@ export function Series(): JSX.Element {
             )}
           </div>
           <div className="series-content-footer__item">
-            <Seasons seasonsValue={season ? Number(season) : 0} mediaContentData={content} />
+            <Seasons seasonsValue={seasonIndex ? Number(seasonIndex) : 0} mediaContentData={content} />
           </div>
         </div>
       </>
     )
   }
+
+
 
   return (
     <div className="series">
