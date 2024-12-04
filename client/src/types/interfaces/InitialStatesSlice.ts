@@ -5,6 +5,7 @@ import { VideoQuality } from "../VideoQuality"
 import { Content } from "./Content"
 import { MediaContent } from "./MediaContent"
 import { ContentTypeEnum } from "./Content"
+import { SrcMediaPlaer } from "../SrcMediaPlaer"
 
 export type ContentTypes = Content | MediaContent | null
 
@@ -27,6 +28,8 @@ export interface AuthState {
   user: UserData | null
 }
 
+
+
 export interface MediaPlayerState {
   loading: boolean
   isShow: boolean
@@ -34,7 +37,7 @@ export interface MediaPlayerState {
     number: number
     message: string
   } | null
-  src: string | null
-  videoQuality: VideoQuality
+  src: SrcMediaPlaer | null
   playerStatus: PlayerStatus
+  title: string | null
 }

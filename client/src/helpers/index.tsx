@@ -1,7 +1,8 @@
 import { CardData } from "../types/Card"
 import { BannerProps } from "../types/interfaces/BannerProps"
-import { MediaContent } from "../types/interfaces/MediaContent"
 import { UserData } from "../types/interfaces/User"
+import { SrcMediaPlaer } from "../types/SrcMediaPlaer"
+import { MediaContent } from "../types/interfaces/MediaContent"
 
 export const setDataInLocalStorage = (key: string, data: string | null | UserData): void => {
   if (data) {
@@ -50,4 +51,41 @@ export const defaultBannerData: BannerProps = {
   titleBtn: "Test btn",
   ageRestriction: 18,
   loading: true
+}
+
+export const formSrcMediaContent = (mediaContentData: MediaContent): SrcMediaPlaer => {
+  const result: SrcMediaPlaer = {
+    _current: {
+      type: '360p',
+      value: ''
+    },
+    quality360: '',
+    quality720: '',
+    quality1080: '',
+    quality2160: ''
+  }
+
+  if (mediaContentData && mediaContentData.trailer) {
+    Object.entries(mediaContentData.trailer).forEach(([key, value]) => {
+      if (key === 'quality360') {
+        result.quality360 = value || ''
+      } else if (key === 'quality720') {
+        result.quality720 = value || ''
+      } else if (key === 'quality1080') {
+        result.quality1080 = value || ''
+      } else if (key === 'quality2160') {
+        result.quality2160 = value || ''
+      }
+    })
+  }
+
+  if (result.quality720) {
+    result._current.type = '720p'
+    result._current.value = result.quality720
+  } else {
+    result._current.type = '360p'
+    result._current.value = result.quality360
+  }
+
+  return result
 }

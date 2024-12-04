@@ -2,6 +2,7 @@ import { BadgeCard } from "./BadgeCard"
 import { Bg } from "./Bg"
 import { Size } from "./Scaffold"
 import { Flex } from "./Scaffold"
+import { SrcMediaPlaer } from "./SrcMediaPlaer"
 
 export type CardLink = {
   linkType: 'allCard' | 'title'
@@ -33,6 +34,7 @@ export type CardData = {
   bg: Bg
   logoImg: string
   link: string
+  src?: SrcMediaPlaer
 }
 
 export type CardStyles = {

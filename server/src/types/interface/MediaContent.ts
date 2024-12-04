@@ -2,6 +2,7 @@ import { Document } from "mongoose"
 import { Bg } from "../Bg"
 import { EpisodesSeries } from "../EpisodesSeries"
 import { Badge } from "../Badge"
+import { TrailerSrc } from "../TrailerSrc"
 
 export interface MediaContent extends Document {
   type: 'movie' | 'series'
@@ -40,13 +41,7 @@ export interface MediaContent extends Document {
     disliked: string[] | []
   }
   bg: Bg
-  trailer: {
-    quality360: string | null
-    quality720: string | null
-    quality1080: string | null
-    quality2160: string | null
-    img: string
-  } | null
+  trailer: TrailerSrc | null
   logoImg: string
 }
 
@@ -54,12 +49,6 @@ export interface Season {
   numberOfSeasons: number
   episodes: EpisodesSeries[]
   bg: Bg | null
-  trailer: {
-    quality360: string | null
-    quality720: string | null
-    quality1080: string | null
-    quality2160: string | null
-    img: string
-  } | null
+  trailer: TrailerSrc | null
   description: string | null
 }

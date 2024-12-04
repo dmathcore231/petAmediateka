@@ -50,6 +50,10 @@ export async function getContent(req: Request, res: Response, next: NextFunction
     })
 
     localDataState.content = data
+  } else if (type === 'series') {
+    const series = await MediaContentModel.findById(id)
+
+    res.locals.localDataState.content = series
   }
 
   return next()

@@ -4,14 +4,14 @@ import { Badge } from "../Badge"
 import { AgeRestrictionBadge } from "../AgeRestrictionBadge"
 import { Tags } from "../Tags"
 import { CardProps } from "../../types/interfaces/CardProps"
+import { MediaPlayIcon } from "../../assets/icons/MediaPlayIcon"
 import { PlayIcon } from "../../assets/icons/PlayIcon"
 import { AddFavoriteIcon } from "../../assets/icons/AddFavoriteIcon"
 
 export function Card({ data, styles, settings, loadingCardData, error }: CardProps): JSX.Element {
   const { _id, type, title, badge, ageRestriction, description, bg, logoImg, link } = data
   const { cardSize, flex, clipPath, ageRestrictionBadge, btnGroup, hover, boxShadow } = styles
-  const { title: { titleOutside, titleLogoImg }, badgeVisible, link: { linkType }, descriptionVisible, tags } = settings
-
+  const { title: { titleOutside, titleLogoImg }, badgeVisible, link: { linkType }, descriptionVisible, tags, cardSeries } = settings
   const renderCardContentLinkWrapper = (children: JSX.Element): JSX.Element => {
     if (linkType === 'allCard') {
       return (
@@ -114,6 +114,11 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
         {!titleLogoImg && titleOutside && (
           <div className="card-title title title_align_left">
             {title.value}
+          </div>
+        )}
+        {cardSeries && (
+          <div className="card-icon-play">
+            <MediaPlayIcon width={60} height={60} />
           </div>
         )}
       </>

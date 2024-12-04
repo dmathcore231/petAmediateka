@@ -1,6 +1,7 @@
 import { Bg } from "../Bg"
 import { EpisodesSeries } from "../EpisodesSeries"
 import { BadgeCard } from "../BadgeCard"
+import { TrailerSrc } from "../TrailerSrc"
 
 export type MediaContentData = {
   title: {
@@ -43,13 +44,7 @@ export interface MediaContent {
     disliked: string[] | []
   }
   bg: Bg
-  trailer: {
-    quality360: string | null
-    quality720: string | null
-    quality1080: string | null
-    quality2160: string | null
-    img: string
-  } | null
+  trailer: TrailerSrc | null
   logoImg: string
 }
 

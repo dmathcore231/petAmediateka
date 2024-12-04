@@ -32,7 +32,6 @@ export const initialStateMediaPlayer: MediaPlayerState = {
   isShow: false,
   error: null,
   src: null,
-  videoQuality: '720p',
   playerStatus: {
     status: null,
     time: {
@@ -47,5 +46,6 @@ export const initialStateMediaPlayer: MediaPlayerState = {
     },
     fullScreen: false,
     userInactive: false
-  }
+  },
+  title: null
 }

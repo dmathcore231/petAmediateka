@@ -26,69 +26,139 @@ export const temporaryListSeries: Partial<MediaContent>[] = [
         numberOfSeasons: 1,
         episodes: [
           {
-            link: '#',
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo360.mp4',
+              quality720: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4',
+            },
             episodeNumber: 1,
             imgPreview: 'http://localhost:3000/public/series/hotd/hotds1e1.jpg',
             title: 'Наследники дракона'
           },
           {
-            link: '#',
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo360.mp4',
+              quality720: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4',
+            },
             episodeNumber: 2,
             imgPreview: 'http://localhost:3000/public/series/hotd/hotds1e2.jpg',
             title: 'Порочный принц'
           },
           {
-            link: '#',
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo360.mp4',
+              quality720: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4',
+            },
             episodeNumber: 3,
             imgPreview: 'http://localhost:3000/public/series/hotd/hotds1e3.jpg',
             title: 'Второй своего имени'
 
           },
           {
-            link: '#',
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo360.mp4',
+              quality720: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4',
+            },
             episodeNumber: 4,
             imgPreview: 'http://localhost:3000/public/series/hotd/hotds1e4.jpg',
             title: 'Король Узкого Моря'
           },
           {
-            link: '#',
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo360.mp4',
+              quality720: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4',
+            },
             episodeNumber: 5,
             imgPreview: 'http://localhost:3000/public/series/hotd/hotds1e5.jpg',
             title: 'Мы путь осветим'
           },
           {
-            link: '#',
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo360.mp4',
+              quality720: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4',
+            },
             episodeNumber: 6,
             imgPreview: 'http://localhost:3000/public/series/hotd/hotds1e6.jpg',
             title: 'Принцесса и королева'
           },
           {
-            link: '#',
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo360.mp4',
+              quality720: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4',
+            },
             episodeNumber: 7,
             imgPreview: 'http://localhost:3000/public/series/hotd/hotds1e7.jpg',
             title: 'Дрифтмарк'
           },
           {
-            link: '#',
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo360.mp4',
+              quality720: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4',
+            },
             episodeNumber: 8,
             imgPreview: 'http://localhost:3000/public/series/hotd/hotds1e8.jpg',
             title: 'Лорд Приливов'
           },
           {
-            link: '#',
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo360.mp4',
+              quality720: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4',
+            },
             episodeNumber: 9,
             imgPreview: 'http://localhost:3000/public/series/hotd/hotds1e9.jpg',
             title: 'Зеленый Совет'
           },
           {
-            link: '#',
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo360.mp4',
+              quality720: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4',
+            },
             episodeNumber: 10,
             imgPreview: 'http://localhost:3000/public/series/hotd/hotds1e10.jpg',
             title: 'Черная королева'
           }
         ],
         bg: {
-          imgUrl: 'http://localhost:3000/public/series/hotd/imgBgHOTDs1.jpg',
+          imgUrl: 'http://localhost:3000/public/series/hotd/imgBgS1.jpg',
           videoUrl: null
         },
         trailer: null,
@@ -99,50 +169,106 @@ export const temporaryListSeries: Partial<MediaContent>[] = [
         numberOfSeasons: 2,
         episodes: [
           {
-            link: '#',
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo360.mp4',
+              quality720: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4',
+            },
             episodeNumber: 1,
             imgPreview: 'http://localhost:3000/public/series/hotd/hotds2e1.jpg',
             title: 'Сын за сына'
           },
           {
-            link: '#',
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo360.mp4',
+              quality720: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4',
+            },
             episodeNumber: 2,
             imgPreview: 'http://localhost:3000/public/series/hotd/hotds2e2.jpg',
             title: 'Рейнира Жестокая'
           },
           {
-            link: '#',
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo360.mp4',
+              quality720: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4',
+            },
             episodeNumber: 3,
             imgPreview: 'http://localhost:3000/public/series/hotd/hotds2e3.jpg',
             title: 'Горящая Мельница'
 
           },
           {
-            link: '#',
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo360.mp4',
+              quality720: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4',
+            },
             episodeNumber: 4,
             imgPreview: 'http://localhost:3000/public/series/hotd/hotds2e4.jpg',
             title: 'Красный дракон и золотой'
           },
           {
-            link: '#',
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo360.mp4',
+              quality720: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4',
+            },
             episodeNumber: 5,
             imgPreview: 'http://localhost:3000/public/series/hotd/hotds2e5.jpg',
             title: 'Регент'
           },
           {
-            link: '#',
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo360.mp4',
+              quality720: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4',
+            },
             episodeNumber: 6,
             imgPreview: 'http://localhost:3000/public/series/hotd/hotds2e6.jpg',
             title: 'Простой люд'
           },
           {
-            link: '#',
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo360.mp4',
+              quality720: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4',
+            },
             episodeNumber: 7,
             imgPreview: 'http://localhost:3000/public/series/hotd/hotds2e7.jpg',
             title: 'Красный Посев'
           },
           {
-            link: '#',
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo360.mp4',
+              quality720: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4',
+            },
             episodeNumber: 8,
             imgPreview: 'http://localhost:3000/public/series/hotd/hotds2e8.jpg',
             title: 'Королева на все времена'
@@ -203,15 +329,13 @@ export const temporaryListSeries: Partial<MediaContent>[] = [
       disliked: []
     },
     bg: {
-      imgUrl: 'http://localhost:3000/public/series/hotd/imgBgHOTDs2.jpg',
+      imgUrl: 'http://localhost:3000/public/series/hotd/imgBgS2.jpg',
       videoUrl: 'http://localhost:3000/public/series/hotd/hotdBgVideo.mp4',
       imgResizeUrl: 'http://localhost:3000/public/series/hotd/resizeImgBgS2.jpg'
     },
     trailer: {
       quality360: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo360.mp4',
       quality720: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4',
-      quality1080: null,
-      quality2160: null,
       img: 'http://localhost:3000/public/series/hotd/hotdTrailer.jpg'
     },
     logoImg: 'http://localhost:3000/public/series/hotd/logo.png'
@@ -223,61 +347,131 @@ export const temporaryListSeries: Partial<MediaContent>[] = [
         numberOfSeasons: 1,
         episodes: [
           {
-            link: '#',
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/nightTherapy/nTTrailerVideo720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/nightTherapy/nTTrailerVideo360.mp4',
+              quality720: 'http://localhost:3000/public/series/nightTherapy/nTTrailerVideo720.mp4',
+            },
             episodeNumber: 1,
             imgPreview: 'http://localhost:3000/public/series/nightTherapy/s1e1.jpg',
             title: 'Ночь - это день'
           },
           {
-            link: '#',
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/nightTherapy/nTTrailerVideo720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/nightTherapy/nTTrailerVideo360.mp4',
+              quality720: 'http://localhost:3000/public/series/nightTherapy/nTTrailerVideo720.mp4',
+            },
             episodeNumber: 2,
             imgPreview: 'http://localhost:3000/public/series/nightTherapy/s1e2.jpg',
             title: 'Очень узкий мостик'
           },
           {
-            link: '#',
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/nightTherapy/nTTrailerVideo720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/nightTherapy/nTTrailerVideo360.mp4',
+              quality720: 'http://localhost:3000/public/series/nightTherapy/nTTrailerVideo720.mp4',
+            },
             episodeNumber: 3,
             imgPreview: 'http://localhost:3000/public/series/nightTherapy/s1e3.jpg',
             title: 'В центре бури'
           },
           {
-            link: '#',
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/nightTherapy/nTTrailerVideo720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/nightTherapy/nTTrailerVideo360.mp4',
+              quality720: 'http://localhost:3000/public/series/nightTherapy/nTTrailerVideo720.mp4',
+            },
             episodeNumber: 4,
             imgPreview: 'http://localhost:3000/public/series/nightTherapy/s1e4.jpg',
             title: 'Не замечать до последнего.'
           },
           {
-            link: '#',
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/nightTherapy/nTTrailerVideo720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/nightTherapy/nTTrailerVideo360.mp4',
+              quality720: 'http://localhost:3000/public/series/nightTherapy/nTTrailerVideo720.mp4',
+            },
             episodeNumber: 5,
             imgPreview: 'http://localhost:3000/public/series/nightTherapy/s1e5.jpg',
             title: 'Крах'
           },
           {
-            link: '#',
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/nightTherapy/nTTrailerVideo720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/nightTherapy/nTTrailerVideo360.mp4',
+              quality720: 'http://localhost:3000/public/series/nightTherapy/nTTrailerVideo720.mp4',
+            },
             episodeNumber: 6,
             imgPreview: 'http://localhost:3000/public/series/nightTherapy/s1e6.jpg',
             title: 'Ретроградный Меркурий, часть 1'
           },
           {
-            link: '#',
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/nightTherapy/nTTrailerVideo720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/nightTherapy/nTTrailerVideo360.mp4',
+              quality720: 'http://localhost:3000/public/series/nightTherapy/nTTrailerVideo720.mp4',
+            },
             episodeNumber: 7,
             imgPreview: 'http://localhost:3000/public/series/nightTherapy/s1e7.jpg',
             title: 'Ретроградный Меркурий, часть 2'
           },
           {
-            link: '#',
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/nightTherapy/nTTrailerVideo720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/nightTherapy/nTTrailerVideo360.mp4',
+              quality720: 'http://localhost:3000/public/series/nightTherapy/nTTrailerVideo720.mp4',
+            },
             episodeNumber: 8,
             imgPreview: 'http://localhost:3000/public/series/nightTherapy/s1e8.jpg',
             title: 'Когда придёт время, отпусти'
           },
           {
-            link: '#',
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/nightTherapy/nTTrailerVideo720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/nightTherapy/nTTrailerVideo360.mp4',
+              quality720: 'http://localhost:3000/public/series/nightTherapy/nTTrailerVideo720.mp4',
+            },
             episodeNumber: 9,
             imgPreview: 'http://localhost:3000/public/series/nightTherapy/s1e8.jpg',
             title: 'Линия жизни'
           },
           {
-            link: '#',
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/nightTherapy/nTTrailerVideo720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/nightTherapy/nTTrailerVideo360.mp4',
+              quality720: 'http://localhost:3000/public/series/nightTherapy/nTTrailerVideo720.mp4',
+            },
             episodeNumber: 10,
             imgPreview: 'http://localhost:3000/public/series/nightTherapy/s1e10.jpg',
             title: 'Это только начало'
@@ -332,8 +526,6 @@ export const temporaryListSeries: Partial<MediaContent>[] = [
     trailer: {
       quality360: 'http://localhost:3000/public/series/nightTherapy/nTTrailerVideo360.mp4',
       quality720: 'http://localhost:3000/public/series/nightTherapy/nTTrailerVideo720.mp4',
-      quality1080: null,
-      quality2160: null,
       img: 'http://localhost:3000/public/series/nightTherapy/imgTrailer.jpg'
     },
     logoImg: 'http://localhost:3000/public/series/nightTherapy/imgTitle.png'
@@ -345,61 +537,131 @@ export const temporaryListSeries: Partial<MediaContent>[] = [
         numberOfSeasons: 1,
         episodes: [
           {
-            link: '#',
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo360.mp4',
+              quality720: 'http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo720.mp4',
+            },
             episodeNumber: 1,
             imgPreview: 'http://localhost:3000/public/series/thoseAboutToDie/s1e1.jpg',
             title: 'Дерзни или умри'
           },
           {
-            link: '#',
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo360.mp4',
+              quality720: 'http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo720.mp4',
+            },
             episodeNumber: 2,
             imgPreview: 'http://localhost:3000/public/series/thoseAboutToDie/s1e2.jpg',
             title: 'Не доверяй никому'
           },
           {
-            link: '#',
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo360.mp4',
+              quality720: 'http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo720.mp4',
+            },
             episodeNumber: 3,
             imgPreview: 'http://localhost:3000/public/series/thoseAboutToDie/s1e3.jpg',
             title: 'На пороге смерти'
           },
           {
-            link: '#',
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo360.mp4',
+              quality720: 'http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo720.mp4',
+            },
             episodeNumber: 4,
             imgPreview: 'http://localhost:3000/public/series/thoseAboutToDie/s1e4.jpg',
             title: 'Ставка глупца'
           },
           {
-            link: '#',
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo360.mp4',
+              quality720: 'http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo720.mp4',
+            },
             episodeNumber: 5,
             imgPreview: 'http://localhost:3000/public/series/thoseAboutToDie/s1e5.jpg',
             title: 'Предательство'
           },
           {
-            link: '#',
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo360.mp4',
+              quality720: 'http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo720.mp4',
+            },
             episodeNumber: 6,
             imgPreview: 'http://localhost:3000/public/series/thoseAboutToDie/s1e6.jpg',
             title: 'Кровные узы'
           },
           {
-            link: '#',
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo360.mp4',
+              quality720: 'http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo720.mp4',
+            },
             episodeNumber: 7,
             imgPreview: 'http://localhost:3000/public/series/thoseAboutToDie/s1e7.jpg',
             title: 'На смертном одре'
           },
           {
-            link: '#',
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo360.mp4',
+              quality720: 'http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo720.mp4',
+            },
             episodeNumber: 8,
             imgPreview: 'http://localhost:3000/public/series/thoseAboutToDie/s1e8.jpg',
             title: 'Всё или ничего'
           },
           {
-            link: '#',
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo360.mp4',
+              quality720: 'http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo720.mp4',
+            },
             episodeNumber: 9,
             imgPreview: 'http://localhost:3000/public/series/thoseAboutToDie/s1e9.jpg',
             title: 'Жребий брошен'
           },
           {
-            link: '#',
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo360.mp4',
+              quality720: 'http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo720.mp4',
+            },
             episodeNumber: 10,
             imgPreview: 'http://localhost:3000/public/series/thoseAboutToDie/s1e10.jpg',
             title: 'Да начнутся игры'
@@ -454,8 +716,6 @@ export const temporaryListSeries: Partial<MediaContent>[] = [
     trailer: {
       quality360: 'http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo360.mp4',
       quality720: 'http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo720.mp4',
-      quality1080: null,
-      quality2160: null,
       img: 'http://localhost:3000/public/series/thoseAboutToDie/imgTrailer.jpg'
     },
     logoImg: 'http://localhost:3000/public/series/thoseAboutToDie/imgTitle.png'
@@ -467,61 +727,131 @@ export const temporaryListSeries: Partial<MediaContent>[] = [
         numberOfSeasons: 1,
         episodes: [
           {
-            link: '#',
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo360.mp4',
+              quality720: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo720.mp4',
+            },
             episodeNumber: 1,
             imgPreview: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/s1e1.jpg',
             title: 'Две судьбы'
           },
           {
-            link: '#',
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo360.mp4',
+              quality720: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo720.mp4',
+            },
             episodeNumber: 2,
             imgPreview: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/s1e2.jpg',
             title: 'План в действии'
           },
           {
-            link: '#',
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo360.mp4',
+              quality720: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo720.mp4',
+            },
             episodeNumber: 3,
             imgPreview: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/s1e3.jpg',
             title: 'План изменился'
           },
           {
-            link: '#',
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo360.mp4',
+              quality720: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo720.mp4',
+            },
             episodeNumber: 4,
             imgPreview: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/s1e4.jpg',
             title: 'Неожиданные перемены'
           },
           {
-            link: '#',
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo360.mp4',
+              quality720: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo720.mp4',
+            },
             episodeNumber: 5,
             imgPreview: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/s1e5.jpg',
             title: 'Око за око'
           },
           {
-            link: '#',
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo360.mp4',
+              quality720: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo720.mp4',
+            },
             episodeNumber: 6,
             imgPreview: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/s1e6.jpg',
             title: 'Перемирие'
           },
           {
-            link: '#',
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo360.mp4',
+              quality720: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo720.mp4',
+            },
             episodeNumber: 7,
             imgPreview: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/s1e7.jpg',
             title: 'Каждый своим путем'
           },
           {
-            link: '#',
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo360.mp4',
+              quality720: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo720.mp4',
+            },
             episodeNumber: 8,
             imgPreview: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/s1e8.jpg',
             title: 'По следу'
           },
           {
-            link: '#',
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo360.mp4',
+              quality720: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo720.mp4',
+            },
             episodeNumber: 9,
             imgPreview: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/s1e9.jpg',
             title: 'Жизнь кувырком'
           },
           {
-            link: '#',
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo360.mp4',
+              quality720: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo720.mp4',
+            },
             episodeNumber: 10,
             imgPreview: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/s1e10.jpg',
             title: 'Последний план'
@@ -573,8 +903,6 @@ export const temporaryListSeries: Partial<MediaContent>[] = [
     trailer: {
       quality360: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo360.mp4',
       quality720: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo720.mp4',
-      quality1080: null,
-      quality2160: null,
       img: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/imgTrailer.jpg'
     },
     logoImg: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/imgTitle.png'
@@ -586,37 +914,79 @@ export const temporaryListSeries: Partial<MediaContent>[] = [
         numberOfSeasons: 1,
         episodes: [
           {
-            link: '#',
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/queensOfMystery/videoTrailer720.mp4'
+              },
+              quality360: '',
+              quality720: '',
+            },
             episodeNumber: 1,
             imgPreview: 'http://localhost:3000/public/series/queensOfMystery/s1e1.jpg',
             title: 'Спарринг со смертью: глава первая'
           },
           {
-            link: '#',
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/queensOfMystery/videoTrailer720.mp4'
+              },
+              quality360: '',
+              quality720: '',
+            },
             episodeNumber: 2,
             imgPreview: 'http://localhost:3000/public/series/queensOfMystery/s1e2.jpg',
             title: 'Спарринг со смертью: глава последняя'
           },
           {
-            link: '#',
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/queensOfMystery/videoTrailer720.mp4'
+              },
+              quality360: '',
+              quality720: '',
+            },
             episodeNumber: 3,
             imgPreview: 'http://localhost:3000/public/series/queensOfMystery/s1e3.jpg',
             title: 'Современное искусство убийства: глава первая'
           },
           {
-            link: '#',
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/queensOfMystery/videoTrailer720.mp4'
+              },
+              quality360: '',
+              quality720: '',
+            },
             episodeNumber: 4,
             imgPreview: 'http://localhost:3000/public/series/queensOfMystery/s1e4.jpg',
             title: 'Современное искусство убийства: глава последняя'
           },
           {
-            link: '#',
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/queensOfMystery/videoTrailer720.mp4'
+              },
+              quality360: '',
+              quality720: '',
+            },
             episodeNumber: 5,
             imgPreview: 'http://localhost:3000/public/series/queensOfMystery/s1e5.jpg',
             title: 'Ворон: глава первая'
           },
           {
-            link: '#',
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/queensOfMystery/videoTrailer720.mp4'
+              },
+              quality360: '',
+              quality720: '',
+            },
             episodeNumber: 6,
             imgPreview: 'http://localhost:3000/public/series/queensOfMystery/s1e6.jpg',
             title: 'Ворон: глава последняя'
@@ -668,8 +1038,6 @@ export const temporaryListSeries: Partial<MediaContent>[] = [
     trailer: {
       quality360: 'http://localhost:3000/public/series/queensOfMystery/videoTrailer360.mp4',
       quality720: 'http://localhost:3000/public/series/queensOfMystery/videoTrailer720.mp4',
-      quality1080: null,
-      quality2160: null,
       img: 'http://localhost:3000/public/series/queensOfMystery/imgTrailer.jpg'
     },
     logoImg: 'http://localhost:3000/public/series/queensOfMystery/imgTitle.png'

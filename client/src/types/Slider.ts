@@ -23,4 +23,5 @@ export type SliderSettings = {
   autoSwipe: boolean
   lastSwipe: boolean
   quantityListItems: number
+  mediaPlayerHandler: boolean
 }

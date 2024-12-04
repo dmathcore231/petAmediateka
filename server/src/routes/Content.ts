@@ -5,7 +5,6 @@ import { ResponseWithoutPayload, ResponseWithPayload } from '../types/interface/
 import { Content } from '../types/interface/Content'
 import { MediaContent } from '../types/interface/MediaContent'
 
-
 const contentRouter = Router()
 
 const setResponseContent = async (req: Request, res: Response) => {

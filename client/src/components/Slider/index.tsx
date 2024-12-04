@@ -1,19 +1,24 @@
 import { useEffect, useState, useRef, CSSProperties } from "react"
+import { useAppDispatch } from "../../hooks"
+import { toggleShow, setTitle, setSrc } from "../../redux/MediaPlayerSlice"
 import { Btn } from "../Btn"
 import { Card } from "../Card"
-import { defaultCardData } from "../../helpers"
+import { Spinner } from "../Spinner"
 import { SliderProps } from "../../types/interfaces/SliderProps"
 import { SlideState, MultiSlideState } from "../../types/Slider"
+import { defaultCardData } from "../../helpers"
 import { ArrowLeftIcon } from "../../assets/icons/ArrowLeftIcon"
 import { ArrowRightIcon } from "../../assets/icons/ArrowRightIcon"
-import { Spinner } from "../Spinner"
+import { CardData } from "../../types/Card"
 
 export function Slider({ sliderSettings, sliderData: { data, cardStyles, settings, loadingData, errorData } }: SliderProps): JSX.Element {
+  const dispatch = useAppDispatch()
+
   const animatedTime = 400
   const autoSwipeTime = 100
   const sliderListGap = 16
 
-  const { typeSlider, pagenation, autoSwipe, lastSwipe, quantityListItems } = sliderSettings
+  const { typeSlider, pagenation, autoSwipe, lastSwipe, quantityListItems, mediaPlayerHandler } = sliderSettings
 
   const [stateSlider, setStateSlider] = useState<SlideState | null>(null)
   const [multiStateSlider, setMultiStateSlider] = useState<MultiSlideState | null>(null)
@@ -320,6 +325,14 @@ export function Slider({ sliderSettings, sliderData: { data, cardStyles, setting
     }
   }
 
+  const handleClickSliderItem = (data: CardData): void => {
+    dispatch(toggleShow(true))
+    dispatch(setTitle(data.title.value))
+    if (data.src) {
+      dispatch(setSrc(data.src))
+    }
+  }
+
   return (
     <div className={typeSlider === 'default' ? 'slider container' : 'slider slider_multi container'}
       style={
@@ -368,6 +381,7 @@ export function Slider({ sliderSettings, sliderData: { data, cardStyles, setting
                 key={index}
                 className={setClassSlide(index)}
                 ref={sliderItemRef}
+                onClick={() => mediaPlayerHandler ? handleClickSliderItem(slide) : null}
               >
                 <Card styles={cardStyles} data={slide} settings={settings} loadingCardData={loadingData} error={errorData} />
               </li>

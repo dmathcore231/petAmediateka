@@ -18,7 +18,30 @@ const mediaContentSchema = new Schema<MediaContent>({
         episodes: {
           type: [{
             link: {
-              type: String,
+              type: {
+                _current: {
+                  type: {
+                    type: String,
+                    enum: ['360p', '460p', '720p', '1080p', '2160p'],
+                    required: true
+                  },
+                  value: {
+                    type: String,
+                  },
+                },
+                quality360: {
+                  type: String,
+                },
+                quality720: {
+                  type: String,
+                },
+                quality1080: {
+                  type: String,
+                },
+                quality2160: {
+                  type: String,
+                }
+              },
               required: true
             },
             episodeNumber: {
@@ -226,21 +249,21 @@ const mediaContentSchema = new Schema<MediaContent>({
   },
   trailer: {
     type: {
+      img: {
+        type: String,
+        required: true
+      },
       quality360: {
         type: String,
-        default: null
       },
       quality720: {
         type: String,
-        default: null
       },
       quality1080: {
         type: String,
-        default: null
       },
       quality2160: {
         type: String,
-        default: null
       }
     },
     default: null,

@@ -23,7 +23,8 @@ export function Seasons({ seasonsValue, mediaContentData }: SeasonsProps): JSX.E
             imgResizeUrl: item.imgPreview
           },
           logoImg: mediaContentData.logoImg,
-          link: item.link
+          link: `#`,
+          src: item.link
         }
       })
 
@@ -40,7 +41,8 @@ export function Seasons({ seasonsValue, mediaContentData }: SeasonsProps): JSX.E
         pagenation: false,
         autoSwipe: false,
         lastSwipe: true,
-        quantityListItems: 5
+        quantityListItems: 5,
+        mediaPlayerHandler: true
       },
       sliderData: {
         data: formCardData(seasonsIndex),
@@ -75,7 +77,7 @@ export function Seasons({ seasonsValue, mediaContentData }: SeasonsProps): JSX.E
           },
           descriptionVisible: false,
           tags: null,
-          cardSeries: false
+          cardSeries: true
         },
         loadingData: false,
         errorData: false

@@ -3,7 +3,7 @@ import { CardData, CardStyles } from "../../types/Card"
 
 export function CoverPromo(): JSX.Element {
 
-  const cardDataTemplate: CardData = {
+  const cardDataTemplate: CardData<string> = {
 
     link: {
       type: 'allCard',
@@ -17,7 +17,7 @@ export function CoverPromo(): JSX.Element {
     ageRestriction: 18,
   }
 
-  const cardDataTemplateSecond: CardData = {
+  const cardDataTemplateSecond: CardData<string> = {
 
     link: {
       type: 'title',

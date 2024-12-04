@@ -13,6 +13,7 @@ import { Seasons } from "../../components/Seasons"
 import { ContentTypeEnum } from "../../types/interfaces/Content"
 import { MediaContent } from "../../types/interfaces/MediaContent"
 import { ContentStateItem } from "../../types/interfaces/InitialStatesSlice"
+import { formSrcMediaContent } from "../../helpers"
 import { HboIcon } from "../../assets/icons/HboIcon"
 import { PlayIcon } from "../../assets/icons/PlayIcon"
 import { ShareIcon } from "../../assets/icons/ShareIcon"
@@ -88,6 +89,8 @@ export function Series(): JSX.Element {
       )
     }
     const { data, logoImg, rating, seasons, _id } = content
+    const season = content?.seasons?.[Number(seasonIndex) - 1]
+    const trailer = season?.trailer
 
     return (
       <>
@@ -199,14 +202,24 @@ export function Series(): JSX.Element {
         </div>
         <div className="series-content-body container">
           <div className="series-meta-data">
-            {content && content.trailer && !seasonIndex && (
+            {content && content.trailer && !seasonIndex && content.seasons && (
               <div className="series-meta-data__item">
-                <Trailer trailerData={content} seasonsIndex={0} />
+                <Trailer
+                  trailerImg={content.trailer.img}
+                  seasonsIndex={content.seasons.length}
+                  src={formSrcMediaContent(content)}
+                  title={content.data.title.value}
+                />
               </div>
             )}
-            {content && seasonIndex && content.seasons && content.seasons[Number(seasonIndex) - 1].trailer && (
+            {content && seasonIndex && content.seasons && season && trailer && (
               <div className="series-meta-data__item">
-                <Trailer trailerData={content} seasonsIndex={Number(seasonIndex) - 1} />
+                <Trailer
+                  trailerImg={trailer.img}
+                  seasonsIndex={Number(seasonIndex)}
+                  src={formSrcMediaContent(content)}
+                  title={content.data.title.value}
+                />
               </div>
             )}
             <div className="series-meta-data__item">
@@ -287,8 +300,6 @@ export function Series(): JSX.Element {
       </>
     )
   }
-
-
 
   return (
     <div className="series">
