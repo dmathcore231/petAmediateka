@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom"
+import { useAppSelector } from "../../hooks"
 import { Btn } from "../Btn"
 import { Badge } from "../Badge"
 import { AgeRestrictionBadge } from "../AgeRestrictionBadge"
@@ -9,6 +10,8 @@ import { PlayIcon } from "../../assets/icons/PlayIcon"
 import { AddFavoriteIcon } from "../../assets/icons/AddFavoriteIcon"
 
 export function Card({ data, styles, settings, loadingCardData, error }: CardProps): JSX.Element {
+  const { user } = useAppSelector(state => state.auth)
+
   const { _id, type, title, badge, ageRestriction, description, bg, logoImg, link } = data
   const { cardSize, flex, clipPath, ageRestrictionBadge, btnGroup, hover, boxShadow } = styles
   const { title: { titleOutside, titleLogoImg }, badgeVisible, link: { linkType }, descriptionVisible, tags, cardSeries } = settings
@@ -97,15 +100,17 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
                       <span className="card-body__btn-text">Смотреть</span>
                     </div>
                   </Link>
-                  <Btn
-                    type="button"
-                    className="btn_secondary btn_transparent card-body__btn-link card-body__btn-link_size_xsm"
-                    onClick={() => console.log('add favorite')}
-                  >
-                    <span className="card-body__btn-wrapper-scale">
-                      <AddFavoriteIcon width={22} height={22} />
-                    </span>
-                  </Btn>
+                  {user && (
+                    <Btn
+                      type="button"
+                      className="btn_secondary btn_transparent card-body__btn-link card-body__btn-link_size_xsm"
+                      onClick={() => console.log('add favorite')}
+                    >
+                      <span className="card-body__btn-wrapper-scale">
+                        <AddFavoriteIcon width={22} height={22} />
+                      </span>
+                    </Btn>
+                  )}
                 </>
               )}
             </div>

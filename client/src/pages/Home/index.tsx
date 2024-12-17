@@ -18,13 +18,14 @@ import { CardData } from "../../types/Card"
 
 export function Home(): JSX.Element {
   const dispatch = useAppDispatch()
-  const { mainSlider, banner } = useAppSelector((state) => state.content)
+  const { mainSlider, banner, watchingNow } = useAppSelector((state) => state.content)
 
   const [activeLinkPopularGenres, setActiveLinkPopularGenres] = useState<number>(0)
 
   useEffect(() => {
     dispatch(fetchContent({ type: ContentTypeEnum.MainSlider }))
     dispatch(fetchContent({ type: ContentTypeEnum.Banner }))
+    dispatch(fetchContent({ type: ContentTypeEnum.WatchingNow }))
   }, [dispatch])
 
   const sliderProps: SliderProps = {
@@ -33,7 +34,8 @@ export function Home(): JSX.Element {
       pagenation: !mainSlider.loading,
       autoSwipe: true,
       lastSwipe: false,
-      quantityListItems: 1
+      quantityListItems: 1,
+      mediaPlayerHandler: false
     },
     sliderData: {
       data: mainSlider.content ? mainSlider.content.data as CardData[] : null,
@@ -84,10 +86,11 @@ export function Home(): JSX.Element {
       pagenation: false,
       autoSwipe: false,
       lastSwipe: true,
-      quantityListItems: 5
+      quantityListItems: 5,
+      mediaPlayerHandler: false
     },
     sliderData: {
-      data: mainSlider.content ? mainSlider.content.data as CardData[] : null,
+      data: watchingNow.content ? watchingNow.content.data as CardData[] : null,
       cardStyles: {
         cardSize: 'md',
         flex: {

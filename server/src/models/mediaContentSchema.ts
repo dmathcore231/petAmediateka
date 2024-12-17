@@ -200,15 +200,15 @@ const mediaContentSchema = new Schema<MediaContent>({
   rating: {
     type: {
       raitingAmediateka: {
-        type: Number,
+        type: Schema.Types.Mixed,
         default: "N/A"
       },
       ratingImdb: {
-        type: Number,
+        type: Schema.Types.Mixed,
         default: "N/A"
       },
       ratingKinopoisk: {
-        type: Number,
+        type: Schema.Types.Mixed,
         default: "N/A"
       }
     },

@@ -1042,6 +1042,383 @@ export const temporaryListSeries: Partial<MediaContent>[] = [
     },
     logoImg: 'http://localhost:3000/public/series/queensOfMystery/imgTitle.png'
   },
+  {
+    type: 'series',
+    seasons: [
+      {
+        numberOfSeasons: 1,
+        episodes: [
+          {
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/normalPeople/videoTrailer720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/normalPeople/videoTrailer360.mp4',
+              quality720: 'http://localhost:3000/public/series/normalPeople/videoTrailer720.mp4',
+            },
+            episodeNumber: 1,
+            imgPreview: 'http://localhost:3000/public/series/normalPeople/s1e1.jpg',
+            title: 'Серия 1'
+          },
+          {
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/normalPeople/videoTrailer720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/normalPeople/videoTrailer360.mp4',
+              quality720: 'http://localhost:3000/public/series/normalPeople/videoTrailer720.mp4',
+            },
+            episodeNumber: 2,
+            imgPreview: 'http://localhost:3000/public/series/normalPeople/s1e2.jpg',
+            title: 'Серия 2'
+          },
+          {
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/normalPeople/videoTrailer720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/normalPeople/videoTrailer360.mp4',
+              quality720: 'http://localhost:3000/public/series/normalPeople/videoTrailer720.mp4',
+            },
+            episodeNumber: 3,
+            imgPreview: 'http://localhost:3000/public/series/normalPeople/s1e3.jpg',
+            title: 'Серия 3'
+          },
+          {
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/normalPeople/videoTrailer720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/normalPeople/videoTrailer360.mp4',
+              quality720: 'http://localhost:3000/public/series/normalPeople/videoTrailer720.mp4',
+            },
+            episodeNumber: 4,
+            imgPreview: 'http://localhost:3000/public/series/normalPeople/s1e4.jpg',
+            title: 'Серия 4'
+          },
+          {
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/normalPeople/videoTrailer720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/normalPeople/videoTrailer360.mp4',
+              quality720: 'http://localhost:3000/public/series/normalPeople/videoTrailer720.mp4',
+            },
+            episodeNumber: 5,
+            imgPreview: 'http://localhost:3000/public/series/normalPeople/s1e5.jpg',
+            title: 'Серия 5'
+          },
+          {
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/normalPeople/videoTrailer720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/normalPeople/videoTrailer360.mp4',
+              quality720: 'http://localhost:3000/public/series/normalPeople/videoTrailer720.mp4',
+            },
+            episodeNumber: 6,
+            imgPreview: 'http://localhost:3000/public/series/normalPeople/s1e6.jpg',
+            title: 'Серия 6'
+          },
+          {
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/normalPeople/videoTrailer720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/normalPeople/videoTrailer360.mp4',
+              quality720: 'http://localhost:3000/public/series/normalPeople/videoTrailer720.mp4',
+            },
+            episodeNumber: 7,
+            imgPreview: 'http://localhost:3000/public/series/normalPeople/s1e7.jpg',
+            title: 'Серия 7'
+          },
+          {
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/normalPeople/videoTrailer720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/normalPeople/videoTrailer360.mp4',
+              quality720: 'http://localhost:3000/public/series/normalPeople/videoTrailer720.mp4',
+            },
+            episodeNumber: 8,
+            imgPreview: 'http://localhost:3000/public/series/normalPeople/s1e8.jpg',
+            title: 'Серия 8'
+          },
+          {
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/normalPeople/videoTrailer720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/normalPeople/videoTrailer360.mp4',
+              quality720: 'http://localhost:3000/public/series/normalPeople/videoTrailer720.mp4',
+            },
+            episodeNumber: 9,
+            imgPreview: 'http://localhost:3000/public/series/normalPeople/s1e9.jpg',
+            title: 'Серия 9'
+          },
+          {
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/normalPeople/videoTrailer720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/normalPeople/videoTrailer360.mp4',
+              quality720: 'http://localhost:3000/public/series/normalPeople/videoTrailer720.mp4',
+            },
+            episodeNumber: 10,
+            imgPreview: 'http://localhost:3000/public/series/normalPeople/s1e10.jpg',
+            title: 'Серия 10'
+          },
+          {
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/normalPeople/videoTrailer720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/normalPeople/videoTrailer360.mp4',
+              quality720: 'http://localhost:3000/public/series/normalPeople/videoTrailer720.mp4',
+            },
+            episodeNumber: 11,
+            imgPreview: 'http://localhost:3000/public/series/normalPeople/s1e11.jpg',
+            title: 'Серия 11'
+          },
+          {
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/normalPeople/videoTrailer720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/normalPeople/videoTrailer360.mp4',
+              quality720: 'http://localhost:3000/public/series/normalPeople/videoTrailer720.mp4',
+            },
+            episodeNumber: 12,
+            imgPreview: 'http://localhost:3000/public/series/normalPeople/s1e12.jpg',
+            title: 'Серия 12'
+          },
+        ],
+        bg: {
+          imgUrl: 'http://localhost:3000/public/series/normalPeople/imgBgS1.jpg',
+          videoUrl: null
+        },
+        trailer: null,
+        description: '«Нормальные люди» – экранизация одноименного бестселлера Салли Руни с Полом Мескалом («Гладиатор 2», «Солнце мое») и Дейзи Эдгар-Джонс («Там, где поют раки», «Безмолвный свидетель») в главных ролях. Действие сериала разворачивается в небольшом ирландском городке. Марианна – умная, богатая, но совершенно непопулярная девушка в школе, практически изгой. Конелл – звезда футбольной команды и тайная любовь всех одноклассниц. Их случайная встреча приводит не просто к первой любви, а скорее к первой настоящей близости, которую они попробуют пронести через годы и сохранить во взрослом возрасте. Героев будут ждать болезненные расставания и трогательные примирения с совершенно непредсказуемым исходом их тайного романа.'
+      }
+    ],
+    data: {
+      title: {
+        value: 'Нормальные люди',
+        originalTitle: 'Normal People',
+        linkTitle: 'normal-people'
+      },
+      badge: null,
+      description: {
+        mainDescription: '«Нормальные люди» – экранизация одноименного бестселлера Салли Руни с Полом Мескалом («Гладиатор 2», «Солнце мое») и Дейзи Эдгар-Джонс («Там, где поют раки», «Безмолвный свидетель») в главных ролях. Действие сериала разворачивается в небольшом ирландском городке. Марианна – умная, богатая, но совершенно непопулярная девушка в школе, практически изгой. Конелл – звезда футбольной команды и тайная любовь всех одноклассниц. Их случайная встреча приводит не просто к первой любви, а скорее к первой настоящей близости, которую они попробуют пронести через годы и сохранить во взрослом возрасте. Героев будут ждать болезненные расставания и трогательные примирения с совершенно непредсказуемым исходом их тайного романа.',
+        prewiewDescription: '«Нормальные люди» – экранизация одноименного бестселлера Салли Руни с Полом Мескалом («Гладиатор 2», «Солнце мое») и Дейзи Эдгар-Джонс («Там, где поют раки», «Безмолвный свидетель») в главных ролях. Действие сериала разворачивается в небольшом ирландском городке.'
+      },
+      about: null,
+      ageRestriction: 18,
+      dateRelease: '2020',
+      genres: ['Драма', 'Мелодрама'],
+      actors: ['Пол Мескал', 'Дейзи Эдгар-Джонс'],
+      directors: ['Леонард Абрахамсон', 'Хетти Макдональд'],
+      country: 'Ирландия',
+      production: 'Hulu'
+    },
+    rating: {
+      raitingAmediateka: 7.2,
+      ratingImdb: 8.4,
+      ratingKinopoisk: 7.6
+    },
+    actionsData: {
+      favorites: [],
+      liked: [],
+      disliked: []
+    },
+    bg: {
+      imgUrl: 'http://localhost:3000/public/series/normalPeople/imgBgS1.jpg',
+      videoUrl: null,
+      imgResizeUrl: 'http://localhost:3000/public/series/normalPeople/resizeImgBgS1.jpg'
+    },
+    trailer: {
+      quality360: 'http://localhost:3000/public/series/normalPeople/videoTrailer360.mp4',
+      quality720: 'http://localhost:3000/public/series/normalPeople/videoTrailer720.mp4',
+      img: 'http://localhost:3000/public/series/normalPeople/imgTrailer.png'
+    },
+    logoImg: 'http://localhost:3000/public/series/normalPeople/imgLogo.png'
+  },
+  {
+    type: 'series',
+    seasons: [
+      {
+        numberOfSeasons: 1,
+        episodes: [
+          {
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/theMayfairWitches/videoTrailer720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/theMayfairWitches/videoTrailer360.mp4',
+              quality720: 'http://localhost:3000/public/series/theMayfairWitches/videoTrailer720.mp4',
+            },
+            episodeNumber: 1,
+            imgPreview: 'http://localhost:3000/public/series/theMayfairWitches/s1e1.jpg',
+            title: 'Час ведьмовства'
+          },
+          {
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/theMayfairWitches/videoTrailer720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/theMayfairWitches/videoTrailer360.mp4',
+              quality720: 'http://localhost:3000/public/series/theMayfairWitches/videoTrailer720.mp4',
+            },
+            episodeNumber: 2,
+            imgPreview: 'http://localhost:3000/public/series/theMayfairWitches/s1e2.jpg',
+            title: 'Во тьме'
+          },
+          {
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/theMayfairWitches/videoTrailer720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/theMayfairWitches/videoTrailer360.mp4',
+              quality720: 'http://localhost:3000/public/series/theMayfairWitches/videoTrailer720.mp4',
+            },
+            episodeNumber: 3,
+            imgPreview: 'http://localhost:3000/public/series/theMayfairWitches/s1e3.jpg',
+            title: 'Вторая линия'
+          },
+          {
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/theMayfairWitches/videoTrailer720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/theMayfairWitches/videoTrailer360.mp4',
+              quality720: 'http://localhost:3000/public/series/theMayfairWitches/videoTrailer720.mp4',
+            },
+            episodeNumber: 4,
+            imgPreview: 'http://localhost:3000/public/series/theMayfairWitches/s1e4.jpg',
+            title: 'Всё страньше и страньше'
+          },
+          {
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/theMayfairWitches/videoTrailer720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/theMayfairWitches/videoTrailer360.mp4',
+              quality720: 'http://localhost:3000/public/series/theMayfairWitches/videoTrailer720.mp4',
+            },
+            episodeNumber: 5,
+            imgPreview: 'http://localhost:3000/public/series/theMayfairWitches/s1e5.jpg',
+            title: 'Пленница'
+          },
+          {
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/theMayfairWitches/videoTrailer720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/theMayfairWitches/videoTrailer360.mp4',
+              quality720: 'http://localhost:3000/public/series/theMayfairWitches/videoTrailer720.mp4',
+            },
+            episodeNumber: 6,
+            imgPreview: 'http://localhost:3000/public/series/theMayfairWitches/s1e6.jpg',
+            title: 'Передача'
+          },
+          {
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/theMayfairWitches/videoTrailer720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/theMayfairWitches/videoTrailer360.mp4',
+              quality720: 'http://localhost:3000/public/series/theMayfairWitches/videoTrailer720.mp4',
+            },
+            episodeNumber: 7,
+            imgPreview: 'http://localhost:3000/public/series/theMayfairWitches/s1e7.jpg',
+            title: 'Тесса'
+          },
+          {
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/theMayfairWitches/videoTrailer720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/theMayfairWitches/videoTrailer360.mp4',
+              quality720: 'http://localhost:3000/public/series/theMayfairWitches/videoTrailer720.mp4',
+            },
+            episodeNumber: 8,
+            imgPreview: 'http://localhost:3000/public/series/theMayfairWitches/s1e8.jpg',
+            title: 'И что за чудище'
+          }
+        ],
+        bg: {
+          imgUrl: 'http://localhost:3000/public/series/theMayfairWitches/imgBgS1.jpg',
+          videoUrl: null
+        },
+        trailer: null,
+        description: null
+      }
+    ],
+    data: {
+      title: {
+        value: 'Мэйфейрские ведьмы',
+        originalTitle: `Anne Rice's The Mayfair Witches`,
+        linkTitle: 'the-mayfair-witches'
+      },
+      badge: null,
+      description: {
+        mainDescription: 'Фэнтези-сериал, основанный на серии книг Энн Райс – именно она подарила нам культовый мистический роман «Интервью с вампиром». Действие «Мэйфейрских ведьм» разворачивается в Новом Орлеане. Главная героиня Роуэн Филдинг (Александра Даддарио), хирург по профессии, узнает, что она наследница древнего ведьминского рода, а своим экстрасенсорным даром члены ее семьи обязаны злому духу по имени Лэшер (Джек Хьюстон). Врачебный дар Роуэн помогает спасать пациентов, а вот магический – лишать жизни ее врагов. Девушка решает разобраться, что за проклятье на ней лежит, кем была ее настоящая мать и какая судьба ждет ее саму. Среди актерского состава – Аннабет Гиш («Полуночная месса»), Гарри Хэмлин («Бесстыжие») и Бет Грант («Старикам здесь не место»).',
+        prewiewDescription: 'Фэнтези-сериал, основанный на серии книг Энн Райс – именно она подарила нам культовый мистический роман «Интервью с вампиром». Действие «Мэйфейрских ведьм» разворачивается в Новом Орлеане. '
+      },
+      about: {
+        title: 'О сериале «Мэйфейрские ведьмы»',
+        description: ' В 2023 году вышла экранизация книг писательницы Энн Райс «Мэйфейрские ведьмы» (в оригинале — Mayfair witches). Этот телесериал сразу покорил как фанатов писательницы, так и не знакомых с ее творчеством зрителей. Это не типичная история доброго или злого волшебника, это нечто более интересное и глубокое. В материале рассказываем об этом сериале и делимся интересными фактами. А посмотреть сериал онлайн и в хорошем качестве можно в Амедиатеке. Роуэн Филдинг — молодой, но очень талантливый и успешный нейрохирург: она заботится о своих пациентах и у нее буквально есть дар им помогать. Однако всё в ее жизни меняется, когда у приемной матери происходит ремиссия рака. Роуэн встречается со своей темной стороной: в тщетных попытках помочь маме она какой-то силой мысли лишает жизни двух человек и понимает, что с ней что-то не так.И как оказалось, на самом деле биологическая мама Роуэн, как и она сама, принадлежит сильному и достаточно знаменитому роду Мэйфейрских ведьм. Только вот их покровитель — темный (или не совсем) дух Лэшер. Роуэн предстоит разобраться в семейных тайнах, научиться управлять своими силами и ответить на вопрос, кто же на самом деле этот Лэшер и чего он хочет. '
+      },
+      ageRestriction: 18,
+      dateRelease: '2023',
+      genres: ['Фэнтези', 'Ужасы', 'Драма'],
+      actors: ['Бет Грант', 'Гарри Хэмлин', 'Аннабет Гиш', ' Джек Хьюстон', 'Александра Даддарио'],
+      directors: ['Майкл Аппендаль', 'Алексис О. Коричински', 'Аксель Кэролин'],
+      country: 'США',
+      production: 'AMC'
+    },
+    rating: {
+      raitingAmediateka: 8.6,
+      ratingImdb: 6.2,
+      ratingKinopoisk: 5.8
+    },
+    actionsData: {
+      favorites: [],
+      liked: [],
+      disliked: []
+    },
+    bg: {
+      imgUrl: 'http://localhost:3000/public/series/theMayfairWitches/imgBgS1.jpg',
+      videoUrl: null,
+      imgResizeUrl: 'http://localhost:3000/public/series/theMayfairWitches/resizeImgBgS1.jpg'
+    },
+    trailer: {
+      quality360: 'http://localhost:3000/public/series/theMayfairWitches/videoTrailer360.mp4',
+      quality720: 'http://localhost:3000/public/series/theMayfairWitches/videoTrailer720.mp4',
+      img: 'http://localhost:3000/public/series/theMayfairWitches/imgTrailer.png'
+    },
+    logoImg: 'http://localhost:3000/public/series/theMayfairWitches/imgLogo.png'
+  },
 ]
 
 export const temporaryBanner: Banner = {

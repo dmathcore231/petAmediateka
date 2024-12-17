@@ -54,6 +54,33 @@ export async function getContent(req: Request, res: Response, next: NextFunction
     const series = await MediaContentModel.findById(id)
 
     res.locals.localDataState.content = series
+  } else if (type === 'watchingNow') {
+    const content = await ContentModel.findOne({ type: 'watchingNow' }).populate({
+      path: 'data',
+      model: MediaContentModel
+    })
+
+    if (content) {
+      const data = content.data as unknown as MediaContent[]
+      const result: Array<CardData> = data.map((item) => {
+        return {
+          _id: item._id as string,
+          type: item.type,
+          title: item.data.title,
+          badge: item.data.badge,
+          ageRestriction: item.data.ageRestriction,
+          description: item.data.description.prewiewDescription,
+          bg: item.bg,
+          logoImg: item.logoImg,
+          link: formationLink(item.type, item._id as string, item.data.title.linkTitle)
+        }
+      })
+
+      localDataState.content = {
+        ...content.toObject(),
+        data: result
+      }
+    }
   }
 
   return next()
