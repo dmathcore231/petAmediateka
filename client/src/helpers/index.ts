@@ -3,6 +3,7 @@ import { BannerProps } from "../types/interfaces/BannerProps"
 import { UserData } from "../types/interfaces/User"
 import { SrcMediaPlaer } from "../types/SrcMediaPlaer"
 import { MediaContent } from "../types/interfaces/MediaContent"
+import { GetDataFromLocalStorageType } from "../types/GetDataFromLocalStorageType"
 
 export const setDataInLocalStorage = (key: string, data: string | null | UserData): void => {
   if (data) {
@@ -12,10 +13,10 @@ export const setDataInLocalStorage = (key: string, data: string | null | UserDat
   }
 }
 
-export const getDataFromLocalStorage = (key: string): UserData | null => {
+export const getDataFromLocalStorage: GetDataFromLocalStorageType = <T>(key: string): T | null => {
   const data = localStorage.getItem(key)
   if (data) {
-    return JSON.parse(data)
+    return JSON.parse(data) as T
   }
   return null
 }

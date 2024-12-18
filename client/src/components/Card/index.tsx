@@ -49,7 +49,7 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
           </div>
         )}
         <div className={`card-body card-body_flex_jc_${flex.body.justifyContent}`}>
-          {ageRestriction && ageRestrictionBadge && (
+          {ageRestrictionBadge && (
             <div className={ageRestrictionBadge.position === 'right'
               ? "card-body__age-restriction card-body__age-restriction_jc_fe"
               : "card-body__age-restriction"

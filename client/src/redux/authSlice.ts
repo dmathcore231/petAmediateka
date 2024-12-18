@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction, Dispatch } from "@reduxjs/toolkit"
-import { requestSignUp, requestSignIn, requestLogout } from "../services/auth"
+import { requestSignUp, requestSignIn, requestLogout, requestRefreshUserData } from "../services/auth"
 import { setStatusResponse } from "./statusResponseSlice"
 import { setDataInLocalStorage } from "../helpers"
 import { FetchAuthPayload } from "../types/interfaces/FetchPayloads"
@@ -69,17 +69,37 @@ export const fetchLogout = createAsyncThunk<ResponseWithoutPayload, void, { reje
     }
   })
 
+export const fetchRefreshUserData = createAsyncThunk<ResponseWithPayload<UserData>, string, { rejectValue: ResponseWithPayload<null>, dispatch: Dispatch }>('auth/fetchRefreshUserData',
+  async (token: string, { dispatch }) => {
+    try {
+      const response = await requestRefreshUserData(token)
+      dispatch(setStatusResponse({
+        status: response.status,
+        error: response.error,
+        message: response.message
+      }))
+      return response
+    } catch (error) {
+      return error
+    }
+  })
+
+export interface SaveDataUserInLocalStorage {
+  token: string
+  userData: UserData
+}
+
 export const authSlice = createSlice({
   name: 'auth',
   initialState: initialStateAuth,
-  reducers: {},
+  reducers: {
+  },
 
   extraReducers: (builder) => {
     builder
       // fetch sign up
       .addCase(fetchSignUp.pending, (state) => {
         state.loading = true
-
       })
       .addCase(fetchSignUp.fulfilled, (state, action: PayloadAction<ResponseWithPayload<UserData | null>>) => {
         state.loading = false
@@ -126,11 +146,34 @@ export const authSlice = createSlice({
       .addCase(fetchLogout.fulfilled, (state, action: PayloadAction<ResponseWithoutPayload>) => {
         state.loading = false
         state.user = action.payload.value
+
         setDataInLocalStorage('userData', null)
         setDataInLocalStorage('token', null)
       })
       .addCase(fetchLogout.rejected, (state, action) => {
         const payload = action.payload as ResponseWithoutPayload
+        if (payload) {
+          state.loading = false
+          state.user = null
+        }
+      })
+
+      //fetch refresh user data
+      .addCase(fetchRefreshUserData.pending, (state) => {
+        state.loading = true
+      })
+      .addCase(fetchRefreshUserData.fulfilled, (state, action: PayloadAction<ResponseWithPayload<UserData>>) => {
+        state.loading = false
+        state.user = action.payload.value
+        // setDataInLocalStorage('userData', action.payload.value)
+        // if (action.payload.token) {
+        //   setDataInLocalStorage('token', action.payload.token)
+        // } else {
+        //   setDataInLocalStorage('token', null)
+        // }
+      })
+      .addCase(fetchRefreshUserData.rejected, (state, action) => {
+        const payload = action.payload as ResponseWithPayload<null>
         if (payload) {
           state.loading = false
           state.user = null
