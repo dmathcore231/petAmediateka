@@ -40,7 +40,7 @@ export const fetchSignUp = createAsyncThunk<ResponseWithoutPayload, FetchAuthPay
   })
 
 export const fetchSignIn = createAsyncThunk<ResponseWithPayload<UserData>, FormData, { rejectValue: ResponseWithPayload<null>, dispatch: Dispatch }>('auth/fetchSignIn',
-  async (body: FormData, { dispatch }) => {
+  async (body: FormData, { dispatch, rejectWithValue }) => {
     try {
       const response = await requestSignIn(body)
       dispatch(setStatusResponse({
@@ -50,12 +50,21 @@ export const fetchSignIn = createAsyncThunk<ResponseWithPayload<UserData>, FormD
       }))
       return response
     } catch (error) {
-      return error
+      if (error instanceof AxiosError && error.response) {
+        const { data } = error.response as { data: ResponseWithoutPayload }
+
+        dispatch(setStatusResponse({
+          status: data.status,
+          error: data.error,
+          message: data.message
+        }))
+        return rejectWithValue(data)
+      }
     }
   })
 
 export const fetchLogout = createAsyncThunk<ResponseWithoutPayload, void, { rejectValue: ResponseWithoutPayload, dispatch: Dispatch }>('auth/fetchLogout',
-  async (_, { dispatch }) => {
+  async (_, { dispatch, rejectWithValue }) => {
     try {
       const response = await requestLogout()
       dispatch(setStatusResponse({
@@ -64,13 +73,22 @@ export const fetchLogout = createAsyncThunk<ResponseWithoutPayload, void, { reje
         message: response.message
       }))
       return response
-    } catch (error) {
-      return error
+    } catch (error: unknown) {
+      if (error instanceof AxiosError && error.response) {
+        const { data } = error.response as { data: ResponseWithoutPayload }
+
+        dispatch(setStatusResponse({
+          status: data.status,
+          error: data.error,
+          message: data.message
+        }))
+        return rejectWithValue(data)
+      }
     }
   })
 
 export const fetchRefreshUserData = createAsyncThunk<ResponseWithPayload<UserData>, string, { rejectValue: ResponseWithPayload<null>, dispatch: Dispatch }>('auth/fetchRefreshUserData',
-  async (token: string, { dispatch }) => {
+  async (token: string, { dispatch, rejectWithValue }) => {
     try {
       const response = await requestRefreshUserData(token)
       dispatch(setStatusResponse({
@@ -79,8 +97,17 @@ export const fetchRefreshUserData = createAsyncThunk<ResponseWithPayload<UserDat
         message: response.message
       }))
       return response
-    } catch (error) {
-      return error
+    } catch (error: unknown) {
+      if (error instanceof AxiosError && error.response) {
+        const { data } = error.response as { data: ResponseWithoutPayload }
+
+        dispatch(setStatusResponse({
+          status: data.status,
+          error: data.error,
+          message: data.message
+        }))
+        return rejectWithValue(data)
+      }
     }
   })
 
@@ -163,20 +190,17 @@ export const authSlice = createSlice({
         state.loading = true
       })
       .addCase(fetchRefreshUserData.fulfilled, (state, action: PayloadAction<ResponseWithPayload<UserData>>) => {
+        console.log(2)
         state.loading = false
         state.user = action.payload.value
-        // setDataInLocalStorage('userData', action.payload.value)
-        // if (action.payload.token) {
-        //   setDataInLocalStorage('token', action.payload.token)
-        // } else {
-        //   setDataInLocalStorage('token', null)
-        // }
       })
       .addCase(fetchRefreshUserData.rejected, (state, action) => {
         const payload = action.payload as ResponseWithPayload<null>
         if (payload) {
           state.loading = false
           state.user = null
+          setDataInLocalStorage('userData', null)
+          setDataInLocalStorage('token', null)
         }
       })
   }

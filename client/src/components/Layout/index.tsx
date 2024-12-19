@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import { Outlet } from "react-router-dom"
 import { useAppSelector, useAppDispatch } from "../../hooks"
 import { fetchRefreshUserData } from "../../redux/authSlice"
-import { getDataFromLocalStorage } from "../../helpers"
+import { getDataFromLocalStorage, setDataInLocalStorage } from "../../helpers"
 import { MediaPlayer } from "../MediaPlayer"
 import { Header } from "../Header"
 import { Main } from "../Main"
@@ -22,9 +22,14 @@ export function Layout(): JSX.Element {
 
     if (userData && token && !user) {
       dispatch(fetchRefreshUserData(token))
-      console.log(2)
+    } else if (!userData && token) {
+
+      dispatch(fetchRefreshUserData(token))
+    } else if (!token && userData) {
+      dispatch(fetchRefreshUserData('noToken'))
     }
-  }, [])
+
+  }, [dispatch])
 
   return (
     <>

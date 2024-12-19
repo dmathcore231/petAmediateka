@@ -210,8 +210,8 @@ const setResponseRefreshAccessToken = (req: Request, res: Response) => {
 
 authRouter.post("/auth/sign_up", checkBadRequestMiddleware, checkValidAuthFormMiddleware, createUser, createJwtMiddleware, setResponseSignUp)
 authRouter.post("/auth/sign_in", checkBadRequestMiddleware, checkValidAuthFormMiddleware, createJwtMiddleware, setResponseSignIn)
-authRouter.post("/auth/refresh_access_token", checkAccessTokenMiddleware, checkRefreshTokenMiddleware, refrechAcccessTokenMiddleware, setResponseRefreshAccessToken)
 
+authRouter.get("/auth/refresh_access_token", checkAccessTokenMiddleware, checkRefreshTokenMiddleware, refrechAcccessTokenMiddleware, setResponseRefreshAccessToken)
 authRouter.get("/auth/logout", logoutUserMiddleware, setResponseLogout)
 
 export { authRouter }

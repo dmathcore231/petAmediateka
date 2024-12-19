@@ -9,20 +9,24 @@ export function checkRefreshTokenMiddleware(req: Request, res: Response, next: N
   cookieParser()(req, res, async () => {
     const { localDataState } = res.locals
     const { token, error } = localDataState
+    const refreshTokenInCookie = req.cookies.refreshToken
 
     if (error) {
       return next()
     }
 
-    const refreshTokenInCookie = req.cookies.refreshToken
-
-    if (!refreshTokenInCookie) {
-      localDataState.token = null
-
-      return next()
-    }
-
     try {
+      if (!refreshTokenInCookie) {
+        const error: ErrorMain = {
+          status: 401,
+          numberError: 105,
+          message: 'Unauthorized',
+          value: null
+        }
+
+        throw error
+      }
+
       const decodeRefreshToken = verify(refreshTokenInCookie, SECRET_KEY) as JwtPayload
 
       if (decodeRefreshToken) {
@@ -40,35 +44,38 @@ export function checkRefreshTokenMiddleware(req: Request, res: Response, next: N
 
       return next()
     } catch (err: unknown) {
-      switch (true) {
-        case err instanceof TokenExpiredError: {
-          const error: ErrorMain = {
-            status: 401,
-            numberError: 106,
-            message: 'Refresh token expired. Please, re-authenticate.'
-          }
-
-          localDataState.user = null
-          localDataState.token = null
-          localDataState.error = error
-          break
+      if (err instanceof TokenExpiredError) {
+        const error: ErrorMain = {
+          status: 401,
+          numberError: 106,
+          message: 'Refresh token expired. Please, re-authenticate.'
         }
-        case err instanceof JsonWebTokenError: {
-          const error: ErrorMain = {
-            status: 401,
-            numberError: 105,
-            message: 'Unauthorized',
-            value: null
-          }
 
-          localDataState.user = null
-          localDataState.token = null
-          localDataState.error = error
-          break
+        localDataState.user = null
+        localDataState.token = null
+        localDataState.error = error
+
+        return next()
+      } else if (err instanceof JsonWebTokenError) {
+        const error: ErrorMain = {
+          status: 401,
+          numberError: 105,
+          message: 'Unauthorized',
+          value: null
         }
+
+        localDataState.user = null
+        localDataState.token = null
+        localDataState.error = error
+
+        return next()
+      } else if ((err as ErrorMain).numberError === 105) {
+        localDataState.user = null
+        localDataState.token = null
+        localDataState.error = err
+
+        return next()
       }
-
-      return next()
     }
   })
 }

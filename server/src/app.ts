@@ -3,8 +3,6 @@ import path from 'path'
 import mongoose from 'mongoose'
 import cookieParser from 'cookie-parser'
 import { initLocalDataState } from './middlewares/initLocalDataState'
-import { checkAccessTokenMiddleware } from './middlewares/checkAccessTokenMiddleware'
-import { checkRefreshTokenMiddleware } from './middlewares/checkRefreshTokenMiddleware'
 import { refrechAcccessTokenMiddleware } from './middlewares/refrechAcccessTokenMiddleware'
 import { authRouter } from './routes/Auth'
 import { contentRouter } from './routes/Content'
@@ -24,8 +22,6 @@ app.use((_: Request, res: Response, next: NextFunction) => {
 app.use('/public', express.static(path.join(__dirname, '..', 'public')))
 
 app.use(initLocalDataState)
-app.use(checkAccessTokenMiddleware)
-app.use(checkRefreshTokenMiddleware)
 app.use(refrechAcccessTokenMiddleware)
 app.use(authRouter)
 app.use(contentRouter)

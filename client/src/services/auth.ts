@@ -49,7 +49,7 @@ export const requestLogout = async () => {
 
 export const requestRefreshUserData = async (token: string) => {
   try {
-    const { data } = await client.post(refreshAccessTokenEndPoint, token, {
+    const { data } = await client.get(refreshAccessTokenEndPoint, {
       headers: {
         Authorization: `Bearer ${token}`
       },
