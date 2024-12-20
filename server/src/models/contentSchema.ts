@@ -4,7 +4,7 @@ import { Content } from '../types/interface/Content'
 const contentSchema = new Schema<Content>({
   type: {
     type: String,
-    enum: ["mainSlider", "watchingNow", "banner"],
+    enum: ["mainSlider", "watchingNow", "banner", "newRelease"],
     required: true,
     _id: false
   },

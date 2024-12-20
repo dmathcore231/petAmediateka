@@ -13,4 +13,5 @@ export enum ContentTypeEnum {
   WatchingNow = "watchingNow",
   Banner = "banner",
   Series = "series",
+  NewRelease = "newRelease"
 }

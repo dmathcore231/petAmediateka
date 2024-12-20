@@ -1419,6 +1419,200 @@ export const temporaryListSeries: Partial<MediaContent>[] = [
     },
     logoImg: 'http://localhost:3000/public/series/theMayfairWitches/imgLogo.png'
   },
+  {
+    type: 'series',
+    seasons: [
+      {
+        numberOfSeasons: 1,
+        episodes: [
+          {
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/theOffer/videoTrailer720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/theOffer/videoTrailer360.mp4',
+              quality720: 'http://localhost:3000/public/series/theOffer/videoTrailer720.mp4',
+            },
+            episodeNumber: 1,
+            imgPreview: 'http://localhost:3000/public/series/theOffer/s1e1.jpg',
+            title: 'Серия 1'
+          },
+          {
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/theOffer/videoTrailer720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/theOffer/videoTrailer360.mp4',
+              quality720: 'http://localhost:3000/public/series/theOffer/videoTrailer720.mp4',
+            },
+            episodeNumber: 2,
+            imgPreview: 'http://localhost:3000/public/series/theOffer/s1e2.jpg',
+            title: 'Серия 2'
+          },
+          {
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/theOffer/videoTrailer720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/theOffer/videoTrailer360.mp4',
+              quality720: 'http://localhost:3000/public/series/theOffer/videoTrailer720.mp4',
+            },
+            episodeNumber: 3,
+            imgPreview: 'http://localhost:3000/public/series/theOffer/s1e3.jpg',
+            title: 'Серия 3'
+          },
+          {
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/theOffer/videoTrailer720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/theOffer/videoTrailer360.mp4',
+              quality720: 'http://localhost:3000/public/series/theOffer/videoTrailer720.mp4',
+            },
+            episodeNumber: 4,
+            imgPreview: 'http://localhost:3000/public/series/theOffer/s1e4.jpg',
+            title: 'Серия 4'
+          },
+          {
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/theOffer/videoTrailer720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/theOffer/videoTrailer360.mp4',
+              quality720: 'http://localhost:3000/public/series/theOffer/videoTrailer720.mp4',
+            },
+            episodeNumber: 5,
+            imgPreview: 'http://localhost:3000/public/series/theOffer/s1e5.jpg',
+            title: 'Серия 5'
+          },
+          {
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/theOffer/videoTrailer720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/theOffer/videoTrailer360.mp4',
+              quality720: 'http://localhost:3000/public/series/theOffer/videoTrailer720.mp4',
+            },
+            episodeNumber: 6,
+            imgPreview: 'http://localhost:3000/public/series/theOffer/s1e6.jpg',
+            title: 'Серия 6'
+          },
+          {
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/theOffer/videoTrailer720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/theOffer/videoTrailer360.mp4',
+              quality720: 'http://localhost:3000/public/series/theOffer/videoTrailer720.mp4',
+            },
+            episodeNumber: 7,
+            imgPreview: 'http://localhost:3000/public/series/theOffer/s1e7.jpg',
+            title: 'Серия 7'
+          },
+          {
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/theOffer/videoTrailer720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/theOffer/videoTrailer360.mp4',
+              quality720: 'http://localhost:3000/public/series/theOffer/videoTrailer720.mp4',
+            },
+            episodeNumber: 8,
+            imgPreview: 'http://localhost:3000/public/series/theOffer/s1e8.jpg',
+            title: 'Серия 8'
+          },
+          {
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/theOffer/videoTrailer720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/theOffer/videoTrailer360.mp4',
+              quality720: 'http://localhost:3000/public/series/theOffer/videoTrailer720.mp4',
+            },
+            episodeNumber: 9,
+            imgPreview: 'http://localhost:3000/public/series/theOffer/s1e9.jpg',
+            title: 'Серия 9'
+          },
+          {
+            link: {
+              _current: {
+                type: '720p',
+                value: 'http://localhost:3000/public/series/theOffer/videoTrailer720.mp4'
+              },
+              quality360: 'http://localhost:3000/public/series/theOffer/videoTrailer360.mp4',
+              quality720: 'http://localhost:3000/public/series/theOffer/videoTrailer720.mp4',
+            },
+            episodeNumber: 10,
+            imgPreview: 'http://localhost:3000/public/series/theOffer/s1e10.jpg',
+            title: 'Серия 10'
+          }
+        ],
+        bg: {
+          imgUrl: 'http://localhost:3000/public/series/theOffer/imgBgS1.jpg',
+          videoUrl: null
+        },
+        trailer: null,
+        description: 'От просмотра «Предложения» вы действительно не сможете отказаться – и отсылка к крылатой фразе дона Корлеоне тут неспроста. За десять эпизодов сериала вы узнаете всё о том, как создавался фильм «Крестный отец» и какие проблемы с ним были связаны. Основные роли в его создании сыграли продюсеры Альберт Радди (Майлз Теллер) и Роберт Эванс (Мэттью Гуд), которым пришлось сломать немало копий, пока режиссер Фрэнсис Форд Коппола (Дэн Фоглер) и писатель Марио Пьюзо (Патрик Галло) никак не могли найти общий язык, а студия не верила, что какой-то «местечковый романчик» про борьбу итальянских кланов в США сможет стать мировым хитом. Но мы-то с вами знаем, чем всё закончилось… А вот как начиналось – эту страницу из истории создания шедевра зрителям и предстоит открыть!'
+      }
+    ],
+    data: {
+      title: {
+        value: 'Предложение',
+        originalTitle: 'The Offer',
+        linkTitle: 'the-offer'
+      },
+      badge: null,
+      description: {
+        mainDescription: 'От просмотра «Предложения» вы действительно не сможете отказаться – и отсылка к крылатой фразе дона Корлеоне тут неспроста. За десять эпизодов сериала вы узнаете всё о том, как создавался фильм «Крестный отец» и какие проблемы с ним были связаны. Основные роли в его создании сыграли продюсеры Альберт Радди (Майлз Теллер) и Роберт Эванс (Мэттью Гуд), которым пришлось сломать немало копий, пока режиссер Фрэнсис Форд Коппола (Дэн Фоглер) и писатель Марио Пьюзо (Патрик Галло) никак не могли найти общий язык, а студия не верила, что какой-то «местечковый романчик» про борьбу итальянских кланов в США сможет стать мировым хитом. Но мы-то с вами знаем, чем всё закончилось… А вот как начиналось – эту страницу из истории создания шедевра зрителям и предстоит открыть!',
+        prewiewDescription: '«Предложение» (The Offer) — это сериал, выпущенный компанией Paramount+, в котором рассказывается о бурном пути выхода на экраны кинематографического шедевра Фрэнсиса Форда Копполы «Крёстный отец».'
+      },
+      about: {
+        title: 'Сюжет сериала «Предложение»',
+        description: `«Предложение» (The Offer) — это сериал, выпущенный компанией Paramount+, в котором рассказывается о бурном пути выхода на экраны кинематографического шедевра Фрэнсиса Форда Копполы «Крёстный отец». Благодаря сочетанию исторических фактов, фантазии и криминальной драмы проект предлагает зрителям интригующий взгляд на поворотный момент в истории кино, рассказывая не только о триумфах, но и о трудностях, с которыми пришлось столкнуться в процессе производства. Давайте отправимся в сложный мир Голливуда, ведь смотреть все сезоны сериала можно онлайн в HD-качестве на сайте Amediateka с русскими субтитрами. Первые семь дней можно попробовать сервис бесплатно.
+
+        Сюжет криминальной драмы «Предложение» разворачивается в начале 1970-х годов и сосредоточен на Альберте С. Радди, продюсере, который сталкивается как со скептицизмом киноиндустрии, так и с личными дилеммами, когда он возглавил создание адаптации бестселлера Марио Пьюзо. Радди, относительно неизвестная в то время фигура в Голливуде, поначалу сталкивается с массой препятствий, включая сопротивление студии, бюджетные ограничения и нестабильные отношения с талантливыми людьми, задействованными в проекте. Но он готов и хочет достичь правосудия и истины.
+
+        Каждый эпизод подробно раскрывает многогранную драму, связанную с производством фильма, иллюстрируя неустанное стремление Радди к своему видению среди хаоса. История мафиозных связей, убийств, расследований, силы журналистики, борьбы за власть и творческих конфликтов придает повествованию глубину и сложность, превращая «Предложение» не просто в рассказ о фильме «Крёстный отец», но и в настоящий триллер о тайнах и творчестве в Голливуде.`
+      },
+      ageRestriction: 18,
+      dateRelease: '2022',
+      genres: ['Драма', 'Биография'],
+      actors: ['Патрик Галло', 'Дэн Фоглер', 'Мэттью Гуд', 'Майлз Теллер'],
+      directors: ['Колин Бакси', 'Адам Аркин'],
+      country: 'США',
+      production: 'Paramount Pictures'
+    },
+    rating: {
+      raitingAmediateka: 9.3,
+      ratingImdb: 8.6,
+      ratingKinopoisk: 8.3
+    },
+    actionsData: {
+      favorites: [],
+      liked: [],
+      disliked: []
+    },
+    bg: {
+      imgUrl: 'http://localhost:3000/public/series/theOffer/imgBgS1.jpg',
+      videoUrl: null,
+      imgResizeUrl: 'http://localhost:3000/public/series/theOffer/resizeImgBgS1.jpg'
+    },
+    trailer: {
+      quality360: 'http://localhost:3000/public/series/theOffer/videoTrailer360.mp4',
+      quality720: 'http://localhost:3000/public/series/theOffer/videoTrailer720.mp4',
+      img: 'http://localhost:3000/public/series/theOffer/imgTrailer.png'
+    },
+    logoImg: 'http://localhost:3000/public/series/theOffer/imgLogo.png'
+  }
 ]
 
 export const temporaryBanner: Banner = {

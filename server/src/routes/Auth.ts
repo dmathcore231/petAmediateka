@@ -180,6 +180,7 @@ const setResponseRefreshAccessToken = (req: Request, res: Response) => {
         value: null
       }
 
+      res.clearCookie('refreshToken')
       return res.status(response.status).send(response)
     }
 

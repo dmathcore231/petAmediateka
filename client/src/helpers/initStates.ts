@@ -24,6 +24,9 @@ export const initialStateContent: ContentState = {
   },
   [ContentTypeEnum.Series]: {
     loading: false, error: null, content: null
+  },
+  [ContentTypeEnum.NewRelease]: {
+    loading: false, error: null, content: null
   }
 }
 

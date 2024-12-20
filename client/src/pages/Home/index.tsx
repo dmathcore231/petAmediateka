@@ -18,7 +18,7 @@ import { CardData } from "../../types/Card"
 
 export function Home(): JSX.Element {
   const dispatch = useAppDispatch()
-  const { mainSlider, banner, watchingNow } = useAppSelector((state) => state.content)
+  const { mainSlider, banner, watchingNow, newRelease } = useAppSelector((state) => state.content)
 
   const [activeLinkPopularGenres, setActiveLinkPopularGenres] = useState<number>(0)
 
@@ -26,6 +26,7 @@ export function Home(): JSX.Element {
     dispatch(fetchContent({ type: ContentTypeEnum.MainSlider }))
     dispatch(fetchContent({ type: ContentTypeEnum.Banner }))
     dispatch(fetchContent({ type: ContentTypeEnum.WatchingNow }))
+    dispatch(fetchContent({ type: ContentTypeEnum.NewRelease }))
   }, [dispatch])
 
   const sliderProps: SliderProps = {
@@ -134,6 +135,58 @@ export function Home(): JSX.Element {
 
   const bannerProps: BannerProps = banner.content ? banner.content.data as BannerProps : defaultBannerData
 
+  const sliderPropsNewRelease: SliderProps = {
+    sliderSettings: {
+      typeSlider: 'multi',
+      pagenation: false,
+      autoSwipe: false,
+      lastSwipe: true,
+      quantityListItems: 5,
+      mediaPlayerHandler: false
+    },
+    sliderData: {
+      data: newRelease.content ? newRelease.content.data as CardData[] : null,
+      cardStyles: {
+        cardSize: 'md',
+        flex: {
+          body: {
+            justifyContent: 'space-between'
+          }
+        },
+        clipPath: false,
+        ageRestrictionBadge: {
+          position: 'left',
+          size: 'sm'
+        },
+        boxShadow: false,
+        btnGroup: false,
+        hover: {
+          scale: true,
+          playBack: {
+            value: false,
+            type: null
+          },
+          shadow: true
+        }
+      },
+      settings: {
+        title: {
+          titleOutside: true,
+          titleLogoImg: false
+        },
+        badgeVisible: false,
+        link: {
+          linkType: 'allCard',
+        },
+        descriptionVisible: false,
+        tags: null,
+        cardSeries: false
+      },
+      loadingData: newRelease.loading,
+      errorData: false
+    },
+  }
+
   // const sliderPropsNewRelease: SliderProps = {
   //   sliderSettings: {
   //     typeSlider: 'multi',
@@ -168,6 +221,8 @@ export function Home(): JSX.Element {
   //     }
   //   }
   // }
+
+
 
   // const seoBlockProps: SeoBlockProps = {
   //   title: "Смотреть лучшие фильмы и сериалы онлайн — Amediatekа",
@@ -296,14 +351,14 @@ export function Home(): JSX.Element {
         </div>
         <Slider {...sliderPropsWatchingNow} />
       </section>
-      {/* <section className="home-item">
+      <section className="home-item">
         <div className="home-item__title container">
           <h2>Новое в Амедиатеке</h2>
           <Link to="/#" className="link link_primary">Показать еще</Link>
         </div>
         <Slider {...sliderPropsNewRelease} />
       </section>
-      <section className="home-item container">
+      {/* <section className="home-item container">
         <SeoBlock {...seoBlockProps} />
       </section>
       <section className="home-item">
