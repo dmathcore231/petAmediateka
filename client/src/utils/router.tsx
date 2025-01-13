@@ -10,7 +10,8 @@ import { Trailers } from "../pages/Trailers"
 import { Kino1tv } from "../pages/Kino1tv"
 import { Tv } from "../pages/Tv"
 import { Search } from "../pages/Search"
-
+import { ProfileMain } from "../pages/Profile"
+import { ProfileFavorites } from "../pages/Profile/Favorites"
 
 export const router = createBrowserRouter([
   {
@@ -57,11 +58,23 @@ export const router = createBrowserRouter([
             element: <Series />,
           }
         ]
+      },
+      {
+        element: <ProfileMain />,
+        children: [
+          {
+            path: "/profile",
+            element: <ProfileMain />,
+          },
+          {
+            path: "/profile/favorites",
+            element: <ProfileFavorites />,
+          }
+        ]
       }
     ],
   },
   {
-
     children: [
       {
         path: "/auth/signin",

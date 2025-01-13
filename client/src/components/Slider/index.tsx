@@ -244,8 +244,14 @@ export function Slider({ sliderSettings, sliderData: { data, cardStyles, setting
       let classValue = 'slider__item'
 
       switch (true) {
+        case (index === prevSlide && cardStyles.clipPath): {
+          return `slider__item_prev ${classValue} ${classValue}_clip-path-active`
+        }
         case (index === prevSlide): {
           return `slider__item_prev ${classValue}`
+        }
+        case (index === nextSlide && cardStyles.clipPath): {
+          return `slider__item_next ${classValue} ${classValue}_clip-path-active`
         }
         case (index === nextSlide): {
           return `slider__item_next ${classValue}`
@@ -333,6 +339,26 @@ export function Slider({ sliderSettings, sliderData: { data, cardStyles, setting
     }
   }
 
+  const renderTitleImg = (indexItem: number, slideItemData: CardData): JSX.Element => {
+    if (indexItem === settings.title.titleLogoImgIndex) {
+      const updateSettings = {
+        ...settings,
+        title: {
+          ...settings.title,
+          titleLogoImg: true
+        }
+      }
+
+      return (
+        <Card styles={cardStyles} data={slideItemData} settings={updateSettings} loadingCardData={loadingData} error={errorData} />
+      )
+    } else {
+      return (
+        <Card styles={cardStyles} data={slideItemData} settings={settings} loadingCardData={loadingData} error={errorData} />
+      )
+    }
+  }
+
   return (
     <div className={typeSlider === 'default' ? 'slider container' : 'slider slider_multi container'}
       style={
@@ -383,7 +409,7 @@ export function Slider({ sliderSettings, sliderData: { data, cardStyles, setting
                 ref={sliderItemRef}
                 onClick={() => mediaPlayerHandler ? handleClickSliderItem(slide) : null}
               >
-                <Card styles={cardStyles} data={slide} settings={settings} loadingCardData={loadingData} error={errorData} />
+                {renderTitleImg(index, slide)}
               </li>
             ))
           )}

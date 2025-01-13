@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { Link, useFetcher } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "../../hooks"
 import { fetchContent } from "../../redux/contentSlice"
@@ -13,21 +13,38 @@ import { BannerProps } from "../../types/interfaces/BannerProps"
 import { SeoBlockProps } from "../../types/interfaces/SeoBlockProps"
 import { PromoLineProps } from "../../types/interfaces/PromoLineProps"
 import { ContentTypeEnum } from "../../types/interfaces/Content"
-import { defaultBannerData } from "../../helpers"
+import { defaultBannerData, defaultPromoLineData } from "../../helpers"
 import { CardData } from "../../types/Card"
+import { PromoLineData } from "../../types/interfaces/PromoLineData"
 
 export function Home(): JSX.Element {
   const dispatch = useAppDispatch()
-  const { mainSlider, banner, watchingNow, newRelease } = useAppSelector((state) => state.content)
+  const ref = useRef<HTMLDivElement>(null)
+  const { mainSlider, banner, watchingNow, newRelease, promoLine } = useAppSelector((state) => state.content)
 
   const [activeLinkPopularGenres, setActiveLinkPopularGenres] = useState<number>(0)
+
+  const firstObservSection = useRef<HTMLElement>(null)
 
   useEffect(() => {
     dispatch(fetchContent({ type: ContentTypeEnum.MainSlider }))
     dispatch(fetchContent({ type: ContentTypeEnum.Banner }))
     dispatch(fetchContent({ type: ContentTypeEnum.WatchingNow }))
     dispatch(fetchContent({ type: ContentTypeEnum.NewRelease }))
+    dispatch(fetchContent({ type: ContentTypeEnum.PromoLine }))
   }, [dispatch])
+
+  const formCardDataFromPromoLine = (data: PromoLineData): Array<CardData> => {
+    const result = data.promoLineItem.map(item => ({
+      ...data.data,
+      bg: {
+        ...(data.data as CardData).bg,
+        imgResizeUrl: item
+      }
+    }))
+
+    return result
+  }
 
   const sliderProps: SliderProps = {
     sliderSettings: {
@@ -66,7 +83,8 @@ export function Home(): JSX.Element {
       settings: {
         title: {
           titleOutside: false,
-          titleLogoImg: true
+          titleLogoImg: true,
+          titleLogoImgIndex: null
         },
         badgeVisible: true,
         link: {
@@ -118,7 +136,8 @@ export function Home(): JSX.Element {
       settings: {
         title: {
           titleOutside: true,
-          titleLogoImg: false
+          titleLogoImg: false,
+          titleLogoImgIndex: null
         },
         badgeVisible: false,
         link: {
@@ -136,6 +155,64 @@ export function Home(): JSX.Element {
   const bannerProps: BannerProps = banner.content ? banner.content.data as BannerProps : defaultBannerData
 
   const sliderPropsNewRelease: SliderProps = {
+    sliderSettings: {
+      typeSlider: 'multi',
+      pagenation: false,
+      autoSwipe: false,
+      lastSwipe: true,
+      quantityListItems: 4,
+      mediaPlayerHandler: false
+    },
+    sliderData: {
+      data: newRelease.content ? newRelease.content.data as CardData[] : null,
+      cardStyles: {
+        cardSize: 'lm',
+        flex: {
+          body: {
+            justifyContent: 'space-between'
+          }
+        },
+        clipPath: true,
+        ageRestrictionBadge: {
+          position: 'right',
+          size: 'sm'
+        },
+        boxShadow: false,
+        btnGroup: false,
+        hover: {
+          scale: false,
+          playBack: {
+            value: true,
+            type: 'default'
+          },
+          shadow: false
+        }
+      },
+      settings: {
+        title: {
+          titleOutside: false,
+          titleLogoImg: true,
+          titleLogoImgIndex: null
+        },
+        badgeVisible: false,
+        link: {
+          linkType: 'allCard',
+        },
+        descriptionVisible: false,
+        tags: null,
+        cardSeries: false
+      },
+      loadingData: newRelease.loading,
+      errorData: false
+    },
+  }
+
+  const seoBlockProps: SeoBlockProps = {
+    title: "Смотреть лучшие фильмы и сериалы онлайн — Amediatekа",
+    text: "Новинки кино и сериалов в HD-качестве в онлайн-кинотеатре Амедиатека. Смотреть лучшие сериалы и фильмы по подписке."
+  }
+
+  const sliderProprsDetectiveSeries: SliderProps = {
     sliderSettings: {
       typeSlider: 'multi',
       pagenation: false,
@@ -172,7 +249,8 @@ export function Home(): JSX.Element {
       settings: {
         title: {
           titleOutside: true,
-          titleLogoImg: false
+          titleLogoImg: false,
+          titleLogoImgIndex: null
         },
         badgeVisible: false,
         link: {
@@ -187,122 +265,63 @@ export function Home(): JSX.Element {
     },
   }
 
-  // const sliderPropsNewRelease: SliderProps = {
-  //   sliderSettings: {
-  //     typeSlider: 'multi',
-  //     pagenation: false,
-  //     autoSwipe: false,
-  //     lastSwipe: true,
-  //     quantityListItems: 4
-  //   },
-  //   slidesData: temporarySlidesNewRelease,
-  //   cardStyles: {
-  //     cardSize: 'lm',
-  //     flex: {
-  //       body: {
-  //         justifyContent: 'space-between'
-  //       }
-  //     },
-  //     clipPath: true,
-  //     ageRestrictionBadge: {
-  //       position: 'right',
-  //       size: 'lm'
-  //     },
-  //     boxShadow: true,
-  //     btnGroup: false,
-  //     titleOutside: false,
-  //     hover: {
-  //       scale: false,
-  //       playBack: {
-  //         value: true,
-  //         type: 'default'
-  //       },
-  //       shadow: false
-  //     }
-  //   }
-  // }
+  const sliderProrsPromoLine: SliderProps = {
+    sliderSettings: {
+      typeSlider: 'multi',
+      pagenation: false,
+      autoSwipe: false,
+      lastSwipe: true,
+      quantityListItems: 4,
+      mediaPlayerHandler: false
+    },
+    sliderData: {
+      data: promoLine.content ? formCardDataFromPromoLine(promoLine.content.data) : null,
+      cardStyles: {
+        cardSize: 'lm',
+        flex: {
+          body: {
+            justifyContent: 'space-between'
+          }
+        },
+        clipPath: true,
+        ageRestrictionBadge: {
+          position: 'right',
+          size: 'sm'
+        },
+        boxShadow: false,
+        btnGroup: false,
+        hover: {
+          scale: false,
+          playBack: {
+            value: true,
+            type: 'default'
+          },
+          shadow: false
+        }
+      },
+      settings: {
+        title: {
+          titleOutside: false,
+          titleLogoImg: false,
+          titleLogoImgIndex: 0
+        },
+        badgeVisible: false,
+        link: {
+          linkType: 'allCard',
+        },
+        descriptionVisible: false,
+        tags: null,
+        cardSeries: false
+      },
+      loadingData: promoLine.loading,
+      errorData: false
+    },
+  }
 
-
-
-  // const seoBlockProps: SeoBlockProps = {
-  //   title: "Смотреть лучшие фильмы и сериалы онлайн — Amediatekа",
-  //   text: "Новинки кино и сериалов в HD-качестве в онлайн-кинотеатре Амедиатека. Смотреть лучшие сериалы и фильмы по подписке."
-  // }
-
-  // const sliderProprsDetectiveSeries: SliderProps = {
-  //   sliderSettings: {
-  //     typeSlider: 'multi',
-  //     pagenation: false,
-  //     autoSwipe: false,
-  //     lastSwipe: true,
-  //     quantityListItems: 5
-  //   },
-  //   slidesData: temporarySlidesDetectiveSeries,
-  //   cardStyles: {
-  //     cardSize: 'md',
-  //     flex: {
-  //       body: {
-  //         justifyContent: 'space-between'
-  //       }
-  //     },
-  //     clipPath: false,
-  //     ageRestrictionBadge: {
-  //       position: 'left',
-  //       size: 'sm'
-  //     },
-  //     boxShadow: false,
-  //     btnGroup: false,
-  //     titleOutside: false,
-  //     hover: {
-  //       scale: true,
-  //       playBack: {
-  //         value: false,
-  //         type: null
-  //       },
-  //       shadow: true
-  //     }
-  //   }
-  // }
-
-  // const sliderProrsPromoLine: SliderProps = {
-  //   sliderSettings: {
-  //     typeSlider: 'multi',
-  //     pagenation: false,
-  //     autoSwipe: false,
-  //     lastSwipe: true,
-  //     quantityListItems: 4
-  //   },
-  //   slidesData: temporaryThoseAboutToDie,
-  //   cardStyles: {
-  //     cardSize: 'lm',
-  //     flex: {
-  //       body: {
-  //         justifyContent: 'space-between'
-  //       }
-  //     },
-  //     clipPath: true,
-  //     ageRestrictionBadge: {
-  //       position: 'right',
-  //       size: 'sm'
-  //     },
-  //     boxShadow: false,
-  //     btnGroup: false,
-  //     titleOutside: false,
-  //     hover: {
-  //       scale: false,
-  //       playBack: {
-  //         value: true,
-  //         type: 'default'
-  //       },
-  //       shadow: false
-  //     }
-  //   }
-  // }
-  // const promoLineProps: PromoLineProps = {
-  //   title: "Историческая драма «Обреченные на славу»",
-  //   subtitle: "Погрузитесь в суровый мир гладиаторских боев и дворцовых интриг, где борьба за власть идет не на жизнь, а на смерть.",
-  //   sliderProps: sliderProrsPromoLine
-  // }
+  const promoLineProps: PromoLineProps = {
+    promoLineData: promoLine.content ? promoLine.content.data as PromoLineData : defaultPromoLineData,
+    sliderProps: sliderProrsPromoLine
+  }
 
   // const sliderPropsPopularGenres: SliderProps = {
   //   sliderSettings: {
@@ -358,10 +377,10 @@ export function Home(): JSX.Element {
         </div>
         <Slider {...sliderPropsNewRelease} />
       </section>
-      {/* <section className="home-item container">
+      <section className="home-item container">
         <SeoBlock {...seoBlockProps} />
       </section>
-      <section className="home-item">
+      <section className="home-item" ref={firstObservSection}>
         <div className="home-item__title container">
           <h2>Детективные сериалы</h2>
           <Link to="/#" className="link link_primary">Показать еще</Link>
@@ -371,7 +390,7 @@ export function Home(): JSX.Element {
       <section className="home-item">
         <PromoLine {...promoLineProps} />
       </section>
-      <section className="home-item">
+      {/* <section className="home-item">
         <div className="home-item__title container">
           <h2>Популярные жанры</h2>
           <div className="home-item__title-wrapper">

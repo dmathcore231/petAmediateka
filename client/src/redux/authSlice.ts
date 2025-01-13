@@ -190,7 +190,6 @@ export const authSlice = createSlice({
         state.loading = true
       })
       .addCase(fetchRefreshUserData.fulfilled, (state, action: PayloadAction<ResponseWithPayload<UserData>>) => {
-        console.log(2)
         state.loading = false
         state.user = action.payload.value
       })

@@ -1,7 +1,7 @@
 import { SliderProps } from "../../types/interfaces/SliderProps"
+import { PromoLineData } from "./PromoLineData"
 
 export interface PromoLineProps {
-  title: string
-  subtitle: string
+  promoLineData: PromoLineData
   sliderProps: SliderProps
 }

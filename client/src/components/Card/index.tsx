@@ -14,7 +14,8 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
 
   const { _id, type, title, badge, ageRestriction, description, bg, logoImg, link } = data
   const { cardSize, flex, clipPath, ageRestrictionBadge, btnGroup, hover, boxShadow } = styles
-  const { title: { titleOutside, titleLogoImg }, badgeVisible, link: { linkType }, descriptionVisible, tags, cardSeries } = settings
+  const { title: { titleOutside, titleLogoImg, titleLogoImgIndex }, badgeVisible, link: { linkType }, descriptionVisible, tags, cardSeries } = settings
+
   const renderCardContentLinkWrapper = (children: JSX.Element): JSX.Element => {
     if (linkType === 'allCard') {
       return (
@@ -30,21 +31,29 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
     }
   }
 
+  const renderCardBg = (): JSX.Element => {
+    if (cardSize === 'lg' && bg?.imgUrl) {
+      return (
+        <img src={bg.imgUrl} alt="" className="card-bg__img" />
+      )
+    } else if (cardSize === 'lm' && bg?.imgResizeLmUrl) {
+      return (
+        <img src={bg.imgResizeLmUrl} alt="" className="card-bg__img" />
+      )
+    } else {
+      return (
+        <img src={bg?.imgResizeUrl} alt="" className="card-bg__img" />
+      )
+    }
+  }
+
   const renderCardContent = (): JSX.Element => {
     return (
       <>
         {!loadingCardData && !error && (
           <div className={boxShadow ? "card-bg card-bg_shadow" : "card-bg"}>
             <picture className="card-bg__picture">
-
-              {cardSize === 'lg' && bg?.imgUrl
-                ? (
-                  <img src={bg.imgUrl} alt="" className="card-bg__img" />
-                )
-                : (
-                  <img src={bg?.imgResizeUrl} alt="" className="card-bg__img" />
-                )
-              }
+              {renderCardBg()}
             </picture>
           </div>
         )}

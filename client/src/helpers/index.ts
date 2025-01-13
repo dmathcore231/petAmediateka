@@ -4,6 +4,7 @@ import { UserData } from "../types/interfaces/User"
 import { SrcMediaPlaer } from "../types/SrcMediaPlaer"
 import { MediaContent } from "../types/interfaces/MediaContent"
 import { GetDataFromLocalStorageType } from "../types/GetDataFromLocalStorageType"
+import { PromoLineData } from "../types/interfaces/PromoLineData"
 
 export const setDataInLocalStorage = (key: string, data: string | null | UserData): void => {
   if (data) {
@@ -52,6 +53,16 @@ export const defaultBannerData: BannerProps = {
   titleBtn: "Test btn",
   ageRestriction: 18,
   loading: true
+}
+
+export const defaultPromoLineData: PromoLineData = {
+  titleData: {
+    originalTitle: '',
+    title: ''
+  },
+  subtitle: '',
+  data: defaultCardData,
+  promoLineItem: ['item1', 'item2', 'item3', 'item4']
 }
 
 export const formSrcMediaContent = (mediaContentData: MediaContent): SrcMediaPlaer => {

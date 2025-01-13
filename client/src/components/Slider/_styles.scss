@@ -118,6 +118,7 @@
         background-color: var(--slider-item-before-bg-color);
         border-radius: 0.5rem;
         z-index: 2;
+        clip-path: var(--item-before-clip-path);
       }
     }
 
@@ -160,6 +161,10 @@
           }
         }
       }
+    }
+
+    &_clip-path-active {
+      --item-before-clip-path: #{$main-clip-path};
     }
   }
 

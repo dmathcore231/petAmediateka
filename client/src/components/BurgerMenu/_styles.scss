@@ -47,7 +47,11 @@
       &__item {
         width: 100%;
         @include flex-start;
-        gap: 1.5rem
+        gap: 1.5rem;
+
+        &_jc {
+          justify-content: space-between;
+        }
       }
 
       &__new-profile {
@@ -92,7 +96,6 @@
     }
 
     &-nav-bar {
-
       &-list {
         @include flex-column-start;
         gap: 2.5rem;

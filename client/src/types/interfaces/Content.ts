@@ -1,11 +1,12 @@
 import { CardData } from "../Card"
 import { BannerProps } from "./BannerProps"
+import { PromoLine } from "./PromoLineData"
 
 export type Content = {
   _id: string
   __v: number
   type: ContentTypeEnum
-  data: Array<CardData> | BannerProps | null
+  data: Array<CardData> | BannerProps | PromoLine | null
 }
 
 export enum ContentTypeEnum {
@@ -13,5 +14,6 @@ export enum ContentTypeEnum {
   WatchingNow = "watchingNow",
   Banner = "banner",
   Series = "series",
-  NewRelease = "newRelease"
+  NewRelease = "newRelease",
+  PromoLine = "promoLine",
 }

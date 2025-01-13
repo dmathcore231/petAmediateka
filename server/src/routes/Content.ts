@@ -49,5 +49,4 @@ const setResponseContent = async (req: Request, res: Response) => {
 
 contentRouter.get(`/content`, checkValidQueryParamsContentMiddleware, getContent, setResponseContent)
 
-
 export { contentRouter }

@@ -65,6 +65,7 @@ export type CardSetting = {
   title: {
     titleOutside: boolean
     titleLogoImg: boolean
+    titleLogoImgIndex: number | null
   }
   badgeVisible: boolean
   link: CardLink

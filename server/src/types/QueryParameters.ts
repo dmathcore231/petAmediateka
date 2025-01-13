@@ -4,5 +4,6 @@ export enum QueryParameterContentTypeEnum {
   WatchingNow = "watchingNow",
   Banner = "banner",
   Series = "series",
-  NewRelease = "newRelease"
+  NewRelease = "newRelease",
+  PromoLine = "promoLine"
 }

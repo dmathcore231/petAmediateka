@@ -5,6 +5,7 @@ import { BannerModel } from '../models/bannerSchema'
 import { CardData } from '../types/interface/CardData'
 import { MediaContent } from '../types/interface/MediaContent'
 import { formationLink } from '../helpers'
+import { PromoLineModel } from '../models/promoLineSchema'
 
 export async function getContent(req: Request, res: Response, next: NextFunction): Promise<void> {
   const { localDataState } = res.locals
@@ -106,6 +107,38 @@ export async function getContent(req: Request, res: Response, next: NextFunction
       localDataState.content = {
         ...content.toObject(),
         data: result
+      }
+    }
+  } else if (type === 'promoLine') {
+    const content = await ContentModel.findOne({ type: 'promoLine' }).populate({
+      path: 'data',
+      model: PromoLineModel,
+      populate: {
+        path: 'data',
+        model: MediaContentModel
+      }
+    })
+
+    if (content && content.data) {
+      const promoData = content.data as any
+
+      if (promoData && promoData.data) {
+        const mediaContent = promoData.data as unknown as MediaContent
+
+        const cardData: CardData = {
+          _id: mediaContent._id as string,
+          type: mediaContent.type,
+          title: mediaContent.data.title,
+          badge: mediaContent.data.badge,
+          ageRestriction: mediaContent.data.ageRestriction,
+          description: mediaContent.data.description.prewiewDescription,
+          bg: mediaContent.bg,
+          logoImg: mediaContent.logoImg,
+          link: formationLink(mediaContent.type, mediaContent._id as string, mediaContent.data.title.linkTitle)
+        }
+
+        promoData.data = cardData
+        localDataState.content = content
       }
     }
   }
