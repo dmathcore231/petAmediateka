@@ -1,4 +1,4 @@
-import { useState, useEffect, MouseEvent } from "react"
+import { useState, useEffect, MouseEvent, JSX } from "react"
 import { Link } from "react-router-dom"
 import { useAppSelector, useAppDispatch } from "../../hooks"
 import { fetchLogout } from "../../redux/authSlice"
@@ -14,7 +14,7 @@ export function BurgerMenu(): JSX.Element {
 
   const [isActive, setIsActive] = useState(false)
 
-  useEffect(() => {
+  useEffect((): void => {
     const layoutElement = document.querySelector('.layout')
     if (isActive) {
       layoutElement?.classList.add('layout_fixed')
@@ -23,17 +23,17 @@ export function BurgerMenu(): JSX.Element {
     }
   }, [isActive])
 
-  const handleClickBurgerMenu = () => {
+  const handleClickBurgerMenu = (): void => {
     setIsActive(true)
   }
 
-  const handleClickCloseBtn = (event: MouseEvent<HTMLButtonElement> | MouseEvent<HTMLAnchorElement>) => {
+  const handleClickCloseBtn = (event: MouseEvent<HTMLButtonElement> | MouseEvent<HTMLAnchorElement>): void => {
     event.stopPropagation()
     setIsActive(false)
   }
 
-  const handleClickLogout = () => {
-    const layoutElement = document.querySelector('.layout')
+  const handleClickLogout = (): void => {
+    const layoutElement: HTMLElement | null = document.querySelector('.layout')
     dispatch(fetchLogout())
     layoutElement?.classList.remove('layout_fixed')
   }
