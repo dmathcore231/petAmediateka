@@ -12,7 +12,7 @@ import { refrechAcccessTokenMiddleware } from '../middlewares/refrechAcccessToke
 
 const authRouter = Router()
 
-const setResponseSignUp = (req: Request, res: Response) => {
+const setResponseSignUp = (req: Request, res: Response): void => {
   const { type, email } = req.body
   const { error, user, token } = res.locals.localDataState
 
@@ -29,7 +29,7 @@ const setResponseSignUp = (req: Request, res: Response) => {
         value: null
       }
 
-      return res.status(response.status).send(response)
+      res.status(response.status).send(response)
     }
 
     if (type === "authSignUpEmail") {
@@ -39,7 +39,7 @@ const setResponseSignUp = (req: Request, res: Response) => {
         message: "Success",
         value: null
       }
-      return res.status(response.status).send(response)
+      res.status(response.status).send(response)
     }
 
     const response: ResponseWithPayload<Omit<User, 'password' | '__v' | 'userCard'>> = {
@@ -50,7 +50,7 @@ const setResponseSignUp = (req: Request, res: Response) => {
       token: token.accessToken.value
     }
 
-    return res.status(response.status).send(response)
+    res.status(response.status).send(response)
   } catch (error: unknown) {
     const response: ResponseWithoutPayload = {
       status: 500,
@@ -62,11 +62,11 @@ const setResponseSignUp = (req: Request, res: Response) => {
       value: null
     }
 
-    return res.status(response.status).send(response)
+    res.status(response.status).send(response)
   }
 }
 
-const setResponseSignIn = (req: Request, res: Response) => {
+const setResponseSignIn = (req: Request, res: Response): void => {
   const { error, user, token } = res.locals.localDataState
   const { type } = req.body
 
@@ -83,7 +83,7 @@ const setResponseSignIn = (req: Request, res: Response) => {
         value: null
       }
 
-      return res.status(response.status).send(response)
+      res.status(response.status).send(response)
     }
 
     const response: ResponseWithPayload<Omit<User, 'password' | '__v' | 'userCard'>> = {
@@ -106,7 +106,7 @@ const setResponseSignIn = (req: Request, res: Response) => {
         })
     }
 
-    return res.status(response.status).send(response)
+    res.status(response.status).send(response)
   } catch (error: unknown) {
     const response: ResponseWithoutPayload = {
       status: 500,
@@ -118,11 +118,11 @@ const setResponseSignIn = (req: Request, res: Response) => {
       value: null
     }
 
-    return res.status(response.status).send(response)
+    res.status(response.status).send(response)
   }
 }
 
-const setResponseLogout = (req: Request, res: Response) => {
+const setResponseLogout = (req: Request, res: Response): void => {
   const { error } = res.locals.localDataState
 
   try {
@@ -147,7 +147,7 @@ const setResponseLogout = (req: Request, res: Response) => {
     }
 
     res.clearCookie('refreshToken')
-    return res.status(response.status).send(response)
+    res.status(response.status).send(response)
 
   } catch (error: unknown) {
     const response: ResponseWithoutPayload = {
@@ -160,11 +160,11 @@ const setResponseLogout = (req: Request, res: Response) => {
       value: null
     }
 
-    return res.status(response.status).send(response)
+    res.status(response.status).send(response)
   }
 }
 
-const setResponseRefreshAccessToken = (req: Request, res: Response) => {
+const setResponseRefreshAccessToken = (req: Request, res: Response): void => {
   const { token, error, user } = res.locals.localDataState
 
   try {
@@ -181,7 +181,7 @@ const setResponseRefreshAccessToken = (req: Request, res: Response) => {
       }
 
       res.clearCookie('refreshToken')
-      return res.status(response.status).send(response)
+      res.status(response.status).send(response)
     }
 
     const response: ResponseWithPayload<Omit<User, 'password' | '__v' | 'userCard'>> = {
@@ -192,7 +192,7 @@ const setResponseRefreshAccessToken = (req: Request, res: Response) => {
       token: token.accessToken.value
     }
 
-    return res.status(response.status).send(response)
+    res.status(response.status).send(response)
 
   } catch (error: unknown) {
     const response: ResponseWithoutPayload = {
@@ -205,7 +205,7 @@ const setResponseRefreshAccessToken = (req: Request, res: Response) => {
       value: null
     }
 
-    return res.status(response.status).send(response)
+    res.status(response.status).send(response)
   }
 }
 
@@ -213,6 +213,6 @@ authRouter.post("/auth/sign_up", checkBadRequestMiddleware, checkValidAuthFormMi
 authRouter.post("/auth/sign_in", checkBadRequestMiddleware, checkValidAuthFormMiddleware, createJwtMiddleware, setResponseSignIn)
 
 authRouter.get("/auth/refresh_access_token", checkAccessTokenMiddleware, checkRefreshTokenMiddleware, refrechAcccessTokenMiddleware, setResponseRefreshAccessToken)
-authRouter.get("/auth/logout", logoutUserMiddleware, setResponseLogout)
+authRouter.get("/auth/logout", checkAccessTokenMiddleware, checkRefreshTokenMiddleware, logoutUserMiddleware, setResponseLogout)
 
 export { authRouter }

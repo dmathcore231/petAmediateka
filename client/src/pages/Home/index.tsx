@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef, JSX } from "react"
 import { Link, useFetcher } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "../../hooks"
 import { fetchContent } from "../../redux/contentSlice"
@@ -152,7 +152,9 @@ export function Home(): JSX.Element {
     },
   }
 
-  const bannerProps: BannerProps = banner.content ? banner.content.data as BannerProps : defaultBannerData
+  const bannerProps: BannerProps = banner.content
+    ? banner.content.data as BannerProps
+    : defaultBannerData
 
   const sliderPropsNewRelease: SliderProps = {
     sliderSettings: {

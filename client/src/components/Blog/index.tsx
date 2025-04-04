@@ -1,3 +1,4 @@
+import { JSX } from "react"
 import { Slider } from "../Slider"
 import { temporaryBlog } from "../../helpers"
 import { SliderProps } from "../../types/interfaces/SliderProps"
@@ -9,7 +10,8 @@ export function Blog(): JSX.Element {
       pagenation: false,
       autoSwipe: false,
       lastSwipe: true,
-      quantityListItems: 5
+      quantityListItems: 5,
+      mediaPlayerHandler: false
     },
     slidesData: temporaryBlog,
     cardStyles: {

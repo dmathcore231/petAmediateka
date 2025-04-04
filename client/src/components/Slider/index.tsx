@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, CSSProperties } from "react"
+import { useEffect, useState, useRef, CSSProperties, JSX } from "react"
 import { useAppDispatch } from "../../hooks"
 import { toggleShow, setTitle, setSrc } from "../../redux/MediaPlayerSlice"
 import { Btn } from "../Btn"
@@ -35,12 +35,20 @@ export function Slider({ sliderSettings, sliderData: { data, cardStyles, setting
   const sliderItemRef = useRef<HTMLLIElement>(null)
 
   useEffect(() => {
-    if (data && data.length === quantityListItems) {
+    const isDataComplete = data && data.length === quantityListItems
+    const isPrevSlideOutOfBounds = multiStateSlider && multiStateSlider.prevSlide < 0 && lastSwipe
+    const isNextSlideOutOfBounds = multiStateSlider
+      && data
+      && multiStateSlider.nextSlide === data.length
+      && lastSwipe
+    const isMultiSliderType = typeSlider === 'multi' && !multiStateSlider
+
+    if (isDataComplete) {
       setClassBtn({
         prev: 'slider__btn slider__btn_prev slider__btn_disabled',
         next: 'slider__btn slider__btn_next slider__btn_disabled'
       })
-    } else if (multiStateSlider && multiStateSlider.prevSlide < 0 && lastSwipe) {
+    } else if (isPrevSlideOutOfBounds) {
       const timer = setTimeout(() => {
         setClassBtn({
           prev: 'slider__btn slider__btn_prev slider__btn_disabled',
@@ -49,7 +57,7 @@ export function Slider({ sliderSettings, sliderData: { data, cardStyles, setting
       }, animatedTime)
 
       return () => clearTimeout(timer)
-    } else if (multiStateSlider && data && multiStateSlider.nextSlide === data.length && lastSwipe) {
+    } else if (isNextSlideOutOfBounds) {
       const timer = setTimeout(() => {
         setClassBtn({
           prev: 'slider__btn slider__btn_prev',
@@ -58,7 +66,7 @@ export function Slider({ sliderSettings, sliderData: { data, cardStyles, setting
       }, animatedTime)
 
       return () => clearTimeout(timer)
-    } else if (typeSlider === 'multi' && !multiStateSlider && lastSwipe) {
+    } else if (isMultiSliderType) {
       setClassBtn({
         prev: 'slider__btn slider__btn_prev slider__btn_disabled',
         next: 'slider__btn slider__btn_next'
@@ -130,9 +138,7 @@ export function Slider({ sliderSettings, sliderData: { data, cardStyles, setting
         }
       }, animatedTime)
 
-      return () => {
-        clearTimeout(timeoutId)
-      }
+      return () => clearTimeout(timeoutId)
     }
   }, [stateSlider?.isAnimated, multiStateSlider?.isAnimated, animatedTime, typeSlider])
 
@@ -174,9 +180,7 @@ export function Slider({ sliderSettings, sliderData: { data, cardStyles, setting
         })
       }, animatedTime)
 
-      return () => {
-        clearTimeout(timerId)
-      }
+      return () => clearTimeout(timerId)
     } else if (stateSlider
       && data
       && stateSlider.indexSlide === data.length
@@ -192,32 +196,24 @@ export function Slider({ sliderSettings, sliderData: { data, cardStyles, setting
         })
       }, animatedTime)
 
-      return () => {
-        clearTimeout(timerId)
-      }
+      return () => clearTimeout(timerId)
     }
   }, [stateSlider?.indexSlide, data])
 
   useEffect(() => {
-    let interval: number
+    if (!autoSwipe || loadingData) return
 
-    if (autoSwipe && !loadingData) {
-      interval = setInterval(() => {
-        setProgress((prevProgress) => {
-          if (prevProgress >= 100) {
-            handleClickBtnNext()
-            return 0
-          }
-          return prevProgress + 1
-        })
-      }, autoSwipeTime)
-    }
+    const interval: number = setInterval(() => {
+      setProgress((prevProgress) => {
+        if (prevProgress >= 100) {
+          handleClickBtnNext()
+          return 0
+        }
+        return prevProgress + 1
+      })
+    }, autoSwipeTime)
 
-    return () => {
-      if (interval) {
-        clearInterval(interval)
-      }
-    }
+    return () => clearInterval(interval)
   }, [autoSwipe, data])
 
   const setClassSlide = (index: number) => {

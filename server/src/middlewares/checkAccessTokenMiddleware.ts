@@ -9,6 +9,8 @@ export function checkAccessTokenMiddleware(req: Request, res: Response, next: Ne
   const { token, error } = localDataState
   const accessTokenInHeader = req.headers.authorization?.split(' ')[1]
 
+  console.log(accessTokenInHeader)
+
   try {
     if (error) {
       return next()

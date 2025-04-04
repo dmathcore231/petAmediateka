@@ -1,3 +1,7 @@
+@use "../../styles/mixins" as *;
+@use "../../styles/variables" as *;
+
+
 .slider {
   --animation-time: .4s;
   --transition: transform var(--animation-time) ease-in-out 0ms;

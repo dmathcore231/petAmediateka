@@ -62,23 +62,58 @@ export function Input({ type, id, label, required, onChange, value, placeholder,
     }
   }
 
+  const setClassPlaceholder = (value: string | undefined, errorState: boolean): string => {
+    const mapClass = [
+      { className: "input__placeholder", condition: true },
+      { className: "input__placeholder_scaled", condition: !!value },
+      { className: "input__placeholder_error", condition: errorState },
+    ]
+
+    return mapClass.filter((item) => item.condition)
+      .map((item) => item.className)
+      .join(" ")
+  }
+
+  const setClassLabel = (labelInvisible: boolean, errorState: boolean): string => {
+    const mapClass = [
+      { className: "input__label", condition: true },
+      { className: "input__label_invisible", condition: labelInvisible },
+      { className: "input__label_error", condition: errorState },
+    ]
+
+    return mapClass.filter(item => item.condition)
+      .map(item => item.className)
+      .join(" ") + " text text_size_sm text_color_secondary-active"
+  }
+
+  const setClassInput = (className: string | undefined, errorState: boolean): string => {
+    const mapClass = [
+      { className: "input", condition: true },
+      { className: "input_error", condition: errorState },
+      { className: className, condition: className ? true : false },
+    ]
+
+    return mapClass.filter(item => item.condition)
+      .map(item => item.className)
+      .join(" ")
+  }
+
   return (
     <div className="input-wrapper">
       <div className="input__item">
         <input
           type={checkPassword ? (isVisiblePass ? "text" : "password") : type}
           id={id}
-          className={"input" + (className ? ` ${className}` : "") +
-            (errorState.value ? " input_error" : "")}
+          className={setClassInput(className, errorState.value)}
           required={required}
           value={value}
           name={name}
-          placeholder={placeholder}
+          placeholder={placeholder?.value}
           onChange={onChange}
           onBlur={handleError}
         />
-        <span className={"input__placeholder" + (value ? " input__placeholder_scaled" : "") + (errorState.value ? " input__placeholder_error" : "")}>
-          {placeholder}
+        <span className={setClassPlaceholder(value, errorState.value)}>
+          {placeholder?.value}
         </span>
         {btnInInput && (
           <span className="input__btn">
@@ -96,9 +131,7 @@ export function Input({ type, id, label, required, onChange, value, placeholder,
       {label.value && (
         <label
           htmlFor={id}
-          className={"input__label" + (label.labelInvisible ? " input__label_invisible" : "")
-            + (errorState.value ? " input__label_error" : "")
-            + " text text_size_sm text_color_secondary-active"}
+          className={setClassLabel(label.labelInvisible, errorState.value)}
         >
           {label.value}
         </label>

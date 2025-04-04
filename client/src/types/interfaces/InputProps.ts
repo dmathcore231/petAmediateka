@@ -11,7 +11,10 @@ export interface InputProps {
   required: boolean
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void
   value?: string
-  placeholder?: string
+  placeholder?: {
+    type: "scale" | "float"
+    value: string
+  }
   className?: string
   name?: string
   error?: InputErrorState | null

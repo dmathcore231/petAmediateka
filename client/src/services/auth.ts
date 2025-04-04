@@ -2,7 +2,7 @@ import { AxiosError } from "axios"
 import { client } from "../utils/client"
 import { signUpEndPoint, signInEndPoint, logoutEndPoint, refreshAccessTokenEndPoint } from "./endPoints"
 
-export const requestSignUp = async (body: FormData) => {
+export const requestSignUp = async (body: FormData): Promise<any> => {
   try {
     const { data } = await client.post(signUpEndPoint, body, {
       headers: {

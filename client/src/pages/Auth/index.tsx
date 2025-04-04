@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from "../../hooks"
-import { fetchSignUp } from '../../redux/authSlice'
+import { fetchSignUp, fetchSignIn } from '../../redux/authSlice'
 import { resetStatusResponse } from '../../redux/statusResponseSlice'
 import { AuthProps } from '../../types/interfaces/AuthProps'
 import { AuthEmail } from './AuthEmail'
@@ -24,32 +24,52 @@ export function Auth({ pageState }: AuthProps): JSX.Element {
 
   const [authState, setAuthState] = useState<AuthState>(defaultAuthState)
 
+  const requestConfig = {
+    signUp: {
+      onlyEmail: (formData: FormData, email: string | null) => {
+        if (!email) return
+
+        formData.append('type', 'authSignUpEmail')
+        formData.append('email', email)
+
+        dispatch(fetchSignUp(formData))
+      },
+      withPassword: (formData: FormData, email: string | null, password: string | null) => {
+        if (!email || !password) return
+
+        formData.append('type', 'authSignUp')
+        formData.append('email', email)
+        formData.append('password', password)
+
+        dispatch(fetchSignUp(formData))
+      }
+    },
+    signIn: {
+      onlyEmail: (formData: FormData, email: string | null) => {
+        if (!email) return
+
+        formData.append('type', 'authSignInEmail')
+        formData.append('email', email)
+
+        dispatch(fetchSignIn(formData))
+      },
+      withPassword: (formData: FormData, email: string | null, password: string | null) => {
+        if (!email || !password) return
+
+        formData.append('type', 'authSignIn')
+        formData.append('email', email)
+        formData.append('password', password)
+
+        dispatch(fetchSignIn(formData))
+      }
+    }
+  }
+
   useEffect(() => {
     const formData = new FormData()
+    const mode = authState.password ? 'withPassword' : 'onlyEmail'
 
-    if (pageState === 'signUp' && authState.email && !authState.password) {
-      formData.append('type', 'authSignUpEmail')
-      formData.append('email', authState.email)
-
-      dispatch(fetchSignUp({ body: formData, typeRequest: 'authSignUp' }))
-    } else if (pageState === 'signUp' && authState.email && authState.password) {
-      formData.append('type', 'authSignUp')
-      formData.append('email', authState.email)
-      formData.append('password', authState.password)
-
-      dispatch(fetchSignUp({ body: formData, typeRequest: 'authSignUp' }))
-    } else if (pageState === 'signIn' && authState.email && !authState.password) {
-      formData.append('type', 'authSignInEmail')
-      formData.append('email', authState.email)
-
-      dispatch(fetchSignUp({ body: formData, typeRequest: 'authSignIn' }))
-    } else if (pageState === 'signIn' && authState.email && authState.password) {
-      formData.append('type', 'authSignIn')
-      formData.append('email', authState.email)
-      formData.append('password', authState.password)
-
-      dispatch(fetchSignUp({ body: formData, typeRequest: 'authSignIn' }))
-    }
+    requestConfig[pageState][mode](formData, authState.email, authState.password)
 
   }, [pageState, authState.email, authState.password, dispatch])
 
@@ -63,11 +83,13 @@ export function Auth({ pageState }: AuthProps): JSX.Element {
     if (user && pageState === 'signUp' && status === 201) {
       navigate('/')
       dispatch(resetStatusResponse())
-    } else if (user && pageState === 'signIn' && status === 200) {
+    }
+
+    if (user && pageState === 'signIn' && status === 200) {
       navigate('/')
       dispatch(resetStatusResponse())
     }
-  }, [user, status])
+  }, [user, status, pageState, navigate, dispatch])
 
   return (
     <div className="auth">

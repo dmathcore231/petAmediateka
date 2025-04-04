@@ -8,16 +8,10 @@ import { initialStateAuth } from "../helpers/initStates"
 import { AxiosError } from "axios"
 import { UserData } from "../types/interfaces/User"
 
-export const fetchSignUp = createAsyncThunk<ResponseWithoutPayload, FetchAuthPayload, { rejectValue: ResponseWithoutPayload, dispatch: Dispatch }>('auth/fetchSignUpEmail',
-  async ({ body, typeRequest }, { dispatch, rejectWithValue }) => {
+export const fetchSignUp = createAsyncThunk<ResponseWithoutPayload, FormData, { rejectValue: ResponseWithoutPayload, dispatch: Dispatch }>('auth/fetchSignUpEmail',
+  async (body: FormData, { dispatch, rejectWithValue }) => {
     try {
-      let response
-      if (typeRequest === 'authSignUp') {
-        response = await requestSignUp(body)
-      } else {
-        response = await requestSignIn(body)
-      }
-
+      const response = await requestSignUp(body)
       dispatch(setStatusResponse({
         status: response.status,
         error: response.error,

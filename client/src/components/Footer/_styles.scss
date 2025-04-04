@@ -1,3 +1,5 @@
+@use "../../styles/mixins" as *;
+
 .footer {
   @include flex-between-start;
   padding-top: 2rem;

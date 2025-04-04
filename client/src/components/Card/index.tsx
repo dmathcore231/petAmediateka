@@ -1,3 +1,4 @@
+import { JSX } from "react"
 import { Link } from "react-router-dom"
 import { useAppSelector } from "../../hooks"
 import { Btn } from "../Btn"

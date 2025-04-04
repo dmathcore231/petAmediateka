@@ -1,3 +1,5 @@
+@use "./variables" as *;
+
 @keyframes fadeInLeft {
   from {
     left: 0;
