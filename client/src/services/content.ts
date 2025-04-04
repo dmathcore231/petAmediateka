@@ -1,11 +1,13 @@
-import { AxiosError } from "axios"
+import { AxiosError, AxiosResponse } from "axios"
 import { client } from "../utils/client"
 import { contentEndPoint } from "./endPoints"
 import { QueryParams } from "../types/QueryParams"
+import { ResponseWithPayload } from "../types/interfaces/Response"
+import { Content } from "../types/interfaces/Content"
 
-export const requestContent = async (query: QueryParams) => {
+export const requestContent = async (query: QueryParams): Promise<ResponseWithPayload<Content>> => {
   try {
-    const { data } = await client.get(contentEndPoint, {
+    const { data }: AxiosResponse<ResponseWithPayload<Content>> = await client.get(contentEndPoint, {
       params: query,
       withCredentials: true
     })

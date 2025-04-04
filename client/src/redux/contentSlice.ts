@@ -47,7 +47,6 @@ export const contentSlice = createSlice({
 
         state[typeContent].loading = true
         state[typeContent].error = null
-        state[typeContent].content = null
       })
       .addCase(fetchContent.fulfilled, (state, action: PayloadAction<ResponseWithPayload<Content | MediaContent>>) => {
         const typeContent = action.payload.value.type as ContentTypeEnum

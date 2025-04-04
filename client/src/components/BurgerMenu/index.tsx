@@ -1,8 +1,7 @@
-import { useState, useEffect, MouseEvent } from "react"
+import { useState, useEffect, MouseEvent, JSX } from "react"
 import { Link } from "react-router-dom"
 import { useAppSelector, useAppDispatch } from "../../hooks"
 import { fetchLogout } from "../../redux/authSlice"
-import { resetStatusResponse } from "../../redux/statusResponseSlice"
 import { Btn } from "../Btn"
 import { Avatar } from "../Avatar"
 import { BurgerMenuIcon } from "../../assets/icons/BurgerMenuIcon"
@@ -15,7 +14,7 @@ export function BurgerMenu(): JSX.Element {
 
   const [isActive, setIsActive] = useState(false)
 
-  useEffect(() => {
+  useEffect((): void => {
     const layoutElement = document.querySelector('.layout')
     if (isActive) {
       layoutElement?.classList.add('layout_fixed')
@@ -24,17 +23,17 @@ export function BurgerMenu(): JSX.Element {
     }
   }, [isActive])
 
-  const handleClickBurgerMenu = () => {
+  const handleClickBurgerMenu = (): void => {
     setIsActive(true)
   }
 
-  const handleClickCloseBtn = (event: MouseEvent<HTMLButtonElement>) => {
+  const handleClickCloseBtn = (event: MouseEvent<HTMLButtonElement> | MouseEvent<HTMLAnchorElement>): void => {
     event.stopPropagation()
     setIsActive(false)
   }
 
-  const handleClickLogout = () => {
-    const layoutElement = document.querySelector('.layout')
+  const handleClickLogout = (): void => {
+    const layoutElement: HTMLElement | null = document.querySelector('.layout')
     dispatch(fetchLogout())
     layoutElement?.classList.remove('layout_fixed')
   }
@@ -47,22 +46,35 @@ export function BurgerMenu(): JSX.Element {
         <div className="burger-menu__overlay"></div>
         <aside className="burger-menu-aside">
           <div className="burger-menu-aside-header">
-            <div className="burger-menu-aside-header__close-btn">
-              <Btn
-                type="button"
-                className="btn_transparent"
-                onClick={(event) => handleClickCloseBtn(event)}
-              >
-                <CloseIcon width={24} height={24} />
-              </Btn>
+            <div className="burger-menu-aside-header__item burger-menu-aside-header__item_jc">
+              <div className="burger-menu-aside-header__title title title_color_gray">
+                Выбор профиля
+              </div>
+              <div className="burger-menu-aside-header__close-btn">
+                <Btn
+                  type="button"
+                  className="btn_transparent"
+                  onClick={(event) => handleClickCloseBtn(event)}
+                >
+                  <CloseIcon width={24} height={24} />
+                </Btn>
+              </div>
             </div>
             <div className="burger-menu-aside-header__item">
-              <span className="burger-menu-aside-header__avatar">
+              <Link
+                to="/profile"
+                className="burger-menu-aside-header__avatar"
+                onClick={handleClickCloseBtn}
+              >
                 <Avatar size="md" className="avatar__img_border_white" />
-              </span>
-              <span className="burger-menu-aside-header__profile-name">
+              </Link>
+              <Link
+                to="/profile"
+                className="burger-menu-aside-header__profile-name"
+                onClick={handleClickCloseBtn}
+              >
                 {user?.userData.profileName}
-              </span>
+              </Link>
             </div>
             <div className="burger-menu-aside-header__item">
               <span className="burger-menu-aside-header__new-profile">
@@ -100,22 +112,38 @@ export function BurgerMenu(): JSX.Element {
             <nav className="burger-menu-aside-nav-bar">
               <ul className="burger-menu-aside-nav-bar-list">
                 <li className="burger-menu-aside-nav-bar-list__item">
-                  <Link to="#" className="link link_white title title_size_s">
+                  <Link
+                    to="/profile/favorites"
+                    className="link link_white title title_size_s"
+                    onClick={handleClickCloseBtn}
+                  >
                     Избранное
                   </Link>
                 </li>
                 <li className="burger-menu-aside-nav-bar-list__item">
-                  <Link to="#" className="link link_white title title_size_s">
+                  <Link
+                    to="/profile/favorites"
+                    className="link link_white title title_size_s"
+                    onClick={handleClickCloseBtn}
+                  >
                     История просмотров
                   </Link>
                 </li>
                 <li className="burger-menu-aside-nav-bar-list__item">
-                  <Link to="#" className="link link_white title title_size_s">
+                  <Link
+                    to="/profile/favorites"
+                    className="link link_white title title_size_s"
+                    onClick={handleClickCloseBtn}
+                  >
                     Настроики
                   </Link>
                 </li>
                 <li className="burger-menu-aside-nav-bar-list__item">
-                  <Link to="#" className="link link_white title title_size_s">
+                  <Link
+                    to="/profile/favorites"
+                    className="link link_white title title_size_s"
+                    onClick={handleClickCloseBtn}
+                  >
                     Покупки
                   </Link>
                 </li>

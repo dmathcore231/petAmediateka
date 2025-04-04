@@ -1,6 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { initialStateMediaPlayer } from "../helpers/initStates"
 import { PlayerStatus } from "../types/PlayerStatus"
+import { SrcMediaPlaer } from "../types/SrcMediaPlaer"
+import { VideoQuality } from "../types/VideoQuality"
 
 export const mediaPlayerSlice = createSlice({
   name: 'mediaPlayer',
@@ -19,15 +21,28 @@ export const mediaPlayerSlice = createSlice({
       state.playerStatus = initialStateMediaPlayer.playerStatus
     },
 
-    getSrc: (state, action: PayloadAction<string>) => {
+    setSrc: (state, action: PayloadAction<SrcMediaPlaer>) => {
       state.src = action.payload
     },
 
-    setVideoQuality: (state, action: PayloadAction<'1080p' | '720p' | '480p' | '360p'>) => {
-      state.videoQuality = action.payload
+    setCurrentSrc: (state, action: PayloadAction<{ type: VideoQuality, value: string }>) => {
+      if (state.src) {
+        state.src = {
+          ...state.src,
+          _current: action.payload
+        }
+      }
+    },
+
+    setError: (state, action: PayloadAction<{ number: number, message: string } | null>) => {
+      state.error = action.payload
+    },
+
+    setTitle: (state, action: PayloadAction<string | null>) => {
+      state.title = action.payload
     }
   }
 })
 
 export const mediaPlayerReducer = mediaPlayerSlice.reducer
-export const { updatePlayerStatus, toggleShow, resetPlayerStatus, getSrc, setVideoQuality } = mediaPlayerSlice.actions
+export const { updatePlayerStatus, toggleShow, resetPlayerStatus, setSrc, setError, setTitle, setCurrentSrc } = mediaPlayerSlice.actions

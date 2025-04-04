@@ -7,7 +7,7 @@ import { MediaContent } from '../types/interface/MediaContent'
 
 const contentRouter = Router()
 
-const setResponseContent = async (req: Request, res: Response) => {
+const setResponseContent = async (req: Request, res: Response): Promise<void> => {
   const { localDataState } = res.locals
   const { error, content } = localDataState
 
@@ -24,7 +24,7 @@ const setResponseContent = async (req: Request, res: Response) => {
         value: null
       }
 
-      return res.status(error.status).json(response)
+      res.status(error.status).json(response)
     }
 
     const response: ResponseWithPayload<Content | MediaContent> = {
@@ -34,7 +34,7 @@ const setResponseContent = async (req: Request, res: Response) => {
       value: content
     }
 
-    return res.status(response.status).json(response)
+    res.status(response.status).json(response)
   } catch (error: unknown) {
     const response: ResponseWithoutPayload = {
       status: 500,
@@ -43,7 +43,7 @@ const setResponseContent = async (req: Request, res: Response) => {
       value: null
     }
 
-    return res.status(response.status).json(response)
+    res.status(response.status).json(response)
   }
 }
 

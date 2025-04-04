@@ -1,6 +1,8 @@
 import { BadgeCard } from "./BadgeCard"
+import { Bg } from "./Bg"
 import { Size } from "./Scaffold"
 import { Flex } from "./Scaffold"
+import { SrcMediaPlaer } from "./SrcMediaPlaer"
 
 export type CardLink = {
   linkType: 'allCard' | 'title'
@@ -19,13 +21,20 @@ export type TagsCard = {
 }
 
 export type CardData = {
-  link: CardLink,
-  imgBg: string
-  title?: CardTitle
-  ageRestriction?: number
-  description?: string
-  badge?: BadgeCard
-  tags?: TagsCard
+  _id: string
+  type: 'movie' | 'series'
+  title: {
+    value: string
+    originalTitle: string
+    linkTitle: string
+  }
+  badge: BadgeCard | null
+  ageRestriction: number
+  description: string
+  bg: Bg
+  logoImg: string
+  link: string
+  src?: SrcMediaPlaer
 }
 
 export type CardStyles = {
@@ -41,7 +50,7 @@ export type CardStyles = {
   ageRestrictionBadge?: {
     position: 'right' | 'left'
     size: Size
-  }
+  } | null
   hover?: {
     scale: boolean
     playBack: {
@@ -54,12 +63,14 @@ export type CardStyles = {
 
 export type CardSetting = {
   title: {
-    titleValue: string | null
     titleOutside: boolean
     titleLogoImg: boolean
+    titleLogoImgIndex: number | null
   }
+  badgeVisible: boolean
   link: CardLink
   descriptionVisible: boolean
   tags: TagsCard | null
+  cardSeries: boolean
 }
 

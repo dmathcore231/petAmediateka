@@ -1,3 +1,5 @@
+@use "../../styles/mixins" as *;
+
 .home {
   @include flex-column;
   gap: 4.375rem;

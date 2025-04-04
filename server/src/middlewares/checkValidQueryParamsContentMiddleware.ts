@@ -147,11 +147,6 @@ export async function checkValidQueryParamsContentMiddleware(req: Request, res: 
         }
 
         throw error
-      } else {
-        res.locals.localDataState = {
-          ...res.locals.localDataState,
-          content: data
-        }
       }
     }
 

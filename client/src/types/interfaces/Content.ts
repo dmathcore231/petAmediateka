@@ -1,11 +1,12 @@
-import { MediaContent } from "../interfaces/MediaContent"
+import { CardData } from "../Card"
 import { BannerProps } from "./BannerProps"
+import { PromoLineData } from "./PromoLineData"
 
 export type Content = {
   _id: string
   __v: number
   type: ContentTypeEnum
-  data: Array<MediaContent> | BannerProps | null
+  data: Array<CardData> | BannerProps | PromoLineData | null
 }
 
 export enum ContentTypeEnum {
@@ -13,4 +14,6 @@ export enum ContentTypeEnum {
   WatchingNow = "watchingNow",
   Banner = "banner",
   Series = "series",
+  NewRelease = "newRelease",
+  PromoLine = "promoLine",
 }

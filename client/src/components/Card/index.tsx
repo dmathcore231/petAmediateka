@@ -1,28 +1,27 @@
+import { JSX } from "react"
 import { Link } from "react-router-dom"
+import { useAppSelector } from "../../hooks"
 import { Btn } from "../Btn"
 import { Badge } from "../Badge"
 import { AgeRestrictionBadge } from "../AgeRestrictionBadge"
 import { Tags } from "../Tags"
 import { CardProps } from "../../types/interfaces/CardProps"
+import { MediaPlayIcon } from "../../assets/icons/MediaPlayIcon"
 import { PlayIcon } from "../../assets/icons/PlayIcon"
 import { AddFavoriteIcon } from "../../assets/icons/AddFavoriteIcon"
 
 export function Card({ data, styles, settings, loadingCardData, error }: CardProps): JSX.Element {
-  const { _id, type, data: { title, badge, ageRestriction, description: { prewiewDescription } }, bg, logoImg } = data
-  const { cardSize, flex, clipPath, ageRestrictionBadge, btnGroup, hover, boxShadow } = styles
-  const { title: { titleValue, titleOutside, titleLogoImg }, link: { linkType }, descriptionVisible, tags } = settings
+  const { user } = useAppSelector(state => state.auth)
 
-  const setLinkValue = (): string => {
-    return type === 'movie'
-      ? `/movie/${_id}/${title.linkTitle}`
-      : `/series/${_id}/${title.linkTitle}`
-  }
+  const { _id, type, title, badge, ageRestriction, description, bg, logoImg, link } = data
+  const { cardSize, flex, clipPath, ageRestrictionBadge, btnGroup, hover, boxShadow } = styles
+  const { title: { titleOutside, titleLogoImg, titleLogoImgIndex }, badgeVisible, link: { linkType }, descriptionVisible, tags, cardSeries } = settings
 
   const renderCardContentLinkWrapper = (children: JSX.Element): JSX.Element => {
     if (linkType === 'allCard') {
       return (
         <Link
-          to={setLinkValue()}
+          to={link}
           className="card__link"
         >
           {children}
@@ -33,26 +32,34 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
     }
   }
 
+  const renderCardBg = (): JSX.Element => {
+    if (cardSize === 'lg' && bg?.imgUrl) {
+      return (
+        <img src={bg.imgUrl} alt="" className="card-bg__img" />
+      )
+    } else if (cardSize === 'lm' && bg?.imgResizeLmUrl) {
+      return (
+        <img src={bg.imgResizeLmUrl} alt="" className="card-bg__img" />
+      )
+    } else {
+      return (
+        <img src={bg?.imgResizeUrl} alt="" className="card-bg__img" />
+      )
+    }
+  }
+
   const renderCardContent = (): JSX.Element => {
     return (
       <>
         {!loadingCardData && !error && (
           <div className={boxShadow ? "card-bg card-bg_shadow" : "card-bg"}>
             <picture className="card-bg__picture">
-
-              {cardSize === 'lg' && bg?.imgUrl
-                ? (
-                  <img src={bg.imgUrl} alt="" className="card-bg__img" />
-                )
-                : (
-                  <img src={bg?.imgResizeUrl} alt="" className="card-bg__img" />
-                )
-              }
+              {renderCardBg()}
             </picture>
           </div>
         )}
         <div className={`card-body card-body_flex_jc_${flex.body.justifyContent}`}>
-          {ageRestriction && ageRestrictionBadge && (
+          {ageRestrictionBadge && (
             <div className={ageRestrictionBadge.position === 'right'
               ? "card-body__age-restriction card-body__age-restriction_jc_fe"
               : "card-body__age-restriction"
@@ -63,7 +70,7 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
             </div>
           )
           }
-          {badge && (
+          {badge && badgeVisible && (
             <div className="card-body__badge">
               {!loadingCardData
                 ? (<Badge type={badge.type} title={badge.title} />)
@@ -73,9 +80,9 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
           {titleLogoImg && (
             <div className="card-body__title">
               {
-                linkType === 'title' && titleValue
+                linkType === 'title'
                   ? (
-                    <Link to={setLinkValue()} className="card__link">
+                    <Link to={link} className="card__link">
                       <img src={logoImg} alt="" className="card-body__title-img" />
                     </Link>
                   )
@@ -85,14 +92,9 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
               }
             </div>
           )}
-          {!titleLogoImg && !titleOutside && (
-            <div className="card-body__title">
-              {titleValue}
-            </div>
-          )}
           {descriptionVisible && (
             <div className={"card-body__description" + (loadingCardData ? ' card-body__description_loading' : '') + " title title_align_left"}>
-              {!loadingCardData && prewiewDescription ? prewiewDescription : ''}
+              {!loadingCardData && description ? description : ''}
             </div>
           )}
           {tags && (
@@ -102,21 +104,23 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
             <div className={"card-body__btn" + (loadingCardData ? ' card-body__btn_loading' : '')}>
               {!loadingCardData && (
                 <>
-                  <Link to={setLinkValue()} className={`btn btn_primary card-body__btn-link card-body__btn-link_size_${styles.cardSize}`}>
+                  <Link to={link} className={`btn btn_primary card-body__btn-link card-body__btn-link_size_${styles.cardSize}`}>
                     <div className="card-body__btn-wrapper">
                       <PlayIcon width={28} height={28} />
                       <span className="card-body__btn-text">Смотреть</span>
                     </div>
                   </Link>
-                  <Btn
-                    type="button"
-                    className="btn_secondary btn_transparent card-body__btn-link card-body__btn-link_size_xsm"
-                    onClick={() => console.log('add favorite')}
-                  >
-                    <span className="card-body__btn-wrapper-scale">
-                      <AddFavoriteIcon width={22} height={22} />
-                    </span>
-                  </Btn>
+                  {user && (
+                    <Btn
+                      type="button"
+                      className="btn_secondary btn_transparent card-body__btn-link card-body__btn-link_size_xsm"
+                      onClick={() => console.log('add favorite')}
+                    >
+                      <span className="card-body__btn-wrapper-scale">
+                        <AddFavoriteIcon width={22} height={22} />
+                      </span>
+                    </Btn>
+                  )}
                 </>
               )}
             </div>
@@ -125,6 +129,11 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
         {!titleLogoImg && titleOutside && (
           <div className="card-title title title_align_left">
             {title.value}
+          </div>
+        )}
+        {cardSeries && (
+          <div className="card-icon-play">
+            <MediaPlayIcon width={60} height={60} />
           </div>
         )}
       </>

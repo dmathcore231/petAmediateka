@@ -1,5 +1,8 @@
-import { MediaContent } from "./MediaContent"
+import { SrcMediaPlaer } from "../SrcMediaPlaer"
 
 export interface TrailerProps {
-  trailerData: MediaContent
+  trailerImg: string
+  seasonsIndex: number
+  src: SrcMediaPlaer
+  title: string
 }

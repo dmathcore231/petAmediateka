@@ -103,7 +103,10 @@ export function AuthPass({ setPassValue, email, type }: AuthPassProps): JSX.Elem
             id="password"
             label={{ value: "Не менее 6 символов", labelInvisible: false }}
             required
-            placeholder="Пароль"
+            placeholder={{
+              type: "scale",
+              value: "Пароль"
+            }}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             error={toggleInputError()}

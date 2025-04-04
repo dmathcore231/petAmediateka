@@ -17,7 +17,7 @@ export function ShowMore({ data }: ShowMoreProps): JSX.Element {
         <h3>{data.title}</h3>
       </div>
       <div className={"show-more__discription title" + (isShow ? " show-more__discription_show" : "")}>
-        {data.discription}
+        {data.description}
       </div>
       <div className="show-more__btn-wrapper">
         <Btn

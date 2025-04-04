@@ -1,23 +1,48 @@
+import { useEffect } from "react"
 import { Outlet } from "react-router-dom"
+import { useAppSelector, useAppDispatch } from "../../hooks"
+import { fetchRefreshUserData } from "../../redux/authSlice"
+import { getDataFromLocalStorage, setDataInLocalStorage } from "../../helpers"
+import { MediaPlayer } from "../MediaPlayer"
 import { Header } from "../Header"
 import { Main } from "../Main"
 import { Footer } from "../Footer"
 import { NavBar } from "../NavBar"
-
-import { useAppSelector } from "../../hooks"
+import { UserData } from "../../types/interfaces/User"
 
 export function Layout(): JSX.Element {
+  const dispatch = useAppDispatch()
+
   const { isShow } = useAppSelector(state => state.mediaPlayer)
+  const { user } = useAppSelector(state => state.auth)
+
+  useEffect(() => {
+    const userData = getDataFromLocalStorage<UserData>('userData')
+    const token = getDataFromLocalStorage<string>('token')
+
+    if (userData && token && !user) {
+      dispatch(fetchRefreshUserData(token))
+    } else if (!userData && token) {
+
+      dispatch(fetchRefreshUserData(token))
+    } else if (!token && userData) {
+      dispatch(fetchRefreshUserData('noToken'))
+    }
+
+  }, [dispatch])
 
   return (
-    <div className={isShow ? "layout layout_fixed" : "layout"}>
-      <Header>
-        <NavBar />
-      </Header>
-      <Main>
-        <Outlet />
-      </Main>
-      <Footer />
-    </div>
+    <>
+      <MediaPlayer />
+      <div className={isShow ? "layout layout_fixed" : "layout"}>
+        <Header>
+          <NavBar />
+        </Header>
+        <Main>
+          <Outlet />
+        </Main>
+        <Footer />
+      </div>
+    </>
   )
 }

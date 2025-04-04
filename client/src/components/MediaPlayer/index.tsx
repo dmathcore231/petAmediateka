@@ -1,10 +1,9 @@
 import { useRef, useEffect, useState, MouseEvent, RefObject } from "react"
 import { useAppDispatch, useAppSelector } from "../../hooks"
-import { updatePlayerStatus, toggleShow, resetPlayerStatus, getSrc, setVideoQuality } from "../../redux/MediaPlayerSlice"
+import { updatePlayerStatus, toggleShow, resetPlayerStatus, setSrc, setError, setCurrentSrc } from "../../redux/MediaPlayerSlice"
 import { Btn } from "../Btn"
 import { TrackSetting } from "../../types/TrackSetting"
 import { VideoQuality } from "../../types/VideoQuality"
-import { MediaPlayerProps } from "../../types/interfaces/MediaPlayerProps"
 import { CloseIcon } from "../../assets/icons/CloseIcon"
 import { Rewind10Icon } from "../../assets/icons/Rewind10Icon"
 import { Forward10Icon } from "../../assets/icons/Forward10Icon"
@@ -15,7 +14,7 @@ import { MutedIcon } from "../../assets/icons/MutedIcon"
 import { UnmutedIcon } from "../../assets/icons/UnmutedIcon"
 import { HdIcon } from "../../assets/icons/HdIcon"
 
-export function MediaPlayer(data: MediaPlayerProps): JSX.Element {
+export function MediaPlayer(): JSX.Element {
   const dispatch = useAppDispatch()
   const videoRef = useRef<HTMLVideoElement>(null)
   const thumbVolumeRef = useRef<HTMLDivElement>(null)
@@ -23,7 +22,7 @@ export function MediaPlayer(data: MediaPlayerProps): JSX.Element {
   const trackVideoRef = useRef<HTMLDivElement>(null)
   const mediaPlayerMainRef = useRef<HTMLDivElement>(null)
 
-  const { isShow, playerStatus, src, videoQuality } = useAppSelector(state => state.mediaPlayer)
+  const { isShow, playerStatus, src, error, loading, title } = useAppSelector(state => state.mediaPlayer)
 
   const [timeVideo, setTimeVideo] = useState(0)
   const [trackSetting, setTrackSetting] = useState<TrackSetting>({
@@ -41,7 +40,16 @@ export function MediaPlayer(data: MediaPlayerProps): JSX.Element {
   const inactiveTime = 3000
 
   useEffect(() => {
-    if (isShow) {
+    if (error) {
+      dispatch(setError({ number: 404, message: 'Not found url video' }))
+      setInactive(false)
+    } else {
+      dispatch(setError(null))
+    }
+  }, [src])
+
+  useEffect(() => {
+    if (isShow && !error) {
       let timeoutId: number | null = null;
 
       const handleCheckUserInactive = () => {
@@ -73,10 +81,10 @@ export function MediaPlayer(data: MediaPlayerProps): JSX.Element {
         document.removeEventListener("touchmove", handleCheckUserInactive)
       }
     }
-  }, [playerStatus.status])
+  }, [playerStatus.status, isShow, error])
 
   useEffect(() => {
-    if (videoRef.current && isShow) {
+    if (videoRef.current && isShow && src) {
       dispatch(resetPlayerStatus())
       videoRef.current.play()
       videoRef.current.currentTime = 0
@@ -84,7 +92,6 @@ export function MediaPlayer(data: MediaPlayerProps): JSX.Element {
       dispatch(updatePlayerStatus({
         ...playerStatus, status: "play",
       }))
-      dispatch(getSrc('/hotd/hotdTrailerVideo720.mp4'))
     }
   }, [isShow])
 
@@ -112,7 +119,7 @@ export function MediaPlayer(data: MediaPlayerProps): JSX.Element {
     if (videoRef.current) {
       videoRef.current.currentTime = timeVideo
     }
-  }, [videoQuality])
+  }, [src])
 
   const getFixedTime = (time: number) => {
     return `${Math.floor(time / 60)}:${Math.floor(time % 60) < 10 ? `0${Math.floor(time % 60)}` : Math.floor(time % 60)}`
@@ -131,6 +138,11 @@ export function MediaPlayer(data: MediaPlayerProps): JSX.Element {
       videoRef.current.pause()
       videoRef.current.currentTime = 0
 
+      dispatch(resetPlayerStatus())
+      dispatch(toggleShow(false))
+      setIsShowHdList(false)
+      setTimeVideo(0)
+    } else if (error && !playerStatus.fullScreen) {
       dispatch(resetPlayerStatus())
       dispatch(toggleShow(false))
       setIsShowHdList(false)
@@ -320,12 +332,14 @@ export function MediaPlayer(data: MediaPlayerProps): JSX.Element {
   }
 
   const handleClickBtnQualityVideoItem = (quality: VideoQuality) => {
-    if (quality === '360p') {
-      dispatch(getSrc('/hotd/hotdTrailerVideo360.mp4'))
-      dispatch(setVideoQuality('360p'))
-    } else {
-      dispatch(getSrc('/hotd/hotdTrailerVideo720.mp4'))
-      dispatch(setVideoQuality('720p'))
+    if (quality === '360p' && src && src.quality360 && src._current.type !== '360p') {
+      dispatch(setCurrentSrc({ type: '360p', value: src.quality360 }))
+    } else if (quality === '720p' && src && src.quality720 && src._current.type !== '720p') {
+      dispatch(setCurrentSrc({ type: '720p', value: src.quality720 }))
+    } else if (quality === '1080p' && src && src.quality1080 && src._current.type !== '1080p') {
+      dispatch(setCurrentSrc({ type: '1080p', value: src.quality1080 }))
+    } else if (quality === '2160p' && src && src.quality2160 && src._current.type !== '2160p') {
+      dispatch(setCurrentSrc({ type: '2160p', value: src.quality2160 }))
     }
   }
 
@@ -350,7 +364,7 @@ export function MediaPlayer(data: MediaPlayerProps): JSX.Element {
               <div className={"media-player-main-header__title" + (inactive
                 ? " media-player-main-header__title_fade"
                 : " media-player-main-header__title_show")}>
-                <h3>Дом Дракона</h3>
+                <h3>{title}</h3>
               </div>
             </div>
             <div className={"media-player-main-header__item"
@@ -364,19 +378,28 @@ export function MediaPlayer(data: MediaPlayerProps): JSX.Element {
               </Btn>
             </div>
           </div>
-          <video src={src!}
-            autoPlay
-            preload="auto"
-            muted={playerStatus.volume.isMuted}
-            ref={videoRef}
-            className={"media-player-main-video" + (playerStatus.fullScreen ? " media-player-main-video_fullscreen" : "")}
-            onTimeUpdate={(e) => setTimeVideo(Number(e.currentTarget.currentTime.toFixed(2)))}
-            onEnded={() => {
-              dispatch(updatePlayerStatus({
-                ...playerStatus, status: "pause"
-              }))
-            }}
-          ></video>
+          {!error && (
+            <video src={src?._current.value!}
+              autoPlay
+              preload="auto"
+              muted={playerStatus.volume.isMuted}
+              ref={videoRef}
+              className={"media-player-main-video" + (playerStatus.fullScreen ? " media-player-main-video_fullscreen" : "")}
+              onTimeUpdate={(e) => setTimeVideo(Number(e.currentTarget.currentTime.toFixed(2)))}
+              onEnded={() => {
+                dispatch(updatePlayerStatus({
+                  ...playerStatus, status: "pause"
+                }))
+              }}
+            ></video>
+          )}
+          {error && (
+            <div className="media-player-error">
+              <div className="media-player-error__item">
+                <h3>Упс, что-то пошло не так...</h3>
+              </div>
+            </div>
+          )}
           <div className={"media-player-control"
             + (playerStatus.fullScreen ? " container" : "")
             + (inactive ? " media-player-control_fade" : "")}>
@@ -497,7 +520,7 @@ export function MediaPlayer(data: MediaPlayerProps): JSX.Element {
                           onClick={() => handleClickBtnQualityVideoItem('360p')}
                         >
                           <span className={"media-player-control-quality__btn"
-                            + (videoQuality === '360p'
+                            + (src?._current.type === '360p'
                               ? " media-player-control-quality__btn_active"
                               : ""
                             )
@@ -513,7 +536,7 @@ export function MediaPlayer(data: MediaPlayerProps): JSX.Element {
                           onClick={() => handleClickBtnQualityVideoItem('720p')}
                         >
                           <span className={"media-player-control-quality__btn"
-                            + (videoQuality === '720p'
+                            + (src?._current.type === '720p'
                               ? " media-player-control-quality__btn_active"
                               : ""
                             )

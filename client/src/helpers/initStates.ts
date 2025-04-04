@@ -1,6 +1,5 @@
 import { AuthState, StateStatusResponse, ContentState, MediaPlayerState } from "../types/interfaces/InitialStatesSlice"
 import { ContentTypeEnum } from "../types/interfaces/Content"
-import { ContentTypes } from "../types/interfaces/InitialStatesSlice"
 
 export const initialStateAuth: AuthState = {
   loading: false,
@@ -25,7 +24,13 @@ export const initialStateContent: ContentState = {
   },
   [ContentTypeEnum.Series]: {
     loading: false, error: null, content: null
-  }
+  },
+  [ContentTypeEnum.NewRelease]: {
+    loading: false, error: null, content: null
+  },
+  [ContentTypeEnum.PromoLine]: {
+    loading: false, error: null, content: null
+  },
 }
 
 export const initialStateMediaPlayer: MediaPlayerState = {
@@ -33,7 +38,6 @@ export const initialStateMediaPlayer: MediaPlayerState = {
   isShow: false,
   error: null,
   src: null,
-  videoQuality: '720p',
   playerStatus: {
     status: null,
     time: {
@@ -48,5 +52,6 @@ export const initialStateMediaPlayer: MediaPlayerState = {
     },
     fullScreen: false,
     userInactive: false
-  }
+  },
+  title: null
 }

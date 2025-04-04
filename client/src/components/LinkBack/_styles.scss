@@ -1,0 +1,16 @@
+@use "../../styles/mixins" as *;
+@use "../../styles/variables" as *;
+
+.link-back {
+  @include flex-center;
+  gap: 0.188rem;
+
+  &__item {}
+
+  &__link {
+
+    &:hover {
+      color: $color-medium-gray;
+    }
+  }
+}

@@ -4,6 +4,17 @@ import { ImdbIcon } from "../../assets/icons/ImdbIcon"
 import { KinopoiskIcon } from "../../assets/icons/KinopoiskIcon"
 
 export function MetaData({ rating, dateRelease, ageRestriction, genres }: MetaDataProps): JSX.Element {
+  const getGenres = (data: Array<string> | string, limit: number): string => {
+    if (typeof data === "string") {
+      return data
+    }
+
+    if (data.length > limit) {
+      return data.slice(0, limit).join(" / ") + " / ..."
+    }
+
+    return data.join(" / ")
+  }
   return (
     <div className="meta-data">
       <div className="meta-data-list">
@@ -44,7 +55,7 @@ export function MetaData({ rating, dateRelease, ageRestriction, genres }: MetaDa
           </div>
           <div className="meta-data-list__item">
             <span className="title title_color_secondary-active title_weight_bold">
-              {genres}
+              {getGenres(genres, 3)}
             </span>
           </div>
         </div>

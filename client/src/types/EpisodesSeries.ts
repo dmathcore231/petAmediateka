@@ -1,6 +1,7 @@
+import { SrcMediaPlaer } from "./SrcMediaPlaer"
 
 export type EpisodesSeries = {
-  link: string
+  link: SrcMediaPlaer
   episodeNumber: number
   imgPreview: string
   title: string

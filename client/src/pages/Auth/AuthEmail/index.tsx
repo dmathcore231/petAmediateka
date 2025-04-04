@@ -90,7 +90,10 @@ export function AuthEmail({ setEmailValue, type }: AuthEmailProps): JSX.Element 
               ? { value: error.message, labelInvisible: false }
               : { value: null, labelInvisible: true }}
             required
-            placeholder="Email"
+            placeholder={{
+              type: "scale",
+              value: "Email"
+            }}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             error={errorInput}

@@ -18,7 +18,30 @@ const mediaContentSchema = new Schema<MediaContent>({
         episodes: {
           type: [{
             link: {
-              type: String,
+              type: {
+                _current: {
+                  type: {
+                    type: String,
+                    enum: ['360p', '460p', '720p', '1080p', '2160p'],
+                    required: true
+                  },
+                  value: {
+                    type: String,
+                  },
+                },
+                quality360: {
+                  type: String,
+                },
+                quality720: {
+                  type: String,
+                },
+                quality1080: {
+                  type: String,
+                },
+                quality2160: {
+                  type: String,
+                }
+              },
               required: true
             },
             episodeNumber: {
@@ -128,8 +151,19 @@ const mediaContentSchema = new Schema<MediaContent>({
         _id: false
       },
       about: {
-        type: Boolean,
-        default: false
+        type: {
+          title: {
+            type: String,
+            required: false,
+            default: null
+          },
+          description: {
+            type: String,
+            required: false,
+            default: null
+          }
+        },
+        _id: false
       },
       ageRestriction: {
         type: Number,
@@ -166,15 +200,15 @@ const mediaContentSchema = new Schema<MediaContent>({
   rating: {
     type: {
       raitingAmediateka: {
-        type: Number,
+        type: Schema.Types.Mixed,
         default: "N/A"
       },
       ratingImdb: {
-        type: Number,
+        type: Schema.Types.Mixed,
         default: "N/A"
       },
       ratingKinopoisk: {
-        type: Number,
+        type: Schema.Types.Mixed,
         default: "N/A"
       }
     },
@@ -211,25 +245,28 @@ const mediaContentSchema = new Schema<MediaContent>({
     imgResizeUrl: {
       type: String,
       required: true
+    },
+    imgResizeLmUrl: {
+      type: String
     }
   },
   trailer: {
     type: {
+      img: {
+        type: String,
+        required: true
+      },
       quality360: {
         type: String,
-        default: null
       },
       quality720: {
         type: String,
-        default: null
       },
       quality1080: {
         type: String,
-        default: null
       },
       quality2160: {
         type: String,
-        default: null
       }
     },
     default: null,

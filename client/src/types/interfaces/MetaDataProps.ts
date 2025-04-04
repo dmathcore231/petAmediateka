@@ -1,11 +1,11 @@
 
 export interface MetaDataProps {
   rating: {
-    amediateka: number
-    imdb: number
-    kinopoisk?: number
+    amediateka: number | string
+    imdb: number | string
+    kinopoisk?: number | string
   }
-  dateRelease: number
-  ageRestriction: number
-  genres: string
+  dateRelease: number | string
+  ageRestriction: number | string
+  genres: Array<string> | string
 }

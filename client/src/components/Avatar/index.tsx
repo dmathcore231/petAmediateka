@@ -1,22 +1,20 @@
+import { JSX } from "react"
 import { useAppSelector } from "../../hooks"
 import { AvatarProps } from "../../types/interfaces/AvatarProps"
 
 export function Avatar({ size, className }: AvatarProps): JSX.Element {
-  const { user, loading } = useAppSelector(state => state.auth)
+  const { user } = useAppSelector(state => state.auth)
 
-  const setUserAvatar = (): string => {
-    if (user && user.userData.userAvatar) {
-      return user.userData.userAvatar
-    } else {
-      return '/defaultAvatar.jpg'
-    }
-  }
+  const baseClass: string = `avatar__img`
+  const sizeClass: string = `avatar__img_size_${size}`
+  const customClass: string = className ? ` ${className}` : ''
+
+  const setUserAvatar = (): string => user?.userData.userAvatar || '/defaultAvatar.jpg'
 
   return (
     <div className="avatar">
       <img src={setUserAvatar()} alt="profile-avatar"
-        className={`avatar__img avatar__img_size_${size}`
-          + (className ? " " + className : "")} />
+        className={`${baseClass} ${sizeClass}${customClass}`} />
     </div>
   )
 }

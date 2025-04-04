@@ -1,0 +1,40 @@
+@use "../../styles/mixins" as *;
+@use "../../styles/variables" as *;
+
+.avatar {
+  @include flex-center;
+
+  &__img {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+
+    &_size {
+
+      &_sm {
+        width: 2.5rem;
+        height: 2.5rem;
+      }
+
+      &_md {
+        width: 3.5rem;
+        height: 3.5rem;
+      }
+    }
+
+    &_border {
+      &_white {
+        border: 0.063rem solid $color-white;
+      }
+    }
+
+    &_scale {
+      transition: all var(--animation-time) ease-in-out 0ms;
+
+      &:hover {
+        cursor: pointer;
+        transform: scale(1.1);
+      }
+    }
+  }
+}

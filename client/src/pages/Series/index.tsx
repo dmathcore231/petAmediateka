@@ -1,62 +1,71 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { useParams, Link } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "../../hooks"
 import { fetchContent } from "../../redux/contentSlice"
+import { RootState } from "../../redux/store"
 import { LinkBack } from "../../components/LinkBack"
 import { Btn } from "../../components/Btn"
 import { MetaData } from "../../components/MetaData"
-import { MediaPlayer } from "../../components/MediaPlayer"
-import { ShowMore } from "../../components/ShowMore"
 import { Spinner } from "../../components/Spinner"
+import { ShowMore } from "../../components/ShowMore"
+import { Trailer } from "../../components/Trailer"
+import { Seasons } from "../../components/Seasons"
 import { ContentTypeEnum } from "../../types/interfaces/Content"
 import { MediaContent } from "../../types/interfaces/MediaContent"
-import { ContentStateItem, ContentTypes } from "../../types/interfaces/InitialStatesSlice"
+import { ContentStateItem } from "../../types/interfaces/InitialStatesSlice"
+import { formSrcMediaContent } from "../../helpers"
 import { HboIcon } from "../../assets/icons/HboIcon"
 import { PlayIcon } from "../../assets/icons/PlayIcon"
 import { ShareIcon } from "../../assets/icons/ShareIcon"
 import { AddFavoriteIcon } from "../../assets/icons/AddFavoriteIcon"
 import { LikeIcon } from "../../assets/icons/LikeIcon"
 import { DislikeIcon } from "../../assets/icons/DislikeIcon"
-import { Trailer } from "../../components/Trailer"
 
 export function Series(): JSX.Element {
-  const { id, title, season } = useParams()
+  const { id, seasonIndex } = useParams()
   const dispatch = useAppDispatch()
 
-  const { series } = useAppSelector(state => state.content)
-  const { status, error, message } = useAppSelector(state => state.statusResponse)
+  const { content, loading } = useAppSelector((state: RootState) => state.content[ContentTypeEnum.Series] as ContentStateItem<MediaContent>)
 
   useEffect(() => {
-    if (!season && id) {
-      dispatch(fetchContent({ type: ContentTypeEnum.Series, id }))
+    dispatch(fetchContent({ type: ContentTypeEnum.Series, id }))
+  }, [dispatch])
+
+  const setClassMetaDataDes = (): string => {
+    if (!seasonIndex && content && content.trailer) {
+      return 'series-meta-data-description'
+    } else if (seasonIndex && content && content.seasons && content.seasons[Number(seasonIndex) - 1] && content.seasons[Number(seasonIndex) - 1].trailer) {
+      return 'series-meta-data-description'
+    } else {
+      return 'series-meta-data-description series-meta-data-description_no-trailer'
     }
-  }, [])
+  }
 
-  // const propsMetaData = {
-  //   rating: {
-  //     amediateka: temporaryListSeries[0].rating.amediateka,
-  //     imdb: temporaryListSeries[0].rating.imdb,
-  //     kinopoisk: temporaryListSeries[0].rating.kinopoisk,
-  //   },
-  //   dateRelease: temporaryListSeries[0].data.dateRelease,
-  //   ageRestriction: temporaryListSeries[0].data.ageRestriction,
-  //   genres: "Драма",
-  // }
+  const renderBgPage = (): JSX.Element => {
+    const indexSeason = Number(seasonIndex)
+    const seasonData = content.seasons?.[indexSeason - 1]
 
-  // const propsShowMore = {
-  //   data: {
-  //     title: temporaryListSeries[0].data.aboutSerial.title,
-  //     discription: temporaryListSeries[0].data.aboutSerial.discription
-  //   }
-  // }
-
-  const renderBgPage = (contentData: MediaContent): JSX.Element => {
-    const { bg } = contentData
-
-    if (!season && bg && bg.videoUrl) {
+    if (!indexSeason && content.bg?.videoUrl) {
       return (
         <div className="series-bg__video">
-          <video src={bg.videoUrl} className="series-bg__video-item"
+          <video src={content.bg.videoUrl} className="series-bg__video-item"
+            autoPlay
+            muted
+            playsInline
+            loop
+            preload="metadata"></video>
+        </div>
+      )
+    } else if (!indexSeason && content.bg?.imgUrl) {
+      return (
+        <picture className="series-bg__picture">
+          <img src={content.bg?.imgUrl} alt="" className="series-bg__img" />
+        </picture>
+      )
+    } else if (indexSeason && seasonData?.bg?.videoUrl) {
+      return (
+        <div className="series-bg__video">
+          <video src={seasonData.bg.videoUrl} className="series-bg__video-item"
             autoPlay
             muted
             playsInline
@@ -67,23 +76,25 @@ export function Series(): JSX.Element {
     } else {
       return (
         <picture className="series-bg__picture">
-          <img src={bg?.imgUrl} alt="" className="series-bg__img" />
+          <img src={seasonData?.bg?.imgUrl} alt="" className="series-bg__img" />
         </picture>
       )
     }
   }
 
-  const renderContent = (contentData: MediaContent | null): JSX.Element => {
-    if (!contentData) {
+  const renderContent = (): JSX.Element => {
+    if (!content) {
       return (
         <Spinner width={100} height={100} />
       )
     }
-    const { actionsData, bg, data, logoImg, rating, seasons, trailer, type, _id } = contentData
+    const { data, logoImg, rating, seasons, _id } = content
+    const season = content?.seasons?.[Number(seasonIndex) - 1]
+    const trailer = season?.trailer
 
     return (
       <>
-        <div className="series-content-upper">
+        <div className="series-content-upper container">
           <LinkBack activePage="Сериалы" />
           <Link to={`/series/${_id}/${data.title.linkTitle}`} className="series-content-upper__item">
             <img src={logoImg}
@@ -105,12 +116,13 @@ export function Series(): JSX.Element {
                 <span className="title">Сезоны:</span>
               </div>
               <ul className="series-seasons-line__list">
-                {seasons?.map((season, index) => {
+                {seasons?.map((item, index) => {
                   return (
-                    <li className="series-seasons-line__item" key={_id + index}>
-                      <Link to={`/series/${_id}/${data.title.linkTitle}/season/${season.numberOfSeasons}`} className="series-seasons-line__link
+                    <li className={"series-seasons-line__item" + (Number(seasonIndex) === item.numberOfSeasons ? " series-seasons-line__item_active" : "")}
+                      key={_id + index}>
+                      <Link to={`/series/${_id}/${data.title.linkTitle}/season/${item.numberOfSeasons}`} className="series-seasons-line__link
                       title title_weight_bold ">
-                        {season.numberOfSeasons}
+                        {item.numberOfSeasons}
                       </Link>
                     </li>
                   )
@@ -119,7 +131,7 @@ export function Series(): JSX.Element {
             </div>
           </div>
         </div>
-        <div className="series-content-header">
+        <div className="series-content-header container">
           <div className="series-content-header__row">
             <div className="series-content-header__btn-group">
               <div className="series-content-header__btn-wrapper series-content-header__btn-wrapper_fill_black">
@@ -188,21 +200,42 @@ export function Series(): JSX.Element {
           <div className="series-content-header__row">
           </div>
         </div>
-        <div className="series-content-body">
+        <div className="series-content-body container">
           <div className="series-meta-data">
+            {content && content.trailer && !seasonIndex && content.seasons && (
+              <div className="series-meta-data__item">
+                <Trailer
+                  trailerImg={content.trailer.img}
+                  seasonsIndex={content.seasons.length}
+                  src={formSrcMediaContent(content)}
+                  title={content.data.title.value}
+                />
+              </div>
+            )}
+            {content && seasonIndex && content.seasons && season && trailer && (
+              <div className="series-meta-data__item">
+                <Trailer
+                  trailerImg={trailer.img}
+                  seasonsIndex={Number(seasonIndex)}
+                  src={formSrcMediaContent(content)}
+                  title={content.data.title.value}
+                />
+              </div>
+            )}
             <div className="series-meta-data__item">
-              {contentData && (
-                <Trailer trailerData={contentData} />
-              )}
-            </div>
-            <div className="series-meta-data__item">
-              <div className="series-meta-data-description">
+              <div className={setClassMetaDataDes()} >
                 <div className="series-meta-data-description__upper">
-                  {/* <MetaData {...propsMetaData} /> */}
+                  {rating && (
+                    <MetaData
+                      rating={rating}
+                      dateRelease={data.dateRelease}
+                      ageRestriction={data.ageRestriction}
+                      genres={data.genres} />
+                  )}
                 </div>
                 <div className="series-meta-data-description-body">
                   <div className="series-meta-data-description-body__text title title_align_left">
-                    {data.description.mainDescription}
+                    {seasonIndex && content.seasons ? content.seasons[Number(seasonIndex) - 1].description : data.description.mainDescription}
                   </div>
                   <div className="series-meta-data-info">
                     <div className="series-meta-data-info__col">
@@ -255,11 +288,13 @@ export function Series(): JSX.Element {
           </div>
         </div>
         <div className="series-content-footer">
-          <div className="series-content-footer__item">
-            {/* <ShowMore {...propsShowMore} /> */}
+          <div className="series-content-footer__item container">
+            {content.data.about && (
+              <ShowMore data={content.data.about as { title: string; description: string }} />
+            )}
           </div>
           <div className="series-content-footer__item">
-
+            <Seasons seasonsValue={seasonIndex ? Number(seasonIndex) : 0} mediaContentData={content} />
           </div>
         </div>
       </>
@@ -268,15 +303,14 @@ export function Series(): JSX.Element {
 
   return (
     <div className="series">
-      {!series.loading && series.content && series.content.data && (
+      {!loading && content && (
         <div className="series-bg">
-          {renderBgPage((series.content as MediaContent))}
+          {renderBgPage()}
         </div>
       )}
       <div className={"series-content"
-        + (series.loading ? " series-content_loading" : "")
-        + " container"}>
-        {renderContent(series.content as MediaContent | null)}
+        + (loading ? " series-content_loading" : "")}>
+        {renderContent()}
       </div>
     </div >
   )

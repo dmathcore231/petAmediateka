@@ -1,8 +1,8 @@
 import { AxiosError } from "axios"
 import { client } from "../utils/client"
-import { signUpEndPoint, signInEndPoint, logoutEndPoint } from "./endPoints"
+import { signUpEndPoint, signInEndPoint, logoutEndPoint, refreshAccessTokenEndPoint } from "./endPoints"
 
-export const requestSignUp = async (body: FormData) => {
+export const requestSignUp = async (body: FormData): Promise<any> => {
   try {
     const { data } = await client.post(signUpEndPoint, body, {
       headers: {
@@ -37,6 +37,22 @@ export const requestSignIn = async (body: FormData) => {
 export const requestLogout = async () => {
   try {
     const { data } = await client.get(logoutEndPoint, {
+      withCredentials: true
+    })
+
+    return data
+  } catch (error) {
+    const err = error as AxiosError
+    throw err
+  }
+}
+
+export const requestRefreshUserData = async (token: string) => {
+  try {
+    const { data } = await client.get(refreshAccessTokenEndPoint, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
       withCredentials: true
     })
 
