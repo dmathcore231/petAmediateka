@@ -33,31 +33,35 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
   }
 
   const renderCardBg = (): JSX.Element => {
-    if (cardSize === 'lg' && bg?.imgUrl) {
-      return (
-        <img src={bg.imgUrl} alt="" className="card-bg__img" />
-      )
-    } else if (cardSize === 'lm' && bg?.imgResizeLmUrl) {
-      return (
-        <img src={bg.imgResizeLmUrl} alt="" className="card-bg__img" />
-      )
-    } else {
-      return (
-        <img src={bg?.imgResizeUrl} alt="" className="card-bg__img" />
-      )
+    const configBg: Record<string, string | undefined> = {
+      lg: bg?.imgUrl,
+      lm: bg?.imgResizeLmUrl,
     }
+
+    const src: string = configBg[cardSize] || bg?.imgResizeUrl
+
+    return <img src={src} alt="" className="card-bg__img" />
   }
 
   const renderCardContent = (): JSX.Element => {
+    const renderBackground = (): JSX.Element | null => {
+      if (loadingCardData || error) return null
+
+      const baseClass = 'card-bg'
+      const shadowClass = boxShadow ? ' card-bg_shadow' : ''
+
+      return (
+        <div className={`${baseClass}${shadowClass}`}>
+          <picture className="card-bg__picture">
+            {renderCardBg()}
+          </picture>
+        </div>
+      )
+    }
+
     return (
       <>
-        {!loadingCardData && !error && (
-          <div className={boxShadow ? "card-bg card-bg_shadow" : "card-bg"}>
-            <picture className="card-bg__picture">
-              {renderCardBg()}
-            </picture>
-          </div>
-        )}
+        {renderBackground()}
         <div className={`card-body card-body_flex_jc_${flex.body.justifyContent}`}>
           {ageRestrictionBadge && (
             <div className={ageRestrictionBadge.position === 'right'
@@ -141,14 +145,17 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
   }
 
   const setClassesCard = (): string => {
-    let classes = `card card_size_${cardSize}`
-    if (hover?.shadow) classes += ' card_hover_shadow'
-    if (hover?.scale) classes += ' card_hover_scale'
-    if (clipPath) classes += ` card_clip-path_main`
-    if (hover?.playBack.value) classes += ' card_hover_playback'
-    if (hover && hover.playBack.type === 'bottom-more') classes += ' card_hover_playback_bottom_more'
-    if (loadingCardData) classes += ' card_loading'
-    return classes
+    const classes = [
+      `card card_size_${cardSize}`,
+      hover?.shadow && 'card_hover_shadow',
+      hover?.scale && 'card_hover_scale',
+      clipPath && 'card_clip-path_main',
+      hover?.playBack.value && 'card_hover_playback',
+      hover?.playBack?.type === 'bottom-more' && 'card_hover_playback_bottom_more',
+      loadingCardData && 'card_loading',
+    ]
+
+    return classes.filter(Boolean).join(' ')
   }
 
   if (hover?.playBack.value) {
