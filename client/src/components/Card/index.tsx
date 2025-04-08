@@ -59,82 +59,122 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
       )
     }
 
+    const renderAgeRestrictionBadge = (loading: boolean): JSX.Element | null => {
+      if (!ageRestrictionBadge) return null
+
+      const baseClass = 'card-body__age-restriction'
+      const positionClass = ageRestrictionBadge.position === 'right'
+        ? ' card-body__age-restriction_jc_fe'
+        : ''
+
+      return (
+        <div className={`${baseClass}${positionClass}`}>
+          {loading
+            ? (<AgeRestrictionBadge size={ageRestrictionBadge.size} loading={loadingCardData} />)
+            : (<AgeRestrictionBadge size={ageRestrictionBadge.size} data={ageRestriction} />)}
+        </div>
+      )
+    }
+
+    const renderBadge = (loading: boolean): JSX.Element | null => {
+      if (!badge) return null
+
+      return (
+        <div className="card-body__badge">
+          {!loading
+            ? (<Badge type={badge.type} title={badge.title} />)
+            : (<Badge type={'loading'} />)}
+        </div>
+      )
+    }
+
+    const renderLogoImg = (): JSX.Element | null => {
+      if (!titleLogoImg) return null
+
+      return (
+        <div className="card-body__title">
+          {linkType === 'title'
+            ? (<Link to={link} className="card__link">
+              <img src={logoImg} alt="" className="card-body__title-img" />
+            </Link>)
+            : (<img src={logoImg} alt="" className="card-body__title-img" />)
+          }
+        </div>
+      )
+    }
+
+    const renderDescription = (): JSX.Element | null => {
+      if (!descriptionVisible) return null
+
+      const baseClass = 'card-body__description'
+      const loadingClass = loadingCardData ? ' card-body__description_loading' : ''
+      const alignTextClass = ' title title_align_left'
+      const descriptionValue = !loadingCardData && description ? description : ''
+
+      return (
+        <div className={`${baseClass}${loadingClass}${alignTextClass}`}>
+          {descriptionValue}
+        </div>
+      )
+    }
+
+    const renderButtons = (): JSX.Element | null => {
+      if (!btnGroup) return null
+
+      const baseClass = "card-body__btn"
+      const loadingClass = loadingCardData ? ' card-body__btn_loading' : ''
+
+      return (
+        <div className={`${baseClass}${loadingClass}`}>
+          {!loadingCardData && (
+            <>
+              <Link to={link} className={`btn btn_primary card-body__btn-link card-body__btn-link_size_${styles.cardSize}`}>
+                <div className="card-body__btn-wrapper">
+                  <PlayIcon width={28} height={28} />
+                  <span className="card-body__btn-text">Смотреть</span>
+                </div>
+              </Link>
+              {user && (
+                <Btn
+                  type="button"
+                  className="btn_secondary btn_transparent card-body__btn-link card-body__btn-link_size_xsm"
+                  onClick={() => console.log('add favorite')}
+                >
+                  <span className="card-body__btn-wrapper-scale">
+                    <AddFavoriteIcon width={22} height={22} />
+                  </span>
+                </Btn>
+              )}
+            </>
+          )}
+        </div>
+      )
+    }
+
+    const renderExternalTitle = (): JSX.Element | null => {
+      if (titleLogoImg || !titleOutside) return null
+
+      return (
+        <div className="card-title title title_align_left">
+          {title.value}
+        </div>
+      )
+    }
+
     return (
       <>
         {renderBackground()}
         <div className={`card-body card-body_flex_jc_${flex.body.justifyContent}`}>
-          {ageRestrictionBadge && (
-            <div className={ageRestrictionBadge.position === 'right'
-              ? "card-body__age-restriction card-body__age-restriction_jc_fe"
-              : "card-body__age-restriction"
-            }>
-              {!loadingCardData
-                ? (<AgeRestrictionBadge size={ageRestrictionBadge.size} data={ageRestriction} />)
-                : (<AgeRestrictionBadge size={ageRestrictionBadge.size} loading={loadingCardData} />)}
-            </div>
-          )
-          }
-          {badge && badgeVisible && (
-            <div className="card-body__badge">
-              {!loadingCardData
-                ? (<Badge type={badge.type} title={badge.title} />)
-                : (<Badge type={'loading'} />)}
-            </div>
-          )}
-          {titleLogoImg && (
-            <div className="card-body__title">
-              {
-                linkType === 'title'
-                  ? (
-                    <Link to={link} className="card__link">
-                      <img src={logoImg} alt="" className="card-body__title-img" />
-                    </Link>
-                  )
-                  : (
-                    <img src={logoImg} alt="" className="card-body__title-img" />
-                  )
-              }
-            </div>
-          )}
-          {descriptionVisible && (
-            <div className={"card-body__description" + (loadingCardData ? ' card-body__description_loading' : '') + " title title_align_left"}>
-              {!loadingCardData && description ? description : ''}
-            </div>
-          )}
+          {renderAgeRestrictionBadge(loadingCardData)}
+          {renderBadge(loadingCardData)}
+          {renderLogoImg()}
+          {renderDescription()}
           {tags && (
             <Tags data={tags} />
           )}
-          {btnGroup === true && (
-            <div className={"card-body__btn" + (loadingCardData ? ' card-body__btn_loading' : '')}>
-              {!loadingCardData && (
-                <>
-                  <Link to={link} className={`btn btn_primary card-body__btn-link card-body__btn-link_size_${styles.cardSize}`}>
-                    <div className="card-body__btn-wrapper">
-                      <PlayIcon width={28} height={28} />
-                      <span className="card-body__btn-text">Смотреть</span>
-                    </div>
-                  </Link>
-                  {user && (
-                    <Btn
-                      type="button"
-                      className="btn_secondary btn_transparent card-body__btn-link card-body__btn-link_size_xsm"
-                      onClick={() => console.log('add favorite')}
-                    >
-                      <span className="card-body__btn-wrapper-scale">
-                        <AddFavoriteIcon width={22} height={22} />
-                      </span>
-                    </Btn>
-                  )}
-                </>
-              )}
-            </div>
-          )}
+          {renderButtons()}
         </div>
-        {!titleLogoImg && titleOutside && (
-          <div className="card-title title title_align_left">
-            {title.value}
-          </div>
-        )}
+        {renderExternalTitle()}
         {cardSeries && (
           <div className="card-icon-play">
             <MediaPlayIcon width={60} height={60} />
@@ -167,11 +207,11 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
         </div>
       </>
     )
-  } else {
-    return (
-      <div className={setClassesCard()}>
-        {renderCardContentLinkWrapper(renderCardContent())}
-      </div>
-    )
   }
+
+  return (
+    <div className={setClassesCard()}>
+      {renderCardContentLinkWrapper(renderCardContent())}
+    </div>
+  )
 }
