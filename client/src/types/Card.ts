@@ -44,7 +44,10 @@ export type CardStyles = {
       justifyContent: Flex
     }
   }
-  clipPath: boolean
+  clipPath: {
+    value: boolean
+    type: 'main' | '10' | null
+  }
   boxShadow: boolean
   btnGroup: boolean
   ageRestrictionBadge?: {

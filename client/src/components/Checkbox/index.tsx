@@ -1,9 +1,10 @@
+import { JSX } from "react"
 import { CheckIcon } from "../../assets/icons/CheckIcon"
 import { CheckboxProps } from "../../types/interfaces/CheckboxProps"
 
 export function Checkbox({ getCheckedValue }: CheckboxProps): JSX.Element {
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     getCheckedValue(e.target.checked)
   }
 

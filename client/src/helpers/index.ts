@@ -41,8 +41,8 @@ export const defaultCardData: CardData = {
     videoUrl: '',
     imgResizeUrl: ''
   },
-  logoImg: '',
-  link: '',
+  logoImg: '#',
+  link: '#',
 }
 
 export const defaultBannerData: BannerProps = {

@@ -14,7 +14,7 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
   const { user } = useAppSelector(state => state.auth)
 
   const { _id, type, title, badge, ageRestriction, description, bg, logoImg, link } = data
-  const { cardSize, flex, clipPath, ageRestrictionBadge, btnGroup, hover, boxShadow } = styles
+  const { cardSize, flex, clipPath: { value: clipPathValue, type: clipPathType }, ageRestrictionBadge, btnGroup, hover, boxShadow } = styles
   const { title: { titleOutside, titleLogoImg, titleLogoImgIndex }, badgeVisible, link: { linkType }, descriptionVisible, tags, cardSeries } = settings
 
   const renderCardContentLinkWrapper = (children: JSX.Element): JSX.Element => {
@@ -77,7 +77,7 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
     }
 
     const renderBadge = (loading: boolean): JSX.Element | null => {
-      if (!badge) return null
+      if (!badge || !badgeVisible) return null
 
       return (
         <div className="card-body__badge">
@@ -189,7 +189,7 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
       `card card_size_${cardSize}`,
       hover?.shadow && 'card_hover_shadow',
       hover?.scale && 'card_hover_scale',
-      clipPath && 'card_clip-path_main',
+      clipPathValue && clipPathType && `card_clip-path_${clipPathType}`,
       hover?.playBack.value && 'card_hover_playback',
       hover?.playBack?.type === 'bottom-more' && 'card_hover_playback_bottom_more',
       loadingCardData && 'card_loading',
@@ -199,9 +199,18 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
   }
 
   if (hover?.playBack.value) {
+    const getClasses = (clipPathType: string | null): string => {
+      const classes = [
+        "card-playback-bg",
+        clipPathType && `card-playback-bg_clip-path_${clipPathType}`,
+      ]
+
+      return classes.filter(Boolean).join(' ')
+    }
+
     return (
       <>
-        <div className="card-playback-bg"></div>
+        <div className={getClasses(clipPathType)} />
         <div className={setClassesCard()}>
           {renderCardContentLinkWrapper(renderCardContent())}
         </div>

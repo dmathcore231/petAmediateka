@@ -1,3 +1,4 @@
+import { JSX } from "react"
 import { Card } from "../Card"
 import { CardData, CardStyles } from "../../types/Card"
 

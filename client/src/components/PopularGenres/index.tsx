@@ -1,0 +1,425 @@
+import { JSX, useState } from "react"
+import { Slider } from "../Slider"
+import { linksPopularGenresState } from '../../types/linksPopularGenresState'
+import { CardData } from "../../types/Card"
+import { SliderProps } from "../../types/interfaces/SliderProps"
+
+export function PopularGenres(): JSX.Element {
+  const itemsSerials: CardData[] = [
+    {
+      _id: '1',
+      type: 'series',
+      title: {
+        value: 'Детективы',
+        originalTitle: 'Detectives',
+        linkTitle: '#'
+      },
+      badge: null,
+      ageRestriction: 0,
+      description: "Детективы",
+      bg: {
+        imgUrl: '../../../public/popularGenres/series/1.jpg',
+        videoUrl: '',
+        imgResizeUrl: '../../../public/popularGenres/series/1.jpg'
+      },
+      logoImg: "#",
+      link: '#',
+    },
+    {
+      _id: '2',
+      type: 'series',
+      title: {
+        value: 'Комедии',
+        originalTitle: 'Comedies',
+        linkTitle: '#'
+      },
+      badge: null,
+      ageRestriction: 0,
+      description: "Комедии",
+      bg: {
+        imgUrl: '../../../public/popularGenres/series/2.jpg',
+        videoUrl: '',
+        imgResizeUrl: '../../../public/popularGenres/series/2.jpg'
+      },
+      logoImg: "#",
+      link: '#',
+    },
+    {
+      _id: '3',
+      type: 'series',
+      title: {
+        value: 'Криминал',
+        originalTitle: 'Crime',
+        linkTitle: '#'
+      },
+      badge: null,
+      ageRestriction: 0,
+      description: "Криминал",
+      bg: {
+        imgUrl: '../../../public/popularGenres/series/3.jpg',
+        videoUrl: '',
+        imgResizeUrl: '../../../public/popularGenres/series/3.jpg'
+      },
+      logoImg: "#",
+      link: '#',
+    },
+    {
+      _id: '4',
+      type: 'series',
+      title: {
+        value: 'Триллеры',
+        originalTitle: 'Thrillers',
+        linkTitle: '#'
+      },
+      badge: null,
+      ageRestriction: 0,
+      description: "Триллеры",
+      bg: {
+        imgUrl: '../../../public/popularGenres/series/4.jpg',
+        videoUrl: '',
+        imgResizeUrl: '../../../public/popularGenres/series/4.jpg'
+      },
+      logoImg: "#",
+      link: '#',
+    },
+    {
+      _id: '5',
+      type: 'series',
+      title: {
+        value: 'Комедии',
+        originalTitle: 'Comedies',
+        linkTitle: '#'
+      },
+      badge: null,
+      ageRestriction: 0,
+      description: "Комедии",
+      bg: {
+        imgUrl: '../../../public/popularGenres/series/5.jpg',
+        videoUrl: '',
+        imgResizeUrl: '../../../public/popularGenres/series/5.jpg'
+      },
+      logoImg: "#",
+      link: '#',
+    },
+    {
+      _id: '6',
+      type: 'series',
+      title: {
+        value: 'Комедии',
+        originalTitle: 'Comedies',
+        linkTitle: '#'
+      },
+      badge: null,
+      ageRestriction: 0,
+      description: "Комедии",
+      bg: {
+        imgUrl: '../../../public/popularGenres/series/6.jpg',
+        videoUrl: '',
+        imgResizeUrl: '../../../public/popularGenres/series/6.jpg'
+      },
+      logoImg: "#",
+      link: '#',
+    },
+    {
+      _id: '7',
+      type: 'series',
+      title: {
+        value: 'Комедии',
+        originalTitle: 'Comedies',
+        linkTitle: '#'
+      },
+      badge: null,
+      ageRestriction: 0,
+      description: "Комедии",
+      bg: {
+        imgUrl: '../../../public/popularGenres/series/7.jpg',
+        videoUrl: '',
+        imgResizeUrl: '../../../public/popularGenres/series/7.jpg'
+      },
+      logoImg: "#",
+      link: '#',
+    },
+    {
+      _id: '8',
+      type: 'series',
+      title: {
+        value: 'Комедии',
+        originalTitle: 'Comedies',
+        linkTitle: '#'
+      },
+      badge: null,
+      ageRestriction: 0,
+      description: "Комедии",
+      bg: {
+        imgUrl: '../../../public/popularGenres/series/8.jpg',
+        videoUrl: '',
+        imgResizeUrl: '../../../public/popularGenres/series/8.jpg'
+      },
+      logoImg: "#",
+      link: '#',
+    },
+  ]
+  const itemsFilms: CardData[] = [
+    {
+      _id: '1',
+      type: 'movie',
+      title: {
+        value: 'Драмы',
+        originalTitle: 'Dramas',
+        linkTitle: '#'
+      },
+      badge: null,
+      ageRestriction: 0,
+      description: "Драмы",
+      bg: {
+        imgUrl: '../../../public/popularGenres/movies/1.jpg',
+        videoUrl: '',
+        imgResizeUrl: '../../../public/popularGenres/movies/1.jpg'
+      },
+      logoImg: "#",
+      link: '#',
+    },
+    {
+      _id: '2',
+      type: 'movie',
+      title: {
+        value: 'Документальные',
+        originalTitle: 'Documentaries',
+        linkTitle: '#'
+      },
+      badge: null,
+      ageRestriction: 0,
+      description: "Документальные",
+      bg: {
+        imgUrl: '../../../public/popularGenres/movies/2.jpg',
+        videoUrl: '',
+        imgResizeUrl: '../../../public/popularGenres/movies/2.jpg'
+      },
+      logoImg: "#",
+      link: '#',
+    },
+    {
+      _id: '3',
+      type: 'series',
+      title: {
+        value: 'Биографические',
+        originalTitle: 'Biographies',
+        linkTitle: '#'
+      },
+      badge: null,
+      ageRestriction: 0,
+      description: "Биографические",
+      bg: {
+        imgUrl: '../../../public/popularGenres/movies/3.jpg',
+        videoUrl: '',
+        imgResizeUrl: '../../../public/popularGenres/movies/3.jpg'
+      },
+      logoImg: "#",
+      link: '#',
+    },
+    {
+      _id: '4',
+      type: 'series',
+      title: {
+        value: 'Стендап',
+        originalTitle: 'Standup',
+        linkTitle: '#'
+      },
+      badge: null,
+      ageRestriction: 0,
+      description: "Стендап",
+      bg: {
+        imgUrl: '../../../public/popularGenres/movies/4.jpg',
+        videoUrl: '',
+        imgResizeUrl: '../../../public/popularGenres/movies/4.jpg'
+      },
+      logoImg: "#",
+      link: '#',
+    },
+    {
+      _id: '5',
+      type: 'series',
+      title: {
+        value: 'Комедии',
+        originalTitle: 'Comedies',
+        linkTitle: '#'
+      },
+      badge: null,
+      ageRestriction: 0,
+      description: "Комедии",
+      bg: {
+        imgUrl: '../../../public/popularGenres/movies/5.jpg',
+        videoUrl: '',
+        imgResizeUrl: '../../../public/popularGenres/movies/5.jpg'
+      },
+      logoImg: "#",
+      link: '#',
+    },
+    {
+      _id: '6',
+      type: 'series',
+      title: {
+        value: 'Криминал',
+        originalTitle: 'Criminals',
+        linkTitle: '#'
+      },
+      badge: null,
+      ageRestriction: 0,
+      description: "Криминал",
+      bg: {
+        imgUrl: '../../../public/popularGenres/movies/6.jpg',
+        videoUrl: '',
+        imgResizeUrl: '../../../public/popularGenres/movies/6.jpg'
+      },
+      logoImg: "#",
+      link: '#',
+    },
+    {
+      _id: '7',
+      type: 'series',
+      title: {
+        value: 'Фильмы HBO',
+        originalTitle: 'HBO Films',
+        linkTitle: '#'
+      },
+      badge: null,
+      ageRestriction: 0,
+      description: "Фильмы HBO",
+      bg: {
+        imgUrl: '../../../public/popularGenres/movies/7.jpg',
+        videoUrl: '',
+        imgResizeUrl: '../../../public/popularGenres/movies/7.jpg'
+      },
+      logoImg: "#",
+      link: '#',
+    },
+    {
+      _id: '8',
+      type: 'series',
+      title: {
+        value: 'Исторические',
+        originalTitle: 'Historical',
+        linkTitle: '#'
+      },
+      badge: null,
+      ageRestriction: 0,
+      description: "Исторические",
+      bg: {
+        imgUrl: '../../../public/popularGenres/movies/8.jpg',
+        videoUrl: '',
+        imgResizeUrl: '../../../public/popularGenres/movies/8.jpg'
+      },
+      logoImg: "#",
+      link: '#',
+    },
+  ]
+  const defaultLinksState: linksPopularGenresState = {
+    serials: {
+      value: true,
+      items: itemsSerials,
+    },
+    films: {
+      value: false,
+      items: itemsFilms,
+    }
+  }
+  const baseClass = 'link'
+  const linkTypeClass = 'link_primary'
+  const activeLinkClass = 'link_active'
+
+  const [activeLinkPopularGenres, setActiveLinkPopularGenres] = useState(defaultLinksState)
+
+  const sliderPropsPopularGenres: SliderProps = {
+    sliderSettings: {
+      typeSlider: 'multi',
+      pagenation: false,
+      autoSwipe: false,
+      lastSwipe: true,
+      quantityListItems: 5,
+      mediaPlayerHandler: false
+    },
+    sliderData: {
+      data: activeLinkPopularGenres.serials.value
+        ? activeLinkPopularGenres.serials.items
+        : activeLinkPopularGenres.films.items,
+      cardStyles: {
+        cardSize: 'sm',
+        flex: {
+          body: {
+            justifyContent: 'space-between'
+          }
+        },
+        clipPath: {
+          value: true,
+          type: '10'
+        },
+        ageRestrictionBadge: null,
+        boxShadow: false,
+        btnGroup: false,
+        hover: {
+          scale: false,
+          playBack: {
+            value: true,
+            type: 'default'
+          },
+          shadow: false
+        }
+      },
+      settings: {
+        title: {
+          titleOutside: false,
+          titleLogoImg: false,
+          titleLogoImgIndex: 0
+        },
+        badgeVisible: false,
+        link: {
+          linkType: 'allCard',
+        },
+        descriptionVisible: false,
+        tags: null,
+        cardSeries: false
+      },
+      loadingData: false,
+      errorData: false
+    },
+  }
+
+  const setClassLink = (link: boolean): string => link
+    ? `${baseClass} ${linkTypeClass} ${activeLinkClass}`
+    : `${baseClass} ${linkTypeClass}`
+
+  const updateActiveLink = () => {
+    setActiveLinkPopularGenres(prev => ({
+      serials: {
+        ...prev.serials,
+        value: !prev.serials.value,
+      },
+      films: {
+        ...prev.films,
+        value: !prev.films.value,
+      }
+    }))
+  }
+
+  return (
+    <>
+      <div className="home-item__title container">
+        <h2>Популярные жанры</h2>
+        <div className="home-item__title-wrapper">
+          <span className={setClassLink(activeLinkPopularGenres.serials.value)}
+            onClick={updateActiveLink}
+          >
+            Сериалы
+          </span>
+          <span className={setClassLink(activeLinkPopularGenres.films.value)}
+            onClick={updateActiveLink}
+          >
+            Фильмы
+          </span>
+        </div>
+      </div>
+
+      <Slider {...sliderPropsPopularGenres} />
+    </>
+  )
+}
