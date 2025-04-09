@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, JSX } from "react"
 import { useParams, Link } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "../../hooks"
 import { fetchContent } from "../../redux/contentSlice"

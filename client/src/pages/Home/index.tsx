@@ -14,13 +14,14 @@ import { BannerProps } from "../../types/interfaces/BannerProps"
 import { SeoBlockProps } from "../../types/interfaces/SeoBlockProps"
 import { PromoLineProps } from "../../types/interfaces/PromoLineProps"
 import { ContentTypeEnum } from "../../types/interfaces/Content"
-import { defaultBannerData, defaultPromoLineData } from "../../helpers"
+import { defaultBannerData, defaultCardData, defaultPromoLineData } from "../../helpers"
 import { CardData } from "../../types/Card"
 import { PromoLineData } from "../../types/interfaces/PromoLineData"
+import { CoverPromoProps } from "../../types/interfaces/CoverPromoProps"
 
 export function Home(): JSX.Element {
   const dispatch = useAppDispatch()
-  const { mainSlider, banner, watchingNow, newRelease, promoLine } = useAppSelector((state) => state.content)
+  const { mainSlider, banner, watchingNow, newRelease, promoLine, coverPromo } = useAppSelector((state) => state.content)
 
   useEffect(() => {
     dispatch(fetchContent({ type: ContentTypeEnum.MainSlider }))
@@ -28,7 +29,9 @@ export function Home(): JSX.Element {
     dispatch(fetchContent({ type: ContentTypeEnum.WatchingNow }))
     dispatch(fetchContent({ type: ContentTypeEnum.NewRelease }))
     dispatch(fetchContent({ type: ContentTypeEnum.PromoLine }))
+    dispatch(fetchContent({ type: ContentTypeEnum.CoverPromo }))
   }, [dispatch])
+
 
   const formCardDataFromPromoLine = (data: PromoLineData): Array<CardData> => {
     const result = data.promoLineItem.map(item => ({
@@ -332,8 +335,16 @@ export function Home(): JSX.Element {
   }
 
   const promoLineProps: PromoLineProps = {
-    promoLineData: promoLine.content ? promoLine.content.data as PromoLineData : defaultPromoLineData,
+    promoLineData: promoLine.content
+      ? promoLine.content.data as PromoLineData
+      : defaultPromoLineData,
     sliderProps: sliderProrsPromoLine
+  }
+
+  const coverPromoProps: CoverPromoProps = {
+    coverPromoData: coverPromo.content
+      ? coverPromo.content.data as CardData[]
+      : null
   }
 
   return (
@@ -371,10 +382,10 @@ export function Home(): JSX.Element {
       <section className="home-item">
         <PopularGenres />
       </section>
-      {/* <section className="home-item container">
-        <CoverPromo />
+      <section className="home-item container">
+        <CoverPromo {...coverPromoProps} />
       </section>
-      <section className="home-item">
+      {/* <section className="home-item">
         <div className="home-item__title container">
           <h2>Блог Амедиатеки</h2>
           <Link to="/#" className="link link_primary">Показать еще</Link>

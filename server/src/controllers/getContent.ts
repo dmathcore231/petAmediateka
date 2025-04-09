@@ -4,8 +4,10 @@ import { MediaContentModel } from '../models/mediaContentSchema'
 import { BannerModel } from '../models/bannerSchema'
 import { CardData } from '../types/interface/CardData'
 import { MediaContent } from '../types/interface/MediaContent'
-import { formationLink } from '../helpers'
+import { CoverPromo } from '../types/interface/CoverPromo'
+import { mapMediaContentToCardData } from '../helpers'
 import { PromoLineModel } from '../models/promoLineSchema'
+import { CoverPromoModel } from '../models/coverPromoSchema'
 
 export async function getContent(req: Request, res: Response, next: NextFunction): Promise<void> {
   const { localDataState } = res.locals
@@ -25,19 +27,7 @@ export async function getContent(req: Request, res: Response, next: NextFunction
 
     if (series) {
       const data = series.data as unknown as MediaContent[]
-      const result: Array<CardData> = data.map((item) => {
-        return {
-          _id: item._id as string,
-          type: item.type,
-          title: item.data.title,
-          badge: item.data.badge,
-          ageRestriction: item.data.ageRestriction,
-          description: item.data.description.prewiewDescription,
-          bg: item.bg,
-          logoImg: item.logoImg,
-          link: formationLink(item.type, item._id as string, item.data.title.linkTitle)
-        }
-      })
+      const result: CardData[] = data.map(items => mapMediaContentToCardData(items))
 
       localDataState.content = {
         ...series.toObject(),
@@ -54,7 +44,7 @@ export async function getContent(req: Request, res: Response, next: NextFunction
   } else if (type === 'series') {
     const series = await MediaContentModel.findById(id)
 
-    res.locals.localDataState.content = series
+    localDataState.content = series
   } else if (type === 'watchingNow') {
     const content = await ContentModel.findOne({ type: 'watchingNow' }).populate({
       path: 'data',
@@ -63,19 +53,7 @@ export async function getContent(req: Request, res: Response, next: NextFunction
 
     if (content) {
       const data = content.data as unknown as MediaContent[]
-      const result: Array<CardData> = data.map((item) => {
-        return {
-          _id: item._id as string,
-          type: item.type,
-          title: item.data.title,
-          badge: item.data.badge,
-          ageRestriction: item.data.ageRestriction,
-          description: item.data.description.prewiewDescription,
-          bg: item.bg,
-          logoImg: item.logoImg,
-          link: formationLink(item.type, item._id as string, item.data.title.linkTitle)
-        }
-      })
+      const result: CardData[] = data.map(items => mapMediaContentToCardData(items))
 
       localDataState.content = {
         ...content.toObject(),
@@ -90,19 +68,7 @@ export async function getContent(req: Request, res: Response, next: NextFunction
 
     if (content) {
       const data = content.data as unknown as MediaContent[]
-      const result: Array<CardData> = data.map((item) => {
-        return {
-          _id: item._id as string,
-          type: item.type,
-          title: item.data.title,
-          badge: item.data.badge,
-          ageRestriction: item.data.ageRestriction,
-          description: item.data.description.prewiewDescription,
-          bg: item.bg,
-          logoImg: item.logoImg,
-          link: formationLink(item.type, item._id as string, item.data.title.linkTitle)
-        }
-      })
+      const result: CardData[] = data.map(items => mapMediaContentToCardData(items))
 
       localDataState.content = {
         ...content.toObject(),
@@ -121,24 +87,51 @@ export async function getContent(req: Request, res: Response, next: NextFunction
 
     if (content && content.data) {
       const promoData = content.data as any
+      const mediaContent = promoData.data as unknown as MediaContent
+      const cardData: CardData = mapMediaContentToCardData(mediaContent)
 
-      if (promoData && promoData.data) {
-        const mediaContent = promoData.data as unknown as MediaContent
+      promoData.data = cardData
+      localDataState.content = content
 
-        const cardData: CardData = {
-          _id: mediaContent._id as string,
-          type: mediaContent.type,
-          title: mediaContent.data.title,
-          badge: mediaContent.data.badge,
-          ageRestriction: mediaContent.data.ageRestriction,
-          description: mediaContent.data.description.prewiewDescription,
-          bg: mediaContent.bg,
-          logoImg: mediaContent.logoImg,
-          link: formationLink(mediaContent.type, mediaContent._id as string, mediaContent.data.title.linkTitle)
+    }
+  } else if (type === 'coverPromo') {
+    const content = await ContentModel.findOne({ type: 'coverPromo' }).populate({
+      path: 'data',
+      model: CoverPromoModel,
+      populate: {
+        path: 'mediaContentData',
+        model: MediaContentModel
+      }
+    })
+
+    if (content && content.data) {
+      const promoData = content.data as unknown as CoverPromo
+      const mediaContent = promoData.mediaContentData as unknown as MediaContent
+      const cardData: CardData = mapMediaContentToCardData(mediaContent)
+      const result: CardData[] = [
+        {
+          ...cardData,
+          bg: {
+            ...cardData.bg,
+            imgUrl: promoData.bgItems[0],
+            imgResizeUrl: promoData.bgItems[0]
+          }
+        },
+        {
+          ...cardData,
+          bg: {
+            ...cardData.bg,
+            imgUrl: promoData.bgItems[1],
+            imgResizeUrl: promoData.bgItems[1]
+          }
         }
+      ]
 
-        promoData.data = cardData
-        localDataState.content = content
+      console.log(promoData)
+
+      localDataState.content = {
+        ...content.toObject(),
+        data: result
       }
     }
   }

@@ -240,13 +240,13 @@ export function Slider({ sliderSettings, sliderData: { data, cardStyles, setting
       let classValue = 'slider__item'
 
       switch (true) {
-        case (index === prevSlide && cardStyles.clipPath): {
+        case (index === prevSlide && cardStyles.clipPath.value): {
           return `slider__item_prev ${classValue} ${classValue}_clip-path-active`
         }
         case (index === prevSlide): {
           return `slider__item_prev ${classValue}`
         }
-        case (index === nextSlide && cardStyles.clipPath): {
+        case (index === nextSlide && cardStyles.clipPath.value): {
           return `slider__item_next ${classValue} ${classValue}_clip-path-active`
         }
         case (index === nextSlide): {

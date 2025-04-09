@@ -1,6 +1,7 @@
 import { ErrorMain } from '../types/Error'
 import { MediaContent } from '../types/interface/MediaContent'
 import { Banner } from '../types/interface/Banner'
+import { CardData } from '../types/interface/CardData'
 
 export function checkBadRequest(fields: string[], errorMessage: string) {
 
@@ -1634,4 +1635,14 @@ export const formationLink = (typeContent: 'movie' | 'series', _id: string, link
   }
 }
 
-
+export const mapMediaContentToCardData = (item: MediaContent): CardData => ({
+  _id: item._id as string,
+  type: item.type,
+  title: item.data.title,
+  badge: item.data.badge,
+  ageRestriction: item.data.ageRestriction,
+  description: item.data.description.prewiewDescription,
+  bg: item.bg,
+  logoImg: item.logoImg,
+  link: formationLink(item.type, item._id as string, item.data.title.linkTitle)
+})

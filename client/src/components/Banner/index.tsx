@@ -4,7 +4,9 @@ import { BannerProps } from "../../types/interfaces/BannerProps"
 
 export function Banner({ _id, title, bannerListItem, img, titleBtn, ageRestriction, loading }: BannerProps): JSX.Element {
   const baseClass: string = 'banner'
-  const loadingClass: string = loading ? ` ${baseClass}_loading` : ''
+  const loadingClass: string = loading
+    ? ` ${baseClass}_loading`
+    : ''
 
   const renderBannerListItems = (arr: string[]): JSX.Element[] => arr.map((item, index) => (
     <li key={index} className="banner-list__item text text_size_s">
