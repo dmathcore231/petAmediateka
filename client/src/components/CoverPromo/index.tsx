@@ -60,17 +60,14 @@ export function CoverPromo({ coverPromoData }: CoverPromoProps): JSX.Element {
       cardSize: 'lm',
       flex: {
         body: {
-          justifyContent: 'space-between'
+          justifyContent: 'flex-end'
         }
       },
       clipPath: {
         value: true,
         type: 'main'
       },
-      ageRestrictionBadge: {
-        position: 'right',
-        size: 'sm'
-      },
+      ageRestrictionBadge: null,
       boxShadow: false,
       btnGroup: true,
       hover: {
@@ -93,7 +90,12 @@ export function CoverPromo({ coverPromoData }: CoverPromoProps): JSX.Element {
         linkType: 'title',
       },
       descriptionVisible: true,
-      tags: null,
+      tags: {
+        raiting: 8,
+        ageRestriction: 18,
+        dateRelease: '2023',
+        genres: ['Драма']
+      },
       cardSeries: false
     },
     loadingCardData: loading,
