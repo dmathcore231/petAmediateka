@@ -8,23 +8,20 @@ import { SeoBlock } from "../../components/SeoBlock"
 import { PromoLine } from "../../components/PromoLine"
 import { CoverPromo } from "../../components/CoverPromo"
 import { Blog } from "../../components/Blog"
+import { PopularGenres } from "../../components/PopularGenres"
 import { SliderProps } from "../../types/interfaces/SliderProps"
 import { BannerProps } from "../../types/interfaces/BannerProps"
 import { SeoBlockProps } from "../../types/interfaces/SeoBlockProps"
 import { PromoLineProps } from "../../types/interfaces/PromoLineProps"
 import { ContentTypeEnum } from "../../types/interfaces/Content"
-import { defaultBannerData, defaultPromoLineData } from "../../helpers"
+import { defaultBannerData, defaultCardData, defaultPromoLineData } from "../../helpers"
 import { CardData } from "../../types/Card"
 import { PromoLineData } from "../../types/interfaces/PromoLineData"
+import { CoverPromoProps } from "../../types/interfaces/CoverPromoProps"
 
 export function Home(): JSX.Element {
   const dispatch = useAppDispatch()
-  const ref = useRef<HTMLDivElement>(null)
-  const { mainSlider, banner, watchingNow, newRelease, promoLine } = useAppSelector((state) => state.content)
-
-  const [activeLinkPopularGenres, setActiveLinkPopularGenres] = useState<number>(0)
-
-  const firstObservSection = useRef<HTMLElement>(null)
+  const { mainSlider, banner, watchingNow, newRelease, promoLine, coverPromo } = useAppSelector((state) => state.content)
 
   useEffect(() => {
     dispatch(fetchContent({ type: ContentTypeEnum.MainSlider }))
@@ -32,7 +29,9 @@ export function Home(): JSX.Element {
     dispatch(fetchContent({ type: ContentTypeEnum.WatchingNow }))
     dispatch(fetchContent({ type: ContentTypeEnum.NewRelease }))
     dispatch(fetchContent({ type: ContentTypeEnum.PromoLine }))
+    dispatch(fetchContent({ type: ContentTypeEnum.CoverPromo }))
   }, [dispatch])
+
 
   const formCardDataFromPromoLine = (data: PromoLineData): Array<CardData> => {
     const result = data.promoLineItem.map(item => ({
@@ -64,7 +63,10 @@ export function Home(): JSX.Element {
             justifyContent: 'flex-start'
           }
         },
-        clipPath: false,
+        clipPath: {
+          value: false,
+          type: null
+        },
         ageRestrictionBadge: {
           position: 'left',
           size: 'lg'
@@ -117,7 +119,10 @@ export function Home(): JSX.Element {
             justifyContent: 'space-between'
           }
         },
-        clipPath: false,
+        clipPath: {
+          value: false,
+          type: null
+        },
         ageRestrictionBadge: {
           position: 'left',
           size: 'sm'
@@ -174,7 +179,10 @@ export function Home(): JSX.Element {
             justifyContent: 'space-between'
           }
         },
-        clipPath: true,
+        clipPath: {
+          value: true,
+          type: 'main'
+        },
         ageRestrictionBadge: {
           position: 'right',
           size: 'sm'
@@ -232,7 +240,10 @@ export function Home(): JSX.Element {
             justifyContent: 'space-between'
           }
         },
-        clipPath: false,
+        clipPath: {
+          value: false,
+          type: null
+        },
         ageRestrictionBadge: {
           position: 'left',
           size: 'sm'
@@ -277,7 +288,7 @@ export function Home(): JSX.Element {
       mediaPlayerHandler: false
     },
     sliderData: {
-      data: promoLine.content ? formCardDataFromPromoLine(promoLine.content.data) : null,
+      data: promoLine.content ? formCardDataFromPromoLine(promoLine.content.data as PromoLineData) : null,
       cardStyles: {
         cardSize: 'lm',
         flex: {
@@ -285,7 +296,10 @@ export function Home(): JSX.Element {
             justifyContent: 'space-between'
           }
         },
-        clipPath: true,
+        clipPath: {
+          value: true,
+          type: 'main'
+        },
         ageRestrictionBadge: {
           position: 'right',
           size: 'sm'
@@ -321,44 +335,17 @@ export function Home(): JSX.Element {
   }
 
   const promoLineProps: PromoLineProps = {
-    promoLineData: promoLine.content ? promoLine.content.data as PromoLineData : defaultPromoLineData,
+    promoLineData: promoLine.content
+      ? promoLine.content.data as PromoLineData
+      : defaultPromoLineData,
     sliderProps: sliderProrsPromoLine
   }
 
-  // const sliderPropsPopularGenres: SliderProps = {
-  //   sliderSettings: {
-  //     typeSlider: 'multi',
-  //     pagenation: false,
-  //     autoSwipe: false,
-  //     lastSwipe: true,
-  //     quantityListItems: 5
-  //   },
-  //   slidesData: activeLinkPopularGenres === 0 ? temporaryPopularGenresSeries : temporaryPopularGenresMovies,
-  //   cardStyles: {
-  //     cardSize: 'sm',
-  //     flex: {
-  //       body: {
-  //         justifyContent: 'space-between'
-  //       }
-  //     },
-  //     clipPath: true,
-  //     ageRestrictionBadge: {
-  //       position: 'right',
-  //       size: 'sm'
-  //     },
-  //     boxShadow: false,
-  //     btnGroup: false,
-  //     titleOutside: false,
-  //     hover: {
-  //       scale: false,
-  //       playBack: {
-  //         value: true,
-  //         type: 'default'
-  //       },
-  //       shadow: false
-  //     }
-  //   }
-  // }
+  const coverPromoProps: CoverPromoProps = {
+    coverPromoData: coverPromo.content
+      ? coverPromo.content.data as CardData[]
+      : null
+  }
 
   return (
     <div className="home" >
@@ -382,7 +369,7 @@ export function Home(): JSX.Element {
       <section className="home-item container">
         <SeoBlock {...seoBlockProps} />
       </section>
-      <section className="home-item" ref={firstObservSection}>
+      <section className="home-item">
         <div className="home-item__title container">
           <h2>Детективные сериалы</h2>
           <Link to="/#" className="link link_primary">Показать еще</Link>
@@ -392,28 +379,13 @@ export function Home(): JSX.Element {
       <section className="home-item">
         <PromoLine {...promoLineProps} />
       </section>
-      {/* <section className="home-item">
-        <div className="home-item__title container">
-          <h2>Популярные жанры</h2>
-          <div className="home-item__title-wrapper">
-            <span className={`link link_primary ${activeLinkPopularGenres === 0 ? 'link_active' : ''}`}
-              onClick={() => setActiveLinkPopularGenres(0)}
-            >
-              Сериалы
-            </span>
-            <span className={`link link_primary ${activeLinkPopularGenres === 1 ? 'link_active' : ''}`}
-              onClick={() => setActiveLinkPopularGenres(1)}
-            >
-              Фильмы
-            </span>
-          </div>
-        </div>
-        <Slider {...sliderPropsPopularGenres} />
+      <section className="home-item">
+        <PopularGenres />
       </section>
       <section className="home-item container">
-        <CoverPromo />
+        <CoverPromo {...coverPromoProps} />
       </section>
-      <section className="home-item">
+      {/* <section className="home-item">
         <div className="home-item__title container">
           <h2>Блог Амедиатеки</h2>
           <Link to="/#" className="link link_primary">Показать еще</Link>

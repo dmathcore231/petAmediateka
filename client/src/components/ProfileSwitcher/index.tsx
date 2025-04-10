@@ -1,4 +1,4 @@
-import { useState, useRef, MouseEvent } from "react"
+import { useState, useRef, MouseEvent, JSX } from "react"
 import { useAppSelector } from "../../hooks"
 import { Spinner } from "../Spinner"
 import { ProfileSwitcherProps } from "../../types/interfaces/ProfileSwitcherProps"
@@ -10,16 +10,30 @@ export function ProfileSwitcher({ className }: ProfileSwitcherProps): JSX.Elemen
   const [isActive, setIsActive] = useState(false)
   const menuListRef = useRef<HTMLUListElement>(null)
 
-  const handleClickSwitcherMenu = (event: MouseEvent) => {
+  const handleClickSwitcherMenu = (event: MouseEvent): void => {
     if (event.target !== menuListRef.current) {
       setIsActive(!isActive)
     }
   }
 
+  const setClassSwitcher = (): string => {
+    const baseClass = "profile-switcher"
+    const customClass = className ? " " + className : ""
+
+    return `${baseClass}${customClass}`
+  }
+
+  const setClassSwitcherMenu = (): string => {
+    const baseClass = "profile-switcher-menu"
+    const isActiveClass = isActive ? " profile-switcher-menu_active" : ""
+
+    return `${baseClass}${isActiveClass}`
+  }
+
   return (
-    <div className={"profile-switcher" + (className ? " " + className : "")}
+    <div className={setClassSwitcher()}
       onClick={handleClickSwitcherMenu}>
-      <div className={"profile-switcher-menu" + (isActive ? " profile-switcher-menu_active" : "")}>
+      <div className={setClassSwitcherMenu()}>
         <Avatar size="sm" className="avatar__img_scale"
         />
         <ul className="profile-switcher-menu-list" ref={menuListRef}>

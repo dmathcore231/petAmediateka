@@ -14,7 +14,7 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
   const { user } = useAppSelector(state => state.auth)
 
   const { _id, type, title, badge, ageRestriction, description, bg, logoImg, link } = data
-  const { cardSize, flex, clipPath, ageRestrictionBadge, btnGroup, hover, boxShadow } = styles
+  const { cardSize, flex, clipPath: { value: clipPathValue, type: clipPathType }, ageRestrictionBadge, btnGroup, hover, boxShadow } = styles
   const { title: { titleOutside, titleLogoImg, titleLogoImgIndex }, badgeVisible, link: { linkType }, descriptionVisible, tags, cardSeries } = settings
 
   const renderCardContentLinkWrapper = (children: JSX.Element): JSX.Element => {
@@ -33,104 +33,148 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
   }
 
   const renderCardBg = (): JSX.Element => {
-    if (cardSize === 'lg' && bg?.imgUrl) {
-      return (
-        <img src={bg.imgUrl} alt="" className="card-bg__img" />
-      )
-    } else if (cardSize === 'lm' && bg?.imgResizeLmUrl) {
-      return (
-        <img src={bg.imgResizeLmUrl} alt="" className="card-bg__img" />
-      )
-    } else {
-      return (
-        <img src={bg?.imgResizeUrl} alt="" className="card-bg__img" />
-      )
+    const configBg: Record<string, string | undefined> = {
+      lg: bg?.imgUrl,
+      lm: bg?.imgResizeLmUrl,
     }
+
+    const src: string = configBg[cardSize] || bg?.imgResizeUrl
+
+    return <img src={src} alt="" className="card-bg__img" />
   }
 
   const renderCardContent = (): JSX.Element => {
+    const renderBackground = (): JSX.Element | null => {
+      if (loadingCardData || error) return null
+
+      const baseClass = 'card-bg'
+      const shadowClass = boxShadow ? ' card-bg_shadow' : ''
+
+      return (
+        <div className={`${baseClass}${shadowClass}`}>
+          <picture className="card-bg__picture">
+            {renderCardBg()}
+          </picture>
+        </div>
+      )
+    }
+
+    const renderAgeRestrictionBadge = (loading: boolean): JSX.Element | null => {
+      if (!ageRestrictionBadge) return null
+
+      const baseClass = 'card-body__age-restriction'
+      const positionClass = ageRestrictionBadge.position === 'right'
+        ? ' card-body__age-restriction_jc_fe'
+        : ''
+
+      return (
+        <div className={`${baseClass}${positionClass}`}>
+          {loading
+            ? (<AgeRestrictionBadge size={ageRestrictionBadge.size} loading={loadingCardData} />)
+            : (<AgeRestrictionBadge size={ageRestrictionBadge.size} data={ageRestriction} />)}
+        </div>
+      )
+    }
+
+    const renderBadge = (loading: boolean): JSX.Element | null => {
+      if (!badge || !badgeVisible) return null
+
+      return (
+        <div className="card-body__badge">
+          {!loading
+            ? (<Badge type={badge.type} title={badge.title} />)
+            : (<Badge type={'loading'} />)}
+        </div>
+      )
+    }
+
+    const renderLogoImg = (): JSX.Element | null => {
+      if (!titleLogoImg) return null
+
+      return (
+        <div className="card-body__title">
+          {linkType === 'title'
+            ? (<Link to={link} className="card__link">
+              <img src={logoImg} alt="" className="card-body__title-img" />
+            </Link>)
+            : (<img src={logoImg} alt="" className="card-body__title-img" />)
+          }
+        </div>
+      )
+    }
+
+    const renderDescription = (): JSX.Element | null => {
+      if (!descriptionVisible) return null
+
+      const baseClass = 'card-body__description'
+      const loadingClass = loadingCardData ? ' card-body__description_loading' : ''
+      const alignTextClass = ' title title_align_left'
+      const descriptionValue = !loadingCardData && description ? description : ''
+
+      return (
+        <div className={`${baseClass}${loadingClass}${alignTextClass}`}>
+          {descriptionValue}
+        </div>
+      )
+    }
+
+    const renderButtons = (): JSX.Element | null => {
+      if (!btnGroup) return null
+
+      const baseClass = "card-body__btn"
+      const loadingClass = loadingCardData ? ' card-body__btn_loading' : ''
+
+      return (
+        <div className={`${baseClass}${loadingClass}`}>
+          {!loadingCardData && (
+            <>
+              <Link to={link} className={`btn btn_primary card-body__btn-link card-body__btn-link_size_${styles.cardSize}`}>
+                <div className="card-body__btn-wrapper">
+                  <PlayIcon width={28} height={28} />
+                  <span className="card-body__btn-text">Смотреть</span>
+                </div>
+              </Link>
+              {user && (
+                <Btn
+                  type="button"
+                  className="btn_secondary btn_transparent card-body__btn-link card-body__btn-link_size_xsm"
+                  onClick={() => console.log('add favorite')}
+                >
+                  <span className="card-body__btn-wrapper-scale">
+                    <AddFavoriteIcon width={22} height={22} />
+                  </span>
+                </Btn>
+              )}
+            </>
+          )}
+        </div>
+      )
+    }
+
+    const renderExternalTitle = (): JSX.Element | null => {
+      if (titleLogoImg || !titleOutside) return null
+
+      return (
+        <div className="card-title title title_align_left">
+          {title.value}
+        </div>
+      )
+    }
+
     return (
       <>
-        {!loadingCardData && !error && (
-          <div className={boxShadow ? "card-bg card-bg_shadow" : "card-bg"}>
-            <picture className="card-bg__picture">
-              {renderCardBg()}
-            </picture>
-          </div>
-        )}
+        {renderBackground()}
         <div className={`card-body card-body_flex_jc_${flex.body.justifyContent}`}>
-          {ageRestrictionBadge && (
-            <div className={ageRestrictionBadge.position === 'right'
-              ? "card-body__age-restriction card-body__age-restriction_jc_fe"
-              : "card-body__age-restriction"
-            }>
-              {!loadingCardData
-                ? (<AgeRestrictionBadge size={ageRestrictionBadge.size} data={ageRestriction} />)
-                : (<AgeRestrictionBadge size={ageRestrictionBadge.size} loading={loadingCardData} />)}
-            </div>
-          )
-          }
-          {badge && badgeVisible && (
-            <div className="card-body__badge">
-              {!loadingCardData
-                ? (<Badge type={badge.type} title={badge.title} />)
-                : (<Badge type={'loading'} />)}
-            </div>
-          )}
-          {titleLogoImg && (
-            <div className="card-body__title">
-              {
-                linkType === 'title'
-                  ? (
-                    <Link to={link} className="card__link">
-                      <img src={logoImg} alt="" className="card-body__title-img" />
-                    </Link>
-                  )
-                  : (
-                    <img src={logoImg} alt="" className="card-body__title-img" />
-                  )
-              }
-            </div>
-          )}
-          {descriptionVisible && (
-            <div className={"card-body__description" + (loadingCardData ? ' card-body__description_loading' : '') + " title title_align_left"}>
-              {!loadingCardData && description ? description : ''}
-            </div>
-          )}
+          {renderAgeRestrictionBadge(loadingCardData)}
+          {renderBadge(loadingCardData)}
+          {renderLogoImg()}
+          {renderDescription()}
           {tags && (
             <Tags data={tags} />
           )}
-          {btnGroup === true && (
-            <div className={"card-body__btn" + (loadingCardData ? ' card-body__btn_loading' : '')}>
-              {!loadingCardData && (
-                <>
-                  <Link to={link} className={`btn btn_primary card-body__btn-link card-body__btn-link_size_${styles.cardSize}`}>
-                    <div className="card-body__btn-wrapper">
-                      <PlayIcon width={28} height={28} />
-                      <span className="card-body__btn-text">Смотреть</span>
-                    </div>
-                  </Link>
-                  {user && (
-                    <Btn
-                      type="button"
-                      className="btn_secondary btn_transparent card-body__btn-link card-body__btn-link_size_xsm"
-                      onClick={() => console.log('add favorite')}
-                    >
-                      <span className="card-body__btn-wrapper-scale">
-                        <AddFavoriteIcon width={22} height={22} />
-                      </span>
-                    </Btn>
-                  )}
-                </>
-              )}
-            </div>
-          )}
+          {renderButtons()}
         </div>
-        {!titleLogoImg && titleOutside && (
-          <div className="card-title title title_align_left">
-            {title.value}
-          </div>
-        )}
+        {renderExternalTitle()}
         {cardSeries && (
           <div className="card-icon-play">
             <MediaPlayIcon width={60} height={60} />
@@ -141,30 +185,42 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
   }
 
   const setClassesCard = (): string => {
-    let classes = `card card_size_${cardSize}`
-    if (hover?.shadow) classes += ' card_hover_shadow'
-    if (hover?.scale) classes += ' card_hover_scale'
-    if (clipPath) classes += ` card_clip-path_main`
-    if (hover?.playBack.value) classes += ' card_hover_playback'
-    if (hover && hover.playBack.type === 'bottom-more') classes += ' card_hover_playback_bottom_more'
-    if (loadingCardData) classes += ' card_loading'
-    return classes
+    const classes = [
+      `card card_size_${cardSize}`,
+      hover?.shadow && 'card_hover_shadow',
+      hover?.scale && 'card_hover_scale',
+      clipPathValue && clipPathType && `card_clip-path_${clipPathType}`,
+      hover?.playBack.value && 'card_hover_playback',
+      hover?.playBack?.type === 'bottom-more' && 'card_hover_playback_bottom_more',
+      loadingCardData && 'card_loading',
+    ]
+
+    return classes.filter(Boolean).join(' ')
   }
 
   if (hover?.playBack.value) {
+    const getClasses = (clipPathType: string | null): string => {
+      const classes = [
+        "card-playback-bg",
+        clipPathType && `card-playback-bg_clip-path_${clipPathType}`,
+      ]
+
+      return classes.filter(Boolean).join(' ')
+    }
+
     return (
       <>
-        <div className="card-playback-bg"></div>
+        <div className={getClasses(clipPathType)} />
         <div className={setClassesCard()}>
           {renderCardContentLinkWrapper(renderCardContent())}
         </div>
       </>
     )
-  } else {
-    return (
-      <div className={setClassesCard()}>
-        {renderCardContentLinkWrapper(renderCardContent())}
-      </div>
-    )
   }
+
+  return (
+    <div className={setClassesCard()}>
+      {renderCardContentLinkWrapper(renderCardContent())}
+    </div>
+  )
 }

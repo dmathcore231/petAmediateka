@@ -4,6 +4,7 @@ import { useAppSelector, useAppDispatch } from "../../hooks"
 import { fetchLogout } from "../../redux/authSlice"
 import { Btn } from "../Btn"
 import { Avatar } from "../Avatar"
+import { BurgerMenuItem } from "../../types/interfaces/BurgerMenuItem"
 import { BurgerMenuIcon } from "../../assets/icons/BurgerMenuIcon"
 import { CloseIcon } from "../../assets/icons/CloseIcon"
 import { PlusIcon } from "../../assets/icons/PlusIcon"
@@ -14,6 +15,42 @@ export function BurgerMenu(): JSX.Element {
 
   const [isActive, setIsActive] = useState(false)
 
+  const baseClasss = "burger-menu"
+  const isActiveClass = isActive ? " burger-menu_active" : ""
+
+  const menuItems: BurgerMenuItem[] = [
+    {
+      to: "/profile/favorites",
+      text: "Избранное",
+      className: "link link_white title title_size_s",
+      onClick: handleClickCloseBtn
+    },
+    {
+      to: "/profile/favorites",
+      text: "История просмотров",
+      className: "link link_white title title_size_s",
+      onClick: handleClickCloseBtn
+    },
+    {
+      to: "/profile/favorites",
+      text: "Настройки",
+      className: "link link_white title title_size_s",
+      onClick: handleClickCloseBtn
+    },
+    {
+      to: "/profile/favorites",
+      text: "Покупки",
+      className: "link link_white title title_size_s",
+      onClick: handleClickCloseBtn
+    },
+    {
+      to: "#",
+      text: "Выйти из аккаунта",
+      className: "link link_gray title title_size_s",
+      onClick: handleClickLogout
+    }
+  ]
+
   useEffect((): void => {
     const layoutElement = document.querySelector('.layout')
     if (isActive) {
@@ -23,23 +60,37 @@ export function BurgerMenu(): JSX.Element {
     }
   }, [isActive])
 
-  const handleClickBurgerMenu = (): void => {
-    setIsActive(true)
-  }
-
-  const handleClickCloseBtn = (event: MouseEvent<HTMLButtonElement> | MouseEvent<HTMLAnchorElement>): void => {
+  function handleClickCloseBtn(event: MouseEvent<HTMLButtonElement> | MouseEvent<HTMLAnchorElement>): void {
     event.stopPropagation()
     setIsActive(false)
   }
 
-  const handleClickLogout = (): void => {
+  function handleClickLogout(): void {
     const layoutElement: HTMLElement | null = document.querySelector('.layout')
     dispatch(fetchLogout())
     layoutElement?.classList.remove('layout_fixed')
   }
 
+  const handleClickBurgerMenu = (): void => {
+    setIsActive(true)
+  }
+
+  const renderBurgerMenuItems = (menuItems: BurgerMenuItem[]): JSX.Element[] => {
+    return menuItems.map((item, index) => (
+      <li key={index} className="burger-menu-aside__item">
+        <Link
+          to={item.to}
+          className={item.className}
+          onClick={item.onClick}
+        >
+          {item.text}
+        </Link>
+      </li>
+    ))
+  }
+
   return (
-    <div className={"burger-menu" + (isActive ? " burger-menu_active" : "")}
+    <div className={`${baseClasss}${isActiveClass}`}
       onClick={handleClickBurgerMenu}>
       <BurgerMenuIcon width={34} height={34} />
       <div className="burger-menu__wrapper">
@@ -111,50 +162,7 @@ export function BurgerMenu(): JSX.Element {
             </div>
             <nav className="burger-menu-aside-nav-bar">
               <ul className="burger-menu-aside-nav-bar-list">
-                <li className="burger-menu-aside-nav-bar-list__item">
-                  <Link
-                    to="/profile/favorites"
-                    className="link link_white title title_size_s"
-                    onClick={handleClickCloseBtn}
-                  >
-                    Избранное
-                  </Link>
-                </li>
-                <li className="burger-menu-aside-nav-bar-list__item">
-                  <Link
-                    to="/profile/favorites"
-                    className="link link_white title title_size_s"
-                    onClick={handleClickCloseBtn}
-                  >
-                    История просмотров
-                  </Link>
-                </li>
-                <li className="burger-menu-aside-nav-bar-list__item">
-                  <Link
-                    to="/profile/favorites"
-                    className="link link_white title title_size_s"
-                    onClick={handleClickCloseBtn}
-                  >
-                    Настроики
-                  </Link>
-                </li>
-                <li className="burger-menu-aside-nav-bar-list__item">
-                  <Link
-                    to="/profile/favorites"
-                    className="link link_white title title_size_s"
-                    onClick={handleClickCloseBtn}
-                  >
-                    Покупки
-                  </Link>
-                </li>
-                <li className="burger-menu-aside-nav-bar-list__item">
-                  <Link to="#"
-                    className="link link_gray title title_size_s"
-                    onClick={handleClickLogout}
-                  >
-                    Выйти из аккаунта
-                  </Link>
-                </li>
+                {renderBurgerMenuItems(menuItems)}
               </ul>
             </nav>
           </div>

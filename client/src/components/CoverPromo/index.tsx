@@ -1,50 +1,29 @@
+import { JSX } from "react"
 import { Card } from "../Card"
-import { CardData, CardStyles } from "../../types/Card"
+import { CoverPromoProps } from "../../types/interfaces/CoverPromoProps"
+import { CardProps } from "../../types/interfaces/CardProps"
+import { defaultCardData } from "../../helpers"
+import { useAppSelector } from "../../hooks"
 
-export function CoverPromo(): JSX.Element {
+export function CoverPromo({ coverPromoData }: CoverPromoProps): JSX.Element {
+  const { coverPromo: { loading, error } } = useAppSelector(state => state.content)
 
-  const cardDataTemplate: CardData<string> = {
-
-    link: {
-      type: 'allCard',
-      value: '/'
-    },
-    title: {
-      type: "img",
-      value: "/coverPromo/title.png"
-    },
-    imgBg: "/coverPromo/bg-promo.jpg",
-    ageRestriction: 18,
-  }
-
-  const cardDataTemplateSecond: CardData<string> = {
-
-    link: {
-      type: 'title',
-      value: '/'
-    },
-    imgBg: "/coverPromo/bg-card.jpg",
-    description: "Арт-эксперт в эмоциональном упадке и торговец антиквариатом объединяются, чтобы обогатиться. Смогут ли они выйти сухими из воды?",
-    tags: {
-      raiting: 8,
-      ageRestriction: 18,
-      dateRelease: '2023',
-      genres: ['Драма', 'Триллер']
-    }
-  }
-
-  const cardStyles: CardStyles[] = [
-    {
+  const cardProps: CardProps = {
+    data: coverPromoData ? coverPromoData[0] : defaultCardData,
+    styles: {
       cardSize: 'lm',
       flex: {
         body: {
           justifyContent: 'space-between'
         }
       },
-      clipPath: true,
+      clipPath: {
+        value: true,
+        type: 'main'
+      },
       ageRestrictionBadge: {
         position: 'right',
-        size: 'lm'
+        size: 'sm'
       },
       boxShadow: false,
       btnGroup: false,
@@ -52,43 +31,84 @@ export function CoverPromo(): JSX.Element {
         scale: false,
         playBack: {
           value: true,
-          type: 'bottom-more'
+          type: 'default'
         },
         shadow: false
       }
     },
-    {
+    settings: {
+      title: {
+        titleOutside: false,
+        titleLogoImg: true,
+        titleLogoImgIndex: null
+      },
+      badgeVisible: false,
+      link: {
+        linkType: 'allCard',
+      },
+      descriptionVisible: false,
+      tags: null,
+      cardSeries: false
+    },
+    loadingCardData: loading,
+    error: error ? true : false
+  }
+
+  const cardSecondProps: CardProps = {
+    data: coverPromoData ? coverPromoData[1] : defaultCardData,
+    styles: {
       cardSize: 'lm',
       flex: {
         body: {
           justifyContent: 'flex-end'
         }
       },
-      clipPath: true,
-      ageRestrictionBadge: {
-        position: 'left',
-        size: 'lg'
+      clipPath: {
+        value: true,
+        type: 'main'
       },
+      ageRestrictionBadge: null,
       boxShadow: false,
       btnGroup: true,
       hover: {
         scale: false,
         playBack: {
           value: false,
-          type: null
+          type: 'default'
         },
         shadow: false
       }
-    }
-  ]
+    },
+    settings: {
+      title: {
+        titleOutside: false,
+        titleLogoImg: false,
+        titleLogoImgIndex: null
+      },
+      badgeVisible: false,
+      link: {
+        linkType: 'title',
+      },
+      descriptionVisible: true,
+      tags: {
+        raiting: 8,
+        ageRestriction: 18,
+        dateRelease: '2023',
+        genres: ['Драма']
+      },
+      cardSeries: false
+    },
+    loadingCardData: loading,
+    error: error ? true : false
+  }
 
   return (
     <div className="cover-promo">
       <div className="cover-promo__item">
-        < Card data={cardDataTemplate} styles={cardStyles[0]} />
+        < Card {...cardProps} />
       </div>
       <div className="cover-promo__item">
-        < Card data={cardDataTemplateSecond} styles={cardStyles[1]} />
+        < Card {...cardSecondProps} />
       </div>
     </div>
   )

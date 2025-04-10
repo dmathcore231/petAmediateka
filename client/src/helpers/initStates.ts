@@ -31,6 +31,9 @@ export const initialStateContent: ContentState = {
   [ContentTypeEnum.PromoLine]: {
     loading: false, error: null, content: null
   },
+  [ContentTypeEnum.CoverPromo]: {
+    loading: false, error: null, content: null
+  },
 }
 
 export const initialStateMediaPlayer: MediaPlayerState = {

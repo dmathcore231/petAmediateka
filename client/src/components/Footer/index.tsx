@@ -1,4 +1,7 @@
+import { JSX } from "react"
 import { Link, NavLink } from "react-router-dom"
+import { NavBarItemFooterTypes } from "../../types/NavBarItemFooterTypes"
+import { ConfigNavBarFooterItems } from "../../types/interfaces/ConfigNavBarFooterItems"
 import { Logo } from "../../assets/icons/Logo"
 import { AppStoreIcon } from "../../assets/icons/AppStoreIcon"
 import { GooglePlayIcon } from "../../assets/icons/GooglePlayIcon"
@@ -11,6 +14,70 @@ import { YouTubeIcon } from "../../assets/icons/YouTubeIcon"
 import { ZenIcon } from "../../assets/icons/ZenIcon"
 
 export function Footer(): JSX.Element {
+  const renderNavBarItems = (type: NavBarItemFooterTypes): JSX.Element => {
+    const config: Record<NavBarItemFooterTypes, ConfigNavBarFooterItems[]> = {
+      main: [
+        { url: '/collection-series', value: 'Сериалы' },
+        { url: '/movies', value: 'Фильмы' },
+        { url: '/collections', value: 'Коллекции' },
+        { url: '/trailers', value: 'Трейлеры' },
+        { url: '/kino1tv', value: 'Кино1ТВ' },
+        { url: '/tv', value: 'Эфир' },
+        { url: '/search', value: 'Поиск' },
+        { url: '/blog', value: 'Блог' },
+      ],
+      secondary: [
+        { url: '/tos', value: 'Пользовательское соглашение' },
+        { url: '/faq', value: 'FAQ' },
+        { url: '/contacts', value: 'Контакты' },
+        { url: '/partners', value: 'Партнерская программа' },
+        { url: '/recommendations', value: 'В Амедиатеке применяются рекомендательные технологии' },
+      ],
+      store: [
+        { url: '#', value: (<AppStoreIcon width={122} height={40} />) },
+        { url: '#', value: (<GooglePlayIcon width={122} height={40} />) },
+        { url: '#', value: (<AppGalleryIcon width={122} height={40} />) },
+        { url: '#', value: (<RuStoreIcon width={122} height={40} />) },
+        { url: '#', value: (<SmartTvIcon width={122} height={40} />) },
+      ],
+      social: [
+        { url: '#', value: (<TelegramIcon width={40} height={40} />) },
+        { url: '#', value: (<VkIcon width={40} height={40} />) },
+        { url: '#', value: (<YouTubeIcon width={40} height={40} />) },
+        { url: '#', value: (<ZenIcon width={40} height={40} />) },
+      ]
+    }
+
+    const setClassLink = (isActive: boolean, typeLink: NavBarItemFooterTypes): string => {
+      const socialClass = 'link link_social'
+      const baseClass = typeLink === 'social'
+        ? socialClass
+        : 'nav-bar-list__link'
+      const activeLinkClass = isActive && typeLink !== 'social'
+        ? " nav-bar-list__link_active"
+        : ""
+
+      return `${baseClass}${activeLinkClass}`
+    }
+    const renderLinkValue = (value: string | JSX.Element): JSX.Element => typeof value === 'string'
+      ? <span className="text text_size_s">{value}</span>
+      : value
+
+    return (
+      <>
+        {Object.values(config[type]).map(({ url, value }, index) => (
+          <li key={index} className="nav-bar-list__item">
+            <NavLink to={url}
+              className={({ isActive }) => setClassLink(isActive, type)}
+            >
+              {renderLinkValue(value)}
+            </NavLink>
+          </li>
+        ))}
+      </>
+    )
+  }
+
   return (
     <footer className="footer container">
       <div className="footer__item">
@@ -22,224 +89,28 @@ export function Footer(): JSX.Element {
         <div className="footer-menu">
           <nav className="footer-nav-bar">
             <ul className="nav-bar-list">
-              <li className="nav-bar-list__item">
-                <NavLink to="/series"
-                  className={({ isActive }) =>
-                    isActive ? "nav-bar-list__link_active" : "nav-bar-list__link"
-                  }
-                >
-                  <span className="text text_size_s">Сериалы</span>
-                </NavLink>
-              </li>
-              <li className="nav-bar-list__item">
-                <NavLink to="/movies"
-                  className={({ isActive }) =>
-                    isActive ? "nav-bar-list__link_active" : "nav-bar-list__link"
-                  }
-                >
-                  <span className="text text_size_s">Фильмы</span>
-                </NavLink>
-              </li>
-              <li className="nav-bar-list__item">
-                <NavLink to="/collections"
-                  className={({ isActive }) =>
-                    isActive ? "nav-bar-list__link_active" : "nav-bar-list__link"
-                  }
-                >
-                  <span className="text text_size_s">Коллекции</span>
-                </NavLink>
-              </li>
-              <li className="nav-bar-list__item">
-                <NavLink to="/trailers"
-                  className={({ isActive }) =>
-                    isActive ? "nav-bar-list__link_active" : "nav-bar-list__link"
-                  }
-                >
-                  <span className="text text_size_s">Трейлеры</span>
-                </NavLink>
-              </li>
-              <li className="nav-bar-list__item">
-                <NavLink to="/kino1tv"
-                  className={({ isActive }) =>
-                    isActive ? "nav-bar-list__link_active" : "nav-bar-list__link"
-                  }
-                >
-                  <span className="text text_size_s">Кино1ТВ</span>
-                </NavLink>
-              </li>
-              <li className="nav-bar-list__item">
-                <NavLink to="/tv"
-                  className={({ isActive }) =>
-                    isActive ? "nav-bar-list__link_active" : "nav-bar-list__link"
-                  }
-                >
-                  <span className="text text_size_s">Эфир</span>
-                </NavLink>
-              </li>
-              <li className="nav-bar-list__item">
-                <NavLink to="/search"
-                  className={({ isActive }) =>
-                    isActive ? "nav-bar-list__link_active" : "nav-bar-list__link"
-                  }
-                >
-                  <span className="text text_size_s">Поиск</span>
-                </NavLink>
-              </li>
-              <li className="nav-bar-list__item">
-                <NavLink to="/blog"
-                  className={({ isActive }) =>
-                    isActive ? "nav-bar-list__link_active" : "nav-bar-list__link"
-                  }
-                >
-                  <span className="text text_size_s">Блог</span>
-                </NavLink>
-              </li>
+              {renderNavBarItems('main')}
             </ul>
             <ul className="nav-bar-list nav-bar-list_gap_sm">
-              <li className="nav-bar-list__item">
-                <NavLink to="/tos"
-                  className={({ isActive }) =>
-                    isActive ? "nav-bar-list__link_active" : "nav-bar-list__link"
-                  }
-                >
-                  <span className="text text_size_s title_color_gray">
-                    Пользовательское соглашение
-                  </span>
-                </NavLink>
-              </li>
-              <li className="nav-bar-list__item">
-                <NavLink to="/faq"
-                  className={({ isActive }) =>
-                    isActive ? "nav-bar-list__link_active" : "nav-bar-list__link"
-                  }
-                >
-                  <span className="text text_size_s title_color_gray">
-                    FAQ
-                  </span>
-                </NavLink>
-              </li>
-              <li className="nav-bar-list__item">
-                <NavLink to="/contacts"
-                  className={({ isActive }) =>
-                    isActive ? "nav-bar-list__link_active" : "nav-bar-list__link"
-                  }
-                >
-                  <span className="text text_size_s title_color_gray">
-                    Контакты
-                  </span>
-                </NavLink>
-              </li>
-              <li className="nav-bar-list__item">
-                <NavLink to="/partners"
-                  className={({ isActive }) =>
-                    isActive ? "nav-bar-list__link_active" : "nav-bar-list__link"
-                  }
-                >
-                  <span className="text text_size_s title_color_gray">
-                    Партнерская программа
-                  </span>
-                </NavLink>
-              </li>
-              <li className="nav-bar-list__item">
-                <NavLink to="/recommendations"
-                  className={({ isActive }) =>
-                    isActive ? "nav-bar-list__link_active" : "nav-bar-list__link"
-                  }
-                >
-                  <span className="text text_size_s title_color_gray">
-                    В Амедиатеке применяются рекомендательные технологии
-                  </span>
-                </NavLink>
-              </li>
+              {renderNavBarItems('secondary')}
             </ul>
             <ul className="nav-bar-list nav-bar-list_gap_sm nav-bar-list_padding_top">
-              <li className="nav-bar-list__item">
-                <NavLink to="/#"
-                  className={({ isActive }) =>
-                    isActive ? "nav-bar-list__link_active" : "nav-bar-list__link"
-                  }
-                >
-                  <AppStoreIcon width={122} height={40} />
-                </NavLink>
-              </li>
-              <li className="nav-bar-list__item">
-                <NavLink to="/#"
-                  className={({ isActive }) =>
-                    isActive ? "nav-bar-list__link_active" : "nav-bar-list__link"
-                  }
-                >
-                  <GooglePlayIcon width={122} height={40} />
-                </NavLink>
-              </li>
-              <li className="nav-bar-list__item">
-                <NavLink to="/#"
-                  className={({ isActive }) =>
-                    isActive ? "nav-bar-list__link_active" : "nav-bar-list__link"
-                  }
-                >
-                  <AppGalleryIcon width={122} height={40} />
-                </NavLink>
-              </li>
-              <li className="nav-bar-list__item">
-                <NavLink to="/#"
-                  className={({ isActive }) =>
-                    isActive ? "nav-bar-list__link_active" : "nav-bar-list__link"
-                  }
-                >
-                  <RuStoreIcon width={122} height={40} />
-                </NavLink>
-              </li>
-              <li className="nav-bar-list__item">
-                <NavLink to="/#"
-                  className={({ isActive }) =>
-                    isActive ? "nav-bar-list__link_active" : "nav-bar-list__link"
-                  }
-                >
-                  <SmartTvIcon width={122} height={40} />
-                </NavLink>
-              </li>
+              {renderNavBarItems('store')}
             </ul>
             <ul className="nav-bar-list nav-bar-list_gap_sm nav-bar-list_padding_top">
-              <li className="nav-bar-list__item">
-                <Link to="/#"
-                  className="link link_social"
-                >
-                  <TelegramIcon width={32} height={32} />
-                </Link>
-              </li>
-              <li className="nav-bar-list__item">
-                <Link to="/#"
-                  className="link link_social"
-                >
-                  <VkIcon width={32} height={32} />
-                </Link>
-              </li>
-              <li className="nav-bar-list__item">
-                <Link to="/#"
-                  className="link link_social"
-                >
-                  <YouTubeIcon width={32} height={32} />
-                </Link>
-              </li>
-              <li className="nav-bar-list__item">
-                <Link to="/#"
-                  className="link link_social"
-                >
-                  <ZenIcon width={32} height={32} />
-                </Link>
-              </li>
+              {renderNavBarItems('social')}
             </ul>
           </nav>
         </div>
       </div>
       <div className="footer__item">
         <Link to="/" className="footer__link">
-          <span className="title title_color_gray">
+          <span className="value value_color_gray">
             Поддержка
           </span>
         </Link>
         <Link to="/" className="footer__link">
-          <span className="title">
+          <span className="value">
             help@amediateka.ru
           </span>
         </Link>

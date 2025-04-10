@@ -1,3 +1,4 @@
+import { JSX } from "react"
 import { Slider } from "../Slider"
 import { PromoLineProps } from "../../types/interfaces/PromoLineProps"
 

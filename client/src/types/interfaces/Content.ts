@@ -6,7 +6,7 @@ export type Content = {
   _id: string
   __v: number
   type: ContentTypeEnum
-  data: Array<CardData> | BannerProps | PromoLineData | null
+  data: CardData[] | BannerProps | PromoLineData | null
 }
 
 export enum ContentTypeEnum {
@@ -16,4 +16,5 @@ export enum ContentTypeEnum {
   Series = "series",
   NewRelease = "newRelease",
   PromoLine = "promoLine",
+  CoverPromo = "coverPromo",
 }

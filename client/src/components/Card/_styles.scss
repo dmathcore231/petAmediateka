@@ -266,6 +266,10 @@
     &_main {
       clip-path: $main-clip-path;
     }
+
+    &_10 {
+      clip-path: $clip-path-10;
+    }
   }
 
   &-playback-bg {
@@ -275,7 +279,17 @@
     width: 99%;
     height: 99%;
     background-color: $color-primary;
-    clip-path: $main-clip-path;
+
+    &_clip-path {
+
+      &_main {
+        clip-path: $main-clip-path;
+      }
+
+      &_10 {
+        clip-path: $clip-path-10;
+      }
+    }
   }
 
   &_size {
