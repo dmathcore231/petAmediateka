@@ -127,8 +127,6 @@ export async function getContent(req: Request, res: Response, next: NextFunction
         }
       ]
 
-      console.log(promoData)
-
       localDataState.content = {
         ...content.toObject(),
         data: result

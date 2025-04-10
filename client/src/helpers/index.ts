@@ -37,12 +37,12 @@ export const defaultCardData: CardData = {
   ageRestriction: 0,
   description: "Prewiew description",
   bg: {
-    imgUrl: '',
-    videoUrl: '',
-    imgResizeUrl: ''
+    imgUrl: '#',
+    videoUrl: '#',
+    imgResizeUrl: '#'
   },
-  logoImg: '#',
-  link: '#',
+  logoImg: '/#',
+  link: '/#',
 }
 
 export const defaultBannerData: BannerProps = {
