@@ -2,6 +2,7 @@ import { Bg } from "../Bg"
 import { EpisodesSeries } from "../EpisodesSeries"
 import { BadgeCard } from "../BadgeCard"
 import { TrailerSrc } from "../TrailerSrc"
+import { Ratings } from "../Ratings"
 
 export type MediaContentData = {
   title: {
@@ -33,11 +34,7 @@ export interface MediaContent {
   type: 'movie' | 'series'
   seasons: Season[] | null
   data: MediaContentData
-  rating: {
-    amediateka: number | 'N/A'
-    imdb: number | 'N/A'
-    kinopoisk: number | 'N/A'
-  }
+  rating: Ratings
   actionsData: {
     favorites: string[] | []
     liked: string[] | []
@@ -52,12 +49,6 @@ export interface Season {
   numberOfSeasons: number
   episodes: EpisodesSeries[]
   bg: Bg | null
-  trailer: {
-    quality360: string | null
-    quality720: string | null
-    quality1080: string | null
-    quality2160: string | null
-    img: string
-  } | null
+  trailer: TrailerSrc | null
   description: string | null
 }

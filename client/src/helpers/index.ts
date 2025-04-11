@@ -1,3 +1,4 @@
+import { JSX } from "react"
 import { CardData } from "../types/Card"
 import { BannerProps } from "../types/interfaces/BannerProps"
 import { UserData } from "../types/interfaces/User"

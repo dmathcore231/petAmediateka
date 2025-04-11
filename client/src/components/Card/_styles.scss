@@ -108,9 +108,11 @@
     width: 100%;
     height: 100%;
     z-index: 10;
-    @include flex-column-start;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     justify-content: var(--body-jc);
-    gap: 1rem;
+    // gap: 1rem;
     padding: var(--body-padding);
 
     &__age-restriction {
@@ -220,6 +222,10 @@
         }
       }
     }
+
+    &__wrapper {
+      height: 500px;
+    }
   }
 
   &-title {
@@ -297,8 +303,8 @@
     &_lg {
       --height: 53.25rem;
       --body-top: 3.125rem;
-      --body-padding: 3.75rem;
-      --body-btn-padding-top: 4.5rem;
+      --body-padding: 3.75rem 3.75rem 9rem 3.75rem;
+      --body-btn-padding-top: 2rem;
 
       --age-restriction-padding-bottom: 7.938rem;
 

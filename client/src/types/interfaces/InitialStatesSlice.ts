@@ -1,7 +1,6 @@
 import { ErrorDataInResponse } from "../Error"
 import { UserData } from "./User"
 import { PlayerStatus } from "../PlayerStatus"
-import { VideoQuality } from "../VideoQuality"
 import { Content } from "./Content"
 import { MediaContent } from "./MediaContent"
 import { ContentTypeEnum } from "./Content"

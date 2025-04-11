@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef, JSX } from "react"
-import { Link, useFetcher } from "react-router-dom"
+import { useEffect, JSX } from "react"
+import { Link } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "../../hooks"
 import { fetchContent } from "../../redux/contentSlice"
 import { Banner } from "../../components/Banner"
@@ -7,14 +7,13 @@ import { Slider } from "../../components/Slider"
 import { SeoBlock } from "../../components/SeoBlock"
 import { PromoLine } from "../../components/PromoLine"
 import { CoverPromo } from "../../components/CoverPromo"
-import { Blog } from "../../components/Blog"
 import { PopularGenres } from "../../components/PopularGenres"
 import { SliderProps } from "../../types/interfaces/SliderProps"
 import { BannerProps } from "../../types/interfaces/BannerProps"
 import { SeoBlockProps } from "../../types/interfaces/SeoBlockProps"
 import { PromoLineProps } from "../../types/interfaces/PromoLineProps"
 import { ContentTypeEnum } from "../../types/interfaces/Content"
-import { defaultBannerData, defaultCardData, defaultPromoLineData } from "../../helpers"
+import { defaultBannerData, defaultPromoLineData } from "../../helpers"
 import { CardData } from "../../types/Card"
 import { PromoLineData } from "../../types/interfaces/PromoLineData"
 import { CoverPromoProps } from "../../types/interfaces/CoverPromoProps"
@@ -60,7 +59,7 @@ export function Home(): JSX.Element {
         cardSize: 'lg',
         flex: {
           body: {
-            justifyContent: 'flex-start'
+            justifyContent: 'space-between'
           }
         },
         clipPath: {
@@ -385,13 +384,6 @@ export function Home(): JSX.Element {
       <section className="home-item container">
         <CoverPromo {...coverPromoProps} />
       </section>
-      {/* <section className="home-item">
-        <div className="home-item__title container">
-          <h2>Блог Амедиатеки</h2>
-          <Link to="/#" className="link link_primary">Показать еще</Link>
-        </div>
-        <Blog />
-      </section> */}
     </div >
   )
 }
