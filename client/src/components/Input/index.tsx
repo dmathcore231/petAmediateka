@@ -1,15 +1,17 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, JSX } from "react"
 import { InputProps } from "../../types/interfaces/InputProps"
 import { InputErrorState } from "../../types/Input"
 import { EyeIcon } from "../../assets/icons/EyeIcon"
 
 export function Input({ type, id, label, required, onChange, value, placeholder, className, name, error, btnInInput, checkPassword }: InputProps): JSX.Element {
-  const [errorState, setErrorState] = useState<InputErrorState>({ value: false, errorData: null })
+  const defaultStateError: InputErrorState = { value: false, errorData: null }
+
+  const [errorState, setErrorState] = useState<InputErrorState>(defaultStateError)
   const [isVisiblePass, setIsVisiblePass] = useState(false)
 
   useEffect(() => {
     if (value === '') {
-      setErrorState({ value: false, errorData: null })
+      setErrorState(defaultStateError)
     }
   }, [value])
 
@@ -19,25 +21,26 @@ export function Input({ type, id, label, required, onChange, value, placeholder,
     }
   }, [error])
 
-  const handleValidEmail = () => {
-    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    if (re.test(String(value).toLowerCase()) || value === '') {
-      return setErrorState({ value: false, errorData: null })
-    } else {
-      return setErrorState({
-        value: true,
-        errorData: {
-          field: "email",
-          message: null
+  const handleValidEmail = (emailValue: string): void => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    const isValidEmail = emailRegex.test(emailValue.toLowerCase()) || emailValue === ''
+
+    setErrorState(
+      isValidEmail
+        ? defaultStateError
+        : {
+          value: true,
+          errorData: {
+            field: "email",
+            message: null
+          }
         }
-      }
-      )
-    }
+    )
   }
 
-  const handleValidPassword = () => {
+  const handleValidPassword = (): void => {
     if (value && value.length >= 6) {
-      return setErrorState({ value: false, errorData: null })
+      return setErrorState(defaultStateError)
     } else {
       return setErrorState({
         value: true,
@@ -50,13 +53,13 @@ export function Input({ type, id, label, required, onChange, value, placeholder,
     }
   }
 
-  const handleIsVisiblePass = () => {
+  const handleIsVisiblePass = (): void => {
     setIsVisiblePass(!isVisiblePass)
   }
 
-  const handleError = () => {
-    if (type === "email" && !checkPassword) {
-      return handleValidEmail()
+  const handleError = (): void => {
+    if (type === "email" && !checkPassword && value) {
+      return handleValidEmail(value)
     } else {
       return handleValidPassword()
     }

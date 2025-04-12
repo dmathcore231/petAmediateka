@@ -16,7 +16,6 @@ import { MediaContent } from "../../types/interfaces/MediaContent"
 import { ContentStateItem } from "../../types/interfaces/InitialStatesSlice"
 import { Season } from "../../types/interfaces/MediaContent"
 import { formSrcMediaContent } from "../../helpers"
-import { HboIcon } from "../../assets/icons/HboIcon"
 import { PlayIcon } from "../../assets/icons/PlayIcon"
 import { ShareIcon } from "../../assets/icons/ShareIcon"
 import { AddFavoriteIcon } from "../../assets/icons/AddFavoriteIcon"
@@ -27,7 +26,7 @@ export function Series(): JSX.Element {
   const { id, seasonIndex } = useParams()
   const dispatch = useAppDispatch()
 
-  const { content, loading } = useAppSelector((state: RootState) => state.content[ContentTypeEnum.Series] as ContentStateItem<MediaContent>)
+  const { content, loading } = useAppSelector((state: RootState) => state.content.series as ContentStateItem<MediaContent>)
 
   useEffect((): void => {
     dispatch(fetchContent({ type: ContentTypeEnum.Series, id }))

@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState, MouseEvent, RefObject } from "react"
+import { useRef, useEffect, useState, MouseEvent, RefObject, JSX } from "react"
 import { useAppDispatch, useAppSelector } from "../../hooks"
 import { updatePlayerStatus, toggleShow, resetPlayerStatus, setSrc, setError, setCurrentSrc } from "../../redux/MediaPlayerSlice"
 import { Btn } from "../Btn"

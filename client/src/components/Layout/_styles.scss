@@ -6,6 +6,7 @@
 
   &_fixed {
     position: fixed;
+    overflow: hidden;
     width: calc(100% - 1.063rem);
   }
 }
