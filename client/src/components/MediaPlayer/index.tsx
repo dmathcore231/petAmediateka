@@ -184,47 +184,50 @@ export function MediaPlayer(): JSX.Element {
     }
   }
 
-  const handleClickBtnMuted = () => {
-    if (videoRef.current) {
-      if (videoRef.current.muted) {
-        videoRef.current.muted = false
-        dispatch(updatePlayerStatus({
-          ...playerStatus,
-          volume: {
-            isMuted: false,
-            value: playerStatus.volume.valueWithMuted,
-            valueWithMuted: playerStatus.volume.valueWithMuted
-          }
-        }))
-      } else {
-        videoRef.current.muted = true
-        dispatch(updatePlayerStatus({
-          ...playerStatus,
-          volume: {
-            isMuted: true,
-            value: 0,
-            valueWithMuted: playerStatus.volume.value
-          }
-        }))
+  const handleClickBtnMuted = (): void => {
+    if (!videoRef.current) return
+
+    const { muted } = videoRef.current
+    const { volume } = playerStatus
+
+    videoRef.current.muted = !muted
+
+    dispatch(updatePlayerStatus({
+      ...playerStatus,
+      volume: {
+        isMuted: !muted,
+        value: muted ? volume.valueWithMuted : 0,
+        valueWithMuted: muted ? volume.valueWithMuted : volume.value
       }
-    }
+    })
+    )
   }
 
   const handleHoverTrack = (track: RefObject<HTMLDivElement | null>): void => {
-    if (track === trackVolumeRef) {
-      setTrackSetting(prev => ({ ...prev, isShowTrack: { ...prev.isShowTrack, volume: true } }))
-    } else {
-      setTrackSetting(prev => ({ ...prev, isShowTrack: { ...prev.isShowTrack, time: true } }))
-    }
+    const isVolumeTrack = track === trackVolumeRef
+    const trackType = isVolumeTrack ? 'volume' : 'time'
+
+    setTrackSetting(prev => ({
+      ...prev,
+      isShowTrack: {
+        ...prev.isShowTrack,
+        [trackType]: true
+      }
+    }))
   }
 
 
   const handleLeaveTrack = (track: RefObject<HTMLDivElement | null>): void => {
-    if (track === trackVolumeRef) {
-      setTrackSetting(prev => ({ ...prev, isShowTrack: { ...prev.isShowTrack, volume: false } }))
-    } else {
-      setTrackSetting(prev => ({ ...prev, isShowTrack: { ...prev.isShowTrack, time: false } }))
-    }
+    const isVolumeTrack = track === trackVolumeRef
+    const trackType = isVolumeTrack ? 'volume' : 'time'
+
+    setTrackSetting(prev => ({
+      ...prev,
+      isShowTrack: {
+        ...prev.isShowTrack,
+        [trackType]: false
+      }
+    }))
   }
 
   const handleSetTrackCurrentMouseX = (e: MouseEvent<HTMLDivElement>,
