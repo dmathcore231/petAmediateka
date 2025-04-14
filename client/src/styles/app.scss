@@ -17,7 +17,6 @@
 @use "../components/PromoLine/styles" as PromoLine;
 @use "../components/CoverPromo/styles" as CoverPromo;
 @use "../components/Tags/styles" as Tags;
-@use "../components/Blog/styles" as Blog;
 @use "../components/Input/styles" as Input;
 @use "../components/Checkbox/styles" as Checkbox;
 @use "../components/LinkBack/styles" as LinkBack;
@@ -31,6 +30,7 @@
 @use "../components/Trailer/styles" as Trailer;
 @use "../components/Seasons/styles" as Seasons;
 @use "../components/PopularGenres/styles" as PopularGenres;
+@use "../components/IconSeries/styles" as IconSeries;
 
 @use "../pages/Home/styles" as Home;
 @use "../pages/СollectionSeries/styles" as CollectionSeries;

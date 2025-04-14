@@ -1,3 +1,4 @@
+import { JSX } from "react"
 import { IconProps } from "../../types/interfaces/IconProps"
 
 export function HboIcon({ className, width, height }: IconProps): JSX.Element {

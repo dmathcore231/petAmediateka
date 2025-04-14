@@ -1,8 +1,8 @@
-import { useEffect } from "react"
+import { useEffect, JSX } from "react"
 import { Outlet } from "react-router-dom"
 import { useAppSelector, useAppDispatch } from "../../hooks"
 import { fetchRefreshUserData } from "../../redux/authSlice"
-import { getDataFromLocalStorage, setDataInLocalStorage } from "../../helpers"
+import { getDataFromLocalStorage } from "../../helpers"
 import { MediaPlayer } from "../MediaPlayer"
 import { Header } from "../Header"
 import { Main } from "../Main"
@@ -16,25 +16,28 @@ export function Layout(): JSX.Element {
   const { isShow } = useAppSelector(state => state.mediaPlayer)
   const { user } = useAppSelector(state => state.auth)
 
-  useEffect(() => {
-    const userData = getDataFromLocalStorage<UserData>('userData')
-    const token = getDataFromLocalStorage<string>('token')
+  const localDataUser = getDataFromLocalStorage<UserData>('userData')
+  const token = getDataFromLocalStorage<string>('token')
 
-    if (userData && token && !user) {
+  useEffect((): void => {
+    if (localDataUser && token && !user) {
       dispatch(fetchRefreshUserData(token))
-    } else if (!userData && token) {
+    } else if (!localDataUser && token) {
 
       dispatch(fetchRefreshUserData(token))
-    } else if (!token && userData) {
+    } else if (!token && localDataUser) {
       dispatch(fetchRefreshUserData('noToken'))
     }
 
-  }, [dispatch])
+  }, [dispatch, localDataUser, token, user])
+
+  const baseClass = "layout"
+  const isShowClass = isShow ? ` ${baseClass}_fixed` : ''
 
   return (
     <>
       <MediaPlayer />
-      <div className={isShow ? "layout layout_fixed" : "layout"}>
+      <div className={`${baseClass}${isShowClass}`}>
         <Header>
           <NavBar />
         </Header>

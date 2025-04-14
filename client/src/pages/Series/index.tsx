@@ -10,11 +10,12 @@ import { Spinner } from "../../components/Spinner"
 import { ShowMore } from "../../components/ShowMore"
 import { Trailer } from "../../components/Trailer"
 import { Seasons } from "../../components/Seasons"
+import { IconSeries } from "../../components/IconSeries"
 import { ContentTypeEnum } from "../../types/interfaces/Content"
 import { MediaContent } from "../../types/interfaces/MediaContent"
 import { ContentStateItem } from "../../types/interfaces/InitialStatesSlice"
+import { Season } from "../../types/interfaces/MediaContent"
 import { formSrcMediaContent } from "../../helpers"
-import { HboIcon } from "../../assets/icons/HboIcon"
 import { PlayIcon } from "../../assets/icons/PlayIcon"
 import { ShareIcon } from "../../assets/icons/ShareIcon"
 import { AddFavoriteIcon } from "../../assets/icons/AddFavoriteIcon"
@@ -25,90 +26,90 @@ export function Series(): JSX.Element {
   const { id, seasonIndex } = useParams()
   const dispatch = useAppDispatch()
 
-  const { content, loading } = useAppSelector((state: RootState) => state.content[ContentTypeEnum.Series] as ContentStateItem<MediaContent>)
+  const { content, loading } = useAppSelector((state: RootState) => state.content.series as ContentStateItem<MediaContent>)
 
-  useEffect(() => {
+  useEffect((): void => {
     dispatch(fetchContent({ type: ContentTypeEnum.Series, id }))
   }, [dispatch])
 
   const setClassMetaDataDes = (): string => {
-    if (!seasonIndex && content && content.trailer) {
-      return 'series-meta-data-description'
-    } else if (seasonIndex && content && content.seasons && content.seasons[Number(seasonIndex) - 1] && content.seasons[Number(seasonIndex) - 1].trailer) {
-      return 'series-meta-data-description'
-    } else {
-      return 'series-meta-data-description series-meta-data-description_no-trailer'
+    const baseClass: string = 'series-meta-data-description'
+    const noTrailerClass: string = `${baseClass}_no-trailer`
+
+    const season: Season | undefined = content?.seasons?.[Number(seasonIndex) - 1]
+
+    if (!seasonIndex && content?.trailer) {
+      return baseClass
     }
+
+    if (seasonIndex && season?.trailer) {
+      return baseClass
+    }
+
+    return `${baseClass} ${noTrailerClass}`
   }
 
   const renderBgPage = (): JSX.Element => {
-    const indexSeason = Number(seasonIndex)
-    const seasonData = content.seasons?.[indexSeason - 1]
+    const indexSeason: number = Number(seasonIndex)
+    const targetBg = indexSeason
+      ? content.seasons?.[indexSeason - 1]?.bg
+      : content.bg
 
-    if (!indexSeason && content.bg?.videoUrl) {
-      return (
-        <div className="series-bg__video">
-          <video src={content.bg.videoUrl} className="series-bg__video-item"
-            autoPlay
-            muted
-            playsInline
-            loop
-            preload="metadata"></video>
-        </div>
-      )
-    } else if (!indexSeason && content.bg?.imgUrl) {
-      return (
-        <picture className="series-bg__picture">
-          <img src={content.bg?.imgUrl} alt="" className="series-bg__img" />
-        </picture>
-      )
-    } else if (indexSeason && seasonData?.bg?.videoUrl) {
-      return (
-        <div className="series-bg__video">
-          <video src={seasonData.bg.videoUrl} className="series-bg__video-item"
-            autoPlay
-            muted
-            playsInline
-            loop
-            preload="metadata"></video>
-        </div>
-      )
-    } else {
-      return (
-        <picture className="series-bg__picture">
-          <img src={seasonData?.bg?.imgUrl} alt="" className="series-bg__img" />
-        </picture>
-      )
+    const renderVideo = (videoUrl: string): JSX.Element => (
+      <div className="series-bg__video">
+        <video
+          src={videoUrl}
+          className="series-bg__video-item"
+          autoPlay
+          muted
+          playsInline
+          loop
+          preload="metadata"
+        />
+      </div>
+    )
+
+    const renderImage = (imgUrl?: string): JSX.Element => (
+      <picture className="series-bg__picture">
+        <img
+          src={imgUrl}
+          alt=""
+          className="series-bg__img"
+        />
+      </picture>
+    )
+
+    if (targetBg?.videoUrl) {
+      return renderVideo(targetBg.videoUrl)
     }
+
+    return renderImage(targetBg?.imgUrl)
   }
 
   const renderContent = (): JSX.Element => {
-    if (!content) {
-      return (
-        <Spinner width={100} height={100} />
-      )
-    }
+    if (!content) return (<Spinner width={100} height={100} />)
+
     const { data, logoImg, rating, seasons, _id } = content
-    const season = content?.seasons?.[Number(seasonIndex) - 1]
+    const season: Season | undefined = content?.seasons?.[Number(seasonIndex) - 1]
     const trailer = season?.trailer
 
-    return (
-      <>
+    const renderUpper = (logoSrc: string): JSX.Element => {
+      const urlMainPageSeries = `/series/${_id}/${data.title.linkTitle}`
+      const altLogo = `logo ${data.title.originalTitle}`
+
+      return (
         <div className="series-content-upper container">
           <LinkBack activePage="Сериалы" />
-          <Link to={`/series/${_id}/${data.title.linkTitle}`} className="series-content-upper__item">
-            <img src={logoImg}
-              alt={`logo ${data.title.originalTitle}`}
+          <Link to={urlMainPageSeries} className="series-content-upper__item">
+            <img src={logoSrc}
+              alt={altLogo}
               className="series-content-upper__img" />
           </Link>
           <div className="series-content-upper__item">
             <span className="title title_color_white-dark">
               {data.title.value}
             </span>
-            <span className="title title_color_white-dark">
-              {/* нужно фиксануть отображение иконок*/}
-              <HboIcon width={43} height={18} />
-            </span>
+            {IconSeries({ studioName: data.production })}
           </div>
           <div className="series-content-upper__item">
             <div className="series-seasons-line">
@@ -121,7 +122,7 @@ export function Series(): JSX.Element {
                     <li className={"series-seasons-line__item" + (Number(seasonIndex) === item.numberOfSeasons ? " series-seasons-line__item_active" : "")}
                       key={_id + index}>
                       <Link to={`/series/${_id}/${data.title.linkTitle}/season/${item.numberOfSeasons}`} className="series-seasons-line__link
-                      title title_weight_bold ">
+                    title title_weight_bold ">
                         {item.numberOfSeasons}
                       </Link>
                     </li>
@@ -131,6 +132,12 @@ export function Series(): JSX.Element {
             </div>
           </div>
         </div>
+      )
+    }
+
+    return (
+      <>
+        {renderUpper(logoImg)}
         <div className="series-content-header container">
           <div className="series-content-header__row">
             <div className="series-content-header__btn-group">
