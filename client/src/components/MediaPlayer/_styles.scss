@@ -188,6 +188,7 @@
 
     &_fade {
       opacity: 0;
+      pointer-events: none;
     }
 
     &-panel {

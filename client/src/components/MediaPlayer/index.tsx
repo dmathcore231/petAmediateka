@@ -22,10 +22,7 @@ export function MediaPlayer(): JSX.Element {
   const trackVideoRef = useRef<HTMLDivElement>(null)
   const mediaPlayerMainRef = useRef<HTMLDivElement>(null)
 
-  const { isShow, playerStatus, src, error, loading, title } = useAppSelector(state => state.mediaPlayer)
-
-  const [timeVideo, setTimeVideo] = useState(0)
-  const [trackSetting, setTrackSetting] = useState<TrackSetting>({
+  const defaultTrackSetting: TrackSetting = {
     isShowTrack: {
       volume: false,
       time: false,
@@ -34,56 +31,62 @@ export function MediaPlayer(): JSX.Element {
       volume: 0,
       time: 0,
     },
-  })
-  const [inactive, setInactive] = useState(true)
-  const [isShowHdList, setIsShowHdList] = useState(false)
-  const inactiveTime = 3000
+  }
 
-  useEffect(() => {
-    if (error) {
-      dispatch(setError({ number: 404, message: 'Not found url video' }))
+  const { isShow, playerStatus, src, error, loading, title } = useAppSelector(state => state.mediaPlayer)
+
+  const [timeVideo, setTimeVideo] = useState<number>(0)
+  const [trackSetting, setTrackSetting] = useState<TrackSetting>(defaultTrackSetting)
+  const [inactive, setInactive] = useState<boolean>(true)
+  const [isShowHdList, setIsShowHdList] = useState<boolean>(false)
+  const inactiveTime: number = 3000
+
+  useEffect((): void => {
+    const hasError = Boolean(error)
+    const errorNotFound: { number: number, message: string } = {
+      number: 404,
+      message: 'Not found url video',
+    }
+
+    if (hasError) {
+      dispatch(setError(errorNotFound))
       setInactive(false)
-    } else {
-      dispatch(setError(null))
+      return
     }
-  }, [src])
+
+    dispatch(setError(null))
+  }, [src, error, dispatch])
 
   useEffect(() => {
-    if (isShow && !error) {
-      let timeoutId: number | null = null;
+    if (!isShow || error || playerStatus.status === 'pause') return
 
-      const handleCheckUserInactive = () => {
-        if (timeoutId) {
-          clearTimeout(timeoutId)
-        }
-        timeoutId = setTimeout(() => {
-          setInactive(true)
-        }, inactiveTime)
-        setInactive(false)
+    const events = ['mousemove', 'mousedown', 'keydown', 'touchmove'] as const
+    let timeoutId: number | undefined
+
+    const handleUserActivity = (): void => {
+      if (timeoutId) {
+        clearTimeout(timeoutId)
       }
 
-      if (playerStatus.status === 'pause') {
-        return
-      }
+      timeoutId = setTimeout(() => {
+        setInactive(true)
+      }, inactiveTime)
 
-      document.addEventListener("mousemove", handleCheckUserInactive)
-      document.addEventListener("mousedown", handleCheckUserInactive)
-      document.addEventListener("keydown", handleCheckUserInactive)
-      document.addEventListener("touchmove", handleCheckUserInactive)
-
-      return () => {
-        if (timeoutId) {
-          clearTimeout(timeoutId)
-        }
-        document.removeEventListener("mousedown", handleCheckUserInactive)
-        document.removeEventListener("mousemove", handleCheckUserInactive)
-        document.removeEventListener("keydown", handleCheckUserInactive)
-        document.removeEventListener("touchmove", handleCheckUserInactive)
-      }
+      setInactive(false)
     }
-  }, [playerStatus.status, isShow, error])
 
-  useEffect(() => {
+    events.forEach(event => document.addEventListener(event, handleUserActivity))
+
+    handleUserActivity()
+
+    return (): void => {
+      if (timeoutId) clearTimeout(timeoutId)
+
+      events.forEach(event => document.removeEventListener(event, handleUserActivity))
+    }
+  }, [playerStatus.status, isShow, error, inactiveTime, setInactive])
+
+  useEffect((): void => {
     if (videoRef.current && isShow && src) {
       dispatch(resetPlayerStatus())
       videoRef.current.play()
@@ -95,7 +98,7 @@ export function MediaPlayer(): JSX.Element {
     }
   }, [isShow])
 
-  useEffect(() => {
+  useEffect((): void => {
     if (timeVideo && videoRef.current) {
       dispatch(updatePlayerStatus({
         ...playerStatus, time: {
@@ -107,7 +110,7 @@ export function MediaPlayer(): JSX.Element {
     }
   }, [timeVideo])
 
-  useEffect(() => {
+  useEffect((): void => {
     if (!document.fullscreenElement) {
       dispatch(updatePlayerStatus({ ...playerStatus, fullScreen: false }))
     } else {
@@ -115,14 +118,22 @@ export function MediaPlayer(): JSX.Element {
     }
   }, [document.fullscreenElement])
 
-  useEffect(() => {
+  useEffect((): void => {
     if (videoRef.current) {
       videoRef.current.currentTime = timeVideo
     }
   }, [src])
 
-  const getFixedTime = (time: number) => {
-    return `${Math.floor(time / 60)}:${Math.floor(time % 60) < 10 ? `0${Math.floor(time % 60)}` : Math.floor(time % 60)}`
+  const formatTimeWithHours = (timeInSeconds: number): string => {
+    const hours: number = Math.floor(timeInSeconds / 3600)
+    const minutes: number = Math.floor((timeInSeconds % 3600) / 60)
+    const seconds: number = Math.floor(timeInSeconds % 60)
+
+    return [
+      hours > 0 ? hours : null,
+      minutes.toString().padStart(2, '0'),
+      seconds.toString().padStart(2, '0')
+    ].filter(Boolean).join(':')
   }
 
   const renderBtnPlayOrPauseIcon = (): JSX.Element => {
@@ -133,7 +144,7 @@ export function MediaPlayer(): JSX.Element {
     }
   }
 
-  const handleClickBtnClose = () => {
+  const handleClickBtnClose = (): void => {
     if (videoRef.current && !playerStatus.fullScreen) {
       videoRef.current.pause()
       videoRef.current.currentTime = 0
@@ -153,19 +164,23 @@ export function MediaPlayer(): JSX.Element {
     }
   }
 
-  const handleClickBtnPlayPause = () => {
-    if (videoRef.current) {
-      if (videoRef.current.paused) {
-        dispatch(updatePlayerStatus({
-          ...playerStatus, status: "play"
-        }))
-        videoRef.current.play()
+  const handleClickBtnPlayPause = async (): Promise<void> => {
+    if (!videoRef.current) return
+    const video: HTMLVideoElement = videoRef.current
+    const isVideoPaused: boolean = video.paused
+    const newStatus: "play" | "pause" = isVideoPaused ? "play" : "pause"
+
+    try {
+      dispatch(updatePlayerStatus({ ...playerStatus, status: newStatus }))
+      if (isVideoPaused) {
+        await video.play()
       } else {
-        dispatch(updatePlayerStatus({
-          ...playerStatus, status: "pause"
-        }))
-        videoRef.current.pause()
+        video.pause()
       }
+    } catch (error: unknown) {
+      const err = error as Error
+      console.error(err)
+      dispatch(setError({ number: 500, message: err.message }))
     }
   }
 
@@ -195,7 +210,7 @@ export function MediaPlayer(): JSX.Element {
     }
   }
 
-  const handleHoverTrack = (track: RefObject<HTMLDivElement>): void => {
+  const handleHoverTrack = (track: RefObject<HTMLDivElement | null>): void => {
     if (track === trackVolumeRef) {
       setTrackSetting(prev => ({ ...prev, isShowTrack: { ...prev.isShowTrack, volume: true } }))
     } else {
@@ -204,7 +219,7 @@ export function MediaPlayer(): JSX.Element {
   }
 
 
-  const handleLeaveTrack = (track: RefObject<HTMLDivElement>): void => {
+  const handleLeaveTrack = (track: RefObject<HTMLDivElement | null>): void => {
     if (track === trackVolumeRef) {
       setTrackSetting(prev => ({ ...prev, isShowTrack: { ...prev.isShowTrack, volume: false } }))
     } else {
@@ -213,7 +228,7 @@ export function MediaPlayer(): JSX.Element {
   }
 
   const handleSetTrackCurrentMouseX = (e: MouseEvent<HTMLDivElement>,
-    track: RefObject<HTMLDivElement>) => {
+    track: RefObject<HTMLDivElement | null>) => {
     const currentMouseX = e.clientX
 
     if (track.current) {
@@ -247,7 +262,7 @@ export function MediaPlayer(): JSX.Element {
     }
   }
 
-  const handleSetValueTrack = (e: MouseEvent<HTMLDivElement>, track: RefObject<HTMLDivElement>) => {
+  const handleSetValueTrack = (e: MouseEvent<HTMLDivElement>, track: RefObject<HTMLDivElement | null>) => {
     const currentMouseX = e.clientX
 
     if (track.current) {
@@ -405,7 +420,7 @@ export function MediaPlayer(): JSX.Element {
             + (inactive ? " media-player-control_fade" : "")}>
             <div className="media-player-time-bar">
               <div className="media-player-time title title_size_m">
-                {getFixedTime(playerStatus.time.current)}
+                {formatTimeWithHours(playerStatus.time.current)}
               </div>
               <div className="media-player-time-bar__track"
                 onMouseEnter={() => handleHoverTrack(trackVideoRef)}
@@ -421,7 +436,7 @@ export function MediaPlayer(): JSX.Element {
                   style={{ left: `${(trackSetting.currentMouseX.time / playerStatus.time.total) * 100}%` }}
                 >
                   <span className="text text_size_xs">
-                    {getFixedTime(trackSetting.currentMouseX.time)}
+                    {formatTimeWithHours(trackSetting.currentMouseX.time)}
                   </span>
                 </div>
                 <div className="media-player-time-bar__progress"
@@ -431,7 +446,7 @@ export function MediaPlayer(): JSX.Element {
                 </div>
               </div>
               <div className="media-player-time title title_size_m">
-                -{getFixedTime(playerStatus.time.left)}
+                -{formatTimeWithHours(playerStatus.time.left)}
               </div>
             </div>
             <div className="media-player-control-panel">
