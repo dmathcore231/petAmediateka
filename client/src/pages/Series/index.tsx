@@ -87,7 +87,7 @@ export function Series(): JSX.Element {
   }
 
   const renderContent = (): JSX.Element => {
-    if (!content) return (<Spinner width={100} height={100} />)
+    if (!content || loading) return (<Spinner width={100} height={100} />)
 
     const { data, logoImg, rating, seasons, _id } = content
     const season: Season | undefined = content?.seasons?.[Number(seasonIndex) - 1]

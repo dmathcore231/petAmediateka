@@ -1,9 +1,13 @@
 import { useRef, useEffect, useState, MouseEvent, RefObject, JSX } from "react"
+import { RootState } from "../../redux/store"
 import { useAppDispatch, useAppSelector } from "../../hooks"
 import { updatePlayerStatus, toggleShow, resetPlayerStatus, setSrc, setError, setCurrentSrc } from "../../redux/MediaPlayerSlice"
 import { Btn } from "../Btn"
 import { TrackSetting } from "../../types/TrackSetting"
 import { VideoQuality } from "../../types/VideoQuality"
+import { SrcMediaPlaer } from "../../types/SrcMediaPlaer"
+import { ContentStateItem } from "../../types/interfaces/InitialStatesSlice"
+import { MediaContent } from "../../types/interfaces/MediaContent"
 import { CloseIcon } from "../../assets/icons/CloseIcon"
 import { Rewind10Icon } from "../../assets/icons/Rewind10Icon"
 import { Forward10Icon } from "../../assets/icons/Forward10Icon"
@@ -13,9 +17,13 @@ import { FullScreenIcon } from "../../assets/icons/FullScreenIcon"
 import { MutedIcon } from "../../assets/icons/MutedIcon"
 import { UnmutedIcon } from "../../assets/icons/UnmutedIcon"
 import { HdIcon } from "../../assets/icons/HdIcon"
+import { Spinner } from "../Spinner"
 
 export function MediaPlayer(): JSX.Element {
   const dispatch = useAppDispatch()
+  const TIME_FORWARD: number = 10
+  const TIME_REWIND: number = 10
+
   const videoRef = useRef<HTMLVideoElement>(null)
   const thumbVolumeRef = useRef<HTMLDivElement>(null)
   const trackVolumeRef = useRef<HTMLDivElement>(null)
@@ -33,7 +41,8 @@ export function MediaPlayer(): JSX.Element {
     },
   }
 
-  const { isShow, playerStatus, src, error, loading, title } = useAppSelector(state => state.mediaPlayer)
+  const { isShow, playerStatus, src, error, loading, title } = useAppSelector((state: RootState) => state.mediaPlayer)
+  const { content } = useAppSelector((state: RootState) => state.content.series as ContentStateItem<MediaContent>)
 
   const [timeVideo, setTimeVideo] = useState<number>(0)
   const [trackSetting, setTrackSetting] = useState<TrackSetting>(defaultTrackSetting)
@@ -204,8 +213,8 @@ export function MediaPlayer(): JSX.Element {
   }
 
   const handleHoverTrack = (track: RefObject<HTMLDivElement | null>): void => {
-    const isVolumeTrack = track === trackVolumeRef
-    const trackType = isVolumeTrack ? 'volume' : 'time'
+    const isVolumeTrack: boolean = track === trackVolumeRef
+    const trackType: 'volume' | 'time' = isVolumeTrack ? 'volume' : 'time'
 
     setTrackSetting(prev => ({
       ...prev,
@@ -216,10 +225,9 @@ export function MediaPlayer(): JSX.Element {
     }))
   }
 
-
   const handleLeaveTrack = (track: RefObject<HTMLDivElement | null>): void => {
-    const isVolumeTrack = track === trackVolumeRef
-    const trackType = isVolumeTrack ? 'volume' : 'time'
+    const isVolumeTrack: boolean = track === trackVolumeRef
+    const trackType: 'volume' | 'time' = isVolumeTrack ? 'volume' : 'time'
 
     setTrackSetting(prev => ({
       ...prev,
@@ -231,162 +239,256 @@ export function MediaPlayer(): JSX.Element {
   }
 
   const handleSetTrackCurrentMouseX = (e: MouseEvent<HTMLDivElement>,
-    track: RefObject<HTMLDivElement | null>) => {
-    const currentMouseX = e.clientX
+    track: RefObject<HTMLDivElement | null>): void => {
+    if (!track.current) return
+    const currentMouseX: number = e.clientX
+    const { left: minPos, right: maxPos } = track.current.getBoundingClientRect()
+    const positionRatio: number = (currentMouseX - minPos) / (maxPos - minPos)
+    const isVolumeTrack: boolean = track === trackVolumeRef
+    const value: number = isVolumeTrack
+      ? Math.round(positionRatio * 100)
+      : Math.round(positionRatio * playerStatus.time.total)
 
-    if (track.current) {
-      const minPos = track.current.getBoundingClientRect().left
-      const maxPos = track.current.getBoundingClientRect().right
+    if (currentMouseX < minPos || currentMouseX > maxPos) return
 
-      if (currentMouseX < minPos || currentMouseX > maxPos) {
-        return
+    setTrackSetting(prev => ({
+      ...prev,
+      currentMouseX: {
+        ...prev.currentMouseX,
+        [isVolumeTrack ? 'volume' : 'time']: value
       }
-
-      if (track === trackVolumeRef) {
-        const percent = Math.round(((currentMouseX - minPos) / (maxPos - minPos)) * 100)
-        setTrackSetting(prev => ({
-          ...prev,
-          currentMouseX: {
-            ...prev.currentMouseX,
-            volume: percent
-          }
-        }))
-      } else {
-        const percent = Math.round(((currentMouseX - minPos) / (maxPos - minPos)) * playerStatus.time.total)
-
-        setTrackSetting(prev => ({
-          ...prev,
-          currentMouseX: {
-            ...prev.currentMouseX,
-            time: percent
-          }
-        }))
-      }
-    }
+    }))
   }
 
-  const handleSetValueTrack = (e: MouseEvent<HTMLDivElement>, track: RefObject<HTMLDivElement | null>) => {
-    const currentMouseX = e.clientX
+  const handleSetValueTrack = (e: MouseEvent<HTMLDivElement>, track: RefObject<HTMLDivElement | null>): void => {
+    if (!track.current) return
+    const { left: minPos, right: maxPos } = track.current.getBoundingClientRect()
+    const currentMouseX: number = e.clientX
+    const positionRatio: number = (currentMouseX - minPos) / (maxPos - minPos)
+    const isVolumeTrack: boolean = track === trackVolumeRef
 
-    if (track.current) {
-      const minPos = track.current.getBoundingClientRect().left
-      const maxPos = track.current.getBoundingClientRect().right
+    if (currentMouseX < minPos || currentMouseX > maxPos) return
 
-      if (currentMouseX < minPos || currentMouseX > maxPos) {
-        return
+    const handleVolumeTrack = (): void => {
+      const percent: number = Math.round(positionRatio * 100)
+      const isMuted: boolean = percent === 0
+
+      if (videoRef.current) {
+        videoRef.current.volume = percent / 100
       }
 
-      if (track === trackVolumeRef) {
-        const percent = Math.round(((currentMouseX - minPos) / (maxPos - minPos)) * 100)
-
-        setTrackSetting(prev => ({
-          ...prev,
+      setTrackSetting(prev => ({
+        ...prev,
+        currentMouseX: {
           ...prev.currentMouseX,
           volume: percent
-        }))
-
-        switch (percent > 0) {
-          case true: {
-            dispatch(updatePlayerStatus({
-              ...playerStatus, volume: { isMuted: false, value: percent, valueWithMuted: percent }
-            }))
-            break
-          }
-          case false: {
-            dispatch(updatePlayerStatus({
-              ...playerStatus, volume: { isMuted: true, value: 0, valueWithMuted: 0 }
-            }))
-            break
-          }
         }
+      }))
 
-        videoRef.current!.volume = percent / 100
-      } else {
-        const percent = Math.round(((currentMouseX - minPos) / (maxPos - minPos)) * playerStatus.time.total)
-
-        setTrackSetting(prev => ({
-          ...prev,
-          ...prev.currentMouseX,
-          time: percent
-        }))
-
-        if (videoRef.current) {
-          videoRef.current.currentTime = percent
+      dispatch(updatePlayerStatus({
+        ...playerStatus,
+        volume: {
+          isMuted,
+          value: isMuted ? 0 : percent,
+          valueWithMuted: isMuted ? 0 : percent
         }
+      }))
+    }
 
-        setTimeVideo(percent)
+    const handleTimeTrack = (): void => {
+      const timePosition: number = Math.round(positionRatio * playerStatus.time.total)
+
+      if (videoRef.current) {
+        videoRef.current.currentTime = timePosition
       }
+
+      setTrackSetting(prev => ({
+        ...prev,
+        currentMouseX: {
+          ...prev.currentMouseX,
+          time: timePosition
+        },
+
+      }))
+
+      setTimeVideo(timePosition)
+    }
+
+    if (isVolumeTrack) {
+      handleVolumeTrack()
+    } else {
+      handleTimeTrack()
     }
   }
 
-  const handleClickBtnForward = () => {
-    if (videoRef.current) {
-      videoRef.current.currentTime += 10
+  const handleClickBtnForward = (): void => {
+    if (!videoRef.current) return
+    const video = videoRef.current
+
+    video.currentTime += TIME_FORWARD
+  }
+
+  const handleClickBtnRewind = (): void => {
+    if (!videoRef.current) return
+    const video = videoRef.current
+
+    video.currentTime -= TIME_REWIND
+  }
+
+  const handleClickBtnFullScreen = async (): Promise<void> => {
+    if (!mediaPlayerMainRef.current) return
+
+    try {
+      if (document.fullscreenElement) {
+        await document.exitFullscreen()
+        dispatch(updatePlayerStatus({ ...playerStatus, fullScreen: false }))
+      } else {
+        await mediaPlayerMainRef.current.requestFullscreen();
+        dispatch(updatePlayerStatus({ ...playerStatus, fullScreen: true }))
+      }
+    } catch (error) {
+      console.error('Fullscreen toggle failed:', error)
+      dispatch(updatePlayerStatus({
+        ...playerStatus,
+        fullScreen: !!document.fullscreenElement
+      }))
     }
   }
 
-  const handleClickBtnRewind = () => {
-    if (videoRef.current) {
-      videoRef.current.currentTime -= 10
-    }
-  }
-
-  const handleClickBtnFullScreen = () => {
-    if (mediaPlayerMainRef.current) {
-      mediaPlayerMainRef.current.requestFullscreen()
-        .then((result) => {
-          if (result === undefined && !playerStatus.fullScreen) {
-            dispatch(updatePlayerStatus({ ...playerStatus, fullScreen: true }))
-          } else {
-            dispatch(updatePlayerStatus({ ...playerStatus, fullScreen: false }))
-            document.exitFullscreen()
-          }
-        })
-    }
-  }
-
-  const handleClickBtnQualityVideo = () => {
+  const handleClickBtnQualityVideo = (): void => {
     setIsShowHdList(prev => !prev)
   }
 
-  const handleClickBtnQualityVideoItem = (quality: VideoQuality) => {
-    if (quality === '360p' && src && src.quality360 && src._current.type !== '360p') {
-      dispatch(setCurrentSrc({ type: '360p', value: src.quality360 }))
-    } else if (quality === '720p' && src && src.quality720 && src._current.type !== '720p') {
-      dispatch(setCurrentSrc({ type: '720p', value: src.quality720 }))
-    } else if (quality === '1080p' && src && src.quality1080 && src._current.type !== '1080p') {
-      dispatch(setCurrentSrc({ type: '1080p', value: src.quality1080 }))
-    } else if (quality === '2160p' && src && src.quality2160 && src._current.type !== '2160p') {
-      dispatch(setCurrentSrc({ type: '2160p', value: src.quality2160 }))
+  const handleClickBtnQualityVideoItem = (quality: VideoQuality): void => {
+    if (!src || src._current.type === quality) return
+
+    const qualityMap: Record<VideoQuality, string | undefined> = {
+      '360p': src.quality360,
+      '720p': src.quality720,
+      '1080p': src.quality1080,
+      '2160p': src.quality2160
     }
+    const qualitySrc = qualityMap[quality]
+
+    if (qualitySrc) {
+      dispatch(setCurrentSrc({ type: quality, value: qualitySrc }))
+    }
+  }
+
+  const setClassMainElement = (isShow: boolean, fullScreen: boolean): string => {
+    const baseClass = "media-player-main"
+    const isShowClass = isShow ? " media-player-main_show" : ""
+    const fullScreenClass = fullScreen ? "" : " container"
+
+    return `${baseClass}${isShowClass}${fullScreenClass}`
+  }
+  const setClassHeader = (fullScreen: boolean): string => {
+    const baseClass = "media-player-main-header"
+    const fullScreenClass = fullScreen ? " container" : ""
+
+    return `${baseClass}${fullScreenClass}`
+  }
+  const setClassHeaderTitle = (inactive: boolean): string => {
+    const baseClass = "media-player-main-header__title"
+    const inactiveClass = inactive
+      ? " media-player-main-header__title_fade"
+      : " media-player-main-header__title_show"
+
+    return `${baseClass}${inactiveClass}`
+  }
+  const setClassHeaderCloseBtn = (inactive: boolean): string => {
+    const baseClass = "media-player-main-header__item"
+    const inactiveClass = inactive
+      ? " media-player-main-header__item_fade"
+      : ""
+
+    return `${baseClass}${inactiveClass}`
+  }
+
+  const renderAgeRestriction = (value: number | null): JSX.Element | null => {
+    if (!value) return null
+
+    const baseClass = "media-player-age-restriction"
+    const itemClass = "media-player-age-restriction__item"
+    const titleXlClass = "title title_size_xl"
+    const titleMClass = "title title_size_m"
+
+    return (
+      <div className={baseClass}>
+        <div className={`${itemClass} ${titleXlClass}`}>
+          {content?.data.ageRestriction}
+        </div>
+        <div className={`${itemClass} ${titleMClass}`}>
+          +
+        </div>
+      </div>
+    )
+  }
+
+  interface RenderVideoProps {
+    error: { number: number; message: string; } | null
+    src: SrcMediaPlaer | null,
+    loading: boolean
+  }
+
+  const renderVideo = ({ error, src, loading }: RenderVideoProps): JSX.Element => {
+    const baseClass = "media-player-main-video"
+    const itemClass = "media-player-main-video__item"
+    const fullScreenClass = playerStatus.fullScreen
+      ? " media-player-main-video_fullscreen"
+      : ""
+    const errorClass = "media-player-error"
+    const errorMessage = "Упс, что-то пошло не так..."
+
+    if (error) {
+      <div className={errorClass}>
+        <div className={itemClass}>
+          <h3>{errorMessage}</h3>
+        </div>
+      </div>
+    }
+
+    if (loading || !src) {
+      return (
+        <div className={baseClass}>
+          <div className={itemClass}>
+            <Spinner height={50} width={50} />
+          </div>
+        </div>
+      )
+    }
+
+    return (
+      <video src={src._current.value}
+        autoPlay
+        preload="auto"
+        muted={playerStatus.volume.isMuted}
+        ref={videoRef}
+        className={`${baseClass}${fullScreenClass}`}
+        onTimeUpdate={(e) => setTimeVideo(Number(e.currentTarget.currentTime.toFixed(2)))}
+        onEnded={() => {
+          dispatch(updatePlayerStatus({
+            ...playerStatus, status: "pause"
+          }))
+        }}
+      />
+    )
   }
 
   return (
     <div className="media-player">
-      <div className={`media-player-main`
-        + (isShow ? " media-player-main_show" : "")
-        + (playerStatus.fullScreen ? "" : " container")}
+      <div className={setClassMainElement(isShow, playerStatus.fullScreen)}
         ref={mediaPlayerMainRef}
       >
         <div className="media-player-main__wrapper">
-          <div className={"media-player-main-header" + (playerStatus.fullScreen ? " container" : "")}>
+          <div className={setClassHeader(playerStatus.fullScreen)}>
             <div className="media-player-main-header__item">
-              <div className="media-player-age-restriction">
-                <div className="media-player-age-restriction__item title title_size_xl">
-                  18
-                </div>
-                <div className="media-player-age-restriction__item title title_size_m">
-                  +
-                </div>
-              </div>
-              <div className={"media-player-main-header__title" + (inactive
-                ? " media-player-main-header__title_fade"
-                : " media-player-main-header__title_show")}>
+              {renderAgeRestriction(content?.data.ageRestriction)}
+              <div className={setClassHeaderTitle(inactive)}>
                 <h3>{title}</h3>
               </div>
             </div>
-            <div className={"media-player-main-header__item"
-              + (inactive ? " media-player-main-header__item_fade" : "")}>
+            <div className={setClassHeaderCloseBtn(inactive)}>
               <Btn
                 type="button"
                 className="btn_transparent btn_scale_hover"
@@ -396,28 +498,7 @@ export function MediaPlayer(): JSX.Element {
               </Btn>
             </div>
           </div>
-          {!error && (
-            <video src={src?._current.value!}
-              autoPlay
-              preload="auto"
-              muted={playerStatus.volume.isMuted}
-              ref={videoRef}
-              className={"media-player-main-video" + (playerStatus.fullScreen ? " media-player-main-video_fullscreen" : "")}
-              onTimeUpdate={(e) => setTimeVideo(Number(e.currentTarget.currentTime.toFixed(2)))}
-              onEnded={() => {
-                dispatch(updatePlayerStatus({
-                  ...playerStatus, status: "pause"
-                }))
-              }}
-            ></video>
-          )}
-          {error && (
-            <div className="media-player-error">
-              <div className="media-player-error__item">
-                <h3>Упс, что-то пошло не так...</h3>
-              </div>
-            </div>
-          )}
+          {renderVideo({ error, src, loading })}
           <div className={"media-player-control"
             + (playerStatus.fullScreen ? " container" : "")
             + (inactive ? " media-player-control_fade" : "")}>
