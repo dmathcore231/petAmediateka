@@ -3,11 +3,14 @@ import { RootState } from "../../redux/store"
 import { useAppDispatch, useAppSelector } from "../../hooks"
 import { updatePlayerStatus, toggleShow, resetPlayerStatus, setSrc, setError, setCurrentSrc } from "../../redux/MediaPlayerSlice"
 import { Btn } from "../Btn"
+import { Spinner } from "../Spinner"
 import { TrackSetting } from "../../types/TrackSetting"
-import { VideoQuality } from "../../types/VideoQuality"
+import { VideoQuality, VideoQualityKey } from "../../types/VideoQuality"
 import { SrcMediaPlaer } from "../../types/SrcMediaPlaer"
 import { ContentStateItem } from "../../types/interfaces/InitialStatesSlice"
 import { MediaContent } from "../../types/interfaces/MediaContent"
+import { RenderVideoProps } from "../../types/interfaces/RenderVideoProps"
+import { formatTimeWithHours } from "../../helpers"
 import { CloseIcon } from "../../assets/icons/CloseIcon"
 import { Rewind10Icon } from "../../assets/icons/Rewind10Icon"
 import { Forward10Icon } from "../../assets/icons/Forward10Icon"
@@ -17,7 +20,6 @@ import { FullScreenIcon } from "../../assets/icons/FullScreenIcon"
 import { MutedIcon } from "../../assets/icons/MutedIcon"
 import { UnmutedIcon } from "../../assets/icons/UnmutedIcon"
 import { HdIcon } from "../../assets/icons/HdIcon"
-import { Spinner } from "../Spinner"
 
 export function MediaPlayer(): JSX.Element {
   const dispatch = useAppDispatch()
@@ -132,18 +134,6 @@ export function MediaPlayer(): JSX.Element {
       videoRef.current.currentTime = timeVideo
     }
   }, [src])
-
-  const formatTimeWithHours = (timeInSeconds: number): string => {
-    const hours: number = Math.floor(timeInSeconds / 3600)
-    const minutes: number = Math.floor((timeInSeconds % 3600) / 60)
-    const seconds: number = Math.floor(timeInSeconds % 60)
-
-    return [
-      hours > 0 ? hours : null,
-      minutes.toString().padStart(2, '0'),
-      seconds.toString().padStart(2, '0')
-    ].filter(Boolean).join(':')
-  }
 
   const renderBtnPlayOrPauseIcon = (): JSX.Element => {
     if (playerStatus.status === "play") {
@@ -425,12 +415,6 @@ export function MediaPlayer(): JSX.Element {
     )
   }
 
-  interface RenderVideoProps {
-    error: { number: number; message: string; } | null
-    src: SrcMediaPlaer | null,
-    loading: boolean
-  }
-
   const renderVideo = ({ error, src, loading }: RenderVideoProps): JSX.Element => {
     const baseClass = "media-player-main-video"
     const itemClass = "media-player-main-video__item"
@@ -475,6 +459,264 @@ export function MediaPlayer(): JSX.Element {
     )
   }
 
+  const renderControlPanel = (): JSX.Element => {
+    const baseClass = "media-player-control"
+    const fullScreenClass = playerStatus.fullScreen
+      ? " container"
+      : ""
+    const inActiveClass = inactive
+      ? " media-player-control_fade"
+      : ""
+
+    const renderTimeBar = (): JSX.Element => {
+      const classes: Record<string, string> = {
+        base: "media-player-time-bar",
+        timeDisplay: "title title_size_m media-player-time",
+        track: "media-player-time-bar__track",
+        tooltip: "media-player-time-bar__tooltip",
+        tooltipVisible: "media-player-time-bar__tooltip_show",
+        progress: "media-player-time-bar__progress",
+        thumb: "media-player-time-bar__thumb",
+        timeText: "text text_size_xs"
+      }
+      const tooltipPosition: number = (trackSetting.currentMouseX.time / playerStatus.time.total) * 100
+      const trackProgress: number = (playerStatus.time.current / playerStatus.time.total) * 100
+      const isTooltipVisible: boolean = trackSetting.isShowTrack.time
+      const isShowTooltipClass: string = isTooltipVisible
+        ? ' media-player-time-bar__tooltip_show' : ''
+      const currentTime: string = formatTimeWithHours(playerStatus.time.current)
+      const remainingTime: string = formatTimeWithHours(playerStatus.time.left)
+      const hoverTime: string = formatTimeWithHours(trackSetting.currentMouseX.time)
+
+      const trackHandlers: React.HTMLAttributes<HTMLDivElement> = {
+        onMouseEnter: () => handleHoverTrack(trackVideoRef),
+        onMouseLeave: () => handleLeaveTrack(trackVideoRef),
+        onMouseMove: (event: MouseEvent<HTMLDivElement>) => handleSetTrackCurrentMouseX(event, trackVideoRef),
+        onMouseDown: (event: MouseEvent<HTMLDivElement>) => handleSetValueTrack(event, trackVideoRef)
+      }
+
+      return (
+        <div className={classes.base}>
+          <div className={classes.timeDisplay}>
+            {currentTime}
+          </div>
+          <div className={classes.track}
+            {...trackHandlers}
+            ref={trackVideoRef}>
+            <div
+              className={`${classes.tooltip}${isShowTooltipClass}`}
+              style={{ left: `${tooltipPosition}%` }}>
+              <span className={classes.timeText}>
+                {hoverTime}
+              </span>
+            </div>
+            <div
+              className={classes.progress}
+              style={{ width: `${trackProgress}%` }}>
+              <div className={classes.thumb} />
+            </div>
+          </div>
+          <div className={classes.timeDisplay}>
+            -{remainingTime}
+          </div>
+        </div>
+      )
+    }
+
+    const renderPanel = (): JSX.Element => {
+      const mainClasses: Record<string, string> = {
+        base: "media-player-control-panel",
+        wrapper: "media-player-control-panel__wrapper",
+        item: "media-player-control-panel__item",
+        itemPaddingLeft: "media-player-control-panel__item_padding_left",
+      }
+      const quealityClasses: Record<string, string> = {
+        base: "media-player-control-quality",
+        item: "media-player-control-quality__item",
+        list: "media-player-control-quality__list",
+        show: isShowHdList
+          ? " media-player-control-quality_show"
+          : "",
+        btn: "media-player-control-quality__btn",
+        btnActive: " media-player-control-quality__btn_active",
+      }
+      const trackHandlers: React.HTMLAttributes<HTMLDivElement> = {
+        onMouseEnter: () => handleHoverTrack(trackVolumeRef),
+        onMouseLeave: () => handleLeaveTrack(trackVolumeRef),
+        onMouseMove: (event: MouseEvent<HTMLDivElement>) => handleSetTrackCurrentMouseX(event, trackVolumeRef),
+        onMouseDown: (event: MouseEvent<HTMLDivElement>) => handleSetValueTrack(event, trackVolumeRef)
+      }
+      const tooltipPosition: number = trackSetting.currentMouseX.volume
+      const trackProgress: number = playerStatus.volume.value
+      const textClass = "text"
+      const textSizeXsClass = `${textClass} ${textClass}_size_xs`
+      const titleClass = "title"
+      const titleSizeMClass = `${titleClass} ${titleClass}_size_m`
+      const titleQualityMenu = "Качество"
+
+      const setIsActiveClassBtnQuality = (currentQuality: VideoQuality, quality: string) => {
+        return currentQuality === quality
+          ? `${quealityClasses.btn}${quealityClasses.btnActive} ${titleClass}`
+          : `${quealityClasses.btn} ${titleClass}`
+      }
+
+      const formatQualityLabel = (quality: VideoQuality): string => quality === '360p'
+        ? `SD ${quality}`
+        : `HD ${quality}`
+
+      const renderListQualityItem = (src: SrcMediaPlaer | null) => {
+        if (!src) return null
+
+        const videoQualityOptions = Object.entries(src)
+          .filter(([key, value]) => key !== '_current' && value !== '' && key !== '_id')
+
+        const QUALITY_MAP: Record<VideoQualityKey, VideoQuality> = {
+          'quality360': '360p',
+          'quality720': '720p',
+          'quality1080': '1080p',
+          'quality2160': '2160p',
+        }
+
+        return (
+          <ul className={quealityClasses.list}>
+            {videoQualityOptions.map(([key, _], index) => (
+              <li className={quealityClasses.item} key={index} >
+                <Btn
+                  type="button"
+                  className="btn_transparent"
+                  onClick={() => handleClickBtnQualityVideoItem(QUALITY_MAP[key as VideoQualityKey])}
+                >
+                  <span className={setIsActiveClassBtnQuality(src._current.type, QUALITY_MAP[key as VideoQualityKey])}>
+                    {formatQualityLabel(QUALITY_MAP[key as VideoQualityKey])}
+                  </span>
+                </Btn>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+
+      const renderVolume = (): JSX.Element => {
+        const classes: Record<string, string> = {
+          base: "media-player-volume",
+          item: "media-player-volume__item",
+          itemOpacity: "media-player-volume__item_opacity",
+          isShow: trackSetting.isShowTrack.volume
+            ? " media-player-volume__item_show"
+            : "",
+          track: "media-player-volume__track",
+          tooltip: "media-player-volume__tooltip",
+          progress: "media-player-volume__progress",
+          thumb: "media-player-volume__thumb",
+        }
+
+        const toggleIconMuted = (): JSX.Element => playerStatus.volume.isMuted
+          ? (<MutedIcon width={35} height={35} />)
+          : (<UnmutedIcon width={35} height={35} />)
+
+        return (
+          <div className={`${mainClasses.item} ${mainClasses.itemPaddingLeft}`}>
+            <div className={classes.base}
+              onMouseLeave={() => handleLeaveTrack(trackVolumeRef)}>
+              <div className={classes.item}
+                onMouseEnter={() => handleHoverTrack(trackVolumeRef)}>
+                <Btn
+                  type="button"
+                  className="btn_transparent btn_stroke_white btn_scale_hover"
+                  onClick={handleClickBtnMuted}>
+                  {toggleIconMuted()}
+                </Btn>
+              </div>
+              <div className={`${classes.item} ${classes.itemOpacity}${classes.isShow}`}
+                {...trackHandlers}>
+                <div className={classes.track} ref={trackVolumeRef}>
+                  <div className={classes.tooltip}
+                    style={{ left: `${tooltipPosition}%` }}>
+                    <span className={textSizeXsClass}>
+                      {trackSetting.currentMouseX.volume}
+                    </span>
+                  </div>
+                  <div className={classes.progress}
+                    style={{ width: `${trackProgress}%` }}>
+                    <div className={classes.thumb} ref={thumbVolumeRef} />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )
+      }
+
+      return (
+        <div className={mainClasses.base}>
+          <div className={mainClasses.wrapper}>
+            <div className={mainClasses.item}>
+              <Btn
+                type="button"
+                className="btn_transparent btn_scale_hover"
+                onClick={handleClickBtnRewind}
+              >
+                <Rewind10Icon width={35} height={35} />
+              </Btn>
+            </div>
+            <div className={mainClasses.item}>
+              <Btn
+                type="button"
+                className="btn_transparent btn_scale_hover"
+                onClick={handleClickBtnPlayPause}
+              >
+                {renderBtnPlayOrPauseIcon()}
+              </Btn>
+            </div>
+            <div className={mainClasses.item}>
+              <Btn
+                type="button"
+                className="btn_transparent btn_scale_hover"
+                onClick={handleClickBtnForward}
+              >
+                <Forward10Icon width={35} height={35} />
+              </Btn>
+            </div>
+            {renderVolume()}
+          </div>
+          <div className={mainClasses.wrapper}>
+            <div className={mainClasses.item}>
+              <div className={`${quealityClasses.base}${quealityClasses.show}`}>
+                <span className={titleSizeMClass}>
+                  {titleQualityMenu}
+                </span>
+                {renderListQualityItem(src)}
+              </div>
+              <Btn
+                type="button"
+                className="btn_transparent btn_scale_hover"
+                onClick={handleClickBtnQualityVideo}
+              >
+                <HdIcon width={40} height={35} />
+              </Btn>
+            </div>
+            <div className="media-player-control-panel__item">
+              <Btn
+                type="button"
+                className="btn_transparent btn_scale_hover"
+                onClick={handleClickBtnFullScreen}
+              >
+                <FullScreenIcon width={35} height={35} />
+              </Btn>
+            </div>
+          </div>
+        </div>
+      )
+    }
+
+    return (
+      <div className={`${baseClass}${fullScreenClass}${inActiveClass}`}>
+        {renderTimeBar()}
+        {renderPanel()}
+      </div>
+    )
+  }
+
   return (
     <div className="media-player">
       <div className={setClassMainElement(isShow, playerStatus.fullScreen)}
@@ -499,173 +741,7 @@ export function MediaPlayer(): JSX.Element {
             </div>
           </div>
           {renderVideo({ error, src, loading })}
-          <div className={"media-player-control"
-            + (playerStatus.fullScreen ? " container" : "")
-            + (inactive ? " media-player-control_fade" : "")}>
-            <div className="media-player-time-bar">
-              <div className="media-player-time title title_size_m">
-                {formatTimeWithHours(playerStatus.time.current)}
-              </div>
-              <div className="media-player-time-bar__track"
-                onMouseEnter={() => handleHoverTrack(trackVideoRef)}
-                onMouseLeave={() => handleLeaveTrack(trackVideoRef)}
-                onMouseMove={(event) => handleSetTrackCurrentMouseX(event, trackVideoRef)}
-                onMouseDown={(event) => handleSetValueTrack(event, trackVideoRef)}
-                ref={trackVideoRef}
-              >
-                <div className={"media-player-time-bar__tooltip"
-                  + (trackSetting.isShowTrack.time
-                    ? " media-player-time-bar__tooltip_show"
-                    : "")}
-                  style={{ left: `${(trackSetting.currentMouseX.time / playerStatus.time.total) * 100}%` }}
-                >
-                  <span className="text text_size_xs">
-                    {formatTimeWithHours(trackSetting.currentMouseX.time)}
-                  </span>
-                </div>
-                <div className="media-player-time-bar__progress"
-                  style={{ width: `${playerStatus.time.current / playerStatus.time.total * 100}%` }}
-                >
-                  <div className="media-player-time-bar__thumb"></div>
-                </div>
-              </div>
-              <div className="media-player-time title title_size_m">
-                -{formatTimeWithHours(playerStatus.time.left)}
-              </div>
-            </div>
-            <div className="media-player-control-panel">
-              <div className="media-player-control-panel__wrapper">
-                <div className="media-player-control-panel__item">
-                  <Btn
-                    type="button"
-                    className="btn_transparent btn_scale_hover"
-                    onClick={handleClickBtnRewind}
-                  >
-                    <Rewind10Icon width={35} height={35} />
-                  </Btn>
-                </div>
-                <div className="media-player-control-panel__item">
-                  <Btn
-                    type="button"
-                    className="btn_transparent btn_scale_hover"
-                    onClick={handleClickBtnPlayPause}
-                  >
-                    {renderBtnPlayOrPauseIcon()}
-                  </Btn>
-                </div>
-                <div className="media-player-control-panel__item">
-                  <Btn
-                    type="button"
-                    className="btn_transparent btn_scale_hover"
-                    onClick={handleClickBtnForward}
-                  >
-                    <Forward10Icon width={35} height={35} />
-                  </Btn>
-                </div>
-                <div className="media-player-control-panel__item media-player-control-panel__item_padding_left">
-                  <div className="media-player-volume"
-                    onMouseLeave={() => handleLeaveTrack(trackVolumeRef)}>
-                    <div className="media-player-volume__item"
-                      onMouseEnter={() => handleHoverTrack(trackVolumeRef)}>
-                      <Btn
-                        type="button"
-                        className="btn_transparent btn_stroke_white btn_scale_hover"
-                        onClick={handleClickBtnMuted}>
-                        {playerStatus.volume.isMuted
-                          ? (<MutedIcon width={35} height={35} />)
-                          : (<UnmutedIcon width={35} height={35} />)}
-                      </Btn>
-                    </div>
-                    <div className={"media-player-volume__item media-player-volume__item_opacity" + (trackSetting.isShowTrack.volume ? " media-player-volume__item_show" : "")}
-                      onMouseEnter={() => handleHoverTrack(trackVolumeRef)}
-                      onMouseMove={(event) => handleSetTrackCurrentMouseX(event, trackVolumeRef)}
-                      onMouseDown={(event) => handleSetValueTrack(event, trackVolumeRef)}
-                    >
-                      <div className="media-player-volume__track"
-                        ref={trackVolumeRef}
-                      >
-                        <div className="media-player-volume__tooltip"
-                          style={{ left: `${trackSetting.currentMouseX.volume}%` }}
-                        >
-                          <span className="text text_size_xs">
-                            {trackSetting.currentMouseX.volume}
-                          </span>
-                        </div>
-                        <div className="media-player-volume__progress"
-                          style={{ width: `${playerStatus.volume.value}%` }}
-                        >
-                          <div className="media-player-volume__thumb"
-                            ref={thumbVolumeRef}
-                          >
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="media-player-control-panel__wrapper">
-                <div className="media-player-control-panel__item">
-                  <div className={"media-player-control-quality"
-                    + (isShowHdList ? " media-player-control-quality_show" : "")}>
-                    <span className="ttitle title_size_m">
-                      Качество
-                    </span>
-                    <ul className="media-player-control-quality__list">
-                      <li className="media-player-control-quality__item">
-                        <Btn
-                          type="button"
-                          className="btn_transparent"
-                          onClick={() => handleClickBtnQualityVideoItem('360p')}
-                        >
-                          <span className={"media-player-control-quality__btn"
-                            + (src?._current.type === '360p'
-                              ? " media-player-control-quality__btn_active"
-                              : ""
-                            )
-                            + (" title")}>
-                            SD 360
-                          </span>
-                        </Btn>
-                      </li>
-                      <li className="media-player-control-quality__item">
-                        <Btn
-                          type="button"
-                          className="btn_transparent"
-                          onClick={() => handleClickBtnQualityVideoItem('720p')}
-                        >
-                          <span className={"media-player-control-quality__btn"
-                            + (src?._current.type === '720p'
-                              ? " media-player-control-quality__btn_active"
-                              : ""
-                            )
-                            + (" title")}>
-                            HD 720
-                          </span>
-                        </Btn>
-                      </li>
-                    </ul>
-                  </div>
-                  <Btn
-                    type="button"
-                    className="btn_transparent btn_scale_hover"
-                    onClick={handleClickBtnQualityVideo}
-                  >
-                    <HdIcon width={40} height={35} />
-                  </Btn>
-                </div>
-                <div className="media-player-control-panel__item">
-                  <Btn
-                    type="button"
-                    className="btn_transparent btn_scale_hover"
-                    onClick={handleClickBtnFullScreen}
-                  >
-                    <FullScreenIcon width={35} height={35} />
-                  </Btn>
-                </div>
-              </div>
-            </div>
-          </div>
+          {renderControlPanel()}
         </div>
       </div>
     </div>

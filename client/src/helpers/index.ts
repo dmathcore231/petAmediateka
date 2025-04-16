@@ -102,3 +102,15 @@ export const formSrcMediaContent = (mediaContentData: MediaContent): SrcMediaPla
 
   return result
 }
+
+export const formatTimeWithHours = (timeInSeconds: number): string => {
+  const hours: number = Math.floor(timeInSeconds / 3600)
+  const minutes: number = Math.floor((timeInSeconds % 3600) / 60)
+  const seconds: number = Math.floor(timeInSeconds % 60)
+
+  return [
+    hours > 0 ? hours : null,
+    minutes.toString().padStart(2, '0'),
+    seconds.toString().padStart(2, '0')
+  ].filter(Boolean).join(':')
+}
