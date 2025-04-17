@@ -14,6 +14,11 @@ import { YouTubeIcon } from "../../assets/icons/YouTubeIcon"
 import { ZenIcon } from "../../assets/icons/ZenIcon"
 
 export function Footer(): JSX.Element {
+  const text = {
+    email: 'help@amediateka.ru',
+    support: 'Поддержка',
+  }
+
   const renderNavBarItems = (type: NavBarItemFooterTypes): JSX.Element => {
     const config: Record<NavBarItemFooterTypes, ConfigNavBarFooterItems[]> = {
       main: [
@@ -106,12 +111,12 @@ export function Footer(): JSX.Element {
       <div className="footer__item">
         <Link to="/" className="footer__link">
           <span className="value value_color_gray">
-            Поддержка
+            {text.support}
           </span>
         </Link>
         <Link to="/" className="footer__link">
           <span className="value">
-            help@amediateka.ru
+            {text.email}
           </span>
         </Link>
       </div>

@@ -5,6 +5,14 @@ import { ImdbIcon } from "../../assets/icons/ImdbIcon"
 import { KinopoiskIcon } from "../../assets/icons/KinopoiskIcon"
 
 export function MetaData({ rating, dateRelease, ageRestriction, genres }: MetaDataProps): JSX.Element {
+  const classes: Record<string, string> = {
+    base: "meta-data",
+    list: "meta-data-list",
+    item: "meta-data-list__item",
+    title: "title title_color_secondary-active title_weight_bold",
+    wrapper: "meta-data-list__wrapper",
+    wrapperGapSizeLg: "meta-data-list__wrapper_gap_size_lg",
+  }
 
   const getGenres = (data: string[] | string, limit: number): string => {
     if (typeof data === "string") return data
@@ -16,45 +24,45 @@ export function MetaData({ rating, dateRelease, ageRestriction, genres }: MetaDa
   }
 
   return (
-    <div className="meta-data">
-      <div className="meta-data-list">
-        <div className="meta-data-list__wrapper">
-          <div className="meta-data-list__item">
+    <div className={classes.base}>
+      <div className={classes.list}>
+        <div className={classes.wrapper}>
+          <div className={classes.item}>
             <RatingAmediateka width={30} height={24} />
-            <span className="title title_color_secondary-active title_weight_bold">
+            <span className={classes.title}>
               {rating.raitingAmediateka}
             </span>
           </div>
           {rating.ratingImdb && (
-            <div className="meta-data-list__item">
+            <div className={classes.item}>
               <ImdbIcon width={41} height={22} />
-              <span className="title title_color_secondary-active title_weight_bold">
+              <span className={classes.title}>
                 {rating.ratingImdb}
               </span>
             </div>
           )}
           {rating.ratingKinopoisk && (
-            <div className="meta-data-list__item">
+            <div className={classes.item}>
               <KinopoiskIcon width={29} height={29} />
-              <span className="title title_color_secondary-active title_weight_bold">
+              <span className={classes.title}>
                 {rating.ratingKinopoisk}
               </span>
             </div>
           )}
         </div>
-        <div className="meta-data-list__wrapper meta-data-list__wrapper_gap_size_lg">
-          <div className="meta-data-list__item">
-            <span className="title title_color_secondary-active title_weight_bold">
+        <div className={`${classes.wrapper} ${classes.wrapperGapSizeLg}`}>
+          <div className={classes.item}>
+            <span className={classes.title}>
               {dateRelease}
             </span>
           </div>
-          <div className="meta-data-list__item">
-            <span className="title title_color_secondary-active title_weight_bold">
+          <div className={classes.item}>
+            <span className={classes.title}>
               {ageRestriction}+
             </span>
           </div>
-          <div className="meta-data-list__item">
-            <span className="title title_color_secondary-active title_weight_bold">
+          <div className={classes.item}>
+            <span className={classes.title}>
               {getGenres(genres, 3)}
             </span>
           </div>

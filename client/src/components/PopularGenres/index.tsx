@@ -326,6 +326,11 @@ export function PopularGenres(): JSX.Element {
   const baseClass = 'link'
   const linkTypeClass = 'link_primary'
   const activeLinkClass = 'link_active'
+  const text: Record<string, string> = {
+    popularGenres: 'Популярные жанры',
+    serials: 'Сериалы',
+    films: 'Фильмы'
+  }
 
   const [activeLinkPopularGenres, setActiveLinkPopularGenres] = useState(defaultLinksState)
 
@@ -404,17 +409,17 @@ export function PopularGenres(): JSX.Element {
   return (
     <>
       <div className="home-item__title container">
-        <h2>Популярные жанры</h2>
+        <h2>{text.popularGenres}</h2>
         <div className="home-item__title-wrapper">
           <span className={setClassLink(activeLinkPopularGenres.serials.value)}
             onClick={updateActiveLink}
           >
-            Сериалы
+            {text.serials}
           </span>
           <span className={setClassLink(activeLinkPopularGenres.films.value)}
             onClick={updateActiveLink}
           >
-            Фильмы
+            {text.films}
           </span>
         </div>
       </div>
