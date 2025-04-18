@@ -1,3 +1,4 @@
+import { JSX } from "react"
 import { SeoBlockProps } from "../../types/interfaces/SeoBlockProps"
 
 export function SeoBlock({ title, text }: SeoBlockProps): JSX.Element {

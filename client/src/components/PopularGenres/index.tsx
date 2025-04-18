@@ -323,9 +323,9 @@ export function PopularGenres(): JSX.Element {
       items: itemsFilms,
     }
   }
-  const baseClass = 'link'
-  const linkTypeClass = 'link_primary'
-  const activeLinkClass = 'link_active'
+  const baseClass: string = 'link'
+  const linkTypeClass: string = 'link_primary'
+  const activeLinkClass: string = 'link_active'
   const text: Record<string, string> = {
     popularGenres: 'Популярные жанры',
     serials: 'Сериалы',

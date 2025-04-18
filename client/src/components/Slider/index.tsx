@@ -6,17 +6,23 @@ import { Card } from "../Card"
 import { Spinner } from "../Spinner"
 import { SliderProps } from "../../types/interfaces/SliderProps"
 import { SlideState, MultiSlideState } from "../../types/Slider"
+import { CardData } from "../../types/Card"
+import { SliderClassBtnState } from "../../types/SliderClassBtnState"
 import { defaultCardData } from "../../helpers"
 import { ArrowLeftIcon } from "../../assets/icons/ArrowLeftIcon"
 import { ArrowRightIcon } from "../../assets/icons/ArrowRightIcon"
-import { CardData } from "../../types/Card"
 
 export function Slider({ sliderSettings, sliderData: { data, cardStyles, settings, loadingData, errorData } }: SliderProps): JSX.Element {
   const dispatch = useAppDispatch()
 
-  const animatedTime = 400
-  const autoSwipeTime = 100
-  const sliderListGap = 16
+  const ANIMATED_TIME: number = 400
+  const autoSwipeTime: number = 100
+  const sliderListGap: number = 16
+
+  const defSliderClassBtnState: SliderClassBtnState = {
+    prev: '',
+    next: ''
+  }
 
   const { typeSlider, pagenation, autoSwipe, lastSwipe, quantityListItems, mediaPlayerHandler } = sliderSettings
 
@@ -24,92 +30,115 @@ export function Slider({ sliderSettings, sliderData: { data, cardStyles, setting
   const [multiStateSlider, setMultiStateSlider] = useState<MultiSlideState | null>(null)
   const [progress, setProgress] = useState<number>(0)
   const [sliderItemWidth, setSliderItemWidth] = useState<number>(0)
-  const [classBtn, setClassBtn] = useState(
-    {
-      prev: '',
-      next: ''
-    }
-  )
+  const [classBtnState, setClassBtnState] = useState<SliderClassBtnState>(defSliderClassBtnState)
 
   const sliderListRef = useRef<HTMLUListElement>(null)
   const sliderItemRef = useRef<HTMLLIElement>(null)
 
-  useEffect(() => {
-    const isDataComplete = data && data.length === quantityListItems
-    const isPrevSlideOutOfBounds = multiStateSlider && multiStateSlider.prevSlide < 0 && lastSwipe
-    const isNextSlideOutOfBounds = multiStateSlider
+  useEffect((): void | (() => void) => {
+    const isDataComplete: boolean = data?.length === quantityListItems
+    const isPrevSlideOutOfBounds: boolean | null = multiStateSlider
+      && multiStateSlider.prevSlide < 0
+      && lastSwipe
+    const isNextSlideOutOfBounds: boolean | null = multiStateSlider
       && data
       && multiStateSlider.nextSlide === data.length
       && lastSwipe
-    const isMultiSliderType = typeSlider === 'multi' && !multiStateSlider
+    const isMultiSliderType: boolean = typeSlider === 'multi' && !multiStateSlider
 
-    if (isDataComplete) {
-      setClassBtn({
-        prev: 'slider__btn slider__btn_prev slider__btn_disabled',
-        next: 'slider__btn slider__btn_next slider__btn_disabled'
-      })
-    } else if (isPrevSlideOutOfBounds) {
-      const timer = setTimeout(() => {
-        setClassBtn({
-          prev: 'slider__btn slider__btn_prev slider__btn_disabled',
-          next: 'slider__btn slider__btn_next'
-        })
-      }, animatedTime)
-
-      return () => clearTimeout(timer)
-    } else if (isNextSlideOutOfBounds) {
-      const timer = setTimeout(() => {
-        setClassBtn({
-          prev: 'slider__btn slider__btn_prev',
-          next: 'slider__btn slider__btn_next slider__btn_disabled'
-        })
-      }, animatedTime)
-
-      return () => clearTimeout(timer)
-    } else if (isMultiSliderType) {
-      setClassBtn({
-        prev: 'slider__btn slider__btn_prev slider__btn_disabled',
-        next: 'slider__btn slider__btn_next'
-      })
+    const classesBtn: Record<string, string> = {
+      base: "slider__btn",
+      prev: "slider__btn_prev",
+      next: "slider__btn_next",
+      disabled: "slider__btn_disabled"
     }
-    else {
-      setClassBtn({
-        prev: 'slider__btn slider__btn_prev',
-        next: 'slider__btn slider__btn_next'
-      })
+
+    type ToggleDisabledClassBtn = {
+      prevDisabled: boolean
+      nextDisabled: boolean
+      isAnimated?: boolean
     }
-  }, [multiStateSlider])
+
+    const toggleDisabledClassBtn = ({ prevDisabled, nextDisabled, isAnimated }: ToggleDisabledClassBtn): void | (() => void) => {
+      if (!isAnimated) {
+        setClassBtnState({
+          prev: prevDisabled
+            ? `${classesBtn.base} ${classesBtn.prev} ${classesBtn.disabled}`
+            : `${classesBtn.base} ${classesBtn.prev}`,
+          next: nextDisabled
+            ? `${classesBtn.base} ${classesBtn.next} ${classesBtn.disabled}`
+            : `${classesBtn.base} ${classesBtn.next}`
+        })
+      }
+
+      const timerId = setTimeout((): void => {
+        setClassBtnState({
+          prev: prevDisabled
+            ? `${classesBtn.base} ${classesBtn.prev} ${classesBtn.disabled}`
+            : `${classesBtn.base} ${classesBtn.prev}`,
+          next: nextDisabled
+            ? `${classesBtn.base} ${classesBtn.next} ${classesBtn.disabled}`
+            : `${classesBtn.base} ${classesBtn.next}`
+        })
+      }, ANIMATED_TIME)
+
+      return () => clearTimeout(timerId)
+    }
+
+    if (isDataComplete) return toggleDisabledClassBtn({
+      prevDisabled: true,
+      nextDisabled: true
+    }) as void
+
+    if (isPrevSlideOutOfBounds) return toggleDisabledClassBtn({
+      prevDisabled: true,
+      nextDisabled: false,
+      isAnimated: true
+    }) as () => void
+
+    if (isNextSlideOutOfBounds) return toggleDisabledClassBtn({
+      prevDisabled: false,
+      nextDisabled: true,
+      isAnimated: true
+    }) as () => void
+
+    if (isMultiSliderType) return toggleDisabledClassBtn({
+      prevDisabled: true,
+      nextDisabled: true
+    }) as void
+
+    return toggleDisabledClassBtn({
+      prevDisabled: false,
+      nextDisabled: false
+    })
+
+  }, [data, typeSlider, multiStateSlider, lastSwipe, quantityListItems])
 
   useEffect(() => {
-    if (data) {
-      switch (typeSlider) {
-        case 'default': {
-          setStateSlider({
-            prevSlide: data.length - 1,
-            activeSlide: 0,
-            nextSlide: 1,
-            translateX: 0,
-            indexSlide: 0,
-            isAnimated: false,
-          })
+    if (!data) return
 
-          break
-        }
-        case 'multi': {
-          setMultiStateSlider({
-            prevSlide: -1,
-            activeSlide: [0, quantityListItems],
-            nextSlide: quantityListItems,
-            translateX: 0,
-            indexSlide: 0,
-            isAnimated: false,
-          })
-
-          break
-        }
-      }
+    const baseState = {
+      translateX: 0,
+      indexSlide: 0,
+      isAnimated: false,
     }
-  }, [data])
+
+    if (typeSlider === 'default') {
+      setStateSlider({
+        ...baseState,
+        prevSlide: data.length - 1,
+        activeSlide: 0,
+        nextSlide: data.length > 1 ? 1 : 0,
+      })
+    } else if (typeSlider === 'multi') {
+      setMultiStateSlider({
+        ...baseState,
+        prevSlide: -1,
+        activeSlide: [0, quantityListItems],
+        nextSlide: quantityListItems,
+      })
+    }
+  }, [data, typeSlider, quantityListItems])
 
   useEffect(() => {
     if (sliderItemRef.current) {
@@ -136,11 +165,11 @@ export function Slider({ sliderSettings, sliderData: { data, cardStyles, setting
             break
           }
         }
-      }, animatedTime)
+      }, ANIMATED_TIME)
 
       return () => clearTimeout(timeoutId)
     }
-  }, [stateSlider?.isAnimated, multiStateSlider?.isAnimated, animatedTime, typeSlider])
+  }, [stateSlider?.isAnimated, multiStateSlider?.isAnimated, ANIMATED_TIME, typeSlider])
 
 
   useEffect(() => {
@@ -178,7 +207,7 @@ export function Slider({ sliderSettings, sliderData: { data, cardStyles, setting
           indexSlide: 0,
           isAnimated: false,
         })
-      }, animatedTime)
+      }, ANIMATED_TIME)
 
       return () => clearTimeout(timerId)
     } else if (stateSlider
@@ -194,7 +223,7 @@ export function Slider({ sliderSettings, sliderData: { data, cardStyles, setting
           indexSlide: data.length - 1,
           isAnimated: false,
         })
-      }, animatedTime)
+      }, ANIMATED_TIME)
 
       return () => clearTimeout(timerId)
     }
@@ -363,7 +392,7 @@ export function Slider({ sliderSettings, sliderData: { data, cardStyles, setting
         } as CSSProperties
       }
     >
-      <div className={classBtn.prev}>
+      <div className={classBtnState.prev}>
         <Btn
           type="button"
           className="btn_transparent"
@@ -373,7 +402,7 @@ export function Slider({ sliderSettings, sliderData: { data, cardStyles, setting
           <ArrowLeftIcon width={48} height={48} />
         </Btn>
       </div>
-      <div className={classBtn.next}>
+      <div className={classBtnState.next}>
         <Btn
           type="button"
           className="btn_transparent"

@@ -1,37 +1,41 @@
+import { JSX } from "react"
 import { CardData } from "../../types/Card"
 import { SeasonsProps } from "../../types/interfaces/SeasonsProps"
 import { SliderProps } from "../../types/interfaces/SliderProps"
 import { Slider } from "../Slider"
 
-export function Seasons({ seasonsValue, mediaContentData }: SeasonsProps): JSX.Element {
-  const formCardData = (seasonsIndex: number): CardData[] | null => {
-    if (mediaContentData && mediaContentData.seasons) {
-      const cardData: CardData[] = mediaContentData.seasons[seasonsIndex].episodes.map((item) => {
-        return {
-          _id: mediaContentData._id,
-          type: mediaContentData.type,
-          title: {
-            ...mediaContentData.data.title,
-            value: item.title,
-          },
-          badge: mediaContentData.data.badge,
-          ageRestriction: mediaContentData.data.ageRestriction,
-          description: mediaContentData.data.description.prewiewDescription,
-          bg: {
-            imgUrl: mediaContentData.bg.imgUrl,
-            videoUrl: mediaContentData.bg.videoUrl,
-            imgResizeUrl: item.imgPreview
-          },
-          logoImg: mediaContentData.logoImg,
-          link: `#`,
-          src: item.link
-        }
-      })
+export function Seasons({ seasonsValue, mediaContentData }: SeasonsProps): JSX.Element | null {
+  const baseClass: string = "seasons"
+  const listClass: string = `${baseClass}-list`
+  const listItemClass: string = `${listClass}__item`
+  const titleClasses: string = "title title_size_l title_align_left container"
 
-      return cardData
-    } else {
-      return null
-    }
+  const formCardData = (seasonsIndex: number): CardData[] | null => {
+    if (!mediaContentData.seasons) return null
+
+    const cardData: CardData[] = mediaContentData.seasons[seasonsIndex].episodes.map((item) => {
+      return {
+        _id: mediaContentData._id,
+        type: mediaContentData.type,
+        title: {
+          ...mediaContentData.data.title,
+          value: item.title,
+        },
+        badge: mediaContentData.data.badge,
+        ageRestriction: mediaContentData.data.ageRestriction,
+        description: mediaContentData.data.description.prewiewDescription,
+        bg: {
+          imgUrl: mediaContentData.bg.imgUrl,
+          videoUrl: mediaContentData.bg.videoUrl,
+          imgResizeUrl: item.imgPreview
+        },
+        logoImg: mediaContentData.logoImg,
+        link: `#`,
+        src: item.link
+      }
+    })
+
+    return cardData
   }
 
   const renderSeasonsSlider = (seasonsIndex: number): JSX.Element => {
@@ -53,7 +57,10 @@ export function Seasons({ seasonsValue, mediaContentData }: SeasonsProps): JSX.E
               justifyContent: 'space-between'
             }
           },
-          clipPath: false,
+          clipPath: {
+            value: false,
+            type: null
+          },
           ageRestrictionBadge: null,
           boxShadow: false,
           btnGroup: false,
@@ -69,7 +76,8 @@ export function Seasons({ seasonsValue, mediaContentData }: SeasonsProps): JSX.E
         settings: {
           title: {
             titleOutside: true,
-            titleLogoImg: false
+            titleLogoImg: false,
+            titleLogoImgIndex: null
           },
           badgeVisible: false,
           link: {
@@ -87,25 +95,31 @@ export function Seasons({ seasonsValue, mediaContentData }: SeasonsProps): JSX.E
     return <Slider {...sliderProps} />
   }
 
+  if (!mediaContentData.seasons) return null
+
   return (
-    <div className="seasons">
-      {seasonsValue === 0 && mediaContentData.seasons && (
-        <div className="seasons-list">
-          {mediaContentData.seasons.map((season, index) => (
-            <div className="seasons-list__item" key={index}>
+    <div className={baseClass}>
+      {seasonsValue === 0 && (
+        <div className={listClass}>
+          {mediaContentData.seasons.map((_, index) => (
+            <div className={listItemClass} key={index}>
               <div className="seasons-list__title">
-                <h3 className="title title_size_l title_align_left container">{`Сезон ${index + 1}`}</h3>
+                <h3 className={titleClasses}>
+                  {`Сезон ${index + 1}`}
+                </h3>
                 {renderSeasonsSlider(index)}
               </div>
             </div>
           ))}
         </div>
       )}
-      {seasonsValue > 0 && mediaContentData.seasons && (
-        <div className="seasons-list">
-          <div className="seasons-list__item">
+      {seasonsValue > 0 && (
+        <div className={listClass}>
+          <div className={listItemClass}>
             <div className="seasons-list__title">
-              <h3 className="title title_size_l title_align_left container">{`Сезон ${seasonsValue}`}</h3>
+              <h3 className={titleClasses}>
+                {`Сезон ${seasonsValue}`}
+              </h3>
               {renderSeasonsSlider(seasonsValue - 1)}
             </div>
           </div>
