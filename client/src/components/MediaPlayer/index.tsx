@@ -52,7 +52,7 @@ export function MediaPlayer(): JSX.Element {
   const [isShowHdList, setIsShowHdList] = useState<boolean>(false)
   const inactiveTime: number = 3000
 
-  useEffect((): void => {
+  useEffect(() => {
     const hasError = Boolean(error)
     const errorNotFound: { number: number, message: string } = {
       number: 404,
@@ -97,7 +97,7 @@ export function MediaPlayer(): JSX.Element {
     }
   }, [playerStatus.status, isShow, error, inactiveTime, setInactive])
 
-  useEffect((): void => {
+  useEffect(() => {
     if (videoRef.current && isShow && src) {
       dispatch(resetPlayerStatus())
       videoRef.current.play()
@@ -109,7 +109,7 @@ export function MediaPlayer(): JSX.Element {
     }
   }, [isShow])
 
-  useEffect((): void => {
+  useEffect(() => {
     if (timeVideo && videoRef.current) {
       dispatch(updatePlayerStatus({
         ...playerStatus, time: {
@@ -121,7 +121,7 @@ export function MediaPlayer(): JSX.Element {
     }
   }, [timeVideo])
 
-  useEffect((): void => {
+  useEffect(() => {
     if (!document.fullscreenElement) {
       dispatch(updatePlayerStatus({ ...playerStatus, fullScreen: false }))
     } else {
@@ -129,7 +129,7 @@ export function MediaPlayer(): JSX.Element {
     }
   }, [document.fullscreenElement])
 
-  useEffect((): void => {
+  useEffect(() => {
     if (videoRef.current) {
       videoRef.current.currentTime = timeVideo
     }
