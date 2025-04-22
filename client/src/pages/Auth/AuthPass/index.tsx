@@ -1,5 +1,5 @@
-import { useState, useEffect, FormEvent } from 'react'
-import { useNavigate, Link } from 'react-router-dom'
+import { useState, useEffect, FormEvent, JSX } from 'react'
+import { Link } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { resetStatusResponse } from "../../../redux/statusResponseSlice"
 import { Input } from '../../../components/Input'
@@ -7,11 +7,25 @@ import { Btn } from '../../../components/Btn'
 import { Checkbox } from '../../../components/Checkbox'
 import { AuthPassProps } from '../../../types/interfaces/AuthProps'
 import { InputErrorState } from "../../../types/Input"
+import { InputProps } from "../../../types/interfaces/InputProps"
+import { setTextAuth } from "../../../helpers/index"
 import { CloseIcon } from '../../../assets/icons/CloseIcon'
 
 export function AuthPass({ setPassValue, email, type }: AuthPassProps): JSX.Element {
-  const navigate = useNavigate()
   const dispatch = useAppDispatch()
+
+  const labelInput: InputProps["label"] = {
+    value: "Не менее 6 символов",
+    labelInvisible: false
+  }
+  const placeholderInput: InputProps["placeholder"] = {
+    type: "scale",
+    value: "Пароль"
+  }
+  const textBtn: Record<'back' | 'next', string> = {
+    back: "Изменить",
+    next: "Продолжить"
+  }
 
   const { error } = useAppSelector(state => state.statusResponse)
   const [password, setPassword] = useState('')
@@ -21,12 +35,12 @@ export function AuthPass({ setPassValue, email, type }: AuthPassProps): JSX.Elem
     dispatch(resetStatusResponse())
   }, [])
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault()
     setPassValue(prev => ({ ...prev, password }))
   }
 
-  const toggleDisableBtn = () => {
+  const toggleDisableBtn = (): boolean => {
     if (password.length < 6 || !isChecked) {
       return true
     } else {
@@ -34,32 +48,32 @@ export function AuthPass({ setPassValue, email, type }: AuthPassProps): JSX.Elem
     }
   }
 
-  const handleClickBtnBack = () => {
+  const handleClickBtnBack = (): void => {
     setPassword('')
     setPassValue(prev => ({ ...prev, password: null, visibleContent: 'email' }))
   }
 
-  const toggleInputError = () => {
-    if (error && error.numberError === 104 && password === error.value) {
+  const toggleInputError = (): InputErrorState => {
+    if (!error) return { value: false, errorData: null }
 
-      const err: InputErrorState = {
+    const mapError: { [key: number]: InputErrorState } = {
+      104: {
         value: true,
         errorData: {
           field: "password",
           message: error.message
         }
       }
-      return err
-    } else {
-      return { value: false, errorData: null }
     }
+
+    return mapError[error.numberError]
   }
 
   return (
     <div className="auth-menu">
       <div className="auth-menu__item">
         <h4 className="auth-menu__pre-title">
-          {type === "signUp" ? "Регистрация" : "Вход"}
+          {setTextAuth(type, "preTitle")}
         </h4>
         <div className="auth-menu__close-btn">
           <Link to="/" className="btn btn_transparent auth-menu__close-btn">
@@ -69,15 +83,12 @@ export function AuthPass({ setPassValue, email, type }: AuthPassProps): JSX.Elem
       </div>
       <div className="auth-menu__item">
         <h1 className="auth-menu__title title title_size_l">
-          {type === "signUp" ? "Создайте аккаунт" : "Войдите в свой аккаунт"}
+          {setTextAuth(type, "title")}
         </h1>
       </div>
       <div className="auth-menu__item">
         <h3 className="title">
-          {type === "signUp"
-            ? "Придумайте пароль для создания аккаунта"
-            : "Введите пароль для входа в свой аккаунт"}
-
+          {setTextAuth(type, "text")}
         </h3>
       </div>
       <div className="auth-menu__item">
@@ -91,7 +102,7 @@ export function AuthPass({ setPassValue, email, type }: AuthPassProps): JSX.Elem
               className="btn_transparent btn_font_size_md"
               onClick={handleClickBtnBack}
             >
-              Изменить
+              {textBtn.back}
             </Btn>
           </div>
         </div>
@@ -101,12 +112,9 @@ export function AuthPass({ setPassValue, email, type }: AuthPassProps): JSX.Elem
           <Input
             type="password"
             id="password"
-            label={{ value: "Не менее 6 символов", labelInvisible: false }}
+            label={labelInput}
             required
-            placeholder={{
-              type: "scale",
-              value: "Пароль"
-            }}
+            placeholder={placeholderInput}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             error={toggleInputError()}
@@ -118,7 +126,7 @@ export function AuthPass({ setPassValue, email, type }: AuthPassProps): JSX.Elem
             className="btn_primary"
             disabled={toggleDisableBtn()}
           >
-            Продолжить
+            {textBtn.next}
           </Btn>
         </form>
       </div>

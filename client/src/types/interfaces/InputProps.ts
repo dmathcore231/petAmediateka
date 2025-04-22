@@ -1,4 +1,4 @@
-import { ChangeEvent} from "react"
+import { ChangeEvent, JSX } from "react"
 import { InputErrorState } from "../../types/Input"
 
 export interface InputProps {

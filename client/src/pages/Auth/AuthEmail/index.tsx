@@ -1,15 +1,15 @@
-import { useState, FormEvent, useEffect } from "react"
-import { useNavigate, Link } from "react-router-dom"
+import { useState, FormEvent, useEffect, JSX } from "react"
+import { Link } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { resetStatusResponse } from "../../../redux/statusResponseSlice"
 import { Input } from "../../../components/Input"
 import { Btn } from "../../../components/Btn"
 import { AuthEmailProps } from "../../../types/interfaces/AuthProps"
 import { InputErrorState } from "../../../types/Input"
+import { setTextAuth } from "../../../helpers/index"
 import { CloseIcon } from "../../../assets/icons/CloseIcon"
 
 export function AuthEmail({ setEmailValue, type }: AuthEmailProps): JSX.Element {
-  const navigate = useNavigate()
   const dispatch = useAppDispatch()
 
   const { error } = useAppSelector(state => state.statusResponse)
@@ -34,14 +34,10 @@ export function AuthEmail({ setEmailValue, type }: AuthEmailProps): JSX.Element 
     }
   }, [error, email])
 
-  const toggleDisableBtn = () => {
-    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  const toggleDisableBtn = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
-    if (re.test(String(email).toLowerCase())) {
-      return false
-    } else {
-      return true
-    }
+    return !emailRegex.test(email.toLowerCase())
   }
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -68,7 +64,7 @@ export function AuthEmail({ setEmailValue, type }: AuthEmailProps): JSX.Element 
     <div className="auth-menu">
       <div className="auth-menu__item">
         <h4 className="auth-menu__pre-title">
-          {type === "signUp" ? "Регистрация" : "Вход"}
+          {setTextAuth(type, "preTitle")}
         </h4>
         <div className="auth-menu__close-btn">
           <Link to="/" className="btn btn_transparent auth-menu__close-btn">
@@ -78,7 +74,7 @@ export function AuthEmail({ setEmailValue, type }: AuthEmailProps): JSX.Element 
       </div>
       <div className="auth-menu__item">
         <h1 className="auth-menu__title title title_size_l">
-          {type === "signUp" ? "Создайте аккаунт" : "Войдите в свой аккаунт"}
+          {setTextAuth(type, "title")}
         </h1>
       </div>
       <div className="auth-menu__item">
@@ -101,7 +97,7 @@ export function AuthEmail({ setEmailValue, type }: AuthEmailProps): JSX.Element 
           <Btn
             type="submit"
             className="btn_primary"
-            disabled={toggleDisableBtn()}
+            disabled={toggleDisableBtn(email)}
           >
             Продолжить
           </Btn>

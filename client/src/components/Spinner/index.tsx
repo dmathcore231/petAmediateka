@@ -1,3 +1,4 @@
+import { JSX } from 'react'
 import { SpinnerIcon } from '../../assets/icons/SpinnerIcon'
 import { SpinnerProps } from '../../types/interfaces/SpinnerProps'
 
