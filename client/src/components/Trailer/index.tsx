@@ -1,3 +1,4 @@
+import { JSX } from "react"
 import { useAppDispatch, useAppSelector } from "../../hooks"
 import { setSrc, toggleShow, setTitle } from "../../redux/MediaPlayerSlice"
 import { TrailerProps } from "../../types/interfaces/TrailerProps"
@@ -8,12 +9,12 @@ export function Trailer({ trailerImg, seasonsIndex, src, title }: TrailerProps):
 
   const { isShow } = useAppSelector(state => state.mediaPlayer)
 
-  const handleClickBtnPlay = () => {
-    if (!isShow && src && title) {
-      dispatch(toggleShow(true))
-      dispatch(setSrc(src))
-      dispatch(setTitle(title))
-    }
+  const handleClickBtnPlay = (): void => {
+    if (isShow || !src || !title) return
+
+    dispatch(toggleShow(true))
+    dispatch(setSrc(src))
+    dispatch(setTitle(title))
   }
 
   return (

@@ -81,6 +81,11 @@
         height: 100vh;
       }
 
+      &__item {
+        @include flex-center;
+        width: 100%;
+      }
+
       &::-webkit-media-controls {
         display: none !important;
       }

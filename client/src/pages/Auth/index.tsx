@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, JSX } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from "../../hooks"
 import { fetchSignUp, fetchSignIn } from '../../redux/authSlice'
@@ -26,7 +26,7 @@ export function Auth({ pageState }: AuthProps): JSX.Element {
 
   const requestConfig = {
     signUp: {
-      onlyEmail: (formData: FormData, email: string | null) => {
+      onlyEmail: (formData: FormData, email: string | null): void => {
         if (!email) return
 
         formData.append('type', 'authSignUpEmail')
@@ -34,7 +34,7 @@ export function Auth({ pageState }: AuthProps): JSX.Element {
 
         dispatch(fetchSignUp(formData))
       },
-      withPassword: (formData: FormData, email: string | null, password: string | null) => {
+      withPassword: (formData: FormData, email: string | null, password: string | null): void => {
         if (!email || !password) return
 
         formData.append('type', 'authSignUp')
@@ -45,7 +45,7 @@ export function Auth({ pageState }: AuthProps): JSX.Element {
       }
     },
     signIn: {
-      onlyEmail: (formData: FormData, email: string | null) => {
+      onlyEmail: (formData: FormData, email: string | null): void => {
         if (!email) return
 
         formData.append('type', 'authSignInEmail')
@@ -53,7 +53,7 @@ export function Auth({ pageState }: AuthProps): JSX.Element {
 
         dispatch(fetchSignIn(formData))
       },
-      withPassword: (formData: FormData, email: string | null, password: string | null) => {
+      withPassword: (formData: FormData, email: string | null, password: string | null): void => {
         if (!email || !password) return
 
         formData.append('type', 'authSignIn')

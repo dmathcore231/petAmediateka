@@ -5,7 +5,7 @@ import { PromoLineProps } from "../../types/interfaces/PromoLineProps"
 export function PromoLine({ promoLineData, sliderProps }: PromoLineProps): JSX.Element {
   return (
     <div className="promo-line">
-      <div className="promo-line__bg"></div>
+      <div className="promo-line__bg" />
       <div className="promo-line__item container">
         <div className="promo-line__title">
           <h2>{promoLineData.titleData.title}</h2>

@@ -9,6 +9,7 @@ export function ProfileSwitcher({ className }: ProfileSwitcherProps): JSX.Elemen
   const { user, loading } = useAppSelector(state => state.auth)
   const [isActive, setIsActive] = useState(false)
   const menuListRef = useRef<HTMLUListElement>(null)
+  const textNewProfile: string = "Новый профиль"
 
   const handleClickSwitcherMenu = (event: MouseEvent): void => {
     if (event.target !== menuListRef.current) {
@@ -17,8 +18,8 @@ export function ProfileSwitcher({ className }: ProfileSwitcherProps): JSX.Elemen
   }
 
   const setClassSwitcher = (): string => {
-    const baseClass = "profile-switcher"
-    const customClass = className ? " " + className : ""
+    const baseClass: string = "profile-switcher"
+    const customClass: string = className ? " " + className : ""
 
     return `${baseClass}${customClass}`
   }
@@ -55,7 +56,7 @@ export function ProfileSwitcher({ className }: ProfileSwitcherProps): JSX.Elemen
                   <PlusIcon width={26} height={26} />
                 </span>
                 <span className="profile-switcher-menu-list__profile-name">
-                  Новый профиль
+                  {textNewProfile}
                 </span>
               </li>
             </>

@@ -1,4 +1,3 @@
-import { JSX } from "react"
 import { CardData } from "../types/Card"
 import { BannerProps } from "../types/interfaces/BannerProps"
 import { UserData } from "../types/interfaces/User"
@@ -6,6 +5,8 @@ import { SrcMediaPlaer } from "../types/SrcMediaPlaer"
 import { MediaContent } from "../types/interfaces/MediaContent"
 import { GetDataFromLocalStorageType } from "../types/GetDataFromLocalStorageType"
 import { PromoLineData } from "../types/interfaces/PromoLineData"
+import { AuthTextKey } from "../types/AuthTextKey"
+import { MapText } from "../types/MapText"
 
 export const setDataInLocalStorage = (key: string, data: string | null | UserData): void => {
   if (data) {
@@ -101,4 +102,33 @@ export const formSrcMediaContent = (mediaContentData: MediaContent): SrcMediaPla
   }
 
   return result
+}
+
+export const formatTimeWithHours = (timeInSeconds: number): string => {
+  const hours: number = Math.floor(timeInSeconds / 3600)
+  const minutes: number = Math.floor((timeInSeconds % 3600) / 60)
+  const seconds: number = Math.floor(timeInSeconds % 60)
+
+  return [
+    hours > 0 ? hours : null,
+    minutes.toString().padStart(2, '0'),
+    seconds.toString().padStart(2, '0')
+  ].filter(Boolean).join(':')
+}
+
+export const setTextAuth = (type: 'signUp' | 'signIn', text: AuthTextKey): string => {
+  const mapText: MapText = {
+    signUp: {
+      preTitle: "Регистрация",
+      title: "Создайте аккаунт",
+      text: "Придумайте пароль для создания аккаунта",
+    },
+    signIn: {
+      preTitle: "Вход",
+      title: "Войдите в свой аккаунт",
+      text: "Введите пароль для входа в свой аккаунт",
+    }
+  }
+
+  return mapText[type][text]
 }
