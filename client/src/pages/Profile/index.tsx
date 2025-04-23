@@ -1,57 +1,56 @@
-import { Link } from "react-router-dom"
+import { JSX } from "react"
+import { Link, Outlet } from "react-router-dom"
 import { LinkBack } from "../../components/LinkBack"
 
-export function ProfileMain(): JSX.Element {
+export function Profile(): JSX.Element {
+  const classes = {
+    base: "profile",
+    navBar: "profile-nav-bar",
+    navBarItem: "profile-nav-bar__item",
+    navBarList: "profile-nav-bar-list",
+    navBarListItem: "profile-nav-bar-list__item",
+    navBarLink: "profile-nav-bar-list__link",
+  }
+  const linkClass = 'link link_primary link_color_white title title_size_s'
+
+  const mainTitleMenu = 'Настройки'
+
+  const renderNavBarList = (): JSX.Element => {
+    const textLinks: string[] = [
+      'Профили',
+      'Покупки',
+      'Способы оплаты',
+      'Устройства',
+      'Аккаунт',
+      'Помощь и поддержка',
+    ]
+    return (
+      <ul className={classes.navBarList}>
+        {textLinks.map((text, index) => (
+          <li className={classes.navBarListItem} key={index}>
+            <Link to={'#'}
+              className={`${classes.navBarLink} ${linkClass}`}>
+              {text}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+
   return (
-    <div className="profile">
-      <nav className="profile-nav-bar">
-        <div className="profile-nav-bar__item">
+    <div className={classes.base}>
+      <nav className={classes.navBar}>
+        <div className={classes.navBarItem}>
           <LinkBack activePage="Профиль" />
-          <h2>Настройки</h2>
+          <h2>{mainTitleMenu}</h2>
         </div>
-        <div className="profile-nav-bar__item">
-          <ul className="profile-nav-bar-list">
-            <li className="profile-nav-bar-list__item">
-              <Link to={'#'}
-                className="link link_primary link_color_white title title_size_s profile-nav-bar-list__link ">
-                Профили
-              </Link>
-            </li>
-            <li className="profile-nav-bar-list__item">
-              <Link to={'#'}
-                className="link link_primary link_color_white title title_size_s profile-nav-bar-list__link ">
-                Покупки
-              </Link>
-            </li>
-            <li className="profile-nav-bar-list__item">
-              <Link to={'#'}
-                className="link link_primary link_color_white title title_size_s profile-nav-bar-list__link ">
-                Способы оплаты
-              </Link>
-            </li>
-            <li className="profile-nav-bar-list__item">
-              <Link to={'#'}
-                className="link link_primary link_color_white title title_size_s profile-nav-bar-list__link ">
-                Устройства
-              </Link>
-            </li>
-            <li className="profile-nav-bar-list__item">
-              <Link to={'#'}
-                className="link link_primary link_color_white title title_size_s profile-nav-bar-list__link ">
-                Аккаунт
-              </Link>
-            </li>
-            <li className="profile-nav-bar-list__item">
-              <Link to={'#'}
-                className="link link_primary link_color_white title title_size_s profile-nav-bar-list__link ">
-                Помощь и поддержка
-              </Link>
-            </li>
-          </ul>
+        <div className={classes.navBarItem}>
+          {renderNavBarList()}
         </div>
       </nav>
       <div className="profile-body">
-        Main content
+        <Outlet />
       </div>
     </div>
   )

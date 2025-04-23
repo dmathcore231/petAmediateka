@@ -1,0 +1,9 @@
+import { JSX } from "react"
+
+export function ProfileMain(): JSX.Element {
+  return (
+    <div className="profile-main">
+      Main Page in Profile
+    </div>
+  )
+}

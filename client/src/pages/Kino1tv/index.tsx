@@ -1,3 +1,4 @@
+import { JSX } from "react"
 
 export function Kino1tv(): JSX.Element {
   return (
