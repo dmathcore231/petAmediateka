@@ -41,11 +41,9 @@ export function AuthPass({ setPassValue, email, type }: AuthPassProps): JSX.Elem
   }
 
   const toggleDisableBtn = (): boolean => {
-    if (password.length < 6 || !isChecked) {
-      return true
-    } else {
-      return false
-    }
+    if (password.length < 6 || !isChecked) return true
+
+    return false
   }
 
   const handleClickBtnBack = (): void => {

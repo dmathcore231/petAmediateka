@@ -1,68 +1,14 @@
-import { useState, useEffect, JSX } from "react"
+import { useState, JSX } from "react"
 import { InputProps } from "../../types/interfaces/InputProps"
-import { InputErrorState } from "../../types/Input"
 import { EyeIcon } from "../../assets/icons/EyeIcon"
 
 export function Input({ type, id, label, required, onChange, value, placeholder, className, name, error, btnInInput, checkPassword }: InputProps): JSX.Element {
-  const defaultStateError: InputErrorState = { value: false, errorData: null }
+  const checkError: boolean = error?.value ? true : false
 
-  const [errorState, setErrorState] = useState<InputErrorState>(defaultStateError)
   const [isVisiblePass, setIsVisiblePass] = useState(false)
-
-  useEffect(() => {
-    if (value === '') {
-      setErrorState(defaultStateError)
-    }
-  }, [value])
-
-  useEffect(() => {
-    if (error) {
-      setErrorState(error)
-    }
-  }, [error])
-
-  const handleValidEmail = (emailValue: string): void => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    const isValidEmail = emailRegex.test(emailValue.toLowerCase()) || emailValue === ''
-
-    setErrorState(
-      isValidEmail
-        ? defaultStateError
-        : {
-          value: true,
-          errorData: {
-            field: "email",
-            message: null
-          }
-        }
-    )
-  }
-
-  const handleValidPassword = (): void => {
-    if (value && value.length >= 6) {
-      return setErrorState(defaultStateError)
-    } else {
-      return setErrorState({
-        value: true,
-        errorData: {
-          field: "password",
-          message: null
-        }
-      }
-      )
-    }
-  }
 
   const handleIsVisiblePass = (): void => {
     setIsVisiblePass(!isVisiblePass)
-  }
-
-  const handleError = (): void => {
-    if (type === "email" && !checkPassword && value) {
-      return handleValidEmail(value)
-    } else {
-      return handleValidPassword()
-    }
   }
 
   const setClassPlaceholder = (value: string | undefined, errorState: boolean): string => {
@@ -89,10 +35,10 @@ export function Input({ type, id, label, required, onChange, value, placeholder,
       .join(" ") + " text text_size_sm text_color_secondary-active"
   }
 
-  const setClassInput = (className: string | undefined, errorState: boolean): string => {
+  const setClassInput = (className: string | undefined, isError: boolean): string => {
     const mapClass = [
       { className: "input", condition: true },
-      { className: "input_error", condition: errorState },
+      { className: "input_error", condition: isError },
       { className: className, condition: className ? true : false },
     ]
 
@@ -101,21 +47,26 @@ export function Input({ type, id, label, required, onChange, value, placeholder,
       .join(" ")
   }
 
+  const toggleTypeInput = (isVisiblePass: boolean) => {
+    return isVisiblePass
+      ? "text"
+      : "password"
+  }
+
   return (
     <div className="input-wrapper">
       <div className="input__item">
         <input
-          type={checkPassword ? (isVisiblePass ? "text" : "password") : type}
+          type={checkPassword ? (toggleTypeInput(isVisiblePass)) : type}
           id={id}
-          className={setClassInput(className, errorState.value)}
+          className={setClassInput(className, checkError)}
           required={required}
           value={value}
           name={name}
           placeholder={placeholder?.value}
           onChange={onChange}
-          onBlur={handleError}
         />
-        <span className={setClassPlaceholder(value, errorState.value)}>
+        <span className={setClassPlaceholder(value, checkError)}>
           {placeholder?.value}
         </span>
         {btnInInput && (
@@ -134,7 +85,7 @@ export function Input({ type, id, label, required, onChange, value, placeholder,
       {label.value && (
         <label
           htmlFor={id}
-          className={setClassLabel(label.labelInvisible, errorState.value)}
+          className={setClassLabel(label.labelInvisible, checkError)}
         >
           {label.value}
         </label>
