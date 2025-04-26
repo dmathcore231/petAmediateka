@@ -1,0 +1,11 @@
+@use "../../../styles/mixins" as *;
+@use "../../../styles/variables" as *;
+
+.profile-main {
+
+  &-nav-bar {
+    @include flex-start;
+    gap: 2.5rem;
+    width: 100%;
+  }
+}

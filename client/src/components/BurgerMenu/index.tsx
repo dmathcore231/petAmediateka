@@ -20,25 +20,25 @@ export function BurgerMenu(): JSX.Element {
 
   const menuItems: BurgerMenuItem[] = [
     {
-      to: "/profile/favorites",
+      to: "/my/favorite",
       text: "Избранное",
       className: "link link_white title title_size_s",
       onClick: handleClickCloseBtn
     },
     {
-      to: "/profile/favorites",
+      to: "/my/history",
       text: "История просмотров",
       className: "link link_white title title_size_s",
       onClick: handleClickCloseBtn
     },
     {
-      to: "/profile/favorites",
+      to: "/profile/settings",
       text: "Настройки",
       className: "link link_white title title_size_s",
       onClick: handleClickCloseBtn
     },
     {
-      to: "/profile/favorites",
+      to: "/my/purchase",
       text: "Покупки",
       className: "link link_white title title_size_s",
       onClick: handleClickCloseBtn

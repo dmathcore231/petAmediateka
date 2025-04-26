@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom"
+import { createBrowserRouter, Navigate } from "react-router-dom"
 import { Layout } from "../components/Layout"
 import { Auth } from "../pages/Auth"
 import { Home } from "../pages/Home"
@@ -11,8 +11,12 @@ import { Kino1tv } from "../pages/Kino1tv"
 import { Tv } from "../pages/Tv"
 import { Search } from "../pages/Search"
 import { Profile } from "../pages/Profile"
-import { ProfileFavorites } from "../pages/Profile/Favorites"
 import { ProfileMain } from "../pages/Profile/Main"
+import { ProfileSettings } from "../pages/Profile/Settings"
+import { My } from "../pages/My"
+import { Favorite } from "../pages/My/Favorite"
+import { History } from "../pages/My/History"
+import { Purchase } from "../pages/My/Purchase"
 
 export const router = createBrowserRouter([
   {
@@ -68,8 +72,30 @@ export const router = createBrowserRouter([
             element: <ProfileMain />,
           },
           {
-            path: "/profile/favorites",
-            element: <ProfileFavorites />,
+            path: "/profile/settings",
+            element: <ProfileSettings />,
+          }
+        ]
+      },
+      {
+        element: <My />,
+        path: "/my",
+        children: [
+          {
+            index: true,
+            element: <Navigate to="favorite" replace />
+          },
+          {
+            path: "favorite",
+            element: <Favorite />,
+          },
+          {
+            path: "history",
+            element: <History />,
+          },
+          {
+            path: "purchase",
+            element: <Purchase />,
           }
         ]
       }

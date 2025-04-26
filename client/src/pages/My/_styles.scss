@@ -1,0 +1,12 @@
+@use "../../styles/mixins" as *;
+@use "../../styles/variables" as *;
+
+.my {
+  @include flex-column-start;
+  padding-top: 7.375rem;
+
+  &-nav {
+    @include flex-center;
+    gap: 2.5rem;
+  }
+}
