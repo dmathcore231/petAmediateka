@@ -24,6 +24,8 @@ export interface UserData {
     disliked: [],
     favoritList: [],
     ratingList: [],
+    historyList: [],
+    purchase: [],
   },
 
   userRole: "user" | "moderator" | "admin"

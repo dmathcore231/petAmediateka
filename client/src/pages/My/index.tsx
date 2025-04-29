@@ -6,7 +6,11 @@ const TITLE_CLASSES = "title title_size_m"
 const LINK_CLASSES = "link link_primary link_color_white"
 const LINK_ACTIVE_CLASSES = "link link_primary link_primary_active"
 
-const renderMyList = (): JSX.Element => {
+const TEXT = {
+  title: "Я смотрю"
+}
+
+const renderNavBarList = (): JSX.Element => {
   const items: { title: string, link: string }[] = [
     { title: "Избранное", link: "/my/favorite" },
     { title: "История просмотров", link: "/my/history" },
@@ -39,14 +43,17 @@ export function My(): JSX.Element {
   return (
     <div className="my">
       <div className="my-header">
-        <div className="my-header__title">
-          <h1><LinkBack activePage="Я смотрю" /></h1>
+        <div className="my-header__wrapper container">
+          <div className="my-header__title">
+            <LinkBack activePage="Я смотрю" />
+            <h2>{TEXT.title}</h2>
+          </div>
+          <nav className="my-header-nav-bar">
+            {renderNavBarList()}
+          </nav>
         </div>
-        <nav className="my-header-nav-bar">
-          {renderMyList()}
-        </nav>
       </div>
-      <div className="my-body">
+      <div className="my-body container">
         <Outlet />
       </div>
     </div>

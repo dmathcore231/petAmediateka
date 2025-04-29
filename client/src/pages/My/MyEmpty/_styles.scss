@@ -1,0 +1,23 @@
+@use "../../../styles/mixins" as *;
+@use "../../../styles/variables" as *;
+
+.my-empty {
+  padding-top: 4rem;
+  padding-bottom: 2rem;
+  @include flex-start;
+  gap: 9.75rem;
+
+  &__item {
+    @include flex-column-start;
+    gap: 1rem;
+  }
+
+  &__img {
+    height: 26.25rem;
+  }
+
+  &__text {
+    max-width: 40.625rem;
+    white-space: pre-line;
+  }
+}
