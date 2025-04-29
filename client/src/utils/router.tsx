@@ -1,5 +1,6 @@
 import { createBrowserRouter, Navigate } from "react-router-dom"
 import { Layout } from "../components/Layout"
+import { PrivateRoute } from "../components/PrivateRoute"
 import { Auth } from "../pages/Auth"
 import { Home } from "../pages/Home"
 import { СollectionSeries } from "../pages/СollectionSeries"
@@ -78,24 +79,29 @@ export const router = createBrowserRouter([
         ]
       },
       {
-        element: <My />,
-        path: "/my",
+        element: <PrivateRoute />,
         children: [
           {
-            index: true,
-            element: <Navigate to="favorite" replace />
-          },
-          {
-            path: "favorite",
-            element: <Favorite />,
-          },
-          {
-            path: "history",
-            element: <History />,
-          },
-          {
-            path: "purchase",
-            element: <Purchase />,
+            element: <My />,
+            path: "/my",
+            children: [
+              {
+                index: true,
+                element: <Navigate to="favorite" replace />
+              },
+              {
+                path: "favorite",
+                element: <Favorite />,
+              },
+              {
+                path: "history",
+                element: <History />,
+              },
+              {
+                path: "purchase",
+                element: <Purchase />,
+              }
+            ]
           }
         ]
       }
