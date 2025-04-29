@@ -1,9 +1,13 @@
 import { AuthState, StateStatusResponse, ContentState, MediaPlayerState } from "../types/interfaces/InitialStatesSlice"
+import { getDataFromLocalStorage } from "./index"
 import { ContentTypeEnum } from "../types/interfaces/Content"
+import { UserData } from "../types/interfaces/User"
+
+const localDataUser = getDataFromLocalStorage<UserData>('userData')
 
 export const initialStateAuth: AuthState = {
   loading: false,
-  user: null
+  user: localDataUser ? localDataUser : null
 }
 
 export const initialStateStatusResponse: StateStatusResponse = {

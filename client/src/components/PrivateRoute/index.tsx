@@ -9,7 +9,7 @@ export function PrivateRoute(): JSX.Element {
   if (loading) {
     return (
       <div className="main-wrapper">
-        <Spinner width={40} height={40} />
+        <Spinner width={50} height={50} />
       </div>
     )
   }

@@ -3,4 +3,10 @@
 
 .my {
   @include flex-column-start;
+
+  &-header {
+    width: 100%;
+    background: linear-gradient(180deg, $color-black, $color-black-01);
+    padding-top: $main-header-padding;
+  }
 }
