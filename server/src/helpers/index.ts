@@ -1,4 +1,4 @@
-import { ErrorMain } from '../types/Error'
+import { ErrorMain } from '../types/classes/ErrorMain'
 import { MediaContent } from '../types/interface/MediaContent'
 import { Banner } from '../types/interface/Banner'
 import { CardData } from '../types/interface/CardData'
@@ -8,14 +8,12 @@ export function checkBadRequest(fields: string[], errorMessage: string) {
   const missingFields = fields.filter(field => !field)
 
   if (missingFields.length > 0) {
-    const error: ErrorMain = {
+    throw new ErrorMain({
       status: 400,
       numberError: 102,
       message: `Bad request: ${errorMessage}`,
       value: missingFields.join(", ")
-    }
-
-    throw error
+    })
   }
 }
 

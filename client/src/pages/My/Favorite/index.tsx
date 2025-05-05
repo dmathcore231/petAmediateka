@@ -13,6 +13,8 @@ const propsEmpty: MyEmptyProps = {
 export function Favorite(): JSX.Element {
   const { user, loading } = useAppSelector(state => state.auth)
 
+  console.log(user)
+
   const getFavoriteList = (list: [] | undefined): JSX.Element => {
     if (!list || list.length === 0) {
       return (

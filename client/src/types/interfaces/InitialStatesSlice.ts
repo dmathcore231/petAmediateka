@@ -27,8 +27,6 @@ export interface AuthState {
   user: UserData | null
 }
 
-
-
 export interface MediaPlayerState {
   loading: boolean
   isShow: boolean

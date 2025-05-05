@@ -6,6 +6,6 @@ export const errorNumbers = {
   104: 'Wrong password',
   105: 'Unauthorized',
   106: 'Refresh token expired. Please, re-authenticate.',
+  107: 'The content with the specified ID does not exist in our database',
   500: 'Internal server error'
 }
-

@@ -13,7 +13,7 @@ export function MyEmpty({ title, text }: MyEmptyProps): JSX.Element {
         </div>
       </div>
       <div className="my-empty__item">
-        <img src="../../../../public/empty.png" alt="empty" className="my-empty__img" />
+        <img src="/empty.png" alt="empty" className="my-empty__img" />
       </div>
     </div>
   )

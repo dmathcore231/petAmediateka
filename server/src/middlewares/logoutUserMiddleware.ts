@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express'
-import { ErrorMain } from '../types/Error'
+import { ErrorMain } from '../types/classes/ErrorMain'
 
 export function logoutUserMiddleware(req: Request, res: Response, next: NextFunction): void {
   const { localDataState } = res.locals
@@ -9,20 +9,26 @@ export function logoutUserMiddleware(req: Request, res: Response, next: NextFunc
     return next()
   }
 
-  if (token.accessToken.value && token.refreshToken.value) {
-    localDataState.user = null
-    localDataState.token = null
+  try {
+    if (token.accessToken.value && token.refreshToken.value) {
+      localDataState.user = null
+      localDataState.token = null
 
-    return next()
-  } else {
-    const error: ErrorMain = {
+      return next()
+    }
+
+    throw new ErrorMain({
       status: 401,
       numberError: 105,
       message: 'Unauthorized',
       value: null
+    })
+
+  } catch (err: unknown) {
+    if (err instanceof ErrorMain) {
+      localDataState.error = err
     }
 
-    localDataState.error = error
     return next()
   }
 }

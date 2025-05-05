@@ -217,10 +217,6 @@ const mediaContentSchema = new Schema<MediaContent>({
   },
   actionsData: {
     type: {
-      favorites: {
-        type: [String],
-        default: []
-      },
       liked: {
         type: [String],
         default: []

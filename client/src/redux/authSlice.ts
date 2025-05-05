@@ -1,12 +1,17 @@
 import { createSlice, createAsyncThunk, PayloadAction, Dispatch } from "@reduxjs/toolkit"
-import { requestSignUp, requestSignIn, requestLogout, requestRefreshUserData } from "../services/auth"
-import { setStatusResponse } from "./statusResponseSlice"
-import { setDataInLocalStorage } from "../helpers"
-import { FetchAuthPayload } from "../types/interfaces/FetchPayloads"
-import { ResponseWithoutPayload, ResponseWithPayload } from "../types/interfaces/Response"
-import { initialStateAuth } from "../helpers/initStates"
 import { AxiosError } from "axios"
+import {
+  requestSignUp,
+  requestSignIn,
+  requestLogout,
+  requestRefreshUserData,
+  requestToggleFavorite
+} from "../services/auth"
+import { setStatusResponse } from "./statusResponseSlice"
+import { ResponseWithoutPayload, ResponseWithPayload } from "../types/interfaces/Response"
 import { UserData } from "../types/interfaces/User"
+import { initialStateAuth } from "../helpers/initStates"
+import { setDataInLocalStorage } from "../helpers"
 
 export const fetchSignUp = createAsyncThunk<ResponseWithoutPayload, FormData, { rejectValue: ResponseWithoutPayload, dispatch: Dispatch }>('auth/fetchSignUpEmail',
   async (body: FormData, { dispatch, rejectWithValue }) => {
@@ -92,6 +97,31 @@ export const fetchRefreshUserData = createAsyncThunk<ResponseWithPayload<UserDat
       }))
       return response
     } catch (error: unknown) {
+      if (error instanceof AxiosError && error.response) {
+        const { data } = error.response as { data: ResponseWithoutPayload }
+
+        dispatch(setStatusResponse({
+          status: data.status,
+          error: data.error,
+          message: data.message
+        }))
+        return rejectWithValue(data)
+      }
+    }
+  })
+
+export const fetchToggleFavorite = createAsyncThunk<ResponseWithPayload<UserData>, FormData, { rejectValue: ResponseWithPayload<null>, dispatch: Dispatch }>('my/addFavorite',
+  async (body: FormData, { dispatch, rejectWithValue }) => {
+    try {
+      const response = await requestToggleFavorite(body)
+      dispatch(setStatusResponse({
+        status: response.status,
+        error: response.error,
+        message: response.message
+      }))
+
+      return response
+    } catch (error) {
       if (error instanceof AxiosError && error.response) {
         const { data } = error.response as { data: ResponseWithoutPayload }
 
@@ -194,6 +224,21 @@ export const authSlice = createSlice({
           state.user = null
           setDataInLocalStorage('userData', null)
           setDataInLocalStorage('token', null)
+        }
+      })
+
+      //fetch toggle favorite content
+      .addCase(fetchToggleFavorite.pending, (state) => {
+        state.loading = true
+      })
+      .addCase(fetchToggleFavorite.fulfilled, (state, action: PayloadAction<ResponseWithPayload<UserData>>) => {
+        state.loading = false
+        state.user = action.payload.value
+      })
+      .addCase(fetchToggleFavorite.rejected, (state, action) => {
+        const payload = action.payload as ResponseWithPayload<null>
+        if (payload) {
+          state.loading = false
         }
       })
   }

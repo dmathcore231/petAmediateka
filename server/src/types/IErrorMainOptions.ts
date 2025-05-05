@@ -1,7 +1,7 @@
 
-export type ErrorMain = {
+export type IErrorMainOptions = {
   status: number
   numberError: number
   message: string
-  value?: string | null;
+  value?: string | null
 }

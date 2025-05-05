@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express'
 import { formDataWithoutFile } from '../utils/multerConfit'
-import { ErrorMain } from '../types/Error'
+import { ErrorMain } from '../types/classes/ErrorMain'
 
 export function checkBadRequestMiddleware(req: Request, res: Response, next: NextFunction): void {
 
@@ -9,25 +9,23 @@ export function checkBadRequestMiddleware(req: Request, res: Response, next: Nex
       const { type, email, password } = req.body
 
       if (!type) {
-        const error: ErrorMain = {
+        throw new ErrorMain({
           status: 400,
           numberError: 102,
           message: 'Bad request: type is required',
           value: null
-        }
-
-        throw error
+        })
       }
 
       switch (type) {
         case "authSignUpEmail": {
           if (!email) {
-            const error: ErrorMain = {
+            const error = new ErrorMain({
               status: 400,
               numberError: 102,
               message: 'Bad request: email is required',
               value: null
-            }
+            })
 
             throw error
           }
@@ -35,12 +33,12 @@ export function checkBadRequestMiddleware(req: Request, res: Response, next: Nex
         }
         case "authSignUp": {
           if (!email || !password) {
-            const error: ErrorMain = {
+            const error = new ErrorMain({
               status: 400,
               numberError: 102,
               message: 'Bad request: email and password are required',
               value: null
-            }
+            })
 
             throw error
           }
@@ -48,12 +46,12 @@ export function checkBadRequestMiddleware(req: Request, res: Response, next: Nex
         }
         case "authSignInEmail": {
           if (!email) {
-            const error: ErrorMain = {
+            const error = new ErrorMain({
               status: 400,
               numberError: 102,
               message: 'Bad request: email is required',
               value: null
-            }
+            })
 
             throw error
           }
@@ -61,12 +59,12 @@ export function checkBadRequestMiddleware(req: Request, res: Response, next: Nex
         }
         case "authSignIn": {
           if (!email || !password) {
-            const error: ErrorMain = {
+            const error = new ErrorMain({
               status: 400,
               numberError: 102,
               message: 'Bad request: email and password are required',
               value: null
-            }
+            })
 
             throw error
           }

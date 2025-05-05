@@ -66,10 +66,55 @@ const userSchema = new Schema<User>({
   },
 
   userActionsData: {
-    liked: [],
-    disliked: [],
-    favoritList: [],
-    ratingList: [],
+    liked: {
+      type: [String],
+      default: []
+    },
+    disliked: {
+      type: [String],
+      default: []
+    },
+    favoritList: {
+      type: [{
+        type: Schema.Types.ObjectId,
+        ref: 'MediaContent'
+      }],
+      default: []
+    },
+    historyList: {
+      type: [
+        {
+          type: {
+            data: {
+              type: String,
+              require: true,
+            },
+            value: {
+              type: String,
+              require: true,
+            }
+          },
+        }
+      ],
+      default: []
+    },
+    purchase: {
+      type: [
+        {
+          type: {
+            data: {
+              type: String,
+              require: true,
+            },
+            value: {
+              type: String,
+              require: true,
+            }
+          },
+        }
+      ],
+      default: []
+    },
   },
 
   userRole: {

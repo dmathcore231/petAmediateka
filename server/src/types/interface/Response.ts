@@ -1,11 +1,11 @@
-import { ErrorMain } from "../Error"
+import { IErrorMainOptions } from "../IErrorMainOptions"
 import { User } from "../interface/User"
 import { Content } from "./Content"
 import { MediaContent } from "./MediaContent"
 
 export interface ResponseStatusData {
   status: number
-  error: Omit<ErrorMain, 'status'> | null
+  error: Omit<IErrorMainOptions, 'status'> | null
 }
 
 export interface ResponseWithoutPayload extends ResponseStatusData {

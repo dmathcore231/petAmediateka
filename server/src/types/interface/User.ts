@@ -1,5 +1,6 @@
 import { Document } from "mongoose"
 import { UserSubscription } from "../UserSubscription"
+import { UserActionsData } from "./UserActionsData"
 
 export interface User extends Document {
   userData: {
@@ -20,12 +21,7 @@ export interface User extends Document {
 
   userSubscriptions: Array<UserSubscription> | []
 
-  userActionsData: {
-    liked: [],
-    disliked: [],
-    favoritList: [],
-    ratingList: [],
-  },
+  userActionsData: UserActionsData,
 
   userRole: "user" | "moderator" | "admin"
 }
