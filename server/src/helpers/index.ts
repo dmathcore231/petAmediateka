@@ -323,7 +323,6 @@ export const temporaryListSeries: Partial<MediaContent>[] = [
       ratingKinopoisk: 8.4
     },
     actionsData: {
-      favorites: [],
       liked: [],
       disliked: []
     },
@@ -513,7 +512,6 @@ export const temporaryListSeries: Partial<MediaContent>[] = [
       ratingKinopoisk: 7.7
     },
     actionsData: {
-      favorites: [],
       liked: [],
       disliked: []
     },
@@ -703,7 +701,6 @@ export const temporaryListSeries: Partial<MediaContent>[] = [
       ratingKinopoisk: 7.7
     },
     actionsData: {
-      favorites: [],
       liked: [],
       disliked: []
     },
@@ -890,7 +887,6 @@ export const temporaryListSeries: Partial<MediaContent>[] = [
       ratingKinopoisk: 7.4
     },
     actionsData: {
-      favorites: [],
       liked: [],
       disliked: []
     },
@@ -1025,7 +1021,6 @@ export const temporaryListSeries: Partial<MediaContent>[] = [
       ratingKinopoisk: 6.2
     },
     actionsData: {
-      favorites: [],
       liked: [],
       disliked: []
     },
@@ -1238,7 +1233,6 @@ export const temporaryListSeries: Partial<MediaContent>[] = [
       ratingKinopoisk: 7.6
     },
     actionsData: {
-      favorites: [],
       liked: [],
       disliked: []
     },
@@ -1402,7 +1396,6 @@ export const temporaryListSeries: Partial<MediaContent>[] = [
       ratingKinopoisk: 5.8
     },
     actionsData: {
-      favorites: [],
       liked: [],
       disliked: []
     },
@@ -1596,7 +1589,6 @@ export const temporaryListSeries: Partial<MediaContent>[] = [
       ratingKinopoisk: 8.3
     },
     actionsData: {
-      favorites: [],
       liked: [],
       disliked: []
     },

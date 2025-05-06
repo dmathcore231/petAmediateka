@@ -234,7 +234,13 @@ export const authSlice = createSlice({
       .addCase(fetchToggleFavorite.fulfilled, (state, action: PayloadAction<ResponseWithPayload<UserData>>) => {
         state.loading = false
         state.user = action.payload.value
+
+        setDataInLocalStorage('userData', action.payload.value)
+        if (action.payload.token) {
+          setDataInLocalStorage('token', action.payload.token)
+        }
       })
+
       .addCase(fetchToggleFavorite.rejected, (state, action) => {
         const payload = action.payload as ResponseWithPayload<null>
         if (payload) {

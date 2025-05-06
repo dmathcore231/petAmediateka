@@ -4,12 +4,14 @@ import { checkRefreshTokenMiddleware } from '../middlewares/checkRefreshTokenMid
 import { validateJsonBody } from '../middlewares/validateJsonBody'
 import { toggleFavorite } from '../controllers/toggleFavorite'
 import { ResponseWithoutPayload } from '../types/interface/Response'
+import { ResponseWithPayload } from '../types/interface/Response'
+import { User } from '../types/interface/User'
 
 const myRouter = Router()
 
 const setResponseAddFavorite = (req: Request, res: Response): void => {
   const { localDataState } = res.locals
-  const { error } = localDataState
+  const { error, user, token } = localDataState
 
   try {
     if (error) {
@@ -26,6 +28,16 @@ const setResponseAddFavorite = (req: Request, res: Response): void => {
 
       res.status(error.status).json(response)
     }
+
+    const response: ResponseWithPayload<Omit<User, 'password' | '__v' | 'userCard'>> = {
+      status: 200,
+      error: null,
+      message: "Success",
+      value: user,
+      token: token.accessToken.value
+    }
+
+    res.status(response.status).send(response)
   } catch (error: unknown) {
     const response: ResponseWithoutPayload = {
       status: 500,

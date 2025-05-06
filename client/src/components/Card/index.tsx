@@ -5,13 +5,11 @@ import { Btn } from "../Btn"
 import { Badge } from "../Badge"
 import { AgeRestrictionBadge } from "../AgeRestrictionBadge"
 import { Tags } from "../Tags"
+import { FavoriteToggleIcon } from "../FavoriteToggleIcon"
 import { fetchToggleFavorite } from "../../redux/authSlice"
 import { CardProps } from "../../types/interfaces/CardProps"
-import { UserData } from "../../types/interfaces/User"
-import { getDataFromLocalStorage } from "../../helpers"
 import { MediaPlayIcon } from "../../assets/icons/MediaPlayIcon"
 import { PlayIcon } from "../../assets/icons/PlayIcon"
-import { AddFavoriteIcon } from "../../assets/icons/AddFavoriteIcon"
 
 export function Card({ data, styles, settings, loadingCardData, error }: CardProps): JSX.Element {
   const dispatch = useAppDispatch()
@@ -151,12 +149,12 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
               {user && (
                 <Btn
                   type="button"
-                  className="btn_secondary btn_transparent card-body__btn-link card-body__btn-link_size_xsm"
+                  className="btn_secondary btn_transparent btn_stroke_none card-body__btn-link card-body__btn-link_size_xsm"
                   onClick={() => handleClickBtnAddFavorite(_id)}
                 >
-                  <span className="card-body__btn-wrapper-scale">
-                    <AddFavoriteIcon width={22} height={22} />
-                  </span>
+                  <FavoriteToggleIcon loading={loading}
+                    favoritesList={user.userActionsData.favoritList}
+                    idMContent={_id} />
                 </Btn>
               )}
             </>
