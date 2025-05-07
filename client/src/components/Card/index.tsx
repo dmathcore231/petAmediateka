@@ -1,15 +1,19 @@
-import { JSX } from "react"
+import { JSX, useState } from "react"
 import { Link } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "../../hooks"
 import { Btn } from "../Btn"
 import { Badge } from "../Badge"
 import { AgeRestrictionBadge } from "../AgeRestrictionBadge"
 import { Tags } from "../Tags"
-import { FavoriteToggleIcon } from "../FavoriteToggleIcon"
+import { IconButton } from "../IconButton"
 import { fetchToggleFavorite } from "../../redux/authSlice"
 import { CardProps } from "../../types/interfaces/CardProps"
+import { IconButtonProps } from "../../types/interfaces/IconButtonProps"
+import { checkIsFavoriteContent } from "../../helpers"
 import { MediaPlayIcon } from "../../assets/icons/MediaPlayIcon"
 import { PlayIcon } from "../../assets/icons/PlayIcon"
+import { AddFavoriteIcon } from "../../assets/icons/AddFavoriteIcon"
+import { IsFavoriteIcon } from "../../assets/icons/IsFavoriteIcon"
 
 export function Card({ data, styles, settings, loadingCardData, error }: CardProps): JSX.Element {
   const dispatch = useAppDispatch()
@@ -18,6 +22,24 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
   const { _id, type, title, badge, ageRestriction, description, bg, logoImg, link } = data
   const { cardSize, flex, clipPath: { value: clipPathValue, type: clipPathType }, ageRestrictionBadge, btnGroup, hover, boxShadow } = styles
   const { title: { titleOutside, titleLogoImg, titleLogoImgIndex }, badgeVisible, link: { linkType }, descriptionVisible, tags, cardSeries } = settings
+
+  const [isHoveredBtnAddFavorite, setIsHoveredBtnAddFavorite] = useState(false)
+
+  const iconButtonProps: IconButtonProps = {
+    config: {
+      stateIcon: checkIsFavoriteContent(user?.userActionsData.favoritList ?? null, _id),
+      loading,
+    },
+    styles: {
+      scale: true,
+      fillColor: 'white'
+    },
+    iconJSX: {
+      default: (<AddFavoriteIcon width={24} height={24} />),
+      isActive: (<IsFavoriteIcon width={24} height={24} />),
+    },
+    isHovered: isHoveredBtnAddFavorite
+  }
 
   const handleClickBtnAddFavorite = (id: string): void => {
     if (!user || loading) return
@@ -151,10 +173,10 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
                   type="button"
                   className="btn_secondary btn_transparent btn_stroke_none card-body__btn-link card-body__btn-link_size_xsm"
                   onClick={() => handleClickBtnAddFavorite(_id)}
+                  onMouseEnter={() => setIsHoveredBtnAddFavorite(true)}
+                  onMouseLeave={() => setIsHoveredBtnAddFavorite(false)}
                 >
-                  <FavoriteToggleIcon loading={loading}
-                    favoritesList={user.userActionsData.favoritList}
-                    idMContent={_id} />
+                  <IconButton {...iconButtonProps} />
                 </Btn>
               )}
             </>

@@ -1,7 +1,8 @@
-import { useEffect, JSX } from "react"
+import { useEffect, useState, JSX } from "react"
 import { useParams, Link } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "../../hooks"
 import { fetchContent } from "../../redux/contentSlice"
+import { fetchToggleFavorite } from "../../redux/authSlice"
 import { RootState } from "../../redux/store"
 import { LinkBack } from "../../components/LinkBack"
 import { Btn } from "../../components/Btn"
@@ -11,14 +12,17 @@ import { ShowMore } from "../../components/ShowMore"
 import { Trailer } from "../../components/Trailer"
 import { Seasons } from "../../components/Seasons"
 import { IconSeries } from "../../components/IconSeries"
+import { IconButton } from "../../components/IconButton"
 import { ContentTypeEnum } from "../../types/interfaces/Content"
 import { MediaContent } from "../../types/interfaces/MediaContent"
 import { ContentStateItem } from "../../types/interfaces/InitialStatesSlice"
 import { Season } from "../../types/interfaces/MediaContent"
-import { formSrcMediaContent } from "../../helpers"
+import { IconButtonProps } from "../../types/interfaces/IconButtonProps"
+import { formSrcMediaContent, checkIsFavoriteContent } from "../../helpers"
 import { PlayIcon } from "../../assets/icons/PlayIcon"
 import { ShareIcon } from "../../assets/icons/ShareIcon"
 import { AddFavoriteIcon } from "../../assets/icons/AddFavoriteIcon"
+import { IsFavoriteIcon } from "../../assets/icons/IsFavoriteIcon"
 import { LikeIcon } from "../../assets/icons/LikeIcon"
 import { DislikeIcon } from "../../assets/icons/DislikeIcon"
 
@@ -27,10 +31,55 @@ export function Series(): JSX.Element {
   const dispatch = useAppDispatch()
 
   const { content, loading } = useAppSelector((state: RootState) => state.content.series as ContentStateItem<MediaContent>)
+  const { user, loading: loadingUser } = useAppSelector(state => state.auth)
+
+  const [isHoveredBtnWatchNow, setIsHoveredBtnWatchNow] = useState(false)
+  const [isHoveredBtnAddFavorite, setIsHoveredBtnAddFavorite] = useState(false)
+
+
+  const iconButtonWatchNowProps: IconButtonProps = {
+    config: {
+      stateIcon: 'default',
+      loading,
+    },
+    styles: {
+      scale: true,
+      fillColor: 'black'
+    },
+    iconJSX: {
+      default: (<PlayIcon width={24} height={24} />),
+    },
+    isHovered: isHoveredBtnWatchNow
+  }
+
+  const iconButtonFavoriteProps: IconButtonProps = {
+    config: {
+      stateIcon: checkIsFavoriteContent(user?.userActionsData.favoritList ?? null, id!),
+      loading,
+    },
+    styles: {
+      scale: true,
+      fillColor: 'white'
+    },
+    iconJSX: {
+      default: (<AddFavoriteIcon width={24} height={24} />),
+      isActive: (<IsFavoriteIcon width={24} height={24} />),
+    },
+    isHovered: isHoveredBtnAddFavorite
+  }
 
   useEffect((): void => {
     dispatch(fetchContent({ type: ContentTypeEnum.Series, id }))
   }, [dispatch])
+
+  const handleClickBtnAddFavorite = (id: string): void => {
+    if (!user || loadingUser) return
+
+    const formData = new FormData()
+    formData.append('id', id)
+
+    dispatch(fetchToggleFavorite(formData))
+  }
 
   const setClassMetaDataDes = (): string => {
     const baseClass: string = 'series-meta-data-description'
@@ -145,9 +194,12 @@ export function Series(): JSX.Element {
                 <Btn
                   type="button"
                   className="btn_primary"
-                  onClick={() => { console.log("click") }}>
+                  onClick={() => { console.log("click") }}
+                  onMouseEnter={() => setIsHoveredBtnWatchNow(true)}
+                  onMouseLeave={() => setIsHoveredBtnWatchNow(false)}
+                >
                   <div className="series-content-header__btn">
-                    <PlayIcon width={26} height={26} />
+                    {<IconButton {...iconButtonWatchNowProps} />}
                     <span className="title title_color_black">
                       Смотреть
                     </span>
@@ -155,17 +207,22 @@ export function Series(): JSX.Element {
                 </Btn>
               </div>
               <div className="series-content-header__btn-wrapper series-content-header__btn-wrapper_fill_transparent">
-                <Btn
-                  type="button"
-                  className="btn_secondary"
-                  onClick={() => { console.log("click") }}>
-                  <div className="series-content-header__btn">
-                    <AddFavoriteIcon width={26} height={26} />
-                    <span className="title">
-                      В избранное
-                    </span>
-                  </div>
-                </Btn>
+                {id && (
+                  <Btn
+                    type="button"
+                    className="btn_secondary"
+                    onClick={() => handleClickBtnAddFavorite(id)}
+                    onMouseEnter={() => setIsHoveredBtnAddFavorite(true)}
+                    onMouseLeave={() => setIsHoveredBtnAddFavorite(false)}
+                  >
+                    <div className="series-content-header__btn">
+                      {<IconButton {...iconButtonFavoriteProps} />}
+                      <span className="title">
+                        В избранное
+                      </span>
+                    </div>
+                  </Btn>
+                )}
               </div>
               <div className="series-content-header__btn-wrapper
                 series-content-header__btn-wrapper_flex_shrink_sm

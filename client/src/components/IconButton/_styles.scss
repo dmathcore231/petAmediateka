@@ -1,0 +1,31 @@
+@use "../../styles/mixins" as *;
+@use "../../styles/variables" as *;
+
+.btn-icon {
+  @include flex-center;
+  gap: 0.313rem;
+  color: $color-black;
+  fill: $color-black;
+  stroke: transparent;
+
+  &_scale {
+    @include flex-center;
+    transition: transform .2s ease-in-out 0ms;
+    transform: scale(1);
+
+    &_active {
+      transition: transform .2s ease-in-out 0ms;
+      transform: scale(1.2);
+    }
+  }
+
+  &_fill {
+    &_white {
+      fill: $color-white;
+    }
+
+    &_black {
+      fill: $color-black;
+    }
+  }
+}

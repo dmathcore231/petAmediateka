@@ -5,9 +5,9 @@
   --btn-width: 100%;
   --btn-height: 100%;
 
-  --btn-color: $color-white;
-  --btn-color-hover: $color-black;
-  --btn-color-active: $color-black;
+  --btn-color: #{$color-white};
+  --btn-color-hover: #{$color-black};
+  --btn-color-active: #{$color-black};
 
   --btn-bg-color: transparent;
   --btn-bg-color-hover: transparent;
@@ -27,10 +27,6 @@
   --btn-padding: 0.625rem 0;
 
   --btn-transition: #{$main-transition};
-
-  --btn-fill: #{$color-black};
-  --btn-fill-hover: #{$color-black};
-  --btn-fill-active: #{$color-black};
 
   --btn-scale-hover: 1;
 
