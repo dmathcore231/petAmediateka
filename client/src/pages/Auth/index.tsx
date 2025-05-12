@@ -2,7 +2,6 @@ import { useState, useEffect, JSX } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from "../../hooks"
 import { fetchSignUp, fetchSignIn } from '../../redux/authSlice'
-import { resetStatusResponse } from '../../redux/statusResponseSlice'
 import { AuthProps } from '../../types/interfaces/AuthProps'
 import { AuthEmail } from './AuthEmail'
 import { AuthPass } from './AuthPass'
@@ -12,18 +11,13 @@ import { Logo } from '../../assets/icons/Logo'
 export function Auth({ pageState }: AuthProps): JSX.Element {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
-
   const defaultAuthState: AuthState = {
     email: null,
     password: null,
     visibleContent: 'email'
   }
-
-  const { user, loading } = useAppSelector(state => state.auth)
-  const { error, status, message } = useAppSelector(state => state.statusResponse)
-
+  const { user, loading, status } = useAppSelector(state => state.auth)
   const [authState, setAuthState] = useState<AuthState>(defaultAuthState)
-
   const requestConfig = {
     signUp: {
       onlyEmail: (formData: FormData, email: string | null): void => {
@@ -82,12 +76,10 @@ export function Auth({ pageState }: AuthProps): JSX.Element {
   useEffect(() => {
     if (user && pageState === 'signUp' && status === 201) {
       navigate('/')
-      dispatch(resetStatusResponse())
     }
 
     if (user && pageState === 'signIn' && status === 200) {
       navigate('/')
-      dispatch(resetStatusResponse())
     }
   }, [user, status, pageState, navigate, dispatch])
 

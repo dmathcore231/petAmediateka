@@ -1,42 +1,46 @@
-import { AuthState, StateStatusResponse, ContentState, MediaPlayerState } from "../types/interfaces/InitialStatesSlice"
-import { getDataFromLocalStorage } from "./index"
+import { AuthState, ContentState, MediaPlayerState, StateStatusResponse } from "../types/interfaces/InitialStatesSlice"
 import { ContentTypeEnum } from "../types/interfaces/Content"
-import { UserData } from "../types/interfaces/User"
 
-const localDataUser = getDataFromLocalStorage<UserData>('userData')
-
-export const initialStateAuth: AuthState = {
+const defaultState: StateStatusResponse = {
   loading: false,
-  user: localDataUser ? localDataUser : null
-}
-
-export const initialStateStatusResponse: StateStatusResponse = {
   status: null,
   error: null,
-  message: null
+  message: null,
+}
+
+export const initialStateAuth: AuthState = {
+  ...defaultState,
+  user: null,
 }
 
 export const initialStateContent: ContentState = {
   [ContentTypeEnum.MainSlider]: {
-    loading: false, error: null, content: null
+    ...defaultState,
+    content: null
   },
   [ContentTypeEnum.WatchingNow]: {
-    loading: false, error: null, content: null
+    ...defaultState,
+    content: null
   },
   [ContentTypeEnum.Banner]: {
-    loading: false, error: null, content: null
+    ...defaultState,
+    content: null
   },
   [ContentTypeEnum.Series]: {
-    loading: false, error: null, content: null
+    ...defaultState,
+    content: null
   },
   [ContentTypeEnum.NewRelease]: {
-    loading: false, error: null, content: null
+    ...defaultState,
+    content: null
   },
   [ContentTypeEnum.PromoLine]: {
-    loading: false, error: null, content: null
+    ...defaultState,
+    content: null
   },
   [ContentTypeEnum.CoverPromo]: {
-    loading: false, error: null, content: null
+    ...defaultState,
+    content: null
   },
 }
 

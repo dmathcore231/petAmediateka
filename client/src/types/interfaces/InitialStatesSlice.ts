@@ -8,22 +8,20 @@ import { SrcMediaPlaer } from "../SrcMediaPlaer"
 
 export type ContentTypes = Content | MediaContent | null
 
-export type ContentStateItem<T extends ContentTypes> = {
-  loading: boolean
-  error: ErrorDataInResponse | null
-  content: T
-}
-
-export type ContentState = Record<ContentTypeEnum, ContentStateItem<ContentTypes>>
-
 export interface StateStatusResponse {
+  loading: boolean
   status: number | null
   error: ErrorDataInResponse | null
   message: string | null
 }
 
-export interface AuthState {
-  loading: boolean
+export type ContentState = Record<ContentTypeEnum, ContentStateItem<ContentTypes>>
+
+export type ContentStateItem<T extends ContentTypes> = StateStatusResponse & {
+  content: T
+}
+
+export interface AuthState extends StateStatusResponse {
   user: UserData | null
 }
 
