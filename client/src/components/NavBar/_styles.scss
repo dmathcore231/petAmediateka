@@ -4,7 +4,6 @@
 .nav-bar {
   --padding: 1.563rem 2.5rem;
 
-
   @include flex-between;
   padding: var(--padding);
 
@@ -74,7 +73,7 @@
           width: 200px;
         }
 
-        &_188{
+        &_188 {
           width: 188px;
         }
       }
@@ -89,5 +88,11 @@
         --padding: 1.563rem 0;
       }
     }
+  }
+
+  &-spinner-wrapper {
+    @include flex-center;
+    width: 2.5rem;
+    height: 2.5rem;
   }
 }

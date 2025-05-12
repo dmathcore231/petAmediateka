@@ -1,113 +1,128 @@
-import { createSlice, createAsyncThunk, PayloadAction, Dispatch } from "@reduxjs/toolkit"
-import { requestSignUp, requestSignIn, requestLogout, requestRefreshUserData } from "../services/auth"
-import { setStatusResponse } from "./statusResponseSlice"
-import { setDataInLocalStorage } from "../helpers"
-import { FetchAuthPayload } from "../types/interfaces/FetchPayloads"
-import { ResponseWithoutPayload, ResponseWithPayload } from "../types/interfaces/Response"
-import { initialStateAuth } from "../helpers/initStates"
+import { createSlice, createAsyncThunk, PayloadAction, AnyAction } from "@reduxjs/toolkit"
 import { AxiosError } from "axios"
+import {
+  requestSignUp,
+  requestSignIn,
+  requestLogout,
+  requestRefreshUserData,
+  requestToggleFavorite
+} from "../services/auth"
+import { ResponseWithoutPayload, ResponseWithPayload } from "../types/interfaces/Response"
 import { UserData } from "../types/interfaces/User"
+import { AuthState } from "../types/interfaces/InitialStatesSlice"
+import { initialStateAuth } from "../helpers/initStates"
+import { setDataInLocalStorage } from "../helpers"
 
-export const fetchSignUp = createAsyncThunk<ResponseWithoutPayload, FormData, { rejectValue: ResponseWithoutPayload, dispatch: Dispatch }>('auth/fetchSignUpEmail',
-  async (body: FormData, { dispatch, rejectWithValue }) => {
+export const fetchSignUp = createAsyncThunk<ResponseWithoutPayload, FormData, { rejectValue: ResponseWithoutPayload }>('auth/fetchSignUpEmail',
+  async (body: FormData, { rejectWithValue }) => {
     try {
-      const response = await requestSignUp(body)
-      dispatch(setStatusResponse({
-        status: response.status,
-        error: response.error,
-        message: response.message
-      }))
+      return await requestSignUp(body)
 
-      return response
     } catch (error: unknown) {
       if (error instanceof AxiosError && error.response) {
         const { data } = error.response as { data: ResponseWithoutPayload }
 
-        dispatch(setStatusResponse({
-          status: data.status,
-          error: data.error,
-          message: data.message
-        }))
         return rejectWithValue(data)
       }
     }
   })
 
-export const fetchSignIn = createAsyncThunk<ResponseWithPayload<UserData>, FormData, { rejectValue: ResponseWithPayload<null>, dispatch: Dispatch }>('auth/fetchSignIn',
-  async (body: FormData, { dispatch, rejectWithValue }) => {
+export const fetchSignIn = createAsyncThunk<ResponseWithPayload<UserData>, FormData, { rejectValue: ResponseWithPayload<null> }>('auth/fetchSignIn',
+  async (body: FormData, { rejectWithValue }) => {
     try {
-      const response = await requestSignIn(body)
-      dispatch(setStatusResponse({
-        status: response.status,
-        error: response.error,
-        message: response.message
-      }))
-      return response
+      return await requestSignIn(body)
+
     } catch (error) {
       if (error instanceof AxiosError && error.response) {
         const { data } = error.response as { data: ResponseWithoutPayload }
 
-        dispatch(setStatusResponse({
-          status: data.status,
-          error: data.error,
-          message: data.message
-        }))
         return rejectWithValue(data)
       }
     }
   })
 
-export const fetchLogout = createAsyncThunk<ResponseWithoutPayload, void, { rejectValue: ResponseWithoutPayload, dispatch: Dispatch }>('auth/fetchLogout',
-  async (_, { dispatch, rejectWithValue }) => {
+export const fetchLogout = createAsyncThunk<ResponseWithoutPayload, void, { rejectValue: ResponseWithoutPayload }>('auth/fetchLogout',
+  async (_, { rejectWithValue }) => {
     try {
-      const response = await requestLogout()
-      dispatch(setStatusResponse({
-        status: response.status,
-        error: response.error,
-        message: response.message
-      }))
-      return response
+      return await requestLogout()
+
     } catch (error: unknown) {
       if (error instanceof AxiosError && error.response) {
         const { data } = error.response as { data: ResponseWithoutPayload }
 
-        dispatch(setStatusResponse({
-          status: data.status,
-          error: data.error,
-          message: data.message
-        }))
         return rejectWithValue(data)
       }
     }
   })
 
-export const fetchRefreshUserData = createAsyncThunk<ResponseWithPayload<UserData>, string, { rejectValue: ResponseWithPayload<null>, dispatch: Dispatch }>('auth/fetchRefreshUserData',
-  async (token: string, { dispatch, rejectWithValue }) => {
+export const fetchRefreshUserData = createAsyncThunk<ResponseWithPayload<UserData>, string, { rejectValue: ResponseWithPayload<null> }>('auth/fetchRefreshUserData',
+  async (token: string, { rejectWithValue }) => {
     try {
-      const response = await requestRefreshUserData(token)
-      dispatch(setStatusResponse({
-        status: response.status,
-        error: response.error,
-        message: response.message
-      }))
-      return response
+      return await requestRefreshUserData(token)
+
     } catch (error: unknown) {
       if (error instanceof AxiosError && error.response) {
         const { data } = error.response as { data: ResponseWithoutPayload }
 
-        dispatch(setStatusResponse({
-          status: data.status,
-          error: data.error,
-          message: data.message
-        }))
         return rejectWithValue(data)
       }
     }
   })
 
-export interface SaveDataUserInLocalStorage {
-  token: string
-  userData: UserData
+export const fetchToggleFavorite = createAsyncThunk<ResponseWithPayload<UserData>, FormData, { rejectValue: ResponseWithPayload<null> }>('my/addFavorite',
+  async (body: FormData, { rejectWithValue }) => {
+    try {
+      return await requestToggleFavorite(body)
+
+    } catch (error) {
+      if (error instanceof AxiosError && error.response) {
+        const { data } = error.response as { data: ResponseWithoutPayload }
+
+        return rejectWithValue(data)
+      }
+    }
+  })
+
+const isAuthPendingAction = (action: AnyAction) =>
+  [
+    fetchSignUp.pending.type,
+    fetchSignIn.pending.type,
+    fetchLogout.pending.type,
+    fetchRefreshUserData.pending.type,
+    fetchToggleFavorite.pending.type,
+  ].includes(action.type)
+
+const handleRejected = (state: AuthState, payload: ResponseWithPayload<null>, cacheLocalStorga: boolean): void => {
+  const { error, message, status } = payload
+
+  state.loading = false
+  state.error = error
+  state.message = message
+  state.status = status
+  state.user = null
+
+  if (cacheLocalStorga) {
+    setDataInLocalStorage('userData', null)
+    setDataInLocalStorage('token', null)
+  }
+}
+
+const handlefulfilled = (state: AuthState, payload: ResponseWithPayload<UserData | null>, cacheLocalStorga: boolean): void => {
+  const { error, message, status, value, token } = payload
+
+  state.loading = false
+  state.error = error
+  state.message = message
+  state.status = status
+  state.user = value
+
+  if (cacheLocalStorga) {
+    setDataInLocalStorage('userData', value)
+
+    if (token) {
+      setDataInLocalStorage('token', token)
+    }
+  }
 }
 
 export const authSlice = createSlice({
@@ -119,54 +134,36 @@ export const authSlice = createSlice({
   extraReducers: (builder) => {
     builder
       // fetch sign up
-      .addCase(fetchSignUp.pending, (state) => {
-        state.loading = true
-      })
       .addCase(fetchSignUp.fulfilled, (state, action: PayloadAction<ResponseWithPayload<UserData | null>>) => {
-        state.loading = false
-        state.user = action.payload.value
-        setDataInLocalStorage('userData', action.payload.value)
-        if (action.payload.token) {
-          setDataInLocalStorage('token', action.payload.token)
-        }
+        handlefulfilled(state, action.payload, true)
       })
       .addCase(fetchSignUp.rejected, (state, action) => {
         const payload = action.payload as ResponseWithPayload<null>
         if (payload) {
-          state.loading = false
-          state.user = null
+          handleRejected(state, payload, false)
         }
       })
 
       // fetch sign in
-      .addCase(fetchSignIn.pending, (state) => {
-        state.loading = true
-      })
       .addCase(fetchSignIn.fulfilled, (state, action: PayloadAction<ResponseWithPayload<UserData>>) => {
-        state.loading = false
-        state.user = action.payload.value
-        setDataInLocalStorage('userData', action.payload.value)
-        if (action.payload.token) {
-          setDataInLocalStorage('token', action.payload.token)
-        } else {
-          setDataInLocalStorage('token', null)
-        }
+        handlefulfilled(state, action.payload, true)
       })
       .addCase(fetchSignIn.rejected, (state, action) => {
         const payload = action.payload as ResponseWithPayload<null>
         if (payload) {
-          state.loading = false
-          state.user = null
+          handleRejected(state, payload, false)
         }
       })
 
       // fetch logout
-      .addCase(fetchLogout.pending, (state) => {
-        state.loading = true
-      })
       .addCase(fetchLogout.fulfilled, (state, action: PayloadAction<ResponseWithoutPayload>) => {
+        const { error, message, status, value } = action.payload
+
         state.loading = false
-        state.user = action.payload.value
+        state.error = error
+        state.message = message
+        state.status = status
+        state.user = value
 
         setDataInLocalStorage('userData', null)
         setDataInLocalStorage('token', null)
@@ -174,28 +171,39 @@ export const authSlice = createSlice({
       .addCase(fetchLogout.rejected, (state, action) => {
         const payload = action.payload as ResponseWithoutPayload
         if (payload) {
-          state.loading = false
-          state.user = null
+          handleRejected(state, payload, true)
         }
       })
 
       //fetch refresh user data
-      .addCase(fetchRefreshUserData.pending, (state) => {
-        state.loading = true
-      })
       .addCase(fetchRefreshUserData.fulfilled, (state, action: PayloadAction<ResponseWithPayload<UserData>>) => {
-        state.loading = false
-        state.user = action.payload.value
+        handlefulfilled(state, action.payload, false)
       })
       .addCase(fetchRefreshUserData.rejected, (state, action) => {
         const payload = action.payload as ResponseWithPayload<null>
         if (payload) {
-          state.loading = false
-          state.user = null
-          setDataInLocalStorage('userData', null)
-          setDataInLocalStorage('token', null)
+          handleRejected(state, payload, true)
         }
       })
+
+      //fetch toggle favorite content
+      .addCase(fetchToggleFavorite.fulfilled, (state, action: PayloadAction<ResponseWithPayload<UserData>>) => {
+        handlefulfilled(state, action.payload, true)
+      })
+
+      .addCase(fetchToggleFavorite.rejected, (state, action) => {
+        const payload = action.payload as ResponseWithPayload<null>
+        if (payload) {
+          handleRejected(state, payload, false)
+        }
+      })
+
+    builder.addMatcher(isAuthPendingAction, (state) => {
+      state.loading = true
+      state.status = null
+      state.error = null
+      state.message = null
+    })
   }
 })
 

@@ -36,7 +36,6 @@ export interface MediaContent {
   data: MediaContentData
   rating: Ratings
   actionsData: {
-    favorites: string[] | []
     liked: string[] | []
     disliked: string[] | []
   }

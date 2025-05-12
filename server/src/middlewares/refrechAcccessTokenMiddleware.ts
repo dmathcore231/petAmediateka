@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from 'express'
-import { Secret, sign, SignOptions } from 'jsonwebtoken'
+import { sign } from 'jsonwebtoken'
 import { SECRET_KEY, EXP_IN_ACCESS_TOKEN } from '../helpers/constants'
-import { Sign } from 'crypto'
 
 export function refrechAcccessTokenMiddleware(req: Request, res: Response, next: NextFunction): void {
   const { localDataState } = res.locals

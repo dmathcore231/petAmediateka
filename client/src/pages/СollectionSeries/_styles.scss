@@ -1,7 +1,8 @@
 @use "../../styles/mixins" as *;
+@use "../../styles/variables" as *;
 
 .collection-series {
-  padding-top: 7.375rem;
+  padding-top: $main-header-padding;
 
   &-header {
     @include flex-column-start;

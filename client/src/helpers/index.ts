@@ -132,3 +132,8 @@ export const setTextAuth = (type: 'signUp' | 'signIn', text: AuthTextKey): strin
 
   return mapText[type][text]
 }
+
+export const checkIsFavoriteContent = (favoritList: string[] | null, idMContent: string): 'isActive' | 'default' =>
+  favoritList?.includes(idMContent)
+    ? 'isActive'
+    : 'default'

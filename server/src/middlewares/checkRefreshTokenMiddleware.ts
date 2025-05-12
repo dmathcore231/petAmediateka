@@ -3,7 +3,7 @@ import { verify, JwtPayload, TokenExpiredError, JsonWebTokenError } from 'jsonwe
 import cookieParser from 'cookie-parser'
 import { UserModel } from '../models/userSchema'
 import { SECRET_KEY } from '../helpers/constants'
-import { ErrorMain } from '../types/Error'
+import { ErrorMain } from '../types/classes/ErrorMain'
 
 export function checkRefreshTokenMiddleware(req: Request, res: Response, next: NextFunction): void {
   cookieParser()(req, res, async () => {
@@ -17,14 +17,12 @@ export function checkRefreshTokenMiddleware(req: Request, res: Response, next: N
 
     try {
       if (!refreshTokenInCookie) {
-        const error: ErrorMain = {
+        throw new ErrorMain({
           status: 401,
           numberError: 105,
           message: 'Unauthorized',
           value: null
-        }
-
-        throw error
+        })
       }
 
       const decodeRefreshToken = verify(refreshTokenInCookie, SECRET_KEY) as JwtPayload
@@ -45,11 +43,11 @@ export function checkRefreshTokenMiddleware(req: Request, res: Response, next: N
       return next()
     } catch (err: unknown) {
       if (err instanceof TokenExpiredError) {
-        const error: ErrorMain = {
+        const error = new ErrorMain({
           status: 401,
           numberError: 106,
           message: 'Refresh token expired. Please, re-authenticate.'
-        }
+        })
 
         localDataState.user = null
         localDataState.token = null
@@ -57,19 +55,19 @@ export function checkRefreshTokenMiddleware(req: Request, res: Response, next: N
 
         return next()
       } else if (err instanceof JsonWebTokenError) {
-        const error: ErrorMain = {
+        const error = new ErrorMain({
           status: 401,
           numberError: 105,
           message: 'Unauthorized',
           value: null
-        }
+        })
 
         localDataState.user = null
         localDataState.token = null
         localDataState.error = error
 
         return next()
-      } else if ((err as ErrorMain).numberError === 105) {
+      } else if (err instanceof ErrorMain && err.numberError === 105) {
         localDataState.user = null
         localDataState.token = null
         localDataState.error = err

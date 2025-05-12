@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 import { JwtPayload, TokenExpiredError, JsonWebTokenError, verify } from 'jsonwebtoken'
+import { ErrorMain } from '../types/classes/ErrorMain'
 import { SECRET_KEY } from '../helpers/constants'
-import { ErrorMain } from '../types/Error'
 import { UserModel } from '../models/userSchema'
 
 export function checkAccessTokenMiddleware(req: Request, res: Response, next: NextFunction): void {
@@ -15,16 +15,12 @@ export function checkAccessTokenMiddleware(req: Request, res: Response, next: Ne
     }
 
     if (!accessTokenInHeader) {
-      localDataState.token = {
-        ...token,
-        accessToken: {
-          value: null,
-          expirated: false,
-          error: false
-        },
-      }
-
-      return next()
+      throw new ErrorMain({
+        status: 401,
+        numberError: 105,
+        message: 'Unauthorized',
+        value: null
+      })
     }
 
     const decodeAccessToken = verify(accessTokenInHeader, SECRET_KEY) as JwtPayload
@@ -43,40 +39,51 @@ export function checkAccessTokenMiddleware(req: Request, res: Response, next: Ne
           error: false
         }
       }
+
       localDataState.user = user
     }
 
     return next()
   } catch (err: unknown) {
-    switch (true) {
-      case err instanceof TokenExpiredError: {
-        localDataState.token = {
-          accessToken: {
-            value: null,
-            expirated: true,
-            error: true
-          },
-          refreshToken: {
-            value: null,
-            expirated: false,
-            error: false
-          }
+    if (err instanceof TokenExpiredError) {
+      localDataState.token = {
+        accessToken: {
+          value: null,
+          expirated: true,
+          error: true
+        },
+        refreshToken: {
+          value: null,
+          expirated: false,
+          error: false
         }
-        break
       }
-      case err instanceof JsonWebTokenError: {
-        const error: ErrorMain = {
-          status: 401,
-          numberError: 105,
-          message: 'Unauthorized',
-          value: null
-        }
+    }
 
-        localDataState.user = null
-        localDataState.token = null
-        localDataState.error = error
-        break
-      }
+    if (err instanceof JsonWebTokenError) {
+      const error = new ErrorMain({
+        status: 401,
+        numberError: 105,
+        message: 'Unauthorized',
+        value: null
+      })
+
+      localDataState.user = null
+      localDataState.token = null
+      localDataState.error = error
+    }
+
+    if (err instanceof ErrorMain) {
+      const error = new ErrorMain({
+        status: 401,
+        numberError: 105,
+        message: 'Unauthorized',
+        value: null
+      })
+
+      localDataState.user = null
+      localDataState.token = null
+      localDataState.error = error
     }
 
     return next()

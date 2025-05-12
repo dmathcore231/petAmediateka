@@ -1,4 +1,5 @@
 import { UserSubscription } from "../UserSubscription"
+import { UserActionsData } from "./UserActionsData"
 
 export interface UserData {
   _id: string
@@ -19,12 +20,7 @@ export interface UserData {
 
   userSubscriptions: UserSubscription[] | []
 
-  userActionsData: {
-    liked: [],
-    disliked: [],
-    favoritList: [],
-    ratingList: [],
-  },
+  userActionsData: UserActionsData,
 
   userRole: "user" | "moderator" | "admin"
 }

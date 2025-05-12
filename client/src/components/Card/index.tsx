@@ -1,21 +1,54 @@
-import { JSX } from "react"
+import { JSX, useState } from "react"
 import { Link } from "react-router-dom"
-import { useAppSelector } from "../../hooks"
+import { useAppDispatch, useAppSelector } from "../../hooks"
 import { Btn } from "../Btn"
 import { Badge } from "../Badge"
 import { AgeRestrictionBadge } from "../AgeRestrictionBadge"
 import { Tags } from "../Tags"
+import { IconButton } from "../IconButton"
+import { fetchToggleFavorite } from "../../redux/authSlice"
 import { CardProps } from "../../types/interfaces/CardProps"
+import { IconButtonProps } from "../../types/interfaces/IconButtonProps"
+import { checkIsFavoriteContent } from "../../helpers"
 import { MediaPlayIcon } from "../../assets/icons/MediaPlayIcon"
 import { PlayIcon } from "../../assets/icons/PlayIcon"
 import { AddFavoriteIcon } from "../../assets/icons/AddFavoriteIcon"
+import { IsFavoriteIcon } from "../../assets/icons/IsFavoriteIcon"
 
 export function Card({ data, styles, settings, loadingCardData, error }: CardProps): JSX.Element {
-  const { user } = useAppSelector(state => state.auth)
+  const dispatch = useAppDispatch()
+  const { user, loading } = useAppSelector(state => state.auth)
 
   const { _id, type, title, badge, ageRestriction, description, bg, logoImg, link } = data
   const { cardSize, flex, clipPath: { value: clipPathValue, type: clipPathType }, ageRestrictionBadge, btnGroup, hover, boxShadow } = styles
   const { title: { titleOutside, titleLogoImg, titleLogoImgIndex }, badgeVisible, link: { linkType }, descriptionVisible, tags, cardSeries } = settings
+
+  const [isHoveredBtnAddFavorite, setIsHoveredBtnAddFavorite] = useState(false)
+
+  const iconButtonProps: IconButtonProps = {
+    config: {
+      stateIcon: checkIsFavoriteContent(user?.userActionsData.favoritList ?? null, _id),
+      loading,
+    },
+    styles: {
+      scale: true,
+      fillColor: 'white'
+    },
+    iconJSX: {
+      default: (<AddFavoriteIcon width={24} height={24} />),
+      isActive: (<IsFavoriteIcon width={24} height={24} />),
+    },
+    isHovered: isHoveredBtnAddFavorite
+  }
+
+  const handleClickBtnAddFavorite = (id: string): void => {
+    if (!user || loading) return
+
+    const formData = new FormData()
+    formData.append('id', id)
+
+    dispatch(fetchToggleFavorite(formData))
+  }
 
   const renderCardContentLinkWrapper = (children: JSX.Element): JSX.Element => {
     if (linkType === 'allCard') {
@@ -128,7 +161,8 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
         <div className={`${baseClass}${loadingClass}`}>
           {!loadingCardData && (
             <>
-              <Link to={link} className={`btn btn_primary card-body__btn-link card-body__btn-link_size_${styles.cardSize}`}>
+              <Link to={link}
+                className={`btn btn_primary card-body__btn-link card-body__btn-link_size_${styles.cardSize}`}>
                 <div className="card-body__btn-wrapper">
                   <PlayIcon width={28} height={28} />
                   <span className="card-body__btn-text">Смотреть</span>
@@ -137,12 +171,12 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
               {user && (
                 <Btn
                   type="button"
-                  className="btn_secondary btn_transparent card-body__btn-link card-body__btn-link_size_xsm"
-                  onClick={() => console.log('add favorite')}
+                  className="btn_secondary btn_transparent btn_stroke_none card-body__btn-link card-body__btn-link_size_xsm"
+                  onClick={() => handleClickBtnAddFavorite(_id)}
+                  onMouseEnter={() => setIsHoveredBtnAddFavorite(true)}
+                  onMouseLeave={() => setIsHoveredBtnAddFavorite(false)}
                 >
-                  <span className="card-body__btn-wrapper-scale">
-                    <AddFavoriteIcon width={22} height={22} />
-                  </span>
+                  <IconButton {...iconButtonProps} />
                 </Btn>
               )}
             </>

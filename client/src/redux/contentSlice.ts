@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk, PayloadAction, Dispatch } from "@reduxjs/toolkit"
-import { setStatusResponse } from "./statusResponseSlice"
 import { requestContent } from "../services/content"
 import { ResponseWithPayload, ResponseWithoutPayload } from "../types/interfaces/Response"
 import { QueryParams } from "../types/QueryParams"
@@ -8,16 +7,11 @@ import { MediaContent } from "../types/interfaces/MediaContent"
 import { initialStateContent } from "../helpers/initStates"
 
 
-export const fetchContent = createAsyncThunk<ResponseWithPayload<Content>, QueryParams, { rejectValue: ResponseWithoutPayload, dispatch: Dispatch }>('auth/fetchContent',
-  async (queryParams: QueryParams, { dispatch, rejectWithValue }) => {
+export const fetchContent = createAsyncThunk<ResponseWithPayload<Content>, QueryParams, { rejectValue: ResponseWithoutPayload }>('auth/fetchContent',
+  async (queryParams: QueryParams, { rejectWithValue }) => {
     try {
-      const response = await requestContent(queryParams)
-      dispatch(setStatusResponse({
-        status: response.status,
-        error: response.error,
-        message: response.message
-      }))
-      return response
+      return await requestContent(queryParams)
+
     } catch (error: unknown) {
 
       return rejectWithValue({

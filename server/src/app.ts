@@ -6,9 +6,11 @@ import { initLocalDataState } from './middlewares/initLocalDataState'
 import { refrechAcccessTokenMiddleware } from './middlewares/refrechAcccessTokenMiddleware'
 import { authRouter } from './routes/Auth'
 import { contentRouter } from './routes/Content'
+import { myRouter } from './routes/My'
 
 const app = express()
 app.use(cookieParser())
+app.use(express.json())
 
 app.use((_: Request, res: Response, next: NextFunction) => {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173')
@@ -25,7 +27,7 @@ app.use(initLocalDataState)
 app.use(refrechAcccessTokenMiddleware)
 app.use(authRouter)
 app.use(contentRouter)
-
+app.use(myRouter)
 
 async function main() {
   try {

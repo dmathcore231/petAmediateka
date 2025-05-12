@@ -1,7 +1,6 @@
 import { useState, FormEvent, useEffect, JSX } from "react"
 import { Link } from "react-router-dom"
-import { useAppDispatch, useAppSelector } from "../../../hooks"
-import { resetStatusResponse } from "../../../redux/statusResponseSlice"
+import { useAppSelector } from "../../../hooks"
 import { Input } from "../../../components/Input"
 import { Btn } from "../../../components/Btn"
 import { AuthEmailProps } from "../../../types/interfaces/AuthProps"
@@ -12,16 +11,11 @@ import { InputProps } from "../../../types/interfaces/InputProps"
 import { ErrorDataInResponse } from "../../../types/Error"
 
 export function AuthEmail({ setEmailValue, type }: AuthEmailProps): JSX.Element {
-  const dispatch = useAppDispatch()
   const defaultErrorState: InputErrorState = { value: false, errorData: null }
 
-  const { error } = useAppSelector(state => state.statusResponse)
+  const { error } = useAppSelector(state => state.auth)
   const [email, setEmail] = useState('')
   const [errorInput, setErrorInput] = useState<InputErrorState>(defaultErrorState)
-
-  useEffect(() => {
-    dispatch(resetStatusResponse())
-  }, [])
 
   useEffect(() => {
     const isRelevantError = error?.numberError === 101 || error?.numberError === 103

@@ -1,7 +1,6 @@
-import { useState, useEffect, FormEvent, JSX } from 'react'
+import { useState, FormEvent, JSX } from 'react'
 import { Link } from 'react-router-dom'
-import { useAppDispatch, useAppSelector } from "../../../hooks"
-import { resetStatusResponse } from "../../../redux/statusResponseSlice"
+import { useAppSelector } from "../../../hooks"
 import { Input } from '../../../components/Input'
 import { Btn } from '../../../components/Btn'
 import { Checkbox } from '../../../components/Checkbox'
@@ -12,8 +11,6 @@ import { setTextAuth } from "../../../helpers/index"
 import { CloseIcon } from '../../../assets/icons/CloseIcon'
 
 export function AuthPass({ setPassValue, email, type }: AuthPassProps): JSX.Element {
-  const dispatch = useAppDispatch()
-
   const labelInput: InputProps["label"] = {
     value: "Не менее 6 символов",
     labelInvisible: false
@@ -27,13 +24,9 @@ export function AuthPass({ setPassValue, email, type }: AuthPassProps): JSX.Elem
     next: "Продолжить"
   }
 
-  const { error } = useAppSelector(state => state.statusResponse)
+  const { error } = useAppSelector(state => state.auth)
   const [password, setPassword] = useState('')
   const [isChecked, setIsChecked] = useState(false)
-
-  useEffect(() => {
-    dispatch(resetStatusResponse())
-  }, [])
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault()

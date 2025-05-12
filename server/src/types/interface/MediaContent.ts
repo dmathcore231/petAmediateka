@@ -36,7 +36,6 @@ export interface MediaContent extends Document {
     ratingKinopoisk: number | 'N/A'
   }
   actionsData: {
-    favorites: string[] | []
     liked: string[] | []
     disliked: string[] | []
   }

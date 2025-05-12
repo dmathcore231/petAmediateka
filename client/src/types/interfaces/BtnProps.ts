@@ -6,5 +6,7 @@ export interface BtnProps {
   className: string
   onClick?: MouseEventHandler<HTMLButtonElement>
   onKeyDown?: KeyboardEventHandler<HTMLButtonElement>
+  onMouseEnter?: MouseEventHandler<HTMLButtonElement>
+  onMouseLeave?: MouseEventHandler<HTMLButtonElement>
   disabled?: boolean
 }
