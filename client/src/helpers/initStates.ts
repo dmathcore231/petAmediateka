@@ -1,4 +1,4 @@
-import { AuthState, ContentState, MediaPlayerState, StateStatusResponse } from "../types/interfaces/InitialStatesSlice"
+import { AuthState, ContentState, MediaPlayerState, StateStatusResponse, MyState } from "../types/interfaces/InitialStatesSlice"
 import { ContentTypeEnum } from "../types/interfaces/Content"
 
 const defaultState: StateStatusResponse = {
@@ -10,7 +10,13 @@ const defaultState: StateStatusResponse = {
 
 export const initialStateAuth: AuthState = {
   ...defaultState,
+  token: null,
+}
+
+export const initialStateMy: MyState = {
+  ...defaultState,
   user: null,
+  initializedData: false
 }
 
 export const initialStateContent: ContentState = {

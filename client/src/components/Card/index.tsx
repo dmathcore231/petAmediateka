@@ -6,7 +6,7 @@ import { Badge } from "../Badge"
 import { AgeRestrictionBadge } from "../AgeRestrictionBadge"
 import { Tags } from "../Tags"
 import { IconButton } from "../IconButton"
-import { fetchToggleFavorite } from "../../redux/authSlice"
+import { fetchMyFavorite } from "../../services/myThunk"
 import { CardProps } from "../../types/interfaces/CardProps"
 import { IconButtonProps } from "../../types/interfaces/IconButtonProps"
 import { checkIsFavoriteContent } from "../../helpers"
@@ -17,7 +17,7 @@ import { IsFavoriteIcon } from "../../assets/icons/IsFavoriteIcon"
 
 export function Card({ data, styles, settings, loadingCardData, error }: CardProps): JSX.Element {
   const dispatch = useAppDispatch()
-  const { user, loading } = useAppSelector(state => state.auth)
+  const { user, loading } = useAppSelector(state => state.my)
 
   const { _id, type, title, badge, ageRestriction, description, bg, logoImg, link } = data
   const { cardSize, flex, clipPath: { value: clipPathValue, type: clipPathType }, ageRestrictionBadge, btnGroup, hover, boxShadow } = styles
@@ -47,7 +47,7 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
     const formData = new FormData()
     formData.append('id', id)
 
-    dispatch(fetchToggleFavorite(formData))
+    dispatch(fetchMyFavorite(formData))
   }
 
   const renderCardContentLinkWrapper = (children: JSX.Element): JSX.Element => {

@@ -47,12 +47,9 @@ export const requestLogout = async () => {
   }
 }
 
-export const requestRefreshUserData = async (token: string) => {
+export const requestRefreshAccessToken = async () => {
   try {
     const { data } = await client.get(refreshAccessTokenEndPoint, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      },
       withCredentials: true
     })
 

@@ -1,7 +1,7 @@
 import { useState, useEffect, MouseEvent, JSX } from "react"
 import { Link } from "react-router-dom"
 import { useAppSelector, useAppDispatch } from "../../hooks"
-import { fetchLogout } from "../../redux/authSlice"
+import { fetchLogout } from "../../services/authThunk"
 import { Btn } from "../Btn"
 import { Avatar } from "../Avatar"
 import { BurgerMenuItem } from "../../types/interfaces/BurgerMenuItem"
@@ -11,7 +11,7 @@ import { PlusIcon } from "../../assets/icons/PlusIcon"
 
 export function BurgerMenu(): JSX.Element {
   const dispatch = useAppDispatch()
-  const { user } = useAppSelector(state => state.auth)
+  const { user } = useAppSelector(state => state.my)
 
   const [isActive, setIsActive] = useState(false)
 

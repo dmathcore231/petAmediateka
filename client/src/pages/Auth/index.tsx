@@ -1,7 +1,7 @@
 import { useState, useEffect, JSX } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from "../../hooks"
-import { fetchSignUp, fetchSignIn } from '../../redux/authSlice'
+import { fetchSignUp, fetchSignIn } from '../../services/authThunk'
 import { AuthProps } from '../../types/interfaces/AuthProps'
 import { AuthEmail } from './AuthEmail'
 import { AuthPass } from './AuthPass'
@@ -16,7 +16,7 @@ export function Auth({ pageState }: AuthProps): JSX.Element {
     password: null,
     visibleContent: 'email'
   }
-  const { user, loading, status } = useAppSelector(state => state.auth)
+  const { token, loading, status } = useAppSelector(state => state.auth)
   const [authState, setAuthState] = useState<AuthState>(defaultAuthState)
   const requestConfig = {
     signUp: {
@@ -74,14 +74,14 @@ export function Auth({ pageState }: AuthProps): JSX.Element {
   }, [authState.email, status, loading])
 
   useEffect(() => {
-    if (user && pageState === 'signUp' && status === 201) {
+    if (token && pageState === 'signUp' && status === 201) {
       navigate('/')
     }
 
-    if (user && pageState === 'signIn' && status === 200) {
+    if (token && pageState === 'signIn' && status === 200) {
       navigate('/')
     }
-  }, [user, status, pageState, navigate, dispatch])
+  }, [token, status, pageState, navigate, dispatch])
 
   return (
     <div className="auth">

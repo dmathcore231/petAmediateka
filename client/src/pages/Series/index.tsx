@@ -2,7 +2,7 @@ import { useEffect, useState, JSX } from "react"
 import { useParams, Link } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "../../hooks"
 import { fetchContent } from "../../redux/contentSlice"
-import { fetchToggleFavorite } from "../../redux/authSlice"
+import { fetchMyFavorite } from "../../services/myThunk"
 import { RootState } from "../../redux/store"
 import { LinkBack } from "../../components/LinkBack"
 import { Btn } from "../../components/Btn"
@@ -31,7 +31,7 @@ export function Series(): JSX.Element {
   const dispatch = useAppDispatch()
 
   const { content, loading } = useAppSelector((state: RootState) => state.content.series as ContentStateItem<MediaContent>)
-  const { user, loading: loadingUser } = useAppSelector(state => state.auth)
+  const { user, loading: loadingUser } = useAppSelector(state => state.my)
 
   const [isHoveredBtnWatchNow, setIsHoveredBtnWatchNow] = useState(false)
   const [isHoveredBtnAddFavorite, setIsHoveredBtnAddFavorite] = useState(false)
@@ -78,7 +78,7 @@ export function Series(): JSX.Element {
     const formData = new FormData()
     formData.append('id', id)
 
-    dispatch(fetchToggleFavorite(formData))
+    dispatch(fetchMyFavorite(formData))
   }
 
   const setClassMetaDataDes = (): string => {

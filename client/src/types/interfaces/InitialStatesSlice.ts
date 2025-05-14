@@ -17,12 +17,17 @@ export interface StateStatusResponse {
 
 export type ContentState = Record<ContentTypeEnum, ContentStateItem<ContentTypes>>
 
-export type ContentStateItem<T extends ContentTypes> = StateStatusResponse & {
+export interface ContentStateItem<T extends ContentTypes> extends StateStatusResponse {
   content: T
 }
 
 export interface AuthState extends StateStatusResponse {
+  token: string | null
+}
+
+export interface MyState extends StateStatusResponse {
   user: UserData | null
+  initializedData: boolean
 }
 
 export interface MediaPlayerState {

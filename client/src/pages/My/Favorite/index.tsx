@@ -11,11 +11,9 @@ const propsEmpty: MyEmptyProps = {
 }
 
 export function Favorite(): JSX.Element {
-  const { user, loading } = useAppSelector(state => state.auth)
+  const { user } = useAppSelector(state => state.my)
 
-  console.log(user)
-
-  const getFavoriteList = (list: [] | undefined): JSX.Element => {
+  const getFavoriteList = (list: string[] | undefined): JSX.Element => {
     if (!list || list.length === 0) {
       return (
         <MyEmpty {...propsEmpty} />
@@ -23,8 +21,8 @@ export function Favorite(): JSX.Element {
     }
 
     return (
-      <div className="list">
-        Favorit List
+      <div className="my-favorite-list">
+        Favorite List
       </div>
     )
   }
