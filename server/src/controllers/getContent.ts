@@ -5,7 +5,7 @@ import { BannerModel } from '../models/bannerSchema'
 import { CardData } from '../types/interface/CardData'
 import { MediaContent } from '../types/interface/MediaContent'
 import { CoverPromo } from '../types/interface/CoverPromo'
-import { mapMediaContentToCardData } from '../helpers'
+import { transformMediaToCard } from '../helpers'
 import { PromoLineModel } from '../models/promoLineSchema'
 import { CoverPromoModel } from '../models/coverPromoSchema'
 
@@ -27,7 +27,7 @@ export async function getContent(req: Request, res: Response, next: NextFunction
 
     if (series) {
       const data = series.data as unknown as MediaContent[]
-      const result: CardData[] = data.map(items => mapMediaContentToCardData(items))
+      const result: CardData[] = data.map(items => transformMediaToCard(items))
 
       localDataState.content = {
         ...series.toObject(),
@@ -53,7 +53,7 @@ export async function getContent(req: Request, res: Response, next: NextFunction
 
     if (content) {
       const data = content.data as unknown as MediaContent[]
-      const result: CardData[] = data.map(items => mapMediaContentToCardData(items))
+      const result: CardData[] = data.map(items => transformMediaToCard(items))
 
       localDataState.content = {
         ...content.toObject(),
@@ -68,7 +68,7 @@ export async function getContent(req: Request, res: Response, next: NextFunction
 
     if (content) {
       const data = content.data as unknown as MediaContent[]
-      const result: CardData[] = data.map(items => mapMediaContentToCardData(items))
+      const result: CardData[] = data.map(items => transformMediaToCard(items))
 
       localDataState.content = {
         ...content.toObject(),
@@ -88,7 +88,7 @@ export async function getContent(req: Request, res: Response, next: NextFunction
     if (content && content.data) {
       const promoData = content.data as any
       const mediaContent = promoData.data as unknown as MediaContent
-      const cardData: CardData = mapMediaContentToCardData(mediaContent)
+      const cardData: CardData = transformMediaToCard(mediaContent)
 
       promoData.data = cardData
       localDataState.content = content
@@ -107,7 +107,7 @@ export async function getContent(req: Request, res: Response, next: NextFunction
     if (content && content.data) {
       const promoData = content.data as unknown as CoverPromo
       const mediaContent = promoData.mediaContentData as unknown as MediaContent
-      const cardData: CardData = mapMediaContentToCardData(mediaContent)
+      const cardData: CardData = transformMediaToCard(mediaContent)
       const result: CardData[] = [
         {
           ...cardData,

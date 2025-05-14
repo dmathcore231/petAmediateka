@@ -1625,7 +1625,7 @@ export const formationLink = (typeContent: 'movie' | 'series', _id: string, link
   }
 }
 
-export const mapMediaContentToCardData = (item: MediaContent): CardData => ({
+export const transformMediaToCard  = (item: MediaContent): CardData => ({
   _id: item._id as string,
   type: item.type,
   title: item.data.title,
