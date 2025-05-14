@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction, AnyAction } from "@reduxjs/toolkit"
 import { ResponseWithoutPayload, ResponseWithPayload } from "../types/interfaces/Response"
-import { fetchSignIn, fetchSignUp, fetchLogout, fetchRefreshAccessToken } from "../services/authThunk"
+import { fetchSignIn, fetchSignUp, fetchLogout, fetchRefreshAccessToken } from "../services/auth/authThunk"
 import { UserData } from "../types/interfaces/User"
 import { AuthState } from "../types/interfaces/InitialStatesSlice"
 import { initialStateAuth } from "../helpers/initStates"

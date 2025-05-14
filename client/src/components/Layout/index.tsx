@@ -1,7 +1,7 @@
 import { useEffect, JSX } from "react"
 import { Outlet } from "react-router-dom"
 import { useAppSelector, useAppDispatch } from "../../hooks"
-import { fetchRefreshAccessToken } from "../../services/authThunk"
+import { fetchRefreshAccessToken } from "../../services/auth/authThunk"
 import { MediaPlayer } from "../MediaPlayer"
 import { Header } from "../Header"
 import { Main } from "../Main"

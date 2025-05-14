@@ -1,7 +1,7 @@
 import { useState, useEffect, MouseEvent, JSX } from "react"
 import { Link } from "react-router-dom"
 import { useAppSelector, useAppDispatch } from "../../hooks"
-import { fetchLogout } from "../../services/authThunk"
+import { fetchLogout } from "../../services/auth/authThunk"
 import { Btn } from "../Btn"
 import { Avatar } from "../Avatar"
 import { BurgerMenuItem } from "../../types/interfaces/BurgerMenuItem"

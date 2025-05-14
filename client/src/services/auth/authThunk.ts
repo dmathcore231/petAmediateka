@@ -1,8 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import { AxiosError } from "axios"
-import { requestSignUp, requestSignIn, requestLogout, requestRefreshAccessToken } from "./auth"
-import { ResponseWithoutPayload, ResponseWithPayload } from "../types/interfaces/Response"
-import { UserData } from "../types/interfaces/User"
+import { requestSignUp, requestSignIn, requestLogout, requestRefreshAccessToken } from "./index"
+import { ResponseWithoutPayload, ResponseWithPayload } from "../../types/interfaces/Response"
+import { UserData } from "../../types/interfaces/User"
 
 export const fetchSignUp = createAsyncThunk<ResponseWithoutPayload, FormData, { rejectValue: ResponseWithoutPayload }>('auth/fetchSignUpEmail',
   async (body: FormData, { rejectWithValue }) => {

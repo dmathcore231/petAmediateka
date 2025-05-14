@@ -16,7 +16,8 @@ export const initialStateAuth: AuthState = {
 export const initialStateMy: MyState = {
   ...defaultState,
   user: null,
-  initializedData: false
+  initializedData: false,
+  favoriteList: null,
 }
 
 export const initialStateContent: ContentState = {

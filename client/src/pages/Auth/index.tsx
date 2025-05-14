@@ -1,7 +1,7 @@
 import { useState, useEffect, JSX } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from "../../hooks"
-import { fetchSignUp, fetchSignIn } from '../../services/authThunk'
+import { fetchSignUp, fetchSignIn } from '../../services/auth/authThunk'
 import { AuthProps } from '../../types/interfaces/AuthProps'
 import { AuthEmail } from './AuthEmail'
 import { AuthPass } from './AuthPass'

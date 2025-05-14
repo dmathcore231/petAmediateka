@@ -28,6 +28,7 @@ export interface AuthState extends StateStatusResponse {
 export interface MyState extends StateStatusResponse {
   user: UserData | null
   initializedData: boolean
+  favoriteList: Content | null
 }
 
 export interface MediaPlayerState {

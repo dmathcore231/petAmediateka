@@ -50,11 +50,20 @@ const setResponseAddFavorite = (req: Request, res: Response): void => {
   }
 }
 
+const setResponseGetFavoriteList = (req: Request, res: Response): void => {
+  console.log(1)
+}
+
 myRouter.post('/my/addFavorite',
   checkAccessTokenMiddleware,
   checkRefreshTokenMiddleware,
   validateJsonBody,
   toggleFavorite,
   setResponseAddFavorite)
+
+myRouter.get('/my/getFavoriteList',
+  checkAccessTokenMiddleware,
+  checkRefreshTokenMiddleware,
+  setResponseGetFavoriteList)
 
 export { myRouter }

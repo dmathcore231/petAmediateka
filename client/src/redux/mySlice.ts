@@ -1,11 +1,12 @@
 import { createSlice, PayloadAction, AnyAction } from '@reduxjs/toolkit'
-import { fetchMyFavorite } from '../services/myThunk'
-import { fetchSignIn, fetchRefreshAccessToken, fetchLogout } from '../services/authThunk'
+import { fetchMyFavorite, fetchGetFavoriteList } from '../services/my/myThunk'
+import { fetchSignIn, fetchRefreshAccessToken, fetchLogout } from '../services/auth/authThunk'
 import { initialStateMy } from '../helpers/initStates'
 import { ResponseWithPayload, } from '../types/interfaces/Response'
 import { UserData } from '../types/interfaces/User'
 import { MyState } from '../types/interfaces/InitialStatesSlice'
 import { ResponseWithoutPayload } from '../types/interfaces/Response'
+import { Content } from '../types/interfaces/Content'
 
 const handleRejected = (state: MyState, payload: ResponseWithPayload<null>): void => {
   const { error, message, status } = payload
@@ -15,6 +16,7 @@ const handleRejected = (state: MyState, payload: ResponseWithPayload<null>): voi
   state.message = message
   state.status = status
   state.user = null
+  state.initializedData = true
 }
 
 const handlefulfilled = (state: MyState, payload: ResponseWithPayload<UserData | null>): void => {
@@ -66,6 +68,7 @@ export const mySlice = createSlice({
       //fetch refresh user data
       .addCase(fetchRefreshAccessToken.fulfilled, (state, action: PayloadAction<ResponseWithPayload<UserData>>) => {
         handlefulfilled(state, action.payload)
+        state.initializedData = true
       })
       .addCase(fetchRefreshAccessToken.rejected, (state, action) => {
         const payload = action.payload as ResponseWithPayload<null>
@@ -77,7 +80,6 @@ export const mySlice = createSlice({
       // fetch logout
       .addCase(fetchLogout.fulfilled, (state, action: PayloadAction<ResponseWithoutPayload>) => {
         const { error, message, status } = action.payload
-
         state.loading = false
         state.error = error
         state.message = message
@@ -86,6 +88,23 @@ export const mySlice = createSlice({
       })
       .addCase(fetchLogout.rejected, (state, action) => {
         const payload = action.payload as ResponseWithoutPayload
+        if (payload) {
+          handleRejected(state, payload)
+        }
+      })
+
+      // fetch get favorite list
+      .addCase(fetchGetFavoriteList.fulfilled, (state, action: PayloadAction<ResponseWithPayload<Content>>) => {
+        const { error, message, status, value } = action.payload
+
+        state.loading = false
+        state.error = error
+        state.message = message
+        state.status = status
+        state.favoriteList = value
+      })
+      .addCase(fetchGetFavoriteList.rejected, (state, action) => {
+        const payload = action.payload as ResponseWithPayload<null>
         if (payload) {
           handleRejected(state, payload)
         }

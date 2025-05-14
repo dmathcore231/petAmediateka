@@ -1,5 +1,6 @@
-import { JSX } from "react"
-import { useAppSelector } from "../../../hooks"
+import { JSX, useEffect } from "react"
+import { useAppSelector, useAppDispatch } from "../../../hooks"
+import { fetchGetFavoriteList } from "../../../services/my/myThunk"
 import { MyEmpty } from "../MyEmpty"
 import { MyEmptyProps } from "../../../types/interfaces/MyEmptyProps"
 
@@ -11,7 +12,12 @@ const propsEmpty: MyEmptyProps = {
 }
 
 export function Favorite(): JSX.Element {
+  const dispatch = useAppDispatch()
   const { user } = useAppSelector(state => state.my)
+
+  useEffect(() => {
+    dispatch(fetchGetFavoriteList())
+  }, [dispatch])
 
   const getFavoriteList = (list: string[] | undefined): JSX.Element => {
     if (!list || list.length === 0) {
