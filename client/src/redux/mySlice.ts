@@ -1,10 +1,11 @@
 import { createSlice, PayloadAction, AnyAction } from '@reduxjs/toolkit'
 import { fetchMyFavorite } from '../services/myThunk'
-import { fetchSignIn, fetchRefreshAccessToken } from '../services/authThunk'
+import { fetchSignIn, fetchRefreshAccessToken, fetchLogout } from '../services/authThunk'
 import { initialStateMy } from '../helpers/initStates'
 import { ResponseWithPayload, } from '../types/interfaces/Response'
 import { UserData } from '../types/interfaces/User'
 import { MyState } from '../types/interfaces/InitialStatesSlice'
+import { ResponseWithoutPayload } from '../types/interfaces/Response'
 
 const handleRejected = (state: MyState, payload: ResponseWithPayload<null>): void => {
   const { error, message, status } = payload
@@ -68,6 +69,23 @@ export const mySlice = createSlice({
       })
       .addCase(fetchRefreshAccessToken.rejected, (state, action) => {
         const payload = action.payload as ResponseWithPayload<null>
+        if (payload) {
+          handleRejected(state, payload)
+        }
+      })
+
+      // fetch logout
+      .addCase(fetchLogout.fulfilled, (state, action: PayloadAction<ResponseWithoutPayload>) => {
+        const { error, message, status } = action.payload
+
+        state.loading = false
+        state.error = error
+        state.message = message
+        state.status = status
+        state.user = null
+      })
+      .addCase(fetchLogout.rejected, (state, action) => {
+        const payload = action.payload as ResponseWithoutPayload
         if (payload) {
           handleRejected(state, payload)
         }

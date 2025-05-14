@@ -67,8 +67,8 @@ export function BurgerMenu(): JSX.Element {
 
   function handleClickLogout(): void {
     const layoutElement: HTMLElement | null = document.querySelector('.layout')
-    dispatch(fetchLogout())
     layoutElement?.classList.remove('layout_fixed')
+    dispatch(fetchLogout())
   }
 
   const handleClickBurgerMenu = (): void => {

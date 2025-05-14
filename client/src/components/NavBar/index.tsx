@@ -57,7 +57,8 @@ const text: Record<string, string> = {
 
 export function NavBar(): JSX.Element {
   const location = useLocation()
-  const { user, loading } = useAppSelector(state => state.my)
+  const { user } = useAppSelector(state => state.my)
+  const { loading } = useAppSelector(state => state.auth)
   const paddingNoneClass = location.pathname === "/" ? "" : " nav-bar_padding-horizontal_none"
 
   return (
