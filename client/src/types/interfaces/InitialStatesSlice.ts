@@ -5,6 +5,7 @@ import { Content } from "./Content"
 import { MediaContent } from "./MediaContent"
 import { ContentTypeEnum } from "./Content"
 import { SrcMediaPlaer } from "../SrcMediaPlaer"
+import { CardData } from "../Card"
 
 export type ContentTypes = Content | MediaContent | null
 
@@ -28,7 +29,7 @@ export interface AuthState extends StateStatusResponse {
 export interface MyState extends StateStatusResponse {
   user: UserData | null
   initializedData: boolean
-  favoriteList: Content | null
+  favoriteList: CardData[] | null
 }
 
 export interface MediaPlayerState {

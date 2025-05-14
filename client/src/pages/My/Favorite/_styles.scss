@@ -1,0 +1,20 @@
+@use "../../../styles/mixins" as *;
+@use "../../../styles/variables" as *;
+
+.my-favorite {
+  width: 100%;
+  @include flex-column-start;
+  gap: 2rem;
+  padding: 4rem 0;
+
+  &-list {
+    width: 100%;
+    @include flex-start;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    &__item {
+      flex: 0 1 calc((100% / 6) - 1rem);
+    }
+  }
+}
