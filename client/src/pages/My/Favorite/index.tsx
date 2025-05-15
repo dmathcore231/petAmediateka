@@ -64,13 +64,17 @@ const TEXT: Record<string, string> = {
 export function Favorite(): JSX.Element {
   const dispatch = useAppDispatch()
   const { user, loading, favoriteList, initializedData } = useAppSelector(state => state.my)
-  const [selectAll, setSelectAll] = useState(false)
   const [countSelect, setCountSelect] = useState(0)
   const [isActiveEditMenu, setIsActiveEditMenu] = useState(false)
+  const [clickBtnDelete, setClickBtnDelete] = useState(false)
+  const [clickBtnSelectAll, setClickBtnSelectAll] = useState(false)
+
   const myEditMenuProps: MyEditMenuProps = {
     isShow: isActiveEditMenu,
     countSelect,
-    setIsActiveEditMenu
+    setIsActiveEditMenu,
+    setClickBtnDelete,
+    setClickBtnSelectAll
   }
 
   useEffect(() => {

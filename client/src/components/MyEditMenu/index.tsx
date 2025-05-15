@@ -8,7 +8,7 @@ const TEXT: Record<string, string> = {
   cancel: "Отмена",
 }
 
-export function MyEditMenu({ isShow, countSelect, setIsActiveEditMenu }: MyEditMenuProps): JSX.Element | null {
+export function MyEditMenu({ isShow, countSelect, setIsActiveEditMenu, setClickBtnDelete, setClickBtnSelectAll }: MyEditMenuProps): JSX.Element | null {
   if (!isShow) return null
 
   const toggleTextCountSelect = (countSelect: number): string => {
@@ -32,14 +32,15 @@ export function MyEditMenu({ isShow, countSelect, setIsActiveEditMenu }: MyEditM
           <Btn
             type="button"
             className="btn btn_primary"
-            onClick={() => { console.log("click select all") }}
+            onClick={() => setClickBtnSelectAll(true)}
           >
             {TEXT.selectAll}
           </Btn>
           <Btn
             type="button"
             className="btn btn_primary"
-            onClick={() => { console.log("click delete") }}
+            onClick={() => setClickBtnDelete(true)}
+            disabled={countSelect === 0}
           >
             {TEXT.delete}
           </Btn>
@@ -52,6 +53,6 @@ export function MyEditMenu({ isShow, countSelect, setIsActiveEditMenu }: MyEditM
           </Btn>
         </div>
       </div>
-    </div>
+    </div >
   )
 }

@@ -1,0 +1,25 @@
+@use "../../styles/mixins" as *;
+@use "../../styles/variables" as *;
+
+.my-edit-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: $main-z-index;
+  @include flex-between;
+  gap: 1rem;
+  background-color: $color-black;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+
+  &__item {
+    width: 100%;
+    text-align: left;
+  }
+
+  &__btn {
+    @include flex-start;
+    gap: 2rem;
+  }
+}
