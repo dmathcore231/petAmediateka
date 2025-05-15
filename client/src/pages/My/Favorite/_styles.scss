@@ -16,7 +16,26 @@
     row-gap: 3.75rem;
 
     &__item {
+      position: relative;
       flex: 0 1 calc((100% / 6) - 1rem);
+      transition: $main-transition;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+
+    &__icon {
+      position: absolute;
+      z-index: 5;
+      top: 5%;
+      right: 5%;
+      fill: $color-white;
+      transition: $main-transition;
+
+      &_active {
+        fill: $color-primary;
+      }
     }
   }
 }

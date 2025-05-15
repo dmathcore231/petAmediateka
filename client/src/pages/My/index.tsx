@@ -1,7 +1,6 @@
 import { JSX } from "react"
 import { Outlet, NavLink } from "react-router-dom"
 import { LinkBack } from "../../components/LinkBack"
-import { Btn } from "../../components/Btn"
 
 const TITLE_CLASSES = "title title_size_m"
 const LINK_CLASSES = "link link_primary link_color_white"
