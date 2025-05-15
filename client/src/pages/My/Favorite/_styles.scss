@@ -3,15 +3,17 @@
 
 .my-favorite {
   width: 100%;
-  @include flex-column-start;
+  @include flex-column-end;
   gap: 2rem;
-  padding: 4rem 0;
+  padding-bottom: 4rem;
+  padding-top: 2rem;
 
   &-list {
     width: 100%;
     @include flex-start;
     flex-wrap: wrap;
     gap: 1rem;
+    row-gap: 3.75rem;
 
     &__item {
       flex: 0 1 calc((100% / 6) - 1rem);
