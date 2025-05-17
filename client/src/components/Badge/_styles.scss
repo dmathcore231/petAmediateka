@@ -10,6 +10,11 @@
   font-size: 0.875rem;
   line-height: 1.25rem;
 
+  @include media (xxl) {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
   &_primary {
     background-color: $color-primary;
   }
@@ -24,5 +29,10 @@
     @include flex-center;
     background-color: $color-secondary;
     animation: $loading-animation;
+
+    @include media (xxl) {
+      width: 8.25rem;
+      height: 1.25rem;
+    }
   }
 }

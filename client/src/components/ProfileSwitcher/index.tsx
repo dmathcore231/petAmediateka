@@ -6,7 +6,7 @@ import { Avatar } from "../Avatar"
 import { PlusIcon } from "../../assets/icons/PlusIcon"
 
 export function ProfileSwitcher({ className }: ProfileSwitcherProps): JSX.Element {
-  const { user, loading } = useAppSelector(state => state.auth)
+  const { user, loading } = useAppSelector(state => state.my)
   const [isActive, setIsActive] = useState(false)
   const menuListRef = useRef<HTMLUListElement>(null)
   const textNewProfile: string = "Новый профиль"
