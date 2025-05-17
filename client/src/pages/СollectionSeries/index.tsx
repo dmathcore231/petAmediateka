@@ -1,3 +1,4 @@
+import { JSX } from "react"
 import { LinkBack } from "../../components/LinkBack"
 
 export function СollectionSeries(): JSX.Element {

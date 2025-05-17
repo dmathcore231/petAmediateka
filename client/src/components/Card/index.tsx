@@ -1,4 +1,4 @@
-import { JSX, useState } from "react"
+import { Children, JSX, useState } from "react"
 import { Link } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "../../hooks"
 import { Btn } from "../Btn"
@@ -20,8 +20,8 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
   const { user, loading } = useAppSelector(state => state.my)
 
   const { _id, type, title, badge, ageRestriction, description, bg, logoImg, link } = data
-  const { cardSize, flex, clipPath: { value: clipPathValue, type: clipPathType }, ageRestrictionBadge, btnGroup, hover, boxShadow } = styles
-  const { title: { titleOutside, titleLogoImg, titleLogoImgIndex }, badgeVisible, link: { linkType }, descriptionVisible, tags, cardSeries } = settings
+  const { cardSize, flex, clipPath: { value: clipPathValue, type: clipPathType }, ageRestrictionBadge, btnGroup, hover, boxShadow, bg: bgImg } = styles
+  const { title: { titleOutside, titleLogoImg, titleLogoImgIndex }, badgeVisible, link: { linkType, linkDisabled }, descriptionVisible, tags, cardSeries } = settings
 
   const [isHoveredBtnAddFavorite, setIsHoveredBtnAddFavorite] = useState(false)
 
@@ -50,12 +50,13 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
     dispatch(fetchMyFavorite(formData))
   }
 
-  const renderCardContentLinkWrapper = (children: JSX.Element): JSX.Element => {
+  const renderCardContentLinkWrapper = (children: JSX.Element, linkType: 'allCard' | 'title', linkDisabled: boolean): JSX.Element => {
     if (linkType === 'allCard') {
       return (
         <Link
           to={link}
           className="card__link"
+          onClick={(e) => linkDisabled && e.preventDefault()}
         >
           {children}
         </Link>
@@ -82,9 +83,10 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
 
       const baseClass = 'card-bg'
       const shadowClass = boxShadow ? ' card-bg_shadow' : ''
+      const borderClass = bgImg?.border ? ' card-bg_border_color_primary' : ''
 
       return (
-        <div className={`${baseClass}${shadowClass}`}>
+        <div className={`${baseClass}${shadowClass}${borderClass}`}>
           <picture className="card-bg__picture">
             {renderCardBg()}
           </picture>
@@ -246,7 +248,7 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
       <>
         <div className={getClasses(clipPathType)} />
         <div className={setClassesCard()}>
-          {renderCardContentLinkWrapper(renderCardContent())}
+          {renderCardContentLinkWrapper(renderCardContent(), linkType, linkDisabled)}
         </div>
       </>
     )
@@ -254,7 +256,7 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
 
   return (
     <div className={setClassesCard()}>
-      {renderCardContentLinkWrapper(renderCardContent())}
+      {renderCardContentLinkWrapper(renderCardContent(), linkType, linkDisabled)}
     </div>
   )
 }

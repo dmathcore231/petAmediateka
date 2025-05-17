@@ -90,6 +90,7 @@ export function Home(): JSX.Element {
         badgeVisible: true,
         link: {
           linkType: 'title',
+          linkDisabled: false
         },
         descriptionVisible: true,
         tags: null,
@@ -146,6 +147,7 @@ export function Home(): JSX.Element {
         badgeVisible: false,
         link: {
           linkType: 'allCard',
+          linkDisabled: false
         },
         descriptionVisible: false,
         tags: null,
@@ -206,6 +208,7 @@ export function Home(): JSX.Element {
         badgeVisible: false,
         link: {
           linkType: 'allCard',
+          linkDisabled: false
         },
         descriptionVisible: false,
         tags: null,
@@ -267,6 +270,7 @@ export function Home(): JSX.Element {
         badgeVisible: false,
         link: {
           linkType: 'allCard',
+          linkDisabled: false
         },
         descriptionVisible: false,
         tags: null,
@@ -323,6 +327,7 @@ export function Home(): JSX.Element {
         badgeVisible: false,
         link: {
           linkType: 'allCard',
+          linkDisabled: false
         },
         descriptionVisible: false,
         tags: null,

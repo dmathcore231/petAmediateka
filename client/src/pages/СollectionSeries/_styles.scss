@@ -2,7 +2,7 @@
 @use "../../styles/variables" as *;
 
 .collection-series {
-  padding-top: $main-header-padding;
+  padding-top: var(--main-header-padding);
 
   &-header {
     @include flex-column-start;

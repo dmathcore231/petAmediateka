@@ -6,6 +6,7 @@ import { SrcMediaPlaer } from "./SrcMediaPlaer"
 
 export type CardLink = {
   linkType: 'allCard' | 'title'
+  linkDisabled: boolean
 }
 
 export type CardTitle = {
@@ -61,6 +62,11 @@ export type CardStyles = {
       type: "bottom-more" | "default" | null
     }
     shadow: boolean
+  }
+  bg?: {
+    border: {
+      color: string
+    }
   }
 }
 

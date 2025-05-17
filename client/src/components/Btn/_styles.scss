@@ -24,7 +24,7 @@
   --btn-font-weight: 400;
   --btn-line-height: 1.5rem;
 
-  --btn-padding: 0.625rem 0;
+  --btn-padding: 0.625rem;
 
   --btn-transition: #{$main-transition};
 
@@ -84,6 +84,33 @@
     --btn-fill: #{$color-white};
     --btn-fill-hover: #{$color-white};
     --btn-fill-active: #{$color-white};
+  }
+
+  &_white {
+    --btn-color: #{$color-black};
+
+    --btn-bg-color: #{$color-white};
+    --btn-bg-color-hover: #{$color-white-hover};
+    --btn-bg-color-active: #{$color-white};
+
+    --btn-fill: #{$color-white};
+    --btn-fill-hover: #{$color-white};
+    --btn-fill-active: #{$color-white};
+
+    &_outline {
+      --btn-color: #{$color-white-dark};
+      --btn-color-hover: #{$color-white};
+      --btn-color-active: #{$color-white};
+
+      --btn-bg-color: transparent;
+      --btn-bg-color-hover: transparent;
+      --btn-bg-color-active: transparent;
+
+      --btn-border-color: #{$color-white-dark};
+      --btn-border-color-hover: #{$color-white};
+      --btn-border-color-active: #{$color-white};
+
+    }
   }
 
   &_transparent {
