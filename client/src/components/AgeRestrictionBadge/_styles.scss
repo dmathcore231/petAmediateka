@@ -28,6 +28,20 @@
       --badge-height: 3rem;
       --badge-font-size: 1.125rem;
       --badge-line-height: 1.5rem;
+
+      @include media(xxl) {
+        --badge-width: 2.375rem;
+        --badge-height: 2.375rem;
+        --badge-font-size: 1rem;
+        --badge-line-height: 1.25rem;
+      }
+
+      @include media(xl) {
+        --badge-width: 1.875rem;
+        --badge-height: 1.875rem;
+        --badge-font-size: 0.875rem;
+        --badge-line-height: 1.25rem;
+      }
     }
 
     &_lm {
@@ -70,6 +84,12 @@
       --badge-bg-color: rgba(0, 0, 0, .3);
 
       --badge-border-radius: 0.313rem;
+
+      @include media(lg) {
+        --badge-width: 1.438rem;
+        --badge-font-size: 0.625rem;
+        --badge-line-height: 0.875rem;
+      }
     }
   }
 
