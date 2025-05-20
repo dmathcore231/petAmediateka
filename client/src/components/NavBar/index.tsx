@@ -159,7 +159,18 @@ export function NavBar(): JSX.Element {
         </Link>
       </div>
       <div className={CLASSES.item}>
-        <BurgerMenu />
+        <ul className={CLASSES.list}>
+          <li className={CLASSES.listItem}>
+            <NavLink to={'/search'}
+              className={({ isActive }) => toggleLinkIsActive(isActive)}
+            >
+              <SearchIcon width={20} height={20} />
+            </NavLink>
+          </li>
+          <li className={CLASSES.listItem}>
+            <BurgerMenu />
+          </li>
+        </ul>
       </div>
     </nav>
   )
