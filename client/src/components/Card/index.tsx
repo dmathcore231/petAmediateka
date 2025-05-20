@@ -74,7 +74,9 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
 
     const src: string = configBg[cardSize] || bg?.imgResizeUrl
 
-    return <img src={src} alt="" className="card-bg__img" />
+    return (
+      <img src={src} alt="" className="card-bg__img" />
+    )
   }
 
   const renderCardContent = (): JSX.Element => {

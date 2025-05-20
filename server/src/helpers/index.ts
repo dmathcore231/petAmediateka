@@ -1612,7 +1612,10 @@ export const temporaryBanner: Banner = {
     'На любых устройствах',
     'В отличном качестве',
     'Без рекламы'],
-  img: "/bannerImg.png",
+  img: {
+    url: "http://localhost:3000/public/content/banner/bannerImg.png",
+    resizeUrl: "http://localhost:3000/public/content/banner/bannerImgResize.png"
+  },
   titleBtn: "Попробовать за 1₽",
   ageRestriction: 18
 }
@@ -1625,7 +1628,7 @@ export const formationLink = (typeContent: 'movie' | 'series', _id: string, link
   }
 }
 
-export const transformMediaToCard  = (item: MediaContent): CardData => ({
+export const transformMediaToCard = (item: MediaContent): CardData => ({
   _id: item._id as string,
   type: item.type,
   title: item.data.title,

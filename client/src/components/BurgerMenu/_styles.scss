@@ -36,10 +36,22 @@
     @include flex-column;
     gap: 2.5rem;
     justify-content: flex-start;
-    padding: 1.875rem 2.5rem 3.75rem 3.75rem;
+    padding: 2.5rem 3.75rem;
     z-index: 5;
     backdrop-filter: blur(12px);
     background-color: rgba(31, 33, 37, .8);
+
+    @include media (xxl) {
+      width: 25rem;
+      gap: 1.5rem;
+      padding: 2.5rem 3.5rem;
+    }
+
+    @include media (xxl) {
+      width: 19rem;
+      gap: 1.5rem;
+      padding: 2rem 2.5rem;
+    }
 
     &-header {
       width: 100%;
@@ -61,10 +73,15 @@
         @include flex-center;
         background-color: $color-secondary;
         fill: $color-gray;
-        width: 56px;
-        height: 56px;
+        width: 3.5rem;
+        height: 3.5rem;
         border-radius: 50%;
-        padding: 10px;
+        padding: 0.625rem;
+
+        @include media (xxl) {
+          width: 2.5rem;
+          height: 2.5rem;
+        }
       }
     }
 

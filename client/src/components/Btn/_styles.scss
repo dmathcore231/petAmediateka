@@ -65,6 +65,34 @@
     cursor: default;
   }
 
+  @include media (xxxl) {
+    --btn-font-size: 1rem;
+    --btn-line-height: 1.5rem;
+
+    --btn-padding: 0.5rem;
+  }
+
+  @include media (xxl) {
+    --btn-font-size: 1rem;
+    --btn-line-height: 1.25rem;
+
+    --btn-padding: 0.375rem;
+  }
+
+  @include media (xl) {
+    --btn-font-size: 0.875rem;
+    --btn-line-height: 1.25rem;
+
+    --btn-padding: 0.25rem;
+  }
+
+  @include media (lg) {
+    --btn-font-size: 0.75rem;
+    --btn-line-height: 1rem;
+
+    --btn-padding: 0.25rem;
+  }
+
   &_primary {
     --btn-color: #{$color-black};
     --btn-bg-color: #{$color-primary};

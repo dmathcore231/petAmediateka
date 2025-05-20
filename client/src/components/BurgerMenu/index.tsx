@@ -1,6 +1,6 @@
 import { useState, useEffect, MouseEvent, JSX } from "react"
 import { Link } from "react-router-dom"
-import { useAppSelector, useAppDispatch } from "../../hooks"
+import { useAppSelector, useAppDispatch, useCheckBreakpoint } from "../../hooks"
 import { fetchLogout } from "../../services/auth/authThunk"
 import { Btn } from "../Btn"
 import { Avatar } from "../Avatar"
@@ -11,6 +11,7 @@ import { PlusIcon } from "../../assets/icons/PlusIcon"
 
 export function BurgerMenu(): JSX.Element {
   const dispatch = useAppDispatch()
+  const breakpointXL = useCheckBreakpoint(1400)
   const { user } = useAppSelector(state => state.my)
 
   const [isActive, setIsActive] = useState(false)
@@ -98,7 +99,7 @@ export function BurgerMenu(): JSX.Element {
         <aside className="burger-menu-aside">
           <div className="burger-menu-aside-header">
             <div className="burger-menu-aside-header__item burger-menu-aside-header__item_jc">
-              <div className="burger-menu-aside-header__title title title_color_gray">
+              <div className="burger-menu-aside-header__title title title_size_m title_color_gray">
                 Выбор профиля
               </div>
               <div className="burger-menu-aside-header__close-btn">
@@ -121,7 +122,7 @@ export function BurgerMenu(): JSX.Element {
               </Link>
               <Link
                 to="/profile"
-                className="burger-menu-aside-header__profile-name"
+                className="burger-menu-aside-header__profile-name title title_size_xm"
                 onClick={handleClickCloseBtn}
               >
                 {user?.userData.profileName}
@@ -131,7 +132,7 @@ export function BurgerMenu(): JSX.Element {
               <span className="burger-menu-aside-header__new-profile">
                 <PlusIcon width={36} height={36} />
               </span>
-              <span className="burger-menu-aside-header__profile-name">
+              <span className="burger-menu-aside-header__profile-name title title_size_xm">
                 Новый профиль
               </span>
             </div>
