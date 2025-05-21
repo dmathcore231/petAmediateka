@@ -4,4 +4,5 @@ export type Bg = {
   videoUrl: string | null
   imgResizeUrl?: string
   imgResizeLmUrl?: string
+  sourceUrls: string[]
 }

@@ -6,9 +6,11 @@ import { Badge } from "../Badge"
 import { AgeRestrictionBadge } from "../AgeRestrictionBadge"
 import { Tags } from "../Tags"
 import { IconButton } from "../IconButton"
+import { PictureWithSources } from "../PictureWithSources"
 import { fetchMyFavorite } from "../../services/my/myThunk"
 import { CardProps } from "../../types/interfaces/CardProps"
 import { IconButtonProps } from "../../types/interfaces/IconButtonProps"
+import { PictureWithSourcesProps } from "../../types/interfaces/PictureWithSourcesProps"
 import { checkIsFavoriteContent } from "../../helpers"
 import { MediaPlayIcon } from "../../assets/icons/MediaPlayIcon"
 import { PlayIcon } from "../../assets/icons/PlayIcon"
@@ -66,19 +68,6 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
     }
   }
 
-  const renderCardBg = (): JSX.Element => {
-    const configBg: Record<string, string | undefined> = {
-      lg: bg?.imgUrl,
-      lm: bg?.imgResizeLmUrl,
-    }
-
-    const src: string = configBg[cardSize] || bg?.imgResizeUrl
-
-    return (
-      <img src={src} alt="" className="card-bg__img" />
-    )
-  }
-
   const renderCardContent = (): JSX.Element => {
     const renderBackground = (): JSX.Element | null => {
       if (loadingCardData || error) return null
@@ -86,12 +75,30 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
       const baseClass = 'card-bg'
       const shadowClass = boxShadow ? ' card-bg_shadow' : ''
       const borderClass = bgImg?.border ? ' card-bg_border_color_primary' : ''
+      const configBg: Record<string, string | undefined> = {
+        lg: bg?.imgUrl,
+        lm: bg?.imgResizeLmUrl,
+      }
+      const src: string = configBg[cardSize] || bg?.imgResizeUrl
+      const pictureWithSourcesProps: PictureWithSourcesProps = {
+        img: {
+          url: src,
+          sourceUrls: bg.sourceUrls
+        },
+        alt: `${title.originalTitle} background`,
+        classes: {
+          picture: 'card-bg__picture',
+          img: 'card-bg__img'
+        },
+        media: ['xxxl', 'xxl', 'xl', 'lg', 'md', 'sm']
+      }
 
       return (
         <div className={`${baseClass}${shadowClass}${borderClass}`}>
-          <picture className="card-bg__picture">
+          <PictureWithSources {...pictureWithSourcesProps} />
+          {/* <picture className="card-bg__picture">
             {renderCardBg()}
-          </picture>
+          </picture> */}
         </div>
       )
     }

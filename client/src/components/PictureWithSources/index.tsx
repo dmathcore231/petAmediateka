@@ -5,6 +5,7 @@ import { MediaBreakpoint } from "../../types/MediaBreakpoint"
 export function PictureWithSources({ img, alt, classes, media }: PictureWithSourcesProps): JSX.Element {
   const getSource = (url: string[], media: MediaBreakpoint[]): JSX.Element[] => {
     const maxMedia: Record<MediaBreakpoint, string> = {
+      xs: '30rem',
       sm: '36rem',
       md: '48rem',
       lg: '62rem',

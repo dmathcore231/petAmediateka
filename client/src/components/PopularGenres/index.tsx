@@ -20,7 +20,8 @@ export function PopularGenres(): JSX.Element {
       bg: {
         imgUrl: '/popularGenres/series/1.jpg',
         videoUrl: '',
-        imgResizeUrl: '/popularGenres/series/1.jpg'
+        imgResizeUrl: '/popularGenres/series/1.jpg',
+        sourceUrls: ['/popularGenres/series/1.jpg']
       },
       logoImg: "#",
       link: '#',
@@ -39,7 +40,8 @@ export function PopularGenres(): JSX.Element {
       bg: {
         imgUrl: '/popularGenres/series/2.jpg',
         videoUrl: '',
-        imgResizeUrl: '/popularGenres/series/2.jpg'
+        imgResizeUrl: '/popularGenres/series/2.jpg',
+        sourceUrls: ['/popularGenres/series/2.jpg'],
       },
       logoImg: "#",
       link: '#',
@@ -58,7 +60,8 @@ export function PopularGenres(): JSX.Element {
       bg: {
         imgUrl: '/popularGenres/series/3.jpg',
         videoUrl: '',
-        imgResizeUrl: '/popularGenres/series/3.jpg'
+        imgResizeUrl: '/popularGenres/series/3.jpg',
+        sourceUrls: ['/popularGenres/series/3.jpg'],
       },
       logoImg: "#",
       link: '#',
@@ -77,7 +80,8 @@ export function PopularGenres(): JSX.Element {
       bg: {
         imgUrl: '/popularGenres/series/4.jpg',
         videoUrl: '',
-        imgResizeUrl: '/popularGenres/series/4.jpg'
+        imgResizeUrl: '/popularGenres/series/4.jpg',
+        sourceUrls: ['/popularGenres/series/4.jpg'],
       },
       logoImg: "#",
       link: '#',
@@ -96,7 +100,8 @@ export function PopularGenres(): JSX.Element {
       bg: {
         imgUrl: '/popularGenres/series/5.jpg',
         videoUrl: '',
-        imgResizeUrl: '/popularGenres/series/5.jpg'
+        imgResizeUrl: '/popularGenres/series/5.jpg',
+        sourceUrls: ['/popularGenres/series/5.jpg'],
       },
       logoImg: "#",
       link: '#',
@@ -115,7 +120,8 @@ export function PopularGenres(): JSX.Element {
       bg: {
         imgUrl: '/popularGenres/series/6.jpg',
         videoUrl: '',
-        imgResizeUrl: '/popularGenres/series/6.jpg'
+        imgResizeUrl: '/popularGenres/series/6.jpg',
+        sourceUrls: ['/popularGenres/series/6.jpg'],
       },
       logoImg: "#",
       link: '#',
@@ -134,7 +140,8 @@ export function PopularGenres(): JSX.Element {
       bg: {
         imgUrl: '/popularGenres/series/7.jpg',
         videoUrl: '',
-        imgResizeUrl: '/popularGenres/series/7.jpg'
+        imgResizeUrl: '/popularGenres/series/7.jpg',
+        sourceUrls: ['/popularGenres/series/7.jpg'],
       },
       logoImg: "#",
       link: '#',
@@ -153,7 +160,8 @@ export function PopularGenres(): JSX.Element {
       bg: {
         imgUrl: '/popularGenres/series/8.jpg',
         videoUrl: '',
-        imgResizeUrl: '/popularGenres/series/8.jpg'
+        imgResizeUrl: '/popularGenres/series/8.jpg',
+        sourceUrls: ['/popularGenres/series/8.jpg'],
       },
       logoImg: "#",
       link: '#',
@@ -174,7 +182,8 @@ export function PopularGenres(): JSX.Element {
       bg: {
         imgUrl: '/popularGenres/movies/1.jpg',
         videoUrl: '',
-        imgResizeUrl: '/popularGenres/movies/1.jpg'
+        imgResizeUrl: '/popularGenres/movies/1.jpg',
+        sourceUrls: ['/popularGenres/movies/1.jpg'],
       },
       logoImg: "#",
       link: '#',
@@ -193,7 +202,8 @@ export function PopularGenres(): JSX.Element {
       bg: {
         imgUrl: '/popularGenres/movies/2.jpg',
         videoUrl: '',
-        imgResizeUrl: '/popularGenres/movies/2.jpg'
+        imgResizeUrl: '/popularGenres/movies/2.jpg',
+        sourceUrls: ['/popularGenres/movies/2.jpg'],
       },
       logoImg: "#",
       link: '#',
@@ -212,7 +222,8 @@ export function PopularGenres(): JSX.Element {
       bg: {
         imgUrl: '/popularGenres/movies/3.jpg',
         videoUrl: '',
-        imgResizeUrl: '/popularGenres/movies/3.jpg'
+        imgResizeUrl: '/popularGenres/movies/3.jpg',
+        sourceUrls: ['/popularGenres/movies/3.jpg'],
       },
       logoImg: "#",
       link: '#',
@@ -231,7 +242,8 @@ export function PopularGenres(): JSX.Element {
       bg: {
         imgUrl: '/popularGenres/movies/4.jpg',
         videoUrl: '',
-        imgResizeUrl: '/popularGenres/movies/4.jpg'
+        imgResizeUrl: '/popularGenres/movies/4.jpg',
+        sourceUrls: ['/popularGenres/movies/4.jpg'],
       },
       logoImg: "#",
       link: '#',
@@ -250,7 +262,8 @@ export function PopularGenres(): JSX.Element {
       bg: {
         imgUrl: '/popularGenres/movies/5.jpg',
         videoUrl: '',
-        imgResizeUrl: '/popularGenres/movies/5.jpg'
+        imgResizeUrl: '/popularGenres/movies/5.jpg',
+        sourceUrls: ['/popularGenres/movies/5.jpg'],
       },
       logoImg: "#",
       link: '#',
@@ -269,7 +282,8 @@ export function PopularGenres(): JSX.Element {
       bg: {
         imgUrl: '/popularGenres/movies/6.jpg',
         videoUrl: '',
-        imgResizeUrl: '/popularGenres/movies/6.jpg'
+        imgResizeUrl: '/popularGenres/movies/6.jpg',
+        sourceUrls: ['/popularGenres/movies/6.jpg'],
       },
       logoImg: "#",
       link: '#',
@@ -288,7 +302,8 @@ export function PopularGenres(): JSX.Element {
       bg: {
         imgUrl: '/popularGenres/movies/7.jpg',
         videoUrl: '',
-        imgResizeUrl: '/popularGenres/movies/7.jpg'
+        imgResizeUrl: '/popularGenres/movies/7.jpg',
+        sourceUrls: ['/popularGenres/movies/7.jpg'],
       },
       logoImg: "#",
       link: '#',
@@ -307,7 +322,8 @@ export function PopularGenres(): JSX.Element {
       bg: {
         imgUrl: '/popularGenres/movies/8.jpg',
         videoUrl: '',
-        imgResizeUrl: '/popularGenres/movies/8.jpg'
+        imgResizeUrl: '/popularGenres/movies/8.jpg',
+        sourceUrls: ['/popularGenres/movies/8.jpg'],
       },
       logoImg: "#",
       link: '#',
@@ -379,6 +395,7 @@ export function PopularGenres(): JSX.Element {
         badgeVisible: false,
         link: {
           linkType: 'allCard',
+          linkDisabled: false
         },
         descriptionVisible: false,
         tags: null,

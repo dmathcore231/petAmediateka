@@ -29,18 +29,25 @@
       --badge-font-size: 1.125rem;
       --badge-line-height: 1.5rem;
 
-      @include media(xxl) {
-        --badge-width: 2.375rem;
-        --badge-height: 2.375rem;
+      @include media (xxxl) {
+        --badge-width: 2.5rem;
+        --badge-height: 2.5rem;
         --badge-font-size: 1rem;
-        --badge-line-height: 1.25rem;
+        --badge-line-height: 1.5rem;
       }
 
-      @include media(xl) {
-        --badge-width: 1.875rem;
-        --badge-height: 1.875rem;
+      @include media (xxl) {
+        --badge-width: 2rem;
+        --badge-height: 2rem;
         --badge-font-size: 0.875rem;
-        --badge-line-height: 1.25rem;
+        --badge-line-height: 1.5rem;
+      }
+
+      @include media (xl) {
+        --badge-width: 1.5rem;
+        --badge-height: 1.5rem;
+        --badge-font-size: 0.75rem;
+        --badge-line-height: 1.5rem;
       }
     }
 
