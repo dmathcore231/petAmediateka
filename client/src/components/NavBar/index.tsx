@@ -60,21 +60,19 @@ export function NavBar(): JSX.Element {
       return (
         <ul className={CLASSES.list}>
           {newList.map(({ url, value }, index) => (
-            <>
-              <li className={CLASSES.listItem} key={index}>
-                <NavLink to={url}
-                  className={({ isActive }) => toggleLinkIsActive(isActive)}
-                >
-                  {value === "Поиск"
-                    ? (<SearchIcon width={20} height={20} />)
-                    : (<span className={CLASSES.title}>
-                      {value}
-                    </span>)
-                  }
+            <li className={CLASSES.listItem} key={index}>
+              <NavLink to={url}
+                className={({ isActive }) => toggleLinkIsActive(isActive)}
+              >
+                {value === "Поиск"
+                  ? (<SearchIcon width={20} height={20} />)
+                  : (<span className={CLASSES.title}>
+                    {value}
+                  </span>)
+                }
 
-                </NavLink>
-              </li>
-            </>
+              </NavLink>
+            </li>
           ))}
           <li className={`${CLASSES.listItem}
             ${CLASSES.listItemCursorPointer}

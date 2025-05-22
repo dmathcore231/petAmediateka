@@ -105,6 +105,8 @@
   }
 
   &_secondary {
+    --btn-color-hover: #{$color-white};
+
     --btn-bg-color: #{$color-secondary};
     --btn-bg-color-hover: #{$color-secondary-hover};
     --btn-bg-color-active: #{$color-secondary-active};
