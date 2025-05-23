@@ -27,7 +27,8 @@ export function Seasons({ seasonsValue, mediaContentData }: SeasonsProps): JSX.E
         bg: {
           imgUrl: mediaContentData.bg.imgUrl,
           videoUrl: mediaContentData.bg.videoUrl,
-          imgResizeUrl: item.imgPreview
+          imgResizeUrl: item.imgPreview,
+          sourceUrls: [item.imgPreview]
         },
         logoImg: mediaContentData.logoImg,
         link: `#`,
@@ -82,6 +83,7 @@ export function Seasons({ seasonsValue, mediaContentData }: SeasonsProps): JSX.E
           badgeVisible: false,
           link: {
             linkType: 'allCard',
+            linkDisabled: false
           },
           descriptionVisible: false,
           tags: null,

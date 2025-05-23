@@ -1,6 +1,6 @@
 import { Children, JSX, useState } from "react"
 import { Link } from "react-router-dom"
-import { useAppDispatch, useAppSelector } from "../../hooks"
+import { useAppDispatch, useAppSelector, useCheckBreakpoint } from "../../hooks"
 import { Btn } from "../Btn"
 import { Badge } from "../Badge"
 import { AgeRestrictionBadge } from "../AgeRestrictionBadge"
@@ -19,13 +19,16 @@ import { IsFavoriteIcon } from "../../assets/icons/IsFavoriteIcon"
 
 export function Card({ data, styles, settings, loadingCardData, error }: CardProps): JSX.Element {
   const dispatch = useAppDispatch()
+  const BREAKPOINT_MD = useCheckBreakpoint(768)
   const { user, loading } = useAppSelector(state => state.my)
-
   const { _id, type, title, badge, ageRestriction, description, bg, logoImg, link } = data
   const { cardSize, flex, clipPath: { value: clipPathValue, type: clipPathType }, ageRestrictionBadge, btnGroup, hover, boxShadow, bg: bgImg } = styles
   const { title: { titleOutside, titleLogoImg, titleLogoImgIndex }, badgeVisible, link: { linkType, linkDisabled }, descriptionVisible, tags, cardSeries } = settings
-
   const [isHoveredBtnAddFavorite, setIsHoveredBtnAddFavorite] = useState(false)
+  const sizeIconFavorite = {
+    width: BREAKPOINT_MD ? 20 : 24,
+    height: BREAKPOINT_MD ? 20 : 24
+  }
 
   const iconButtonProps: IconButtonProps = {
     config: {
@@ -37,8 +40,12 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
       fillColor: 'white'
     },
     iconJSX: {
-      default: (<AddFavoriteIcon width={24} height={24} />),
-      isActive: (<IsFavoriteIcon width={24} height={24} />),
+      default: (<AddFavoriteIcon
+        width={sizeIconFavorite.width}
+        height={sizeIconFavorite.height} />),
+      isActive: (<IsFavoriteIcon
+        width={sizeIconFavorite.width}
+        height={sizeIconFavorite.height} />),
     },
     isHovered: isHoveredBtnAddFavorite
   }
@@ -83,7 +90,7 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
       const pictureWithSourcesProps: PictureWithSourcesProps = {
         img: {
           url: src,
-          sourceUrls: bg.sourceUrls
+          sourceUrls: cardSize === 'lg' ? bg.sourceUrls : [src]
         },
         alt: `${title.originalTitle} background`,
         classes: {
@@ -96,9 +103,6 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
       return (
         <div className={`${baseClass}${shadowClass}${borderClass}`}>
           <PictureWithSources {...pictureWithSourcesProps} />
-          {/* <picture className="card-bg__picture">
-            {renderCardBg()}
-          </picture> */}
         </div>
       )
     }

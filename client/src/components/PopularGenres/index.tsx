@@ -1,10 +1,13 @@
 import { JSX, useState } from "react"
+import { useCheckBreakpoint } from "../../hooks"
 import { Slider } from "../Slider"
 import { linksPopularGenresState } from '../../types/linksPopularGenresState'
 import { CardData } from "../../types/Card"
 import { SliderProps } from "../../types/interfaces/SliderProps"
 
 export function PopularGenres(): JSX.Element {
+  const BREAKPOINT_XL = useCheckBreakpoint(1200)
+  const BREAKPOINT_MD = useCheckBreakpoint(768)
   const itemsSerials: CardData[] = [
     {
       _id: '1',
@@ -356,7 +359,7 @@ export function PopularGenres(): JSX.Element {
       pagenation: false,
       autoSwipe: false,
       lastSwipe: true,
-      quantityListItems: 5,
+      quantityListItems: BREAKPOINT_MD ? 2 : BREAKPOINT_XL ? 4 : 5,
       mediaPlayerHandler: false
     },
     sliderData: {

@@ -7,12 +7,17 @@
   text-transform: uppercase;
   padding: 0.188rem 0.5rem 0.063rem;
   border-radius: 0.25rem;
-  font-size: 0.875rem;
+  font-size: 1rem;
   line-height: 1.25rem;
 
-  @include media (xxl) {
-    font-size: 1rem;
-    line-height: 1.5rem;
+  @include media (xl) {
+    font-size: 0.75rem;
+    line-height: 1rem;
+  }
+
+  @include media (lg) {
+    font-size: 0.75rem;
+    line-height: 1rem;
   }
 
   &_primary {
@@ -29,10 +34,5 @@
     @include flex-center;
     background-color: $color-secondary;
     animation: $loading-animation;
-
-    @include media (xxl) {
-      width: 8.25rem;
-      height: 1.25rem;
-    }
   }
 }
