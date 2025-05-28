@@ -13,11 +13,13 @@ import { Trailer } from "../../components/Trailer"
 import { Seasons } from "../../components/Seasons"
 import { IconSeries } from "../../components/IconSeries"
 import { IconButton } from "../../components/IconButton"
+import { PictureWithSources } from "../../components/PictureWithSources"
 import { ContentTypeEnum } from "../../types/interfaces/Content"
 import { MediaContent } from "../../types/interfaces/MediaContent"
 import { ContentStateItem } from "../../types/interfaces/InitialStatesSlice"
 import { Season } from "../../types/interfaces/MediaContent"
 import { RenderBtnGroupIconConfig } from "../../types/interfaces/RenderBtnGroupIconConfig"
+import { PictureWithSourcesProps } from "../../types/interfaces/PictureWithSourcesProps"
 import { formSrcMediaContent, checkIsFavoriteContent } from "../../helpers"
 import { PlayIcon } from "../../assets/icons/PlayIcon"
 import { ShareIcon } from "../../assets/icons/ShareIcon"
@@ -68,16 +70,11 @@ export function Series(): JSX.Element {
     dispatch(fetchMyFavorite(formData))
   }
 
-  const renderBgPage = (): JSX.Element => {
-    const indexSeason: number = Number(seasonIndex)
-    const targetBg = indexSeason
-      ? content.seasons?.[indexSeason - 1]?.bg
-      : content.bg
-
-    const renderVideo = (videoUrl: string): JSX.Element => (
+  const renderBackgroundPage = (): JSX.Element | null => {
+    const renderVideo = (url: string): JSX.Element => (
       <div className="series-bg__video">
         <video
-          src={videoUrl}
+          src={url}
           className="series-bg__video-item"
           autoPlay
           muted
@@ -88,21 +85,62 @@ export function Series(): JSX.Element {
       </div>
     )
 
-    const renderImage = (imgUrl?: string): JSX.Element => (
-      <picture className="series-bg__picture">
-        <img
-          src={imgUrl}
-          alt=""
-          className="series-bg__img"
-        />
-      </picture>
-    )
+    const renderBackground = (
+      videoUrl: string | null | undefined,
+      imgUrl: string,
+      sourceUrls: string[]
+    ): JSX.Element => {
+      if (videoUrl) {
+        return renderVideo(videoUrl)
+      }
 
-    if (targetBg?.videoUrl) {
-      return renderVideo(targetBg.videoUrl)
+      const pictureProps: PictureWithSourcesProps = {
+        img: {
+          url: imgUrl,
+          sourceUrls: sourceUrls
+        },
+        alt: `${content.data.title.originalTitle} background`,
+        classes: {
+          picture: 'series-bg__picture',
+          img: 'series-bg__img'
+        },
+        media: sourceUrls.length > 0
+          ? ['xxl', 'xl', 'lg', 'md', 'sm', 'xs']
+          : ['xxl']
+      }
+
+      return <PictureWithSources {...pictureProps} />
     }
 
-    return renderImage(targetBg?.imgUrl)
+    const mainBackground = {
+      videoUrl: content.bg.videoUrl,
+      imgUrl: content.bg.imgUrl,
+      sourceUrls: content.bg.sourceUrls
+    }
+
+    if (!seasonIndex) {
+      return renderBackground(
+        mainBackground.videoUrl,
+        mainBackground.imgUrl,
+        mainBackground.sourceUrls
+      )
+    }
+
+    const seasonNumber = parseInt(seasonIndex, 10)
+    const season = content.seasons?.[seasonNumber - 1]
+
+    if (!season) {
+      return <Spinner width={60} height={60} />
+    }
+
+    const seasonBackground = season.bg
+    const background = seasonBackground || mainBackground
+
+    return renderBackground(
+      background.videoUrl,
+      background.imgUrl,
+      background.sourceUrls
+    )
   }
 
   const renderContent = (): JSX.Element => {
@@ -459,7 +497,7 @@ export function Series(): JSX.Element {
     <div className="series">
       {!loading && content && (
         <div className="series-bg">
-          {renderBgPage()}
+          {renderBackgroundPage()}
         </div>
       )}
       <div className={"series-content"
