@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef, CSSProperties, JSX } from "react"
-import { useAppDispatch } from "../../hooks"
+import { useAppDispatch, useCheckBreakpoint } from "../../hooks"
 import { toggleShow, setTitle, setSrc } from "../../redux/MediaPlayerSlice"
 import { Btn } from "../Btn"
 import { Card } from "../Card"
@@ -14,6 +14,7 @@ import { ArrowRightIcon } from "../../assets/icons/ArrowRightIcon"
 
 export function Slider({ sliderSettings, sliderData: { data, cardStyles, settings, loadingData, errorData } }: SliderProps): JSX.Element {
   const dispatch = useAppDispatch()
+  const BREAKPOINTMD = useCheckBreakpoint(768)
   const ANIMATED_TIME: number = 400
   const autoSwipeTime: number = 100
   const sliderListGap: number = 16
@@ -21,18 +22,14 @@ export function Slider({ sliderSettings, sliderData: { data, cardStyles, setting
     prev: '',
     next: ''
   }
-
   const { typeSlider, pagenation, autoSwipe, lastSwipe, quantityListItems, mediaPlayerHandler } = sliderSettings
-
   const [stateSlider, setStateSlider] = useState<SlideState | null>(null)
   const [multiStateSlider, setMultiStateSlider] = useState<MultiSlideState | null>(null)
   const [progress, setProgress] = useState<number>(0)
   const [sliderItemWidth, setSliderItemWidth] = useState<number>(0)
   const [classBtnState, setClassBtnState] = useState<SliderClassBtnState>(defSliderClassBtnState)
-
   const sliderListRef = useRef<HTMLUListElement>(null)
   const sliderItemRef = useRef<HTMLLIElement>(null)
-
   const sliderStyle: CSSProperties = {
     ['--slider-item-per-view' as string]: `${quantityListItems}`
   }
@@ -363,10 +360,15 @@ export function Slider({ sliderSettings, sliderData: { data, cardStyles, setting
     }
   }
 
-  const toggleBaseClass = (typeSlider: "default" | "multi"): string => {
-    return typeSlider === 'default'
-      ? 'slider container'
-      : 'slider slider_multi container'
+  const toggleBaseClass = (typeSlider: "default" | "multi", mobileBreakpoint: boolean): string => {
+    const result = {
+      default: 'slider',
+      multi: 'slider slider_multi container',
+    }
+
+    if (mobileBreakpoint) return result[typeSlider]
+
+    return `${result[typeSlider]} container`
   }
 
   const renderList = (): JSX.Element | null => {
@@ -464,7 +466,7 @@ export function Slider({ sliderSettings, sliderData: { data, cardStyles, setting
   }
 
   return (
-    <div className={toggleBaseClass(typeSlider)}
+    <div className={toggleBaseClass(typeSlider, BREAKPOINTMD)}
       style={sliderStyle}
     >
       <div className={classBtnState.prev}>

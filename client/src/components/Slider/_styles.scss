@@ -48,6 +48,14 @@
     transform: scale(1);
     transition: all var(--animation-time) ease-in-out 0ms;
 
+    @include media (xl) {
+      --slider-btn-width: 2.375rem;
+    }
+
+    @include media(lg) {
+      --slider-btn-width: 1.875rem;
+    }
+
     &:hover {
       transform: scale(1.2);
     }
@@ -91,6 +99,10 @@
     &_next {
       transform: scale(var(--slider-item-next-scale));
 
+      @include media (lg) {
+        transform: scale(0.98);
+      }
+
       &::before {
         content: '';
         position: absolute;
@@ -111,6 +123,10 @@
 
     &_prev {
       transform: scale(var(--slider-item-prev-scale));
+
+      @include media (lg) {
+        transform: scale(0.98);
+      }
 
       &::before {
         content: '';
@@ -179,6 +195,21 @@
     @include flex-center;
     gap: 1rem;
     padding: 0 3.75rem;
+
+    @include media (xxxl) {
+      bottom: 2.5rem;
+      padding: 0 2.5rem;
+    }
+
+    @include media (xxl) {
+      bottom: 2rem;
+      padding: 0 2rem;
+    }
+
+    @include media (xl) {
+      bottom: 1.5rem;
+      padding: 0 1.5rem;
+    }
 
     &__item {
       height: 0.25rem;

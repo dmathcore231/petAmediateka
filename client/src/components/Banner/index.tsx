@@ -1,18 +1,45 @@
 import { JSX } from "react"
 import { Link } from "react-router-dom"
+import { useCheckBreakpoint } from "../../hooks"
+import { PictureWithSources } from "../PictureWithSources"
 import { BannerProps } from "../../types/interfaces/BannerProps"
+import { PictureWithSourcesProps } from "../../types/interfaces/PictureWithSourcesProps"
 
 export function Banner({ _id, title, bannerListItem, img, titleBtn, ageRestriction, loading }: BannerProps): JSX.Element {
+  const breakpointLg = useCheckBreakpoint(992)
+  const breakpointMd = useCheckBreakpoint(768)
   const baseClass: string = 'banner'
   const loadingClass: string = loading
     ? ` ${baseClass}_loading`
     : ''
+  const pictureWithSourcesProps: PictureWithSourcesProps = {
+    img: {
+      url: img.url,
+      sourceUrls: img.sourceUrls,
+    },
+    alt: 'banner',
+    classes: {
+      picture: 'banner-picture',
+      img: 'banner-picture__img',
+    },
+    media: ['xxl', 'md'],
+  }
 
-  const renderBannerListItems = (arr: string[]): JSX.Element[] => arr.map((item, index) => (
-    <li key={index} className="banner-list__item text text_size_s">
-      {item}
-    </li>
-  ))
+  const renderBannerListItems = (arr: string[], breakpointLg: boolean): JSX.Element[] => {
+    if (breakpointLg && !breakpointMd) {
+      return arr.filter((_, index) => index < arr.length - 1).map((item, index) => (
+        <li key={index} className="banner-list__item text">
+          {item}
+        </li>
+      ))
+    } else {
+      return arr.map((item, index) => (
+        <li key={index} className="banner-list__item text">
+          {item}
+        </li>
+      ))
+    }
+  }
 
   if (loading) {
     return (
@@ -33,10 +60,10 @@ export function Banner({ _id, title, bannerListItem, img, titleBtn, ageRestricti
       <div className="banner__wrapper">
         <div className="banner__item">
           <div className="banner__title">
-            <h3>{title}</h3>
+            <span className="title title_size_m">{title}</span >
           </div>
           <ul className="banner-list">
-            {renderBannerListItems(bannerListItem)}
+            {renderBannerListItems(bannerListItem, breakpointLg)}
             <li className="banner-list__item text text_size_s">
               {`${ageRestriction}+`}
             </li>
@@ -48,10 +75,8 @@ export function Banner({ _id, title, bannerListItem, img, titleBtn, ageRestricti
               {titleBtn}
             </Link>
           </div>
+          <PictureWithSources {...pictureWithSourcesProps} />
         </div>
-        <picture className="banner-picture">
-          <img src={img} alt="" className="banner-picture__img" />
-        </picture>
       </div>
     </div>
   )

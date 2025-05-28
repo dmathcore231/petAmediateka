@@ -1,5 +1,6 @@
 import { JSX } from "react"
 import { Link, NavLink } from "react-router-dom"
+import { useCheckBreakpoint } from "../../hooks"
 import { NavBarItemFooterTypes } from "../../types/NavBarItemFooterTypes"
 import { ConfigNavBarFooterItems } from "../../types/interfaces/ConfigNavBarFooterItems"
 import { Logo } from "../../assets/icons/Logo"
@@ -14,12 +15,31 @@ import { YouTubeIcon } from "../../assets/icons/YouTubeIcon"
 import { ZenIcon } from "../../assets/icons/ZenIcon"
 
 export function Footer(): JSX.Element {
+  const BREAKPOINT_XXL = useCheckBreakpoint(1400)
   const text = {
     email: 'help@amediateka.ru',
     support: 'Поддержка',
   }
 
   const renderNavBarItems = (type: NavBarItemFooterTypes): JSX.Element => {
+    const setIconSize = (): { width: number, height: number } => {
+      const sizeStorIcon: Record<string, { width: number, height: number }> = {
+        xxl: {
+          width: 122,
+          height: 40
+        },
+        xl: {
+          width: 100,
+          height: 32
+        }
+      }
+
+      if (!BREAKPOINT_XXL) {
+        return sizeStorIcon.xxl
+      } else {
+        return sizeStorIcon.xl
+      }
+    }
     const config: Record<NavBarItemFooterTypes, ConfigNavBarFooterItems[]> = {
       main: [
         { url: '/collection-series', value: 'Сериалы' },
@@ -39,11 +59,26 @@ export function Footer(): JSX.Element {
         { url: '/recommendations', value: 'В Амедиатеке применяются рекомендательные технологии' },
       ],
       store: [
-        { url: '#', value: (<AppStoreIcon width={122} height={40} />) },
-        { url: '#', value: (<GooglePlayIcon width={122} height={40} />) },
-        { url: '#', value: (<AppGalleryIcon width={122} height={40} />) },
-        { url: '#', value: (<RuStoreIcon width={122} height={40} />) },
-        { url: '#', value: (<SmartTvIcon width={122} height={40} />) },
+        {
+          url: '#',
+          value: (<AppStoreIcon width={setIconSize().width} height={setIconSize().height} />)
+        },
+        {
+          url: '#',
+          value: (<GooglePlayIcon width={setIconSize().width} height={setIconSize().height} />)
+        },
+        {
+          url: '#',
+          value: (<AppGalleryIcon width={setIconSize().width} height={setIconSize().height} />)
+        },
+        {
+          url: '#',
+          value: (<RuStoreIcon width={setIconSize().width} height={setIconSize().height} />)
+        },
+        {
+          url: '#',
+          value: (<SmartTvIcon width={setIconSize().width} height={setIconSize().height} />)
+        },
       ],
       social: [
         { url: '#', value: (<TelegramIcon width={40} height={40} />) },
@@ -64,9 +99,12 @@ export function Footer(): JSX.Element {
 
       return `${baseClass}${activeLinkClass}`
     }
-    const renderLinkValue = (value: string | JSX.Element): JSX.Element => typeof value === 'string'
-      ? <span className="text text_size_s">{value}</span>
-      : value
+    const renderLinkValue = (value: string | JSX.Element): JSX.Element =>
+      typeof value === 'string'
+        ? (<span className="title">
+          {value}
+        </span>)
+        : value
 
     return (
       <>
@@ -87,19 +125,19 @@ export function Footer(): JSX.Element {
     <footer className="footer container">
       <div className="footer__item">
         <Link to="/" className="footer__link-home">
-          <Logo width={168} height={16} />
+          <Logo width={BREAKPOINT_XXL ? 120 : 168} height={16} />
         </Link>
       </div>
       <div className="footer__item">
         <div className="footer-menu">
           <nav className="footer-nav-bar">
-            <ul className="nav-bar-list">
+            <ul className="nav-bar-list nav-bar-list_flex_wrap">
               {renderNavBarItems('main')}
             </ul>
-            <ul className="nav-bar-list nav-bar-list_gap_sm">
+            <ul className="nav-bar-list nav-bar-list_gap_sm nav-bar-list_flex_wrap">
               {renderNavBarItems('secondary')}
             </ul>
-            <ul className="nav-bar-list nav-bar-list_gap_sm nav-bar-list_padding_top">
+            <ul className="nav-bar-list nav-bar-list_gap_sm nav-bar-list_padding_top nav-bar-list_flex_wrap">
               {renderNavBarItems('store')}
             </ul>
             <ul className="nav-bar-list nav-bar-list_gap_sm nav-bar-list_padding_top">
@@ -110,12 +148,12 @@ export function Footer(): JSX.Element {
       </div>
       <div className="footer__item">
         <Link to="/" className="footer__link">
-          <span className="value value_color_gray">
+          <span className="title title_color_secondary">
             {text.support}
           </span>
         </Link>
         <Link to="/" className="footer__link">
-          <span className="value">
+          <span className="title">
             {text.email}
           </span>
         </Link>

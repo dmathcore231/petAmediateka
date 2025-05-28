@@ -19,11 +19,6 @@ h1 {
     font-size: 2rem;
     line-height: 2.5rem;
   }
-
-  @include media (sm) {
-    font-size: 1.5rem;
-    line-height: 2rem;
-  }
 }
 
 h2 {
@@ -44,12 +39,6 @@ h2 {
     font-size: 1.25rem;
     line-height: 1.75rem;
   }
-
-  @include media (sm) {
-    font-size: 1.125rem;
-    line-height: 1.5rem;
-  }
-
 }
 
 h3 {
@@ -68,11 +57,6 @@ h3 {
 
   @include media (md) {
     font-size: 1.125rem;
-    line-height: 1.5rem;
-  }
-
-  @include media (sm) {
-    font-size: 1rem;
     line-height: 1.5rem;
   }
 }
@@ -95,11 +79,6 @@ h4 {
     font-size: 1rem;
     line-height: 1.5rem;
   }
-
-  @include media (sm) {
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-  }
 }
 
 h5 {
@@ -119,11 +98,6 @@ h5 {
   @include media (md) {
     font-size: 0.875rem;
     line-height: 1.25rem;
-  }
-
-  @include media (sm) {
-    font-size: 0.75rem;
-    line-height: 1rem;
   }
 }
 
@@ -145,11 +119,6 @@ h6 {
     font-size: 0.75rem;
     line-height: 1rem;
   }
-
-  @include media (sm) {
-    font-size: 0.625rem;
-    line-height: 0.875rem;
-  }
 }
 
 .title {
@@ -169,11 +138,6 @@ h6 {
   @include media (md) {
     font-size: 0.75rem;
     line-height: 1rem;
-  }
-
-  @include media (sm) {
-    font-size: 0.625rem;
-    line-height: 0.875rem;
   }
 
   &_align {
@@ -201,11 +165,6 @@ h6 {
         font-size: 1.5rem;
         line-height: 2.5rem;
       }
-
-      @include media (sm) {
-        font-size: 1.25rem;
-        line-height: 2rem;
-      }
     }
 
     &_xl {
@@ -225,11 +184,6 @@ h6 {
       @include media (md) {
         font-size: 1.25rem;
         line-height: 2rem;
-      }
-
-      @include media (sm) {
-        font-size: 1rem;
-        line-height: 1.5rem;
       }
     }
 
@@ -251,11 +205,6 @@ h6 {
         font-size: 1rem;
         line-height: 1.5rem;
       }
-
-      @include media (sm) {
-        font-size: 0.875rem;
-        line-height: 1.25rem;
-      }
     }
 
     &_m {
@@ -276,11 +225,6 @@ h6 {
         font-size: 0.875rem;
         line-height: 1.25rem;
       }
-
-      @include media (sm) {
-        font-size: 0.75rem;
-        line-height: 1rem;
-      }
     }
 
     &_s {
@@ -300,11 +244,6 @@ h6 {
       @include media (md) {
         font-size: 0.75rem;
         line-height: 1rem;
-      }
-
-      @include media (sm) {
-        font-size: 0.625rem;
-        line-height: 0.875rem;
       }
     }
   }
@@ -369,11 +308,6 @@ h6 {
     line-height: 0.875rem;
   }
 
-  @include media (sm) {
-    font-size: 0.5rem;
-    line-height: 0.75rem;
-  }
-
   &_color {
 
     &_secondary {
@@ -408,11 +342,6 @@ h6 {
         font-size: 0.5rem;
         line-height: 0.75rem;
       }
-
-      @include media (sm) {
-        font-size: 0.375rem;
-        line-height: 0.5rem;
-      }
     }
 
     &_xs {
@@ -432,11 +361,6 @@ h6 {
       @include media (md) {
         font-size: 0.375rem;
         line-height: 0.5rem;
-      }
-
-      @include media (sm) {
-        font-size: 0.25rem;
-        line-height: 0.375rem;
       }
     }
   }

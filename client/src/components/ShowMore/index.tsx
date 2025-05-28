@@ -12,8 +12,8 @@ export function ShowMore({ data }: ShowMoreProps): JSX.Element {
   }
 
   const setClassesDiscription = (isShow: boolean): string => {
-    const baseClass = "show-more__discription"
-    const isShowClass = isShow ? " show-more__discription_show" : ""
+    const baseClass = "show-more__discription title"
+    const isShowClass = isShow ? " show-more__discription_show title" : ""
 
     return `${baseClass}${isShowClass}`
   }

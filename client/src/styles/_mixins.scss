@@ -88,4 +88,10 @@
       @content;
     }
   }
+
+  @else if $size ==xxxl {
+    @media (max-width: $breakpoint-xxxl) {
+      @content;
+    }
+  }
 }

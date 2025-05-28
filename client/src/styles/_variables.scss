@@ -23,6 +23,7 @@ $clip-path-10: polygon(0 10%, 100% 0, 100% 100%, 0% 100%);
 $main-transition: all .4s ease-in-out 0ms;
 $loading-animation: loading 2.5s infinite;
 $main-z-index: 1001;
+$breakpoint-xxxl: 112.5rem;
 $breakpoint-xxl: 87.5rem;
 $breakpoint-xl: 75rem;
 $breakpoint-lg: 62rem;
@@ -30,17 +31,17 @@ $breakpoint-md: 48rem;
 $breakpoint-sm: 36rem;
 
 :root {
-  --main-header-padding: 7.5rem;
+  --main-header-padding: 12.5rem;
 
   @media (max-width: $breakpoint-xxl) {
-    --main-header-padding: 6.25rem;
+    --main-header-padding: 7.5rem;
   }
 
   @media(max-width: $breakpoint-lg) {
-    --main-header-padding: 4.75rem;
+    --main-header-padding: 5rem;
   }
 
   @media(max-width: $breakpoint-md) {
-    --main-header-padding: 5rem;
+    --main-header-padding: 3.5rem;
   }
 }

@@ -41,7 +41,8 @@ export const defaultCardData: CardData = {
   bg: {
     imgUrl: '#',
     videoUrl: '#',
-    imgResizeUrl: '#'
+    imgResizeUrl: '#',
+    sourceUrls: []
   },
   logoImg: '/#',
   link: '/#',
@@ -51,7 +52,11 @@ export const defaultBannerData: BannerProps = {
   _id: '1',
   title: "test title",
   bannerListItem: ['test1', 'test2', 'test3', 'test4'],
-  img: "/bannerImg.png",
+  img: {
+    url: "/bannerImg.png",
+    resizeUrl: '#',
+    sourceUrls: []
+  },
   titleBtn: "Test btn",
   ageRestriction: 18,
   loading: true

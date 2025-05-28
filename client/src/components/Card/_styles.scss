@@ -5,7 +5,6 @@
   --width: 100%;
   --height: 100%;
   --border-radius: 1.5rem;
-  --border-top-radius: 1.5rem;
   --bg-color: transparent;
   --before-bg: transparent;
 
@@ -50,7 +49,7 @@
     width: 100%;
     height: 100%;
     background: var(--before-bg);
-    border-radius: var(--border-top-radius);
+    border-radius: var(--border-radius);
   }
 
   &-bg {
@@ -110,6 +109,7 @@
       height: 100%;
       display: block;
       object-fit: cover;
+      object-position: top center;
       border-radius: var(--bg-img-border-radius);
     }
   }
@@ -125,7 +125,6 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: var(--body-jc);
-    // gap: 1rem;
     padding: var(--body-padding);
 
     &__age-restriction {
@@ -202,6 +201,10 @@
 
           &_lg {
             width: 22.5rem;
+
+            @include media (md) {
+              width: 100%;
+            }
           }
 
           &_xsm {
@@ -327,6 +330,46 @@
       --bg-before-bg-color: linear-gradient(90deg, rgba(17, 17, 19, .6), rgba(17, 17, 19, 0));
       --bg-after-content: '';
       --bg-after-bg-color: linear-gradient(180deg, rgba(31, 33, 37, 0) 0, rgba(31, 33, 37, .8));
+
+      @include media (xxxl) {
+        --height: 38.75rem;
+
+        --body-top: 2rem;
+        --body-padding: 2.5rem 2.5rem 7rem 2.5rem;
+        --body-btn-padding-top: 1.5rem;
+
+        --age-restriction-padding-bottom: 0;
+
+        --bg-title-max-height: 170px;
+        --bg-title-max-width: 520px;
+      }
+
+      @include media (xxl) {
+        --body-padding: 2rem 2rem 6rem 2rem;
+
+        --bg-title-max-height: 150px;
+        --bg-title-max-width: 450px;
+      }
+
+      @include media (xl) {
+        --height: 400px;
+        --body-padding: 1.5rem 1.5rem 5rem 1.5rem;
+
+        --bg-title-max-height: 85px;
+        --bg-title-max-width: 450px;
+      }
+
+      @include media (md) {
+        --height: 32rem;
+
+        --border-radius: 0;
+        --bg-border-radius: 0;
+        --bg-img-border-radius: 0;
+
+        --bg-title-max-height: 85px;
+        --bg-title-max-width: 100%;
+      }
+
     }
 
     &_lm {
@@ -336,6 +379,7 @@
       --body-btn-padding-top: 2rem;
 
       --bg-img-border-radius: 0;
+      --bg-border-size: 0;
 
       --bg-before-height: 66%;
       --bg-before-top: none;
@@ -356,6 +400,7 @@
     &_sm {
       --border-radius: 0;
       --bg-img-border-radius: 0;
+      --bg-border-size: 0;
     }
   }
 

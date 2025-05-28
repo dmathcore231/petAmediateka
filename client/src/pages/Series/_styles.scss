@@ -2,19 +2,37 @@
 @use "../../styles/variables" as *;
 
 .series {
-  --content-padding-top: 18.75rem;
-  --meta-data-description-padding-left: 5rem;
+  --gap-between-page: 4rem;
+  --content-padding-top: var(--main-header-padding);
   --meta-data-description-body-fd: column;
   --meta-data-description-body-jc: flex-start;
   --meta-data-description-body-gap: 2.5rem;
 
+  --content-upper-img-max-width: 520px;
+  --content-upper-img-max-height: 260px;
+
+  --bg-picture-before-height: 35rem;
+
   position: relative;
   width: 100%;
+
+  @include media (xxl) {
+    --gap-between-page: 3rem;
+  }
+
+  @include media (xl) {
+    --gap-between-page: 2rem;
+  }
+
+  @include media (lg) {
+    --gap-between-page: 1.5rem;
+  }
 
   &-bg {
     position: absolute;
     top: 0;
     left: 0;
+    width: 100%;
 
     &__picture {
       position: relative;
@@ -36,16 +54,33 @@
       &::before {
         content: "";
         position: absolute;
-        top: 0;
-        left: 0;
-        display: block;
-        height: 0.063rem;
-        pointer-events: none;
         top: auto;
         bottom: 0;
         width: 100%;
-        height: 35rem;
+        height: var(--bg-picture-before-height);
+        display: block;
+        pointer-events: none;
         background-image: linear-gradient(180deg, rgba(30, 31, 35, 0) 0, #111113 98%);
+
+        @include media (xxl) {
+          --bg-picture-before-height: 30rem;
+        }
+
+        @include media (xl) {
+          --bg-picture-before-height: 25rem;
+        }
+
+        @include media (lg) {
+          --bg-picture-before-height: 20rem;
+        }
+
+        @include media (md) {
+          --bg-picture-before-height: 15rem;
+        }
+
+        @include media (sm) {
+          --bg-picture-before-height: 10rem;
+        }
       }
     }
 
@@ -107,10 +142,33 @@
       gap: 1rem;
 
       &__img {
-        width: auto;
-        height: auto;
-        max-width: 100%;
-        max-height: 12.5rem;
+        max-width: var(--content-upper-img-max-width);
+        max-height: var(--content-upper-img-max-height);
+
+        @include media (xxxl) {
+          --content-upper-img-max-width: 390px;
+          --content-upper-img-max-height: 195px;
+        }
+
+        @include media (xxl) {
+          --content-upper-img-max-width: 368px;
+          --content-upper-img-max-height: 184px;
+        }
+
+        @include media (xl) {
+          --content-upper-img-max-width: 272px;
+          --content-upper-img-max-height: 136px;
+        }
+
+        @include media (lg) {
+          --content-upper-img-max-width: 208px;
+          --content-upper-img-max-height: 104px;
+        }
+
+        @include media (md) {
+          --content-upper-img-max-width: 200px;
+          --content-upper-img-max-height: 100px;
+        }
       }
 
       &__item {
@@ -123,37 +181,47 @@
 
     &-header {
       width: 100%;
+      @include flex-between;
+      gap: var(--gap-between-page);
 
-      &__row {
-        width: 100%;
-        @include flex-start;
-        gap: 5.625rem;
+      @include media (md) {
+        @include flex-column-start;
       }
 
-      &__btn {
+      &-btn {
         @include flex-center;
         gap: 0.5rem;
 
         &-group {
+          width: 100%;
           @include flex-start;
           gap: 1rem;
           flex: 1 0;
-          padding-right: 2.188rem;
+
+          @include media (sm) {
+            @include flex-column-start;
+          }
+
+          &__item {
+            width: 100%;
+            @include flex-center;
+            gap: 0.5rem;
+            flex: 1 0;
+
+            &_flex {
+              &_shrink {
+                &_lg {
+                  flex: 2 0;
+                }
+              }
+            }
+          }
         }
 
         &-wrapper {
           width: 100%;
           @include flex-center;
           fill: $color-white;
-          flex: 3 0;
-
-          &_flex {
-            &_shrink {
-              &_sm {
-                flex: 0.67 0;
-              }
-            }
-          }
 
           &_fill {
             &_black {
@@ -170,18 +238,12 @@
               stroke: $color-white;
             }
           }
-
-          &_flex {
-            &_sm {
-              flex: 0 0;
-            }
-          }
         }
       }
 
       &__title {
         @include flex-start;
-        flex: 0.93 0;
+        flex: 1 0;
       }
     }
 
@@ -191,10 +253,12 @@
     }
 
     &-footer {
+      width: 100%;
       @include flex-column;
       gap: 2rem;
 
       &__item {
+        width: 100%;
         @include flex-center;
       }
     }
@@ -239,8 +303,13 @@
 
   &-meta-data {
     width: 100%;
-    @include flex-center;
+    @include flex-between;
     align-items: flex-start;
+    gap: var(--gap-between-page);
+
+    @include media (md) {
+      @include flex-column-start;
+    }
 
     &-trailer {
       @include flex-column-start;
@@ -249,42 +318,6 @@
 
     &__item {
       flex: 1 0;
-    }
-
-    &-description {
-      @include flex-column-start;
-      gap: 1.875rem;
-      padding-left: var(--meta-data-description-padding-left);
-
-      &-body {
-        display: flex;
-        flex-direction: var(--meta-data-description-body-fd);
-        justify-content: var(--meta-data-description-body-jc);
-        gap: var(--meta-data-description-body-gap);
-
-        &__text {
-          flex: 1 0;
-        }
-      }
-
-      &_no-trailer {
-        --meta-data-description-padding-left: 0;
-        --meta-data-description-body-fd: row;
-        --meta-data-description-body-jc: flex-start;
-        --meta-data-description-body-gap: 5rem;
-        gap: 2.5rem;
-      }
-    }
-
-    &-info {
-      @include flex-start;
-      gap: 2.813rem;
-      flex: 1 0;
-
-      &__col {
-        @include flex-column-start;
-        gap: 0.8rem;
-      }
     }
   }
 }

@@ -5,6 +5,10 @@
   padding-top: 2rem;
   padding-bottom: 2rem;
 
+  @include media (lg) {
+    @include flex-column;
+  }
+
 
   &__item {
     @include flex-column;

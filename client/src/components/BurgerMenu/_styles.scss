@@ -3,6 +3,10 @@
 
 .burger-menu {
   --aside-display: none;
+  --aside-width: 30rem;
+  --aside-padding: 2.5rem 3.75rem;
+
+  --aside-header-gap: 1.5rem;
 
   @include flex-center;
   cursor: pointer;
@@ -30,30 +34,61 @@
 
   &-aside {
     position: absolute;
-    width: 480px;
+    width: var(--aside-width);
     height: 100vh;
     overflow-y: auto;
     @include flex-column;
     gap: 2.5rem;
     justify-content: flex-start;
-    padding: 1.875rem 2.5rem 3.75rem 3.75rem;
+    padding: var(--aside-padding);
     z-index: 5;
     backdrop-filter: blur(12px);
-    background-color: rgba(31, 33, 37, .8);
+    background-color: $color-dark;
+
+    @include media (xxl) {
+      --aside-width: 25rem;
+      --aside-padding: 2.5rem 3.5rem;
+      gap: 1.5rem;
+    }
+
+    @include media (xxl) {
+      --aside-width: 19rem;
+      --aside-padding: 2rem 2.5rem;
+      gap: 1.5rem;
+    }
+
+    @include media (md) {
+      --aside-width: 100%;
+      --aside-padding: 1.438rem 2rem 2rem;
+    }
 
     &-header {
       width: 100%;
       @include flex-column-end;
       fill: $color-white;
-      gap: 1.5rem;
+      gap: var(--aside-header-gap);
+
+      @include media(md) {
+        --aside-header-gap: 1rem;
+      }
 
       &__item {
         width: 100%;
         @include flex-start;
         gap: 1.5rem;
 
+        @include media(md) {
+          @include flex-center;
+        }
+
         &_jc {
           justify-content: space-between;
+        }
+
+        &_margin {
+          &_bottom {
+            margin-bottom: 2.75rem;
+          }
         }
       }
 
@@ -61,10 +96,30 @@
         @include flex-center;
         background-color: $color-secondary;
         fill: $color-gray;
-        width: 56px;
-        height: 56px;
+        width: 3.5rem;
+        height: 3.5rem;
         border-radius: 50%;
-        padding: 10px;
+        padding: 0.625rem;
+
+        @include media (xxl) {
+          width: 2.5rem;
+          height: 2.5rem;
+        }
+      }
+
+      &__wrapper {
+        width: 100%;
+        @include flex-end;
+        position: relative;
+      }
+
+      &__title {
+        @include media(md) {
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
+          @include flex-center;
+        }
       }
     }
 
@@ -100,9 +155,17 @@
 
     &-nav-bar {
       &-list {
+        padding-top: 3.75rem;
         @include flex-column-start;
         gap: 2.5rem;
-        padding-top: 3.75rem;
+
+        @include media (md) {
+          padding-top: 1rem;
+          display: grid;
+          grid-template-columns: repeat(2, max-content);
+          justify-content: space-between;
+          gap: 1rem;
+        }
       }
     }
   }
