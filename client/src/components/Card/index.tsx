@@ -19,6 +19,7 @@ import { IsFavoriteIcon } from "../../assets/icons/IsFavoriteIcon"
 
 export function Card({ data, styles, settings, loadingCardData, error }: CardProps): JSX.Element {
   const dispatch = useAppDispatch()
+  const BREAKPOINT_XL = useCheckBreakpoint(1200)
   const BREAKPOINT_MD = useCheckBreakpoint(768)
   const { user, loading } = useAppSelector(state => state.my)
   const { _id, type, title, badge, ageRestriction, description, bg, logoImg, link } = data
@@ -28,6 +29,10 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
   const sizeIconFavorite = {
     width: BREAKPOINT_MD ? 20 : 24,
     height: BREAKPOINT_MD ? 20 : 24
+  }
+  const sizeIconPlay = {
+    width: BREAKPOINT_XL ? 40 : 60,
+    height: BREAKPOINT_XL ? 40 : 60
   }
 
   const iconButtonProps: IconButtonProps = {
@@ -226,7 +231,7 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
         {renderExternalTitle()}
         {cardSeries && (
           <div className="card-icon-play">
-            <MediaPlayIcon width={60} height={60} />
+            <MediaPlayIcon width={sizeIconPlay.width} height={sizeIconPlay.height} />
           </div>
         )}
       </>

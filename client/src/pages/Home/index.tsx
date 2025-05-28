@@ -23,7 +23,10 @@ export function Home(): JSX.Element {
   const { mainSlider, banner, watchingNow, newRelease, promoLine, coverPromo } = useAppSelector((state) => state.content)
   const BREAKPOINT_XL = useCheckBreakpoint(1200)
   const BREAKPOINT_MD = useCheckBreakpoint(768)
+  const BREAKPOINT_SM = useCheckBreakpoint(576)
   const setQuantityListItems = (maxSize: boolean) => {
+    if (BREAKPOINT_SM) return 1
+
     if (BREAKPOINT_MD) return 2
 
     if (BREAKPOINT_XL) return maxSize ? 4 : 3

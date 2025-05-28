@@ -2,6 +2,8 @@
 @use "../../styles/variables" as *;
 
 .show-more {
+  --discription-max-width: 48%;
+
   @include flex-column-start;
   gap: 1rem;
 
@@ -11,9 +13,13 @@
 
   &__discription {
     text-align: left;
-    max-width: 55%;
+    max-width: var(--discription-max-width);
     max-height: 140px;
     overflow-y: hidden;
+
+    @include media (md) {
+      --discription-max-width: 100%;
+    }
 
     &_show {
       max-height: 100%;

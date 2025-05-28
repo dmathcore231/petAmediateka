@@ -1,6 +1,6 @@
 import { useEffect, useState, JSX } from "react"
 import { useParams, Link } from "react-router-dom"
-import { useAppDispatch, useAppSelector } from "../../hooks"
+import { useAppDispatch, useAppSelector, useCheckBreakpoint } from "../../hooks"
 import { fetchContent } from "../../redux/contentSlice"
 import { fetchMyFavorite } from "../../services/my/myThunk"
 import { RootState } from "../../redux/store"
@@ -17,60 +17,47 @@ import { ContentTypeEnum } from "../../types/interfaces/Content"
 import { MediaContent } from "../../types/interfaces/MediaContent"
 import { ContentStateItem } from "../../types/interfaces/InitialStatesSlice"
 import { Season } from "../../types/interfaces/MediaContent"
-import { IconButtonProps } from "../../types/interfaces/IconButtonProps"
+import { RenderBtnGroupIconConfig } from "../../types/interfaces/RenderBtnGroupIconConfig"
 import { formSrcMediaContent, checkIsFavoriteContent } from "../../helpers"
 import { PlayIcon } from "../../assets/icons/PlayIcon"
 import { ShareIcon } from "../../assets/icons/ShareIcon"
+import { ShareIconIsActive } from "../../assets/icons/ShareIconIsActive"
 import { AddFavoriteIcon } from "../../assets/icons/AddFavoriteIcon"
 import { IsFavoriteIcon } from "../../assets/icons/IsFavoriteIcon"
 import { LikeIcon } from "../../assets/icons/LikeIcon"
+import { LikeIconIsActive } from "../../assets/icons/LikeIconIsActive"
 import { DislikeIcon } from "../../assets/icons/DislikeIcon"
+import { DislikeIconIsActive } from "../../assets/icons/DislikeIconIsActive"
 
 export function Series(): JSX.Element {
-  const { id, seasonIndex } = useParams()
   const dispatch = useAppDispatch()
-
+  const BREAKPOINT_LG = useCheckBreakpoint(992)
+  const BREAKPOINT_MD = useCheckBreakpoint(768)
+  const { id, seasonIndex } = useParams()
   const { content, loading } = useAppSelector((state: RootState) => state.content.series as ContentStateItem<MediaContent>)
   const { user, loading: loadingUser } = useAppSelector(state => state.my)
-
-  const [isHoveredBtnWatchNow, setIsHoveredBtnWatchNow] = useState(false)
-  const [isHoveredBtnAddFavorite, setIsHoveredBtnAddFavorite] = useState(false)
-
-
-  const iconButtonWatchNowProps: IconButtonProps = {
-    config: {
-      stateIcon: 'default',
-      loading,
-    },
-    styles: {
-      scale: true,
-      fillColor: 'black'
-    },
-    iconJSX: {
-      default: (<PlayIcon width={24} height={24} />),
-    },
-    isHovered: isHoveredBtnWatchNow
-  }
-
-  const iconButtonFavoriteProps: IconButtonProps = {
-    config: {
-      stateIcon: checkIsFavoriteContent(user?.userActionsData.favoritList ?? null, id!),
-      loading,
-    },
-    styles: {
-      scale: true,
-      fillColor: 'white'
-    },
-    iconJSX: {
-      default: (<AddFavoriteIcon width={24} height={24} />),
-      isActive: (<IsFavoriteIcon width={24} height={24} />),
-    },
-    isHovered: isHoveredBtnAddFavorite
-  }
+  const [btnHoveredState, setBtnHoveredState] = useState({
+    watchNow: false,
+    addFavorite: false,
+    like: false,
+    dislike: false,
+    share: false,
+  })
+  const [sizeIcons, setSizeIcons] = useState({ width: 24, height: 24 })
 
   useEffect((): void => {
     dispatch(fetchContent({ type: ContentTypeEnum.Series, id }))
   }, [dispatch])
+
+  useEffect(() => {
+    if (BREAKPOINT_MD) {
+      setSizeIcons({ width: 14, height: 14 })
+    } else if (BREAKPOINT_LG) {
+      setSizeIcons({ width: 20, height: 20 })
+    } else {
+      setSizeIcons({ width: 24, height: 24 })
+    }
+  }, [BREAKPOINT_LG, BREAKPOINT_MD])
 
   const handleClickBtnAddFavorite = (id: string): void => {
     if (!user || loadingUser) return
@@ -79,23 +66,6 @@ export function Series(): JSX.Element {
     formData.append('id', id)
 
     dispatch(fetchMyFavorite(formData))
-  }
-
-  const setClassMetaDataDes = (): string => {
-    const baseClass: string = 'series-meta-data-description'
-    const noTrailerClass: string = `${baseClass}_no-trailer`
-
-    const season: Season | undefined = content?.seasons?.[Number(seasonIndex) - 1]
-
-    if (!seasonIndex && content?.trailer) {
-      return baseClass
-    }
-
-    if (seasonIndex && season?.trailer) {
-      return baseClass
-    }
-
-    return `${baseClass} ${noTrailerClass}`
   }
 
   const renderBgPage = (): JSX.Element => {
@@ -184,84 +154,253 @@ export function Series(): JSX.Element {
       )
     }
 
+    const renderBtnGroup = (): JSX.Element => {
+      const TEXT: Record<string, string> = {
+        watchNow: "Смотреть",
+      }
+      const mainClass = "series-content-header"
+      const CLASSES = {
+        btnGroup: {
+          base: `${mainClass}-btn-group`,
+          item: `${mainClass}-btn-group__item`,
+        },
+        wrapper: {
+          base: `${mainClass}-btn-wrapper`,
+          flexShrink: `${mainClass}-btn-wrapper_flex_shrink_lg`,
+          fillTransparent: `${mainClass}-btn-wrapper_fill_transparent`,
+        },
+        btn: `${mainClass}-btn`,
+        title: "title title_color_black",
+      }
+
+      const iconsConfig: RenderBtnGroupIconConfig[] = [
+        {
+          typeBtn: 'watchNow',
+          propsIconBtn: {
+            config: {
+              stateIcon: 'default',
+              loading,
+            },
+            styles: {
+              scale: true,
+              fillColor: 'black'
+            },
+            iconJSX: {
+              default: (<PlayIcon width={sizeIcons.width} height={sizeIcons.height} />),
+            },
+            isHovered: btnHoveredState.watchNow
+          },
+          classes: `${CLASSES.wrapper.base} ${CLASSES.wrapper.flexShrink}`,
+          handlersBtn: {
+            onClick: () => {
+              console.log('click watch now')
+            },
+            onMouseEnter: () => {
+              setBtnHoveredState((prev) => ({
+                ...prev,
+                watchNow: !prev.watchNow
+              }))
+            },
+            onMouseLeave: () => {
+              setBtnHoveredState((prev) => ({
+                ...prev,
+                watchNow: !prev.watchNow
+              }))
+            }
+          },
+          titleBtn: TEXT.watchNow
+        },
+        {
+          typeBtn: 'addFavorite',
+          propsIconBtn: {
+            config: {
+              stateIcon: checkIsFavoriteContent(user?.userActionsData.favoritList ?? null, id!),
+              loading,
+            },
+            styles: {
+              scale: true,
+              fillColor: 'white'
+            },
+            iconJSX: {
+              default: (<AddFavoriteIcon width={sizeIcons.width} height={sizeIcons.height} />),
+              isActive: (<IsFavoriteIcon width={sizeIcons.width} height={sizeIcons.height} />),
+            },
+            isHovered: btnHoveredState.addFavorite
+          },
+          classes: `${CLASSES.wrapper.base} ${CLASSES.wrapper.fillTransparent}`,
+          handlersBtn: {
+            onClick: () => {
+              handleClickBtnAddFavorite(id as string)
+            },
+            onMouseEnter: () => {
+              setBtnHoveredState((prev) => ({
+                ...prev,
+                addFavorite: !prev.addFavorite
+              }))
+            },
+            onMouseLeave: () => {
+              setBtnHoveredState((prev) => ({
+                ...prev,
+                addFavorite: !prev.addFavorite
+              }))
+            }
+          },
+        },
+        {
+          typeBtn: 'like',
+          propsIconBtn: {
+            config: {
+              stateIcon: 'default',
+              loading,
+            },
+            styles: {
+              scale: true,
+              fillColor: 'white'
+            },
+            iconJSX: {
+              default: (<LikeIcon width={sizeIcons.width} height={sizeIcons.height} />),
+              active: (<LikeIconIsActive width={sizeIcons.width} height={sizeIcons.height} />),
+            },
+            isHovered: btnHoveredState.like
+          },
+          classes: CLASSES.wrapper.base,
+          handlersBtn: {
+            onClick: () => {
+              console.log('click like')
+            },
+            onMouseEnter: () => {
+              setBtnHoveredState((prev) => (
+                { ...prev, like: !prev.like }))
+            },
+            onMouseLeave: () => {
+              setBtnHoveredState((prev) => (
+                { ...prev, like: !prev.like }))
+            },
+          }
+        },
+        {
+          typeBtn: 'dislike',
+          propsIconBtn: {
+            config: {
+              stateIcon: 'default',
+              loading,
+            },
+            styles: {
+              scale: true,
+              fillColor: 'white'
+            },
+            iconJSX: {
+              default: (<DislikeIcon width={sizeIcons.width} height={sizeIcons.height} />),
+              active: (<DislikeIconIsActive width={sizeIcons.width} height={sizeIcons.height} />),
+            },
+            isHovered: btnHoveredState.dislike
+          },
+          classes: CLASSES.wrapper.base,
+          handlersBtn: {
+            onClick: () => {
+              console.log('click dislike')
+            },
+            onMouseEnter: () => {
+              setBtnHoveredState((prev) => (
+                { ...prev, dislike: !prev.dislike }))
+            },
+            onMouseLeave: () => {
+              setBtnHoveredState((prev) => (
+                { ...prev, dislike: !prev.dislike }))
+            },
+          }
+        },
+        {
+          typeBtn: 'share',
+          propsIconBtn: {
+            config: {
+              stateIcon: 'default',
+              loading,
+            },
+            styles: {
+              scale: true,
+              fillColor: 'white'
+            },
+            iconJSX: {
+              default: (<ShareIcon width={sizeIcons.width} height={sizeIcons.height} />),
+              active: (<ShareIconIsActive width={sizeIcons.width} height={sizeIcons.height} />),
+            },
+            isHovered: btnHoveredState.share
+          },
+          classes: CLASSES.wrapper.base,
+          handlersBtn: {
+            onClick: () => {
+              console.log('click share')
+            },
+            onMouseEnter: () => {
+              setBtnHoveredState((prev) => (
+                { ...prev, share: !prev.share }))
+            },
+            onMouseLeave: () => {
+              setBtnHoveredState((prev) => (
+                { ...prev, share: !prev.share }))
+            },
+          }
+        },
+      ]
+
+      return (
+        <div className={CLASSES.btnGroup.base}>
+          <div className={CLASSES.btnGroup.item}>
+            <div className={iconsConfig[0].classes}>
+              <Btn
+                type="button"
+                className={iconsConfig[0].typeBtn === 'watchNow' ? 'btn_primary' : "btn_secondary"}
+                {...iconsConfig[0].handlersBtn}
+              >
+                {iconsConfig[0].titleBtn ? (
+                  <div className={CLASSES.btn}>
+                    <span className={CLASSES.title}>
+                      {iconsConfig[0].titleBtn}
+                    </span>
+                    {<IconButton {...iconsConfig[0].propsIconBtn} />}
+                  </div>)
+                  : (
+                    <IconButton {...iconsConfig[0].propsIconBtn} />
+                  )}
+              </Btn>
+            </div>
+          </div>
+          <div className={CLASSES.btnGroup.item}>
+            {iconsConfig.slice(1).map((item, index) => (
+              <div className={item.classes} key={index}>
+                <Btn
+                  type="button"
+                  className={item.typeBtn === 'watchNow' ? 'btn_primary' : "btn_secondary"}
+                  {...item.handlersBtn}
+                >
+                  {item.titleBtn ? (
+                    <div className={CLASSES.btn}>
+                      <span className={CLASSES.title}>
+                        {item.titleBtn}
+                      </span>
+                      {<IconButton {...item.propsIconBtn} />}
+                    </div>)
+                    : (
+                      <IconButton {...item.propsIconBtn} />
+                    )}
+                </Btn>
+              </div>
+            ))}
+          </div>
+        </div>
+      )
+    }
+
     return (
       <>
         {renderUpper(logoImg)}
         <div className="series-content-header container">
-          <div className="series-content-header__row">
-            <div className="series-content-header__btn-group">
-              <div className="series-content-header__btn-wrapper series-content-header__btn-wrapper_fill_black">
-                <Btn
-                  type="button"
-                  className="btn_primary"
-                  onClick={() => { console.log("click") }}
-                  onMouseEnter={() => setIsHoveredBtnWatchNow(true)}
-                  onMouseLeave={() => setIsHoveredBtnWatchNow(false)}
-                >
-                  <div className="series-content-header__btn">
-                    {<IconButton {...iconButtonWatchNowProps} />}
-                    <span className="title title_color_black">
-                      Смотреть
-                    </span>
-                  </div>
-                </Btn>
-              </div>
-              <div className="series-content-header__btn-wrapper series-content-header__btn-wrapper_fill_transparent">
-                {id && (
-                  <Btn
-                    type="button"
-                    className="btn_secondary"
-                    onClick={() => handleClickBtnAddFavorite(id)}
-                    onMouseEnter={() => setIsHoveredBtnAddFavorite(true)}
-                    onMouseLeave={() => setIsHoveredBtnAddFavorite(false)}
-                  >
-                    <div className="series-content-header__btn">
-                      {<IconButton {...iconButtonFavoriteProps} />}
-                      <span className="title">
-                        В избранное
-                      </span>
-                    </div>
-                  </Btn>
-                )}
-              </div>
-              <div className="series-content-header__btn-wrapper
-                series-content-header__btn-wrapper_flex_shrink_sm
-              ">
-                <Btn
-                  type="button"
-                  className="btn_secondary"
-                  onClick={() => { console.log("click") }}>
-                  <LikeIcon width={26} height={26} />
-                </Btn>
-              </div>
-              <div className="series-content-header__btn-wrapper
-                series-content-header__btn-wrapper_flex_shrink_sm
-              ">
-                <Btn
-                  type="button"
-                  className="btn_secondary"
-                  onClick={() => { console.log("click") }}>
-                  <DislikeIcon width={26} height={26} />
-                </Btn>
-              </div>
-              <div className="series-content-header__btn-wrapper
-                series-content-header__btn-wrapper_flex_shrink_sm
-              ">
-                <Btn
-                  type="button"
-                  className="btn_secondary"
-                  onClick={() => { console.log("click") }}>
-                  <ShareIcon width={26} height={26} />
-                </Btn>
-              </div>
-            </div>
-            <div className="series-content-header__title">
-              <h2 className="title title_size_xl title_color_secondary title_weight_light">
-                {data.title.value}
-              </h2>
-            </div>
-          </div>
-          <div className="series-content-header__row">
+          {renderBtnGroup()}
+          <div className="series-content-header__title">
+            <h2 className="title title_size_xl title_color_secondary title_weight_light">
+              {data.title.value}
+            </h2>
           </div>
         </div>
         <div className="series-content-body container">
@@ -287,67 +426,17 @@ export function Series(): JSX.Element {
               </div>
             )}
             <div className="series-meta-data__item">
-              <div className={setClassMetaDataDes()} >
-                <div className="series-meta-data-description__upper">
-                  {rating && (
-                    <MetaData
-                      rating={rating}
-                      dateRelease={data.dateRelease}
-                      ageRestriction={data.ageRestriction}
-                      genres={data.genres} />
-                  )}
-                </div>
-                <div className="series-meta-data-description-body">
-                  <div className="series-meta-data-description-body__text title title_align_left">
-                    {seasonIndex && content.seasons ? content.seasons[Number(seasonIndex) - 1].description : data.description.mainDescription}
-                  </div>
-                  <div className="series-meta-data-info">
-                    <div className="series-meta-data-info__col">
-                      <div className="series-meta-data-info__row title title_color_gray title_weight_light">
-                        Режиссеры:
-                      </div>
-                      <div className="series-meta-data-info__row title title_color_gray title_weight_light">
-                        В ролях:
-                      </div>
-                      <div className="series-meta-data-info__row title title_color_gray title_weight_light">
-                        Страна:
-                      </div>
-                      <div className="series-meta-data-info__row title title_color_gray title_weight_light">
-                        Жанры:
-                      </div>
-                    </div>
-                    <div className="series-meta-data-info__col">
-                      <div className="series-meta-data-info__row title">
-                        {data.directors.map((director, index) => (
-                          <span key={index}>
-                            {director}
-                            {index !== data.directors.length - 1 && ', '}
-                          </span>
-                        ))}
-                      </div>
-                      <div className="series-meta-data-info__row title">
-                        {data.actors.map((actor, index) => (
-                          <span key={index}>
-                            {actor}
-                            {index !== data.actors.length - 1 && ', '}
-                          </span>
-                        ))}
-                      </div>
-                      <div className="series-meta-data-info__row title">
-                        {data.country}
-                      </div>
-                      <div className="series-meta-data-info__row title">
-                        {data.genres.map((genre, index) => (
-                          <span key={index}>
-                            {genre}
-                            {index !== data.genres.length - 1 && ', '}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              {<MetaData
+                type="full"
+                rating={rating}
+                dateRelease={data.dateRelease}
+                ageRestriction={data.ageRestriction}
+                genres={data.genres}
+                description={season?.description ? season.description : data.description.mainDescription}
+                directors={data.directors}
+                actors={data.actors}
+                country={data.country}
+              />}
             </div>
           </div>
         </div>
@@ -358,7 +447,8 @@ export function Series(): JSX.Element {
             )}
           </div>
           <div className="series-content-footer__item">
-            <Seasons seasonsValue={seasonIndex ? Number(seasonIndex) : 0} mediaContentData={content} />
+            <Seasons seasonsValue={seasonIndex ? Number(seasonIndex) : 0}
+              mediaContentData={content} />
           </div>
         </div>
       </>
