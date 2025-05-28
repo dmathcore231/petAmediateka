@@ -11,8 +11,22 @@ const bannerSchema = new Schema<Banner>({
     required: true
   },
   img: {
-    type: String,
-    required: true
+    type: {
+      url: {
+        type: String,
+        required: true
+      },
+      resizeUrl: {
+        type: String,
+        required: true
+      },
+      sourceUrls: {
+        type: [String],
+        required: true
+      }
+    },
+    required: true,
+    _id: false
   },
   titleBtn: {
     type: String,

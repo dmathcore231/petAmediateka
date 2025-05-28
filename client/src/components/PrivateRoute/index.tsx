@@ -4,7 +4,8 @@ import { Navigate, Outlet } from "react-router-dom"
 import { Spinner } from "../Spinner"
 
 export function PrivateRoute(): JSX.Element {
-  const { user, loading } = useAppSelector(state => state.auth)
+  const { loading, token } = useAppSelector(state => state.auth)
+  const { initializedData } = useAppSelector(state => state.my)
 
   if (loading) {
     return (
@@ -14,7 +15,7 @@ export function PrivateRoute(): JSX.Element {
     )
   }
 
-  if (!user) {
+  if (!token && initializedData) {
     return <Navigate to="/auth/signin" replace />
   }
 

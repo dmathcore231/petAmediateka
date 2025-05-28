@@ -7,13 +7,41 @@
   @include flex-between;
   padding: var(--padding);
 
+  @include media (xxxl) {
+    --padding: 1.25rem 2rem;
+  }
+
+  @include media (xxl) {
+    --padding: 1rem 1.5rem;
+  }
+
+  @include media (xl) {
+    --padding: 1rem 1.5rem;
+  }
+
+  @include media (lg) {
+    --padding: 0.75rem;
+  }
+
+  @include media (md) {
+    --padding: 0.75rem 0;
+  }
+
   &__logo {
     @include flex-center;
+
+    @include media (xl) {
+      max-width: 126px;
+    }
   }
 
   &-list {
     @include flex-center;
-    gap: 2.5rem;
+    gap: 2.3rem;
+
+    @include media (xxxl) {
+      gap: 1rem;
+    }
 
     &__link {
       @include flex-center;
@@ -40,14 +68,49 @@
     &_padding {
 
       &_top {
-        padding-top: 2rem
+        padding-top: 2rem;
+
+        @include media(lg) {
+          padding-top: 1rem;
+        }
+      }
+    }
+
+    &__item {
+      @include flex-center;
+
+      &_cursor {
+
+        &_pointer {
+          cursor: pointer;
+        }
+      }
+
+      &_hover {
+        padding: 5px;
+
+        &:hover {
+          border-radius: 30%;
+          background-color: $color-secondary-hover;
+        }
+      }
+    }
+
+    &_flex {
+      &_wrap {
+        flex-wrap: wrap;
       }
     }
   }
 
   &__item {
     @include flex-center;
-    gap: 5rem;
+    gap: 4.5rem;
+    fill: $color-white;
+
+    @include media (xxxl) {
+      gap: 2rem;
+    }
 
     &_gap {
 
@@ -63,18 +126,55 @@
     height: 100%;
 
     &__item {
+      width: 120px;
+
+      @include media (xxxl) {
+        width: 100px;
+      }
+
+      @include media (xxl) {
+        width: 80px;
+      }
+
+      @include media (xl) {
+        width: 60px;
+      }
+
+      @include media (lg) {
+        width: 40px;
+      }
 
       &_margin {
         margin-right: 1.563rem;
+
+        @include media (xxxl) {
+          margin-right: 1rem;
+        }
+
+        @include media (xxl) {
+          margin-right: 0.5rem;
+        }
       }
 
       &_width {
-        &_200 {
+        &_lg {
           width: 200px;
-        }
 
-        &_188 {
-          width: 188px;
+          @include media (xxxl) {
+            width: 176px;
+          }
+
+          @include media (xxl) {
+            width: 150px;
+          }
+
+          @include media (xl) {
+            width: 126px;
+          }
+
+          @include media (lg) {
+            width: 110px;
+          }
         }
       }
     }

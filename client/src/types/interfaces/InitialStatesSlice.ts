@@ -5,6 +5,7 @@ import { Content } from "./Content"
 import { MediaContent } from "./MediaContent"
 import { ContentTypeEnum } from "./Content"
 import { SrcMediaPlaer } from "../SrcMediaPlaer"
+import { CardData } from "../Card"
 
 export type ContentTypes = Content | MediaContent | null
 
@@ -17,12 +18,18 @@ export interface StateStatusResponse {
 
 export type ContentState = Record<ContentTypeEnum, ContentStateItem<ContentTypes>>
 
-export type ContentStateItem<T extends ContentTypes> = StateStatusResponse & {
+export interface ContentStateItem<T extends ContentTypes> extends StateStatusResponse {
   content: T
 }
 
 export interface AuthState extends StateStatusResponse {
+  token: string | null
+}
+
+export interface MyState extends StateStatusResponse {
   user: UserData | null
+  initializedData: boolean
+  favoriteList: CardData[] | null
 }
 
 export interface MediaPlayerState {

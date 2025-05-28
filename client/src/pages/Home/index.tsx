@@ -1,6 +1,6 @@
 import { useEffect, JSX } from "react"
 import { Link } from "react-router-dom"
-import { useAppDispatch, useAppSelector } from "../../hooks"
+import { useAppDispatch, useAppSelector, useCheckBreakpoint } from "../../hooks"
 import { fetchContent } from "../../redux/contentSlice"
 import { Banner } from "../../components/Banner"
 import { Slider } from "../../components/Slider"
@@ -21,6 +21,18 @@ import { CoverPromoProps } from "../../types/interfaces/CoverPromoProps"
 export function Home(): JSX.Element {
   const dispatch = useAppDispatch()
   const { mainSlider, banner, watchingNow, newRelease, promoLine, coverPromo } = useAppSelector((state) => state.content)
+  const BREAKPOINT_XL = useCheckBreakpoint(1200)
+  const BREAKPOINT_MD = useCheckBreakpoint(768)
+  const BREAKPOINT_SM = useCheckBreakpoint(576)
+  const setQuantityListItems = (maxSize: boolean) => {
+    if (BREAKPOINT_SM) return 1
+
+    if (BREAKPOINT_MD) return 2
+
+    if (BREAKPOINT_XL) return maxSize ? 4 : 3
+
+    return maxSize ? 5 : 4
+  }
 
   useEffect(() => {
     dispatch(fetchContent({ type: ContentTypeEnum.MainSlider }))
@@ -90,6 +102,7 @@ export function Home(): JSX.Element {
         badgeVisible: true,
         link: {
           linkType: 'title',
+          linkDisabled: false
         },
         descriptionVisible: true,
         tags: null,
@@ -106,7 +119,7 @@ export function Home(): JSX.Element {
       pagenation: false,
       autoSwipe: false,
       lastSwipe: true,
-      quantityListItems: 5,
+      quantityListItems: setQuantityListItems(true),
       mediaPlayerHandler: false
     },
     sliderData: {
@@ -146,6 +159,7 @@ export function Home(): JSX.Element {
         badgeVisible: false,
         link: {
           linkType: 'allCard',
+          linkDisabled: false
         },
         descriptionVisible: false,
         tags: null,
@@ -166,7 +180,7 @@ export function Home(): JSX.Element {
       pagenation: false,
       autoSwipe: false,
       lastSwipe: true,
-      quantityListItems: 4,
+      quantityListItems: setQuantityListItems(false),
       mediaPlayerHandler: false
     },
     sliderData: {
@@ -206,6 +220,7 @@ export function Home(): JSX.Element {
         badgeVisible: false,
         link: {
           linkType: 'allCard',
+          linkDisabled: false
         },
         descriptionVisible: false,
         tags: null,
@@ -227,7 +242,7 @@ export function Home(): JSX.Element {
       pagenation: false,
       autoSwipe: false,
       lastSwipe: true,
-      quantityListItems: 5,
+      quantityListItems: setQuantityListItems(true),
       mediaPlayerHandler: false
     },
     sliderData: {
@@ -267,6 +282,7 @@ export function Home(): JSX.Element {
         badgeVisible: false,
         link: {
           linkType: 'allCard',
+          linkDisabled: false
         },
         descriptionVisible: false,
         tags: null,
@@ -283,7 +299,7 @@ export function Home(): JSX.Element {
       pagenation: false,
       autoSwipe: false,
       lastSwipe: true,
-      quantityListItems: 4,
+      quantityListItems: setQuantityListItems(false),
       mediaPlayerHandler: false
     },
     sliderData: {
@@ -323,6 +339,7 @@ export function Home(): JSX.Element {
         badgeVisible: false,
         link: {
           linkType: 'allCard',
+          linkDisabled: false
         },
         descriptionVisible: false,
         tags: null,

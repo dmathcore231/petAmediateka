@@ -6,7 +6,7 @@ import { UserModel } from '../models/userSchema'
 
 export function checkAccessTokenMiddleware(req: Request, res: Response, next: NextFunction): void {
   const { localDataState } = res.locals
-  const { token, error } = localDataState
+  const { error } = localDataState
   const accessTokenInHeader = req.headers.authorization?.split(' ')[1]
 
   try {

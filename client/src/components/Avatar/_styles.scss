@@ -5,8 +5,8 @@
   @include flex-center;
 
   &__img {
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 1rem;
+    height: 1rem;
     border-radius: 50%;
 
     &_size {
@@ -14,11 +14,21 @@
       &_sm {
         width: 2.5rem;
         height: 2.5rem;
+
+        @include media (xxl) {
+          width: 2rem;
+          height: 2rem;
+        }
       }
 
       &_md {
         width: 3.5rem;
         height: 3.5rem;
+
+        @include media (xxl) {
+          width: 2.5rem;
+          height: 2.5rem;
+        }
       }
     }
 

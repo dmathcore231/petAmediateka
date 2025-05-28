@@ -24,7 +24,7 @@
   --btn-font-weight: 400;
   --btn-line-height: 1.5rem;
 
-  --btn-padding: 0.625rem 0;
+  --btn-padding: 0.625rem;
 
   --btn-transition: #{$main-transition};
 
@@ -65,6 +65,34 @@
     cursor: default;
   }
 
+  @include media (xxxl) {
+    --btn-font-size: 1rem;
+    --btn-line-height: 1.5rem;
+
+    --btn-padding: 0.5rem;
+  }
+
+  @include media (xxl) {
+    --btn-font-size: 1rem;
+    --btn-line-height: 1.25rem;
+
+    --btn-padding: 0.375rem;
+  }
+
+  @include media (xl) {
+    --btn-font-size: 0.875rem;
+    --btn-line-height: 1.25rem;
+
+    --btn-padding: 0.25rem;
+  }
+
+  @include media (lg) {
+    --btn-font-size: 0.75rem;
+    --btn-line-height: 1rem;
+
+    --btn-padding: 0.25rem;
+  }
+
   &_primary {
     --btn-color: #{$color-black};
     --btn-bg-color: #{$color-primary};
@@ -77,6 +105,8 @@
   }
 
   &_secondary {
+    --btn-color-hover: #{$color-white};
+
     --btn-bg-color: #{$color-secondary};
     --btn-bg-color-hover: #{$color-secondary-hover};
     --btn-bg-color-active: #{$color-secondary-active};
@@ -84,6 +114,33 @@
     --btn-fill: #{$color-white};
     --btn-fill-hover: #{$color-white};
     --btn-fill-active: #{$color-white};
+  }
+
+  &_white {
+    --btn-color: #{$color-black};
+
+    --btn-bg-color: #{$color-white};
+    --btn-bg-color-hover: #{$color-white-hover};
+    --btn-bg-color-active: #{$color-white};
+
+    --btn-fill: #{$color-white};
+    --btn-fill-hover: #{$color-white};
+    --btn-fill-active: #{$color-white};
+
+    &_outline {
+      --btn-color: #{$color-white-dark};
+      --btn-color-hover: #{$color-white};
+      --btn-color-active: #{$color-white};
+
+      --btn-bg-color: transparent;
+      --btn-bg-color-hover: transparent;
+      --btn-bg-color-active: transparent;
+
+      --btn-border-color: #{$color-white-dark};
+      --btn-border-color-hover: #{$color-white};
+      --btn-border-color-active: #{$color-white};
+
+    }
   }
 
   &_transparent {

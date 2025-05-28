@@ -158,7 +158,8 @@ export const temporaryListSeries: Partial<MediaContent>[] = [
         ],
         bg: {
           imgUrl: 'http://localhost:3000/public/series/hotd/imgBgS1.jpg',
-          videoUrl: null
+          videoUrl: null,
+          sourceUrls: ['http://localhost:3000/public/series/hotd/imgBgS1.jpg']
         },
         trailer: null,
         description: `
@@ -275,7 +276,8 @@ export const temporaryListSeries: Partial<MediaContent>[] = [
         ],
         bg: {
           imgUrl: 'http://localhost:3000/public/series/hotd/imgBgS2.jpg',
-          videoUrl: null
+          videoUrl: null,
+          sourceUrls: ['http://localhost:3000/public/series/hotd/imgBgS2.jpg']
         },
         trailer: null,
         description: `Приквел «Игры престолов» возвращается со вторым сезоном, в котором битва за власть в Вестеросе набирает грандиозные обороты. Главные герои «Дома Дракона» – Алисента (Оливия Кук) и Эйгон (Том Глинн-Карни), которые всеми силами пытаются оставить за собой Железный трон, и Рейнира (Эмма Д’Арси) с Деймоном (Мэтт Смит), которые копят силы на Драконьем Камне для захвата власти в королевстве, – готовы начать гражданскую войну. Важную роль в противостоянии «зеленых» и «черных» сыграет Криган (Том Тейлор), предок знаменитых Старков из оригинального сериала. Зрителей ждут заговоры и неожиданные союзы за столом переговоров, эпичные сражения на земле и в небе на огнедышащих драконах, а также любовь, предательства, подвиги и шекспировские страсти – в общем, всё то, за что так любят творчество Джорджа Мартина.`,
@@ -329,7 +331,8 @@ export const temporaryListSeries: Partial<MediaContent>[] = [
     bg: {
       imgUrl: 'http://localhost:3000/public/series/hotd/imgBgS2.jpg',
       videoUrl: 'http://localhost:3000/public/series/hotd/hotdBgVideo.mp4',
-      imgResizeUrl: 'http://localhost:3000/public/series/hotd/resizeImgBgS2.jpg'
+      imgResizeUrl: 'http://localhost:3000/public/series/hotd/resizeImgBgS2.jpg',
+      sourceUrls: ['http://localhost:3000/public/series/hotd/resizeImgBgS2.jpg']
     },
     trailer: {
       quality360: 'http://localhost:3000/public/series/hotd/hotdTrailerVideo360.mp4',
@@ -478,6 +481,7 @@ export const temporaryListSeries: Partial<MediaContent>[] = [
         bg: {
           imgUrl: 'http://localhost:3000/public/series/nightTherapy/bgImg.jpg',
           videoUrl: null,
+          sourceUrls: ['http://localhost:3000/public/series/nightTherapy/bgImg.jpg']
         },
         trailer: null,
         description: null
@@ -518,7 +522,8 @@ export const temporaryListSeries: Partial<MediaContent>[] = [
     bg: {
       imgUrl: 'http://localhost:3000/public/series/nightTherapy/bgImg.jpg',
       videoUrl: null,
-      imgResizeUrl: 'http://localhost:3000/public/series/nightTherapy/resizeImgBgS1.jpg'
+      imgResizeUrl: 'http://localhost:3000/public/series/nightTherapy/resizeImgBgS1.jpg',
+      sourceUrls: ['http://localhost:3000/public/series/nightTherapy/bgImg.jpg']
     },
     trailer: {
       quality360: 'http://localhost:3000/public/series/nightTherapy/nTTrailerVideo360.mp4',
@@ -667,6 +672,7 @@ export const temporaryListSeries: Partial<MediaContent>[] = [
         bg: {
           imgUrl: 'http://localhost:3000/public/series/thoseAboutToDie/bgImg.jpg',
           videoUrl: null,
+          sourceUrls: ['http://localhost:3000/public/series/thoseAboutToDie/bgImg.jpg'],
         },
         trailer: null,
         description: null
@@ -707,7 +713,8 @@ export const temporaryListSeries: Partial<MediaContent>[] = [
     bg: {
       imgUrl: 'http://localhost:3000/public/series/thoseAboutToDie/bgImg.jpg',
       videoUrl: null,
-      imgResizeUrl: 'http://localhost:3000/public/series/thoseAboutToDie/resizeImgBgS1.jpg'
+      imgResizeUrl: 'http://localhost:3000/public/series/thoseAboutToDie/resizeImgBgS1.jpg',
+      sourceUrls: ['http://localhost:3000/public/series/thoseAboutToDie/bgImg.jpg'],
     },
     trailer: {
       quality360: 'http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo360.mp4',
@@ -855,7 +862,8 @@ export const temporaryListSeries: Partial<MediaContent>[] = [
         ],
         bg: {
           imgUrl: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/imgBg.jpg',
-          videoUrl: null
+          videoUrl: null,
+          sourceUrls: ['http://localhost:3000/public/series/losArtistasPrimerosTrazos/imgBg.jpg']
         },
         trailer: null,
         description: null
@@ -893,7 +901,8 @@ export const temporaryListSeries: Partial<MediaContent>[] = [
     bg: {
       imgUrl: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/imgBg.jpg',
       videoUrl: null,
-      imgResizeUrl: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/resizeImgBgS1.jpg'
+      imgResizeUrl: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/resizeImgBgS1.jpg',
+      sourceUrls: ['http://localhost:3000/public/series/losArtistasPrimerosTrazos/imgBg.jpg'],
     },
     trailer: {
       quality360: 'http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo360.mp4',
@@ -989,7 +998,8 @@ export const temporaryListSeries: Partial<MediaContent>[] = [
         ],
         bg: {
           imgUrl: 'http://localhost:3000/public/series/queensOfMystery/imgBg.jpg',
-          videoUrl: null
+          videoUrl: null,
+          sourceUrls: ['http://localhost:3000/public/series/queensOfMystery/imgBg.jpg'],
         },
         trailer: null,
         description: null
@@ -1027,7 +1037,8 @@ export const temporaryListSeries: Partial<MediaContent>[] = [
     bg: {
       imgUrl: 'http://localhost:3000/public/series/queensOfMystery/imgBg.jpg',
       videoUrl: null,
-      imgResizeUrl: 'http://localhost:3000/public/series/queensOfMystery/resizeImgBgS1.jpg'
+      imgResizeUrl: 'http://localhost:3000/public/series/queensOfMystery/resizeImgBgS1.jpg',
+      sourceUrls: ['http://localhost:3000/public/series/queensOfMystery/imgBg.jpg'],
     },
     trailer: {
       quality360: 'http://localhost:3000/public/series/queensOfMystery/videoTrailer360.mp4',
@@ -1201,7 +1212,8 @@ export const temporaryListSeries: Partial<MediaContent>[] = [
         ],
         bg: {
           imgUrl: 'http://localhost:3000/public/series/normalPeople/imgBgS1.jpg',
-          videoUrl: null
+          videoUrl: null,
+          sourceUrls: ['http://localhost:3000/public/series/normalPeople/imgBgS1.jpg'],
         },
         trailer: null,
         description: '«Нормальные люди» – экранизация одноименного бестселлера Салли Руни с Полом Мескалом («Гладиатор 2», «Солнце мое») и Дейзи Эдгар-Джонс («Там, где поют раки», «Безмолвный свидетель») в главных ролях. Действие сериала разворачивается в небольшом ирландском городке. Марианна – умная, богатая, но совершенно непопулярная девушка в школе, практически изгой. Конелл – звезда футбольной команды и тайная любовь всех одноклассниц. Их случайная встреча приводит не просто к первой любви, а скорее к первой настоящей близости, которую они попробуют пронести через годы и сохранить во взрослом возрасте. Героев будут ждать болезненные расставания и трогательные примирения с совершенно непредсказуемым исходом их тайного романа.'
@@ -1239,7 +1251,8 @@ export const temporaryListSeries: Partial<MediaContent>[] = [
     bg: {
       imgUrl: 'http://localhost:3000/public/series/normalPeople/imgBgS1.jpg',
       videoUrl: null,
-      imgResizeUrl: 'http://localhost:3000/public/series/normalPeople/resizeImgBgS1.jpg'
+      imgResizeUrl: 'http://localhost:3000/public/series/normalPeople/resizeImgBgS1.jpg',
+      sourceUrls: ['http://localhost:3000/public/series/normalPeople/imgBgS1.jpg']
     },
     trailer: {
       quality360: 'http://localhost:3000/public/series/normalPeople/videoTrailer360.mp4',
@@ -1361,7 +1374,8 @@ export const temporaryListSeries: Partial<MediaContent>[] = [
         ],
         bg: {
           imgUrl: 'http://localhost:3000/public/series/theMayfairWitches/imgBgS1.jpg',
-          videoUrl: null
+          videoUrl: null,
+          sourceUrls: ['http://localhost:3000/public/series/theMayfairWitches/imgBgS1.jpg'],
         },
         trailer: null,
         description: null
@@ -1402,7 +1416,8 @@ export const temporaryListSeries: Partial<MediaContent>[] = [
     bg: {
       imgUrl: 'http://localhost:3000/public/series/theMayfairWitches/imgBgS1.jpg',
       videoUrl: null,
-      imgResizeUrl: 'http://localhost:3000/public/series/theMayfairWitches/resizeImgBgS1.jpg'
+      imgResizeUrl: 'http://localhost:3000/public/series/theMayfairWitches/resizeImgBgS1.jpg',
+      sourceUrls: ['http://localhost:3000/public/series/theMayfairWitches/imgBgS1.jpg']
     },
     trailer: {
       quality360: 'http://localhost:3000/public/series/theMayfairWitches/videoTrailer360.mp4',
@@ -1550,7 +1565,8 @@ export const temporaryListSeries: Partial<MediaContent>[] = [
         ],
         bg: {
           imgUrl: 'http://localhost:3000/public/series/theOffer/imgBgS1.jpg',
-          videoUrl: null
+          videoUrl: null,
+          sourceUrls: ['http://localhost:3000/public/series/theOffer/imgBgS1.jpg']
         },
         trailer: null,
         description: 'От просмотра «Предложения» вы действительно не сможете отказаться – и отсылка к крылатой фразе дона Корлеоне тут неспроста. За десять эпизодов сериала вы узнаете всё о том, как создавался фильм «Крестный отец» и какие проблемы с ним были связаны. Основные роли в его создании сыграли продюсеры Альберт Радди (Майлз Теллер) и Роберт Эванс (Мэттью Гуд), которым пришлось сломать немало копий, пока режиссер Фрэнсис Форд Коппола (Дэн Фоглер) и писатель Марио Пьюзо (Патрик Галло) никак не могли найти общий язык, а студия не верила, что какой-то «местечковый романчик» про борьбу итальянских кланов в США сможет стать мировым хитом. Но мы-то с вами знаем, чем всё закончилось… А вот как начиналось – эту страницу из истории создания шедевра зрителям и предстоит открыть!'
@@ -1595,7 +1611,8 @@ export const temporaryListSeries: Partial<MediaContent>[] = [
     bg: {
       imgUrl: 'http://localhost:3000/public/series/theOffer/imgBgS1.jpg',
       videoUrl: null,
-      imgResizeUrl: 'http://localhost:3000/public/series/theOffer/resizeImgBgS1.jpg'
+      imgResizeUrl: 'http://localhost:3000/public/series/theOffer/resizeImgBgS1.jpg',
+      sourceUrls: ['http://localhost:3000/public/series/theOffer/imgBgS1.jpg']
     },
     trailer: {
       quality360: 'http://localhost:3000/public/series/theOffer/videoTrailer360.mp4',
@@ -1612,7 +1629,11 @@ export const temporaryBanner: Banner = {
     'На любых устройствах',
     'В отличном качестве',
     'Без рекламы'],
-  img: "/bannerImg.png",
+  img: {
+    url: "http://localhost:3000/public/content/banner/bannerImg.png",
+    resizeUrl: "http://localhost:3000/public/content/banner/bannerImgResize.png",
+    sourceUrls: ["http://localhost:3000/public/content/banner/bannerImg.png"]
+  },
   titleBtn: "Попробовать за 1₽",
   ageRestriction: 18
 }
@@ -1625,7 +1646,7 @@ export const formationLink = (typeContent: 'movie' | 'series', _id: string, link
   }
 }
 
-export const mapMediaContentToCardData = (item: MediaContent): CardData => ({
+export const transformMediaToCard = (item: MediaContent): CardData => ({
   _id: item._id as string,
   type: item.type,
   title: item.data.title,

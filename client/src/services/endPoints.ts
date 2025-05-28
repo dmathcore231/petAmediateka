@@ -6,3 +6,4 @@ export const refreshAccessTokenEndPoint = `${authEndPoint}/refresh_access_token`
 export const contentEndPoint = "/content"
 export const myEndPoint = "/my"
 export const addFavoriteEndPoint = `${myEndPoint}/addFavorite`
+export const getFavoriteListEndPoint = `${myEndPoint}/getFavoriteList`

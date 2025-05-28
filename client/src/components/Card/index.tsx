@@ -1,14 +1,16 @@
-import { JSX, useState } from "react"
+import { Children, JSX, useState } from "react"
 import { Link } from "react-router-dom"
-import { useAppDispatch, useAppSelector } from "../../hooks"
+import { useAppDispatch, useAppSelector, useCheckBreakpoint } from "../../hooks"
 import { Btn } from "../Btn"
 import { Badge } from "../Badge"
 import { AgeRestrictionBadge } from "../AgeRestrictionBadge"
 import { Tags } from "../Tags"
 import { IconButton } from "../IconButton"
-import { fetchToggleFavorite } from "../../redux/authSlice"
+import { PictureWithSources } from "../PictureWithSources"
+import { fetchMyFavorite } from "../../services/my/myThunk"
 import { CardProps } from "../../types/interfaces/CardProps"
 import { IconButtonProps } from "../../types/interfaces/IconButtonProps"
+import { PictureWithSourcesProps } from "../../types/interfaces/PictureWithSourcesProps"
 import { checkIsFavoriteContent } from "../../helpers"
 import { MediaPlayIcon } from "../../assets/icons/MediaPlayIcon"
 import { PlayIcon } from "../../assets/icons/PlayIcon"
@@ -17,13 +19,21 @@ import { IsFavoriteIcon } from "../../assets/icons/IsFavoriteIcon"
 
 export function Card({ data, styles, settings, loadingCardData, error }: CardProps): JSX.Element {
   const dispatch = useAppDispatch()
-  const { user, loading } = useAppSelector(state => state.auth)
-
+  const BREAKPOINT_XL = useCheckBreakpoint(1200)
+  const BREAKPOINT_MD = useCheckBreakpoint(768)
+  const { user, loading } = useAppSelector(state => state.my)
   const { _id, type, title, badge, ageRestriction, description, bg, logoImg, link } = data
-  const { cardSize, flex, clipPath: { value: clipPathValue, type: clipPathType }, ageRestrictionBadge, btnGroup, hover, boxShadow } = styles
-  const { title: { titleOutside, titleLogoImg, titleLogoImgIndex }, badgeVisible, link: { linkType }, descriptionVisible, tags, cardSeries } = settings
-
+  const { cardSize, flex, clipPath: { value: clipPathValue, type: clipPathType }, ageRestrictionBadge, btnGroup, hover, boxShadow, bg: bgImg } = styles
+  const { title: { titleOutside, titleLogoImg, titleLogoImgIndex }, badgeVisible, link: { linkType, linkDisabled }, descriptionVisible, tags, cardSeries } = settings
   const [isHoveredBtnAddFavorite, setIsHoveredBtnAddFavorite] = useState(false)
+  const sizeIconFavorite = {
+    width: BREAKPOINT_MD ? 20 : 24,
+    height: BREAKPOINT_MD ? 20 : 24
+  }
+  const sizeIconPlay = {
+    width: BREAKPOINT_XL ? 40 : 60,
+    height: BREAKPOINT_XL ? 40 : 60
+  }
 
   const iconButtonProps: IconButtonProps = {
     config: {
@@ -35,8 +45,12 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
       fillColor: 'white'
     },
     iconJSX: {
-      default: (<AddFavoriteIcon width={24} height={24} />),
-      isActive: (<IsFavoriteIcon width={24} height={24} />),
+      default: (<AddFavoriteIcon
+        width={sizeIconFavorite.width}
+        height={sizeIconFavorite.height} />),
+      isActive: (<IsFavoriteIcon
+        width={sizeIconFavorite.width}
+        height={sizeIconFavorite.height} />),
     },
     isHovered: isHoveredBtnAddFavorite
   }
@@ -47,15 +61,16 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
     const formData = new FormData()
     formData.append('id', id)
 
-    dispatch(fetchToggleFavorite(formData))
+    dispatch(fetchMyFavorite(formData))
   }
 
-  const renderCardContentLinkWrapper = (children: JSX.Element): JSX.Element => {
+  const renderCardContentLinkWrapper = (children: JSX.Element, linkType: 'allCard' | 'title', linkDisabled: boolean): JSX.Element => {
     if (linkType === 'allCard') {
       return (
         <Link
           to={link}
           className="card__link"
+          onClick={(e) => linkDisabled && e.preventDefault()}
         >
           {children}
         </Link>
@@ -65,29 +80,34 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
     }
   }
 
-  const renderCardBg = (): JSX.Element => {
-    const configBg: Record<string, string | undefined> = {
-      lg: bg?.imgUrl,
-      lm: bg?.imgResizeLmUrl,
-    }
-
-    const src: string = configBg[cardSize] || bg?.imgResizeUrl
-
-    return <img src={src} alt="" className="card-bg__img" />
-  }
-
   const renderCardContent = (): JSX.Element => {
     const renderBackground = (): JSX.Element | null => {
       if (loadingCardData || error) return null
 
       const baseClass = 'card-bg'
       const shadowClass = boxShadow ? ' card-bg_shadow' : ''
+      const borderClass = bgImg?.border ? ' card-bg_border_color_primary' : ''
+      const configBg: Record<string, string | undefined> = {
+        lg: bg?.imgUrl,
+        lm: bg?.imgResizeLmUrl,
+      }
+      const src: string = configBg[cardSize] || bg?.imgResizeUrl
+      const pictureWithSourcesProps: PictureWithSourcesProps = {
+        img: {
+          url: src,
+          sourceUrls: cardSize === 'lg' ? bg.sourceUrls : [src]
+        },
+        alt: `${title.originalTitle} background`,
+        classes: {
+          picture: 'card-bg__picture',
+          img: 'card-bg__img'
+        },
+        media: ['xxxl', 'xxl', 'xl', 'lg', 'md', 'sm']
+      }
 
       return (
-        <div className={`${baseClass}${shadowClass}`}>
-          <picture className="card-bg__picture">
-            {renderCardBg()}
-          </picture>
+        <div className={`${baseClass}${shadowClass}${borderClass}`}>
+          <PictureWithSources {...pictureWithSourcesProps} />
         </div>
       )
     }
@@ -211,7 +231,7 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
         {renderExternalTitle()}
         {cardSeries && (
           <div className="card-icon-play">
-            <MediaPlayIcon width={60} height={60} />
+            <MediaPlayIcon width={sizeIconPlay.width} height={sizeIconPlay.height} />
           </div>
         )}
       </>
@@ -246,7 +266,7 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
       <>
         <div className={getClasses(clipPathType)} />
         <div className={setClassesCard()}>
-          {renderCardContentLinkWrapper(renderCardContent())}
+          {renderCardContentLinkWrapper(renderCardContent(), linkType, linkDisabled)}
         </div>
       </>
     )
@@ -254,7 +274,7 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
 
   return (
     <div className={setClassesCard()}>
-      {renderCardContentLinkWrapper(renderCardContent())}
+      {renderCardContentLinkWrapper(renderCardContent(), linkType, linkDisabled)}
     </div>
   )
 }

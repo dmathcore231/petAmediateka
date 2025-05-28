@@ -10,20 +10,18 @@ export function refrechAcccessTokenMiddleware(req: Request, res: Response, next:
     return next()
   }
 
-  if (token.accessToken.expirated && user) {
-    const setAccessToken = sign({ id: user._id },
-      SECRET_KEY,
-      { expiresIn: EXP_IN_ACCESS_TOKEN }
-    )
+  const setAccessToken = sign({ id: user._id },
+    SECRET_KEY,
+    { expiresIn: EXP_IN_ACCESS_TOKEN }
+  )
 
-    localDataState.token = {
-      ...token,
-      accessToken: {
-        value: setAccessToken,
-        expirated: false,
-        error: false
-      },
-    }
+  localDataState.token = {
+    ...token,
+    accessToken: {
+      value: setAccessToken,
+      expirated: false,
+      error: false
+    },
   }
 
   return next()

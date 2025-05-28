@@ -1,4 +1,5 @@
 import { JSX } from "react"
+import { useCheckBreakpoint } from "../../hooks"
 import { CardData } from "../../types/Card"
 import { SeasonsProps } from "../../types/interfaces/SeasonsProps"
 import { SliderProps } from "../../types/interfaces/SliderProps"
@@ -9,6 +10,19 @@ export function Seasons({ seasonsValue, mediaContentData }: SeasonsProps): JSX.E
   const listClass: string = `${baseClass}-list`
   const listItemClass: string = `${listClass}__item`
   const titleClasses: string = "title title_size_l title_align_left container"
+  const BREAKPOINT_XL = useCheckBreakpoint(1200)
+  const BREAKPOINT_MD = useCheckBreakpoint(768)
+  const BREAKPOINT_SM = useCheckBreakpoint(576)
+
+  const setQuantityListItems = (maxSize: boolean) => {
+    if (BREAKPOINT_SM) return 1
+
+    if (BREAKPOINT_MD) return 2
+
+    if (BREAKPOINT_XL) return maxSize ? 4 : 3
+
+    return maxSize ? 5 : 4
+  }
 
   const formCardData = (seasonsIndex: number): CardData[] | null => {
     if (!mediaContentData.seasons) return null
@@ -27,7 +41,8 @@ export function Seasons({ seasonsValue, mediaContentData }: SeasonsProps): JSX.E
         bg: {
           imgUrl: mediaContentData.bg.imgUrl,
           videoUrl: mediaContentData.bg.videoUrl,
-          imgResizeUrl: item.imgPreview
+          imgResizeUrl: item.imgPreview,
+          sourceUrls: [item.imgPreview]
         },
         logoImg: mediaContentData.logoImg,
         link: `#`,
@@ -45,7 +60,7 @@ export function Seasons({ seasonsValue, mediaContentData }: SeasonsProps): JSX.E
         pagenation: false,
         autoSwipe: false,
         lastSwipe: true,
-        quantityListItems: 5,
+        quantityListItems: setQuantityListItems(true),
         mediaPlayerHandler: true
       },
       sliderData: {
@@ -82,6 +97,7 @@ export function Seasons({ seasonsValue, mediaContentData }: SeasonsProps): JSX.E
           badgeVisible: false,
           link: {
             linkType: 'allCard',
+            linkDisabled: false
           },
           descriptionVisible: false,
           tags: null,
