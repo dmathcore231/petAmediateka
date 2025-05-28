@@ -11,21 +11,32 @@
   --content-upper-img-max-width: 520px;
   --content-upper-img-max-height: 260px;
 
-  --bg-picture-before-height: 35rem;
+  --bg-before-height: 35rem;
 
   position: relative;
   width: 100%;
 
   @include media (xxl) {
     --gap-between-page: 3rem;
+    --bg-before-height: 30rem;
   }
 
   @include media (xl) {
     --gap-between-page: 2rem;
+    --bg-before-height: 25rem;
   }
 
   @include media (lg) {
     --gap-between-page: 1.5rem;
+    --bg-before-height: 20rem;
+  }
+
+  @include media (md) {
+    --bg-before-height: 15rem;
+  }
+
+  @include media (sm) {
+    --bg-before-height: 7rem;
   }
 
   &-bg {
@@ -57,30 +68,10 @@
         top: auto;
         bottom: 0;
         width: 100%;
-        height: var(--bg-picture-before-height);
+        height: var(--bg-before-height);
         display: block;
         pointer-events: none;
         background-image: linear-gradient(180deg, rgba(30, 31, 35, 0) 0, #111113 98%);
-
-        @include media (xxl) {
-          --bg-picture-before-height: 30rem;
-        }
-
-        @include media (xl) {
-          --bg-picture-before-height: 25rem;
-        }
-
-        @include media (lg) {
-          --bg-picture-before-height: 20rem;
-        }
-
-        @include media (md) {
-          --bg-picture-before-height: 15rem;
-        }
-
-        @include media (sm) {
-          --bg-picture-before-height: 10rem;
-        }
       }
     }
 
@@ -112,7 +103,7 @@
         top: auto;
         bottom: 0;
         width: 100%;
-        height: 35rem;
+        height: var(--bg-before-height);
         background-image: linear-gradient(180deg, rgba(30, 31, 35, 0) 0, #111113 98%);
       }
 

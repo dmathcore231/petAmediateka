@@ -70,6 +70,9 @@ const mediaContentSchema = new Schema<MediaContent>({
           },
           imgResizeUrl: {
             type: String,
+          },
+          sourceUrls: {
+            type: [String],
           }
         },
         trailer: {
