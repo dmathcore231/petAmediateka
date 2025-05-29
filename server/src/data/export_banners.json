@@ -1,0 +1,23 @@
+[
+  {
+    "_id": "67238590983f2beb45f76c9f",
+    "title": "Мировые премьеры и любимые сериалы",
+    "bannerListItem": [
+      "В единой подписке",
+      "На любых устройствах",
+      "В отличном качестве",
+      "Без рекламы"
+    ],
+    "img": {
+      "resizeUrl": "http://localhost:3000/public/content/banner/bannerImgResize.png",
+      "url": "http://localhost:3000/public/content/banner/bannerImg.png",
+      "sourceUrls": [
+        "http://localhost:3000/public/content/banner/resize/1024x512.png",
+        "http://localhost:3000/public/content/banner/resize/768x384.png"
+      ]
+    },
+    "titleBtn": "Попробовать за 1₽",
+    "ageRestriction": 18,
+    "__v": 0
+  }
+]
