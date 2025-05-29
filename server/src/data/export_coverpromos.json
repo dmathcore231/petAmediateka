@@ -1,0 +1,11 @@
+[
+  {
+    "_id": "67f687540288efc18d075924",
+    "mediaContentData": "67505c616e085652ec018f74",
+    "bgItems": [
+      "http://localhost:3000/public/content/coverPromo/bg-promo.jpg",
+      "http://localhost:3000/public/content/coverPromo/bg-item.jpg"
+    ],
+    "__v": 0
+  }
+]

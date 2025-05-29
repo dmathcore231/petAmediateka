@@ -1,0 +1,24 @@
+[
+  {
+    "_id": "677e80dfe89755c1e4cae801",
+    "titleData": {
+      "originalTitle": "thoseAboutToDie",
+      "title": "Историческая драма «Обреченные на славу»",
+      "_id": "677e80dfe89755c1e4cae802"
+    },
+    "subtitle": "Погрузитесь в суровый мир гладиаторских боев и дворцовых интриг, где борьба за власть идет не на жизнь, а на смерть.",
+    "data": "67505c616e085652ec018f5f",
+    "promoLineItem": [
+      "http://localhost:3000/public/content/promoLine/thoseAboutToDie/1.jpg",
+      "http://localhost:3000/public/content/promoLine/thoseAboutToDie/2.jpg",
+      "http://localhost:3000/public/content/promoLine/thoseAboutToDie/3.jpg",
+      "http://localhost:3000/public/content/promoLine/thoseAboutToDie/4.jpg",
+      "http://localhost:3000/public/content/promoLine/thoseAboutToDie/5.jpg",
+      "http://localhost:3000/public/content/promoLine/thoseAboutToDie/6.jpg",
+      "http://localhost:3000/public/content/promoLine/thoseAboutToDie/7.jpg",
+      "http://localhost:3000/public/content/promoLine/thoseAboutToDie/8.jpg",
+      "http://localhost:3000/public/content/promoLine/thoseAboutToDie/9.jpg"
+    ],
+    "__v": 0
+  }
+]

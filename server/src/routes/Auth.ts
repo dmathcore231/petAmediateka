@@ -28,7 +28,6 @@ const setResponseSignUp = (req: Request, res: Response): void => {
         message: "Reject",
         value: null
       }
-
       res.status(response.status).send(response)
     }
 
@@ -50,7 +49,13 @@ const setResponseSignUp = (req: Request, res: Response): void => {
       token: token.accessToken.value
     }
 
-    res.status(response.status).send(response)
+    res.cookie('refreshToken', token.refreshToken.value, {
+      maxAge: 30 * 24 * 60 * 60 * 1000,
+      sameSite: 'strict',
+      httpOnly: false,
+      secure: true
+    }).status(response.status).send(response)
+
   } catch (error: unknown) {
     const response: ResponseWithoutPayload = {
       status: 500,
@@ -96,17 +101,13 @@ const setResponseSignIn = (req: Request, res: Response): void => {
         : token.accessToken.value
     }
 
-    if (type === 'authSignIn') {
-      res.cookie('refreshToken',
-        token.refreshToken.value,
-        {
-          maxAge: 30 * 24 * 60 * 60 * 1000, sameSite: 'strict',
-          httpOnly: false,
-          secure: true
-        })
-    }
+    res.cookie('refreshToken', token.refreshToken.value, {
+      maxAge: 30 * 24 * 60 * 60 * 1000,
+      sameSite: 'strict',
+      httpOnly: false,
+      secure: true
+    }).status(response.status).send(response)
 
-    res.status(response.status).send(response)
   } catch (error: unknown) {
     const response: ResponseWithoutPayload = {
       status: 500,

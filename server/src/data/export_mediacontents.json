@@ -1,0 +1,2545 @@
+[
+  {
+    "_id": "67505c616e085652ec018f25",
+    "type": "series",
+    "seasons": [
+      {
+        "numberOfSeasons": 1,
+        "episodes": [
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/hotd/hotdTrailerVideo360.mp4",
+              "quality720": "http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4",
+              "_id": "67505c616e085652ec018f27"
+            },
+            "episodeNumber": 1,
+            "imgPreview": "http://localhost:3000/public/series/hotd/hotds1e1.jpg",
+            "title": "Наследники дракона",
+            "_id": "67505c616e085652ec018f26"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/hotd/hotdTrailerVideo360.mp4",
+              "quality720": "http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4",
+              "_id": "67505c616e085652ec018f29"
+            },
+            "episodeNumber": 2,
+            "imgPreview": "http://localhost:3000/public/series/hotd/hotds1e2.jpg",
+            "title": "Порочный принц",
+            "_id": "67505c616e085652ec018f28"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/hotd/hotdTrailerVideo360.mp4",
+              "quality720": "http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4",
+              "_id": "67505c616e085652ec018f2b"
+            },
+            "episodeNumber": 3,
+            "imgPreview": "http://localhost:3000/public/series/hotd/hotds1e3.jpg",
+            "title": "Второй своего имени",
+            "_id": "67505c616e085652ec018f2a"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/hotd/hotdTrailerVideo360.mp4",
+              "quality720": "http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4",
+              "_id": "67505c616e085652ec018f2d"
+            },
+            "episodeNumber": 4,
+            "imgPreview": "http://localhost:3000/public/series/hotd/hotds1e4.jpg",
+            "title": "Король Узкого Моря",
+            "_id": "67505c616e085652ec018f2c"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/hotd/hotdTrailerVideo360.mp4",
+              "quality720": "http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4",
+              "_id": "67505c616e085652ec018f2f"
+            },
+            "episodeNumber": 5,
+            "imgPreview": "http://localhost:3000/public/series/hotd/hotds1e5.jpg",
+            "title": "Мы путь осветим",
+            "_id": "67505c616e085652ec018f2e"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/hotd/hotdTrailerVideo360.mp4",
+              "quality720": "http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4",
+              "_id": "67505c616e085652ec018f31"
+            },
+            "episodeNumber": 6,
+            "imgPreview": "http://localhost:3000/public/series/hotd/hotds1e6.jpg",
+            "title": "Принцесса и королева",
+            "_id": "67505c616e085652ec018f30"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/hotd/hotdTrailerVideo360.mp4",
+              "quality720": "http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4",
+              "_id": "67505c616e085652ec018f33"
+            },
+            "episodeNumber": 7,
+            "imgPreview": "http://localhost:3000/public/series/hotd/hotds1e7.jpg",
+            "title": "Дрифтмарк",
+            "_id": "67505c616e085652ec018f32"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/hotd/hotdTrailerVideo360.mp4",
+              "quality720": "http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4",
+              "_id": "67505c616e085652ec018f35"
+            },
+            "episodeNumber": 8,
+            "imgPreview": "http://localhost:3000/public/series/hotd/hotds1e8.jpg",
+            "title": "Лорд Приливов",
+            "_id": "67505c616e085652ec018f34"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/hotd/hotdTrailerVideo360.mp4",
+              "quality720": "http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4",
+              "_id": "67505c616e085652ec018f37"
+            },
+            "episodeNumber": 9,
+            "imgPreview": "http://localhost:3000/public/series/hotd/hotds1e9.jpg",
+            "title": "Зеленый Совет",
+            "_id": "67505c616e085652ec018f36"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/hotd/hotdTrailerVideo360.mp4",
+              "quality720": "http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4",
+              "_id": "67505c616e085652ec018f39"
+            },
+            "episodeNumber": 10,
+            "imgPreview": "http://localhost:3000/public/series/hotd/hotds1e10.jpg",
+            "title": "Черная королева",
+            "_id": "67505c616e085652ec018f38"
+          }
+        ],
+        "bg": {
+          "imgUrl": "http://localhost:3000/public/series/hotd/imgBgS1.jpg",
+          "videoUrl": null,
+          "sourceUrls": [
+            "http://localhost:3000/public/series/hotd/resize/bgS1/1440x720.jpg",
+            "http://localhost:3000/public/series/hotd/resize/bgS1/1366x682.jpg",
+            "http://localhost:3000/public/series/hotd/resize/bgS1/1024x512.jpg",
+            "http://localhost:3000/public/series/hotd/resize/bgS1/768x384.jpg",
+            "http://localhost:3000/public/series/hotd/resize/bgS1/720x873.jpg",
+            "http://localhost:3000/public/series/hotd/resize/bgS1/360x436.jpg"
+          ]
+        },
+        "trailer": null,
+        "description": "\n        Долгожданный приквел легендарного сериала «Игра престолов». В основу «Дома Дракона» лег первый том книги Джорджа Р.Р. Мартина «Пламя и кровь», где раскрывается история династии Таргариенов. В частности, семейство ввязывается в жестокую гражданскую войну, которая получила название «Танец драконов». Среди режиссеров сериала — Мигель Сапочник, ранее работавший над «Игрой престолов». Главные роли исполнили Мэтт Смит («Доктор Кто»), Эмма Д’Арси («Мисс Плохое Поведение») и Оливия Кук («Медленные лошади»). Автор оригинальной книги Джордж Мартин описывает сериал «Дом Дракона» как «шекспировскую трагедию», где нет однозначно положительных героев. То есть все в лучших традициях невероятной вселенной «Игры престолов»!"
+      },
+      {
+        "numberOfSeasons": 2,
+        "episodes": [
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/hotd/hotdTrailerVideo360.mp4",
+              "quality720": "http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4",
+              "_id": "67505c616e085652ec018f3b"
+            },
+            "episodeNumber": 1,
+            "imgPreview": "http://localhost:3000/public/series/hotd/hotds2e1.jpg",
+            "title": "Сын за сына",
+            "_id": "67505c616e085652ec018f3a"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/hotd/hotdTrailerVideo360.mp4",
+              "quality720": "http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4",
+              "_id": "67505c616e085652ec018f3d"
+            },
+            "episodeNumber": 2,
+            "imgPreview": "http://localhost:3000/public/series/hotd/hotds2e2.jpg",
+            "title": "Рейнира Жестокая",
+            "_id": "67505c616e085652ec018f3c"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/hotd/hotdTrailerVideo360.mp4",
+              "quality720": "http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4",
+              "_id": "67505c616e085652ec018f3f"
+            },
+            "episodeNumber": 3,
+            "imgPreview": "http://localhost:3000/public/series/hotd/hotds2e3.jpg",
+            "title": "Горящая Мельница",
+            "_id": "67505c616e085652ec018f3e"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/hotd/hotdTrailerVideo360.mp4",
+              "quality720": "http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4",
+              "_id": "67505c616e085652ec018f41"
+            },
+            "episodeNumber": 4,
+            "imgPreview": "http://localhost:3000/public/series/hotd/hotds2e4.jpg",
+            "title": "Красный дракон и золотой",
+            "_id": "67505c616e085652ec018f40"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/hotd/hotdTrailerVideo360.mp4",
+              "quality720": "http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4",
+              "_id": "67505c616e085652ec018f43"
+            },
+            "episodeNumber": 5,
+            "imgPreview": "http://localhost:3000/public/series/hotd/hotds2e5.jpg",
+            "title": "Регент",
+            "_id": "67505c616e085652ec018f42"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/hotd/hotdTrailerVideo360.mp4",
+              "quality720": "http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4",
+              "_id": "67505c616e085652ec018f45"
+            },
+            "episodeNumber": 6,
+            "imgPreview": "http://localhost:3000/public/series/hotd/hotds2e6.jpg",
+            "title": "Простой люд",
+            "_id": "67505c616e085652ec018f44"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/hotd/hotdTrailerVideo360.mp4",
+              "quality720": "http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4",
+              "_id": "67505c616e085652ec018f47"
+            },
+            "episodeNumber": 7,
+            "imgPreview": "http://localhost:3000/public/series/hotd/hotds2e7.jpg",
+            "title": "Красный Посев",
+            "_id": "67505c616e085652ec018f46"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/hotd/hotdTrailerVideo360.mp4",
+              "quality720": "http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4",
+              "_id": "67505c616e085652ec018f49"
+            },
+            "episodeNumber": 8,
+            "imgPreview": "http://localhost:3000/public/series/hotd/hotds2e8.jpg",
+            "title": "Королева на все времена",
+            "_id": "67505c616e085652ec018f48"
+          }
+        ],
+        "bg": {
+          "imgUrl": "http://localhost:3000/public/series/hotd/imgBgS2.jpg",
+          "videoUrl": null,
+          "sourceUrls": [
+            "http://localhost:3000/public/series/hotd/resize/bgS2/1440x720.jpg",
+            "http://localhost:3000/public/series/hotd/resize/bgS2/1366x682.jpg",
+            "http://localhost:3000/public/series/hotd/resize/bgS2/1024x512.jpg",
+            "http://localhost:3000/public/series/hotd/resize/bgS2/768x384.jpg",
+            "http://localhost:3000/public/series/hotd/resize/bgS2/720x873.jpg",
+            "http://localhost:3000/public/series/hotd/resize/bgS2/360x436.jpg"
+          ]
+        },
+        "trailer": null,
+        "description": "Приквел «Игры престолов» возвращается со вторым сезоном, в котором битва за власть в Вестеросе набирает грандиозные обороты. Главные герои «Дома Дракона» – Алисента (Оливия Кук) и Эйгон (Том Глинн-Карни), которые всеми силами пытаются оставить за собой Железный трон, и Рейнира (Эмма Д’Арси) с Деймоном (Мэтт Смит), которые копят силы на Драконьем Камне для захвата власти в королевстве, – готовы начать гражданскую войну. Важную роль в противостоянии «зеленых» и «черных» сыграет Криган (Том Тейлор), предок знаменитых Старков из оригинального сериала. Зрителей ждут заговоры и неожиданные союзы за столом переговоров, эпичные сражения на земле и в небе на огнедышащих драконах, а также любовь, предательства, подвиги и шекспировские страсти – в общем, всё то, за что так любят творчество Джорджа Мартина."
+      }
+    ],
+    "data": {
+      "title": {
+        "value": "Дом Дракона",
+        "originalTitle": "House of the Dragon",
+        "linkTitle": "house-of-the-dragon"
+      },
+      "badge": {
+        "type": "secondary",
+        "title": "Номинант «Эмми»"
+      },
+      "description": {
+        "mainDescription": "Долгожданный приквел легендарного сериала «Игра престолов». В основу «Дома Дракона» лег первый том книги Джорджа Р.Р. Мартина «Пламя и кровь», где раскрывается история династии Таргариенов. В частности, семейство ввязывается в жестокую гражданскую войну, которая получила название «Танец драконов». Среди режиссеров сериала — Мигель Сапочник, ранее работавший над «Игрой престолов». Главные роли исполнили Мэтт Смит («Доктор Кто»), Эмма Д’Арси («Мисс Плохое Поведение») и Оливия Кук («Медленные лошади»). Автор оригинальной книги Джордж Мартин описывает сериал «Дом Дракона» как «шекспировскую трагедию», где нет однозначно положительных героев. То есть все в лучших традициях невероятной вселенной «Игры престолов»!",
+        "prewiewDescription": "Долгожданный приквел легендарного сериала «Игра престолов». В основу «Дома Дракона» лег первый том книги Джорджа Р.Р. Мартина «Пламя и кровь», где раскрывается история династии Таргариенов."
+      },
+      "about": {
+        "title": "Главная информация о «Доме дракона»",
+        "description": "После невероятного успеха телесериала «Игра престолов» стоило ожидать, что вселенная сериала обязательно дополнится приквелами и спин-оффами. Первым из них стал проект «Дом дракона» (в оригинале — House of Dragon), вышедший в 2022 году. Сейчас посмотреть все серии онлайн и в хорошем качестве можно в Амедиатеке — по подписке доступен весь сезон бесплатно — без дополнительных плат. А в этом материале подробнее расскажем о сюжете сериала.\n\n        Новый сериал-приквел «Дом дракона» снят также по франшизе Джорджа Р. Р. Мартина «Песнь льда и пламени», а если быть точнее по главам книги «Пламя и кровь», которые описывают события гражданской войны с названием «Танец Драконов».\n\n        Действие сериала «Дом дракона» переносит зрителей в фэнтези-континент Вестерос, знакомый фанатам по «Игре престолов». Однако события во всех сериях происходят примерно за 200 лет до событий всех сезонов известной истории. Кстати, именно по этой причине смотреть сериал можно и тем, кто еще не погружен в основной сюжет.\n\n        История «Дома дракона» разворачивается вокруг рода Таргариенов, которые и объединили Семь Королевств. После смерти короля Визериса I сразу два героя заявили свои права на Железный трон — принцесса Рейнира Таргариен и принц Деймон Таргариен. Они заручились поддержкой разных партий, и началась жестокая война — ведь бесплатно и без жертв получить желаемое невозможно.\n\n        Интересный факт: у сюжета сериала «Дом дракона» есть исторический прототип — война в Англии за престол в XII веке. Тогда за трон боролись племянник короля Генриха I Стефан и дочь Генриха Матильда.\n\n      Также занимательный факт — в книге данный сюжет представлен как хорошая, но не очень объективная историческая хроника, написанная вестеросским историком. В сериале «Дом дракона» создатели, в том числе в лице режиссера Мигеля Сапочника, решили рассказать эту историю в хронологическом порядке для достоверности."
+      },
+      "ageRestriction": 18,
+      "dateRelease": "2022",
+      "genres": [
+        "Драма",
+        "Мелодрама",
+        "Боевик",
+        "Фэнтези"
+      ],
+      "actors": [
+        "Стив Туссэн",
+        "Мэтт Смит",
+        "Эмма Д’Арси",
+        "Пэдди Консидайн"
+      ],
+      "directors": [
+        "Грег Яйтанс",
+        "Мигель Сапочник"
+      ],
+      "country": "США",
+      "production": "HBO"
+    },
+    "rating": {
+      "raitingAmediateka": 9.1,
+      "ratingImdb": 8.8,
+      "ratingKinopoisk": 8.4
+    },
+    "actionsData": {
+      "liked": [],
+      "disliked": []
+    },
+    "bg": {
+      "imgUrl": "http://localhost:3000/public/series/hotd/imgBgS2.jpg",
+      "videoUrl": "http://localhost:3000/public/series/hotd/hotdBgVideo.mp4",
+      "imgResizeUrl": "http://localhost:3000/public/series/hotd/resizeImgBgS2.jpg",
+      "sourceUrls": [
+        "http://localhost:3000/public/series/hotd/resize/bgS2/1440x720.jpg",
+        "http://localhost:3000/public/series/hotd/resize/bgS2/1366x682.jpg",
+        "http://localhost:3000/public/series/hotd/resize/bgS2/1024x512.jpg",
+        "http://localhost:3000/public/series/hotd/resize/bgS2/768x384.jpg",
+        "http://localhost:3000/public/series/hotd/resize/bgS2/720x873.jpg",
+        "http://localhost:3000/public/series/hotd/resize/bgS2/360x436.jpg"
+      ]
+    },
+    "trailer": {
+      "img": "http://localhost:3000/public/series/hotd/hotdTrailer.jpg",
+      "quality360": "http://localhost:3000/public/series/hotd/hotdTrailerVideo360.mp4",
+      "quality720": "http://localhost:3000/public/series/hotd/hotdTrailerVideo720.mp4"
+    },
+    "logoImg": "http://localhost:3000/public/series/hotd/logo.png",
+    "__v": 0
+  },
+  {
+    "_id": "67505c616e085652ec018f5f",
+    "type": "series",
+    "seasons": [
+      {
+        "numberOfSeasons": 1,
+        "episodes": [
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo360.mp4",
+              "quality720": "http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo720.mp4",
+              "_id": "67505c616e085652ec018f61"
+            },
+            "episodeNumber": 1,
+            "imgPreview": "http://localhost:3000/public/series/thoseAboutToDie/s1e1.jpg",
+            "title": "Дерзни или умри",
+            "_id": "67505c616e085652ec018f60"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo360.mp4",
+              "quality720": "http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo720.mp4",
+              "_id": "67505c616e085652ec018f63"
+            },
+            "episodeNumber": 2,
+            "imgPreview": "http://localhost:3000/public/series/thoseAboutToDie/s1e2.jpg",
+            "title": "Не доверяй никому",
+            "_id": "67505c616e085652ec018f62"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo360.mp4",
+              "quality720": "http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo720.mp4",
+              "_id": "67505c616e085652ec018f65"
+            },
+            "episodeNumber": 3,
+            "imgPreview": "http://localhost:3000/public/series/thoseAboutToDie/s1e3.jpg",
+            "title": "На пороге смерти",
+            "_id": "67505c616e085652ec018f64"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo360.mp4",
+              "quality720": "http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo720.mp4",
+              "_id": "67505c616e085652ec018f67"
+            },
+            "episodeNumber": 4,
+            "imgPreview": "http://localhost:3000/public/series/thoseAboutToDie/s1e4.jpg",
+            "title": "Ставка глупца",
+            "_id": "67505c616e085652ec018f66"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo360.mp4",
+              "quality720": "http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo720.mp4",
+              "_id": "67505c616e085652ec018f69"
+            },
+            "episodeNumber": 5,
+            "imgPreview": "http://localhost:3000/public/series/thoseAboutToDie/s1e5.jpg",
+            "title": "Предательство",
+            "_id": "67505c616e085652ec018f68"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo360.mp4",
+              "quality720": "http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo720.mp4",
+              "_id": "67505c616e085652ec018f6b"
+            },
+            "episodeNumber": 6,
+            "imgPreview": "http://localhost:3000/public/series/thoseAboutToDie/s1e6.jpg",
+            "title": "Кровные узы",
+            "_id": "67505c616e085652ec018f6a"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo360.mp4",
+              "quality720": "http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo720.mp4",
+              "_id": "67505c616e085652ec018f6d"
+            },
+            "episodeNumber": 7,
+            "imgPreview": "http://localhost:3000/public/series/thoseAboutToDie/s1e7.jpg",
+            "title": "На смертном одре",
+            "_id": "67505c616e085652ec018f6c"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo360.mp4",
+              "quality720": "http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo720.mp4",
+              "_id": "67505c616e085652ec018f6f"
+            },
+            "episodeNumber": 8,
+            "imgPreview": "http://localhost:3000/public/series/thoseAboutToDie/s1e8.jpg",
+            "title": "Всё или ничего",
+            "_id": "67505c616e085652ec018f6e"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo360.mp4",
+              "quality720": "http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo720.mp4",
+              "_id": "67505c616e085652ec018f71"
+            },
+            "episodeNumber": 9,
+            "imgPreview": "http://localhost:3000/public/series/thoseAboutToDie/s1e9.jpg",
+            "title": "Жребий брошен",
+            "_id": "67505c616e085652ec018f70"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo360.mp4",
+              "quality720": "http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo720.mp4",
+              "_id": "67505c616e085652ec018f73"
+            },
+            "episodeNumber": 10,
+            "imgPreview": "http://localhost:3000/public/series/thoseAboutToDie/s1e10.jpg",
+            "title": "Да начнутся игры",
+            "_id": "67505c616e085652ec018f72"
+          }
+        ],
+        "bg": {
+          "imgUrl": "http://localhost:3000/public/series/thoseAboutToDie/bgImg.jpg",
+          "videoUrl": null
+        },
+        "trailer": null,
+        "description": "Масштабная историческая драма о Римской империи с двукратным обладателем «Оскара» Энтони Хопкинсом в главной роли. Режиссером выступил Роланд Эммерих, известный по фильмам-катастрофам «День независимости», «Послезавтра» и «2012», а сценаристом – номинант на «Оскар» Роберт Родат («Спасти рядового Райана»). Зрителей ждет погружение в суровый мир гладиаторских боев и дворцовых интриг, где борьба за власть идет не на жизнь, а на смерть. Император Веспасиан (Энтони Хопкинс) – опытный воин, взошедший на трон после кровопролитной гражданской войны. Чтобы утихомирить народ, он решает дать ему не только хлеба, но и зрелищ, повелев проводить регулярные битвы гладиаторов на арене, гонки на колесницах и даже публичные казни. «Обреченные на славу» – это не только эпичные битвы и древнеримские страсти, но и звездный актерский состав: Иван Реон («Игра престолов»), Димитри Леонидас («Центурион»), Том Хьюз («Виктория»), Габриэлла Пессион («Соври мне») и многие другие. В основе сериала лежит роман Дэниела Мэнникса «Путь гладиатора»."
+      }
+    ],
+    "data": {
+      "title": {
+        "value": "Обреченные на славу",
+        "originalTitle": "Those About to Die",
+        "linkTitle": "those-about-to-die"
+      },
+      "badge": {
+        "type": "primary",
+        "title": "Мировая премьера 19 июля"
+      },
+      "description": {
+        "mainDescription": "Масштабная историческая драма о Римской империи с двукратным обладателем «Оскара» Энтони Хопкинсом в главной роли. Режиссером выступил Роланд Эммерих, известный по фильмам-катастрофам «День независимости», «Послезавтра» и «2012», а сценаристом – номинант на «Оскар» Роберт Родат («Спасти рядового Райана»). Зрителей ждет погружение в суровый мир гладиаторских боев и дворцовых интриг, где борьба за власть идет не на жизнь, а на смерть. Император Веспасиан (Энтони Хопкинс) – опытный воин, взошедший на трон после кровопролитной гражданской войны. Чтобы утихомирить народ, он решает дать ему не только хлеба, но и зрелищ, повелев проводить регулярные битвы гладиаторов на арене, гонки на колесницах и даже публичные казни. «Обреченные на славу» – это не только эпичные битвы и древнеримские страсти, но и звездный актерский состав: Иван Реон («Игра престолов»), Димитри Леонидас («Центурион»), Том Хьюз («Виктория»), Габриэлла Пессион («Соври мне») и многие другие. В основе сериала лежит роман Дэниела Мэнникса «Путь гладиатора».",
+        "prewiewDescription": "Смотрите в июле масштабную историческую драму о Римской империи с двукратным обладателем «Оскара» Энтони Хопкинсом в главной роли"
+      },
+      "about": null,
+      "ageRestriction": 18,
+      "dateRelease": "2024",
+      "genres": [
+        "Драма",
+        "Боевик",
+        "Комедия"
+      ],
+      "actors": [
+        "Энтони Хопкинс",
+        "Габриэлла Пессион",
+        "Том Хьюз",
+        "Димитри Леонидас",
+        "Иван Реон"
+      ],
+      "directors": [
+        "Марко Кройцпайнтнер",
+        "Роланд Эммерих"
+      ],
+      "country": "США",
+      "production": "Peacock"
+    },
+    "rating": {
+      "raitingAmediateka": 8.8,
+      "ratingImdb": 6.6,
+      "ratingKinopoisk": 7.7
+    },
+    "actionsData": {
+      "liked": [],
+      "disliked": []
+    },
+    "bg": {
+      "imgUrl": "http://localhost:3000/public/series/thoseAboutToDie/bgImg.jpg",
+      "videoUrl": null,
+      "imgResizeUrl": "http://localhost:3000/public/series/thoseAboutToDie/resizeImgBgS1.jpg",
+      "sourceUrls": [
+        "http://localhost:3000/public/series/thoseAboutToDie/resize/1440x720.jpg",
+        "",
+        "http://localhost:3000/public/series/thoseAboutToDie/resize/1366x682.jpg",
+        "http://localhost:3000/public/series/thoseAboutToDie/resize/1024x512.jpg",
+        "http://localhost:3000/public/series/thoseAboutToDie/resize/768x384.jpg",
+        "http://localhost:3000/public/series/thoseAboutToDie/resize/360x436.jpg"
+      ]
+    },
+    "trailer": {
+      "img": "http://localhost:3000/public/series/thoseAboutToDie/imgTrailer.jpg",
+      "quality360": "http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo360.mp4",
+      "quality720": "http://localhost:3000/public/series/thoseAboutToDie/tatdTrailerVideo720.mp4"
+    },
+    "logoImg": "http://localhost:3000/public/series/thoseAboutToDie/imgTitle.png",
+    "__v": 0
+  },
+  {
+    "_id": "67505c616e085652ec018f4a",
+    "type": "series",
+    "seasons": [
+      {
+        "numberOfSeasons": 1,
+        "episodes": [
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/nightTherapy/nTTrailerVideo720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/nightTherapy/nTTrailerVideo360.mp4",
+              "quality720": "http://localhost:3000/public/series/nightTherapy/nTTrailerVideo720.mp4",
+              "_id": "67505c616e085652ec018f4c"
+            },
+            "episodeNumber": 1,
+            "imgPreview": "http://localhost:3000/public/series/nightTherapy/s1e1.jpg",
+            "title": "Ночь - это день",
+            "_id": "67505c616e085652ec018f4b"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/nightTherapy/nTTrailerVideo720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/nightTherapy/nTTrailerVideo360.mp4",
+              "quality720": "http://localhost:3000/public/series/nightTherapy/nTTrailerVideo720.mp4",
+              "_id": "67505c616e085652ec018f4e"
+            },
+            "episodeNumber": 2,
+            "imgPreview": "http://localhost:3000/public/series/nightTherapy/s1e2.jpg",
+            "title": "Очень узкий мостик",
+            "_id": "67505c616e085652ec018f4d"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/nightTherapy/nTTrailerVideo720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/nightTherapy/nTTrailerVideo360.mp4",
+              "quality720": "http://localhost:3000/public/series/nightTherapy/nTTrailerVideo720.mp4",
+              "_id": "67505c616e085652ec018f50"
+            },
+            "episodeNumber": 3,
+            "imgPreview": "http://localhost:3000/public/series/nightTherapy/s1e3.jpg",
+            "title": "В центре бури",
+            "_id": "67505c616e085652ec018f4f"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/nightTherapy/nTTrailerVideo720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/nightTherapy/nTTrailerVideo360.mp4",
+              "quality720": "http://localhost:3000/public/series/nightTherapy/nTTrailerVideo720.mp4",
+              "_id": "67505c616e085652ec018f52"
+            },
+            "episodeNumber": 4,
+            "imgPreview": "http://localhost:3000/public/series/nightTherapy/s1e4.jpg",
+            "title": "Не замечать до последнего.",
+            "_id": "67505c616e085652ec018f51"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/nightTherapy/nTTrailerVideo720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/nightTherapy/nTTrailerVideo360.mp4",
+              "quality720": "http://localhost:3000/public/series/nightTherapy/nTTrailerVideo720.mp4",
+              "_id": "67505c616e085652ec018f54"
+            },
+            "episodeNumber": 5,
+            "imgPreview": "http://localhost:3000/public/series/nightTherapy/s1e5.jpg",
+            "title": "Крах",
+            "_id": "67505c616e085652ec018f53"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/nightTherapy/nTTrailerVideo720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/nightTherapy/nTTrailerVideo360.mp4",
+              "quality720": "http://localhost:3000/public/series/nightTherapy/nTTrailerVideo720.mp4",
+              "_id": "67505c616e085652ec018f56"
+            },
+            "episodeNumber": 6,
+            "imgPreview": "http://localhost:3000/public/series/nightTherapy/s1e6.jpg",
+            "title": "Ретроградный Меркурий, часть 1",
+            "_id": "67505c616e085652ec018f55"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/nightTherapy/nTTrailerVideo720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/nightTherapy/nTTrailerVideo360.mp4",
+              "quality720": "http://localhost:3000/public/series/nightTherapy/nTTrailerVideo720.mp4",
+              "_id": "67505c616e085652ec018f58"
+            },
+            "episodeNumber": 7,
+            "imgPreview": "http://localhost:3000/public/series/nightTherapy/s1e7.jpg",
+            "title": "Ретроградный Меркурий, часть 2",
+            "_id": "67505c616e085652ec018f57"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/nightTherapy/nTTrailerVideo720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/nightTherapy/nTTrailerVideo360.mp4",
+              "quality720": "http://localhost:3000/public/series/nightTherapy/nTTrailerVideo720.mp4",
+              "_id": "67505c616e085652ec018f5a"
+            },
+            "episodeNumber": 8,
+            "imgPreview": "http://localhost:3000/public/series/nightTherapy/s1e8.jpg",
+            "title": "Когда придёт время, отпусти",
+            "_id": "67505c616e085652ec018f59"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/nightTherapy/nTTrailerVideo720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/nightTherapy/nTTrailerVideo360.mp4",
+              "quality720": "http://localhost:3000/public/series/nightTherapy/nTTrailerVideo720.mp4",
+              "_id": "67505c616e085652ec018f5c"
+            },
+            "episodeNumber": 9,
+            "imgPreview": "http://localhost:3000/public/series/nightTherapy/s1e8.jpg",
+            "title": "Линия жизни",
+            "_id": "67505c616e085652ec018f5b"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/nightTherapy/nTTrailerVideo720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/nightTherapy/nTTrailerVideo360.mp4",
+              "quality720": "http://localhost:3000/public/series/nightTherapy/nTTrailerVideo720.mp4",
+              "_id": "67505c616e085652ec018f5e"
+            },
+            "episodeNumber": 10,
+            "imgPreview": "http://localhost:3000/public/series/nightTherapy/s1e10.jpg",
+            "title": "Это только начало",
+            "_id": "67505c616e085652ec018f5d"
+          }
+        ],
+        "bg": {
+          "imgUrl": "http://localhost:3000/public/series/nightTherapy/bgImg.jpg",
+          "videoUrl": null
+        },
+        "trailer": null,
+        "description": "Психологическая драма о поддержке и силе жизни. В центре повествования – психолог Луи Мансур (Юсеф Свейд, «Неортодоксальная»). После самоубийства жены ему приходится самостоятельно справляться с утратой, параллельно воспитывая двоих детей. Чтобы пережить боль, он решает после очередной бессонной ночи изменить время приема своих пациентов и встречаться с ними после заката. Постепенно главный герой погружается в чужие проблемы, наблюдая за человеческими историями, словно невидимый зритель, и учится справляться с собственной болью. Ночная терапия оказывается целительной для всех ее участников. Актриса Шира Хаас («Неортодоксальная») исполнила в сериале роль гениальной компьютерщицы, которая предпочитает не выходить из дома, а режиссером выступил известный израильский документалист Гавриель Библиович."
+      }
+    ],
+    "data": {
+      "title": {
+        "value": "Ночная терапия",
+        "originalTitle": "Night Therapy",
+        "linkTitle": "night-therapy"
+      },
+      "badge": {
+        "type": "primary",
+        "title": "Премьера"
+      },
+      "description": {
+        "mainDescription": "Психологическая драма о поддержке и силе жизни. В центре повествования – психолог Луи Мансур (Юсеф Свейд, «Неортодоксальная»). После самоубийства жены ему приходится самостоятельно справляться с утратой, параллельно воспитывая двоих детей. Чтобы пережить боль, он решает после очередной бессонной ночи изменить время приема своих пациентов и встречаться с ними после заката. Постепенно главный герой погружается в чужие проблемы, наблюдая за человеческими историями, словно невидимый зритель, и учится справляться с собственной болью. Ночная терапия оказывается целительной для всех ее участников. Актриса Шира Хаас («Неортодоксальная») исполнила в сериале роль гениальной компьютерщицы, которая предпочитает не выходить из дома, а режиссером выступил известный израильский документалист Гавриель Библиович.",
+        "prewiewDescription": "Психологическая драма о поддержке и силе жизни"
+      },
+      "about": null,
+      "ageRestriction": 18,
+      "dateRelease": "2024",
+      "genres": [
+        "Драма"
+      ],
+      "actors": [
+        "Шира Хаас",
+        "Яаков Зада Даниель"
+      ],
+      "directors": [
+        "Гавриель Библиович"
+      ],
+      "country": "Израиль",
+      "production": "N/A"
+    },
+    "rating": {
+      "raitingAmediateka": 9.3,
+      "ratingImdb": 8.4,
+      "ratingKinopoisk": 7.7
+    },
+    "actionsData": {
+      "liked": [],
+      "disliked": []
+    },
+    "bg": {
+      "imgUrl": "http://localhost:3000/public/series/nightTherapy/bgImg.jpg",
+      "videoUrl": null,
+      "imgResizeUrl": "http://localhost:3000/public/series/nightTherapy/resizeImgBgS1.jpg",
+      "sourceUrls": [
+        "http://localhost:3000/public/series/nightTherapy/resize/1440x720.jpg",
+        "http://localhost:3000/public/series/nightTherapy/resize/1366x682.jpg",
+        "http://localhost:3000/public/series/nightTherapy/resize/1024x512.jpg",
+        "http://localhost:3000/public/series/nightTherapy/resize/768x384.jpg",
+        "http://localhost:3000/public/series/nightTherapy/resize/720x873.jpg",
+        "http://localhost:3000/public/series/nightTherapy/resize/360x436.jpg"
+      ]
+    },
+    "trailer": {
+      "img": "http://localhost:3000/public/series/nightTherapy/imgTrailer.jpg",
+      "quality360": "http://localhost:3000/public/series/nightTherapy/nTTrailerVideo360.mp4",
+      "quality720": "http://localhost:3000/public/series/nightTherapy/nTTrailerVideo720.mp4"
+    },
+    "logoImg": "http://localhost:3000/public/series/nightTherapy/imgTitle.png",
+    "__v": 0
+  },
+  {
+    "_id": "67505c616e085652ec018f74",
+    "type": "series",
+    "seasons": [
+      {
+        "numberOfSeasons": 1,
+        "episodes": [
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo360.mp4",
+              "quality720": "http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo720.mp4",
+              "_id": "67505c616e085652ec018f76"
+            },
+            "episodeNumber": 1,
+            "imgPreview": "http://localhost:3000/public/series/losArtistasPrimerosTrazos/s1e1.jpg",
+            "title": "Две судьбы",
+            "_id": "67505c616e085652ec018f75"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo360.mp4",
+              "quality720": "http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo720.mp4",
+              "_id": "67505c616e085652ec018f78"
+            },
+            "episodeNumber": 2,
+            "imgPreview": "http://localhost:3000/public/series/losArtistasPrimerosTrazos/s1e2.jpg",
+            "title": "План в действии",
+            "_id": "67505c616e085652ec018f77"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo360.mp4",
+              "quality720": "http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo720.mp4",
+              "_id": "67505c616e085652ec018f7a"
+            },
+            "episodeNumber": 3,
+            "imgPreview": "http://localhost:3000/public/series/losArtistasPrimerosTrazos/s1e3.jpg",
+            "title": "План изменился",
+            "_id": "67505c616e085652ec018f79"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo360.mp4",
+              "quality720": "http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo720.mp4",
+              "_id": "67505c616e085652ec018f7c"
+            },
+            "episodeNumber": 4,
+            "imgPreview": "http://localhost:3000/public/series/losArtistasPrimerosTrazos/s1e4.jpg",
+            "title": "Неожиданные перемены",
+            "_id": "67505c616e085652ec018f7b"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo360.mp4",
+              "quality720": "http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo720.mp4",
+              "_id": "67505c616e085652ec018f7e"
+            },
+            "episodeNumber": 5,
+            "imgPreview": "http://localhost:3000/public/series/losArtistasPrimerosTrazos/s1e5.jpg",
+            "title": "Око за око",
+            "_id": "67505c616e085652ec018f7d"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo360.mp4",
+              "quality720": "http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo720.mp4",
+              "_id": "67505c616e085652ec018f80"
+            },
+            "episodeNumber": 6,
+            "imgPreview": "http://localhost:3000/public/series/losArtistasPrimerosTrazos/s1e6.jpg",
+            "title": "Перемирие",
+            "_id": "67505c616e085652ec018f7f"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo360.mp4",
+              "quality720": "http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo720.mp4",
+              "_id": "67505c616e085652ec018f82"
+            },
+            "episodeNumber": 7,
+            "imgPreview": "http://localhost:3000/public/series/losArtistasPrimerosTrazos/s1e7.jpg",
+            "title": "Каждый своим путем",
+            "_id": "67505c616e085652ec018f81"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo360.mp4",
+              "quality720": "http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo720.mp4",
+              "_id": "67505c616e085652ec018f84"
+            },
+            "episodeNumber": 8,
+            "imgPreview": "http://localhost:3000/public/series/losArtistasPrimerosTrazos/s1e8.jpg",
+            "title": "По следу",
+            "_id": "67505c616e085652ec018f83"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo360.mp4",
+              "quality720": "http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo720.mp4",
+              "_id": "67505c616e085652ec018f86"
+            },
+            "episodeNumber": 9,
+            "imgPreview": "http://localhost:3000/public/series/losArtistasPrimerosTrazos/s1e9.jpg",
+            "title": "Жизнь кувырком",
+            "_id": "67505c616e085652ec018f85"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo360.mp4",
+              "quality720": "http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo720.mp4",
+              "_id": "67505c616e085652ec018f88"
+            },
+            "episodeNumber": 10,
+            "imgPreview": "http://localhost:3000/public/series/losArtistasPrimerosTrazos/s1e10.jpg",
+            "title": "Последний план",
+            "_id": "67505c616e085652ec018f87"
+          }
+        ],
+        "bg": {
+          "imgUrl": "http://localhost:3000/public/series/losArtistasPrimerosTrazos/imgBg.jpg",
+          "videoUrl": null
+        },
+        "trailer": null,
+        "description": "Красочный сериал «Искусство обмана» расскажет о дуэте обаятельных мошенников, которые решили заработать на глупости богачей. Ката (Химена Ромо), влиятельный арт-эксперт, находится в эмоциональном упадке и близка к профессиональному выгоранию. Красавчик Яго (Макси Иглесиас), торговец антиквариатом, продает за большие деньги безделушки неопытным коллекционерам. Их знакомство приводит к неожиданному результату – они решают организовать общее дело. У героев нет никаких сомнений, что знания и связи помогут продать миллионерам не один десяток поддельных картин, но в какой-то момент их план превращается в капкан… Смогут ли герои обогатиться и выйти сухими из воды?"
+      }
+    ],
+    "data": {
+      "title": {
+        "value": "Искусство обмана",
+        "originalTitle": "Los Artistas: Primeros Trazos",
+        "linkTitle": "los-artistas-primeros-trazos"
+      },
+      "badge": null,
+      "description": {
+        "mainDescription": "Красочный сериал «Искусство обмана» расскажет о дуэте обаятельных мошенников, которые решили заработать на глупости богачей. Ката (Химена Ромо), влиятельный арт-эксперт, находится в эмоциональном упадке и близка к профессиональному выгоранию. Красавчик Яго (Макси Иглесиас), торговец антиквариатом, продает за большие деньги безделушки неопытным коллекционерам. Их знакомство приводит к неожиданному результату – они решают организовать общее дело. У героев нет никаких сомнений, что знания и связи помогут продать миллионерам не один десяток поддельных картин, но в какой-то момент их план превращается в капкан… Смогут ли герои обогатиться и выйти сухими из воды?",
+        "prewiewDescription": "Красочный сериал «Искусство обмана» расскажет о дуэте обаятельных мошенников, которые решили заработать на глупости богачей"
+      },
+      "about": null,
+      "ageRestriction": 18,
+      "dateRelease": "2023",
+      "genres": [
+        "Драма"
+      ],
+      "actors": [
+        "Химена Ромо",
+        "Макси Иглесиас"
+      ],
+      "directors": [
+        "Хоакин Льямас",
+        "Мануэль Санабрия"
+      ],
+      "country": "Испания",
+      "production": "Televisa"
+    },
+    "rating": {
+      "raitingAmediateka": 8,
+      "ratingImdb": 6.5,
+      "ratingKinopoisk": 7.4
+    },
+    "actionsData": {
+      "liked": [],
+      "disliked": []
+    },
+    "bg": {
+      "imgUrl": "http://localhost:3000/public/series/losArtistasPrimerosTrazos/imgBg.jpg",
+      "videoUrl": null,
+      "imgResizeUrl": "http://localhost:3000/public/series/losArtistasPrimerosTrazos/resizeImgBgS1.jpg",
+      "sourceUrls": [
+        "http://localhost:3000/public/series/losArtistasPrimerosTrazos/resize/1440x720.jpg",
+        "http://localhost:3000/public/series/losArtistasPrimerosTrazos/resize/1366x682.jpg",
+        "http://localhost:3000/public/series/losArtistasPrimerosTrazos/resize/1024x512.jpg",
+        "http://localhost:3000/public/series/losArtistasPrimerosTrazos/resize/768x384.jpg",
+        "http://localhost:3000/public/series/losArtistasPrimerosTrazos/resize/720x873.jpg",
+        "http://localhost:3000/public/series/losArtistasPrimerosTrazos/resize/360x436.jpg"
+      ]
+    },
+    "trailer": {
+      "img": "http://localhost:3000/public/series/losArtistasPrimerosTrazos/imgTrailer.jpg",
+      "quality360": "http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo360.mp4",
+      "quality720": "http://localhost:3000/public/series/losArtistasPrimerosTrazos/tatdTrailerVideo720.mp4"
+    },
+    "logoImg": "http://localhost:3000/public/series/losArtistasPrimerosTrazos/imgTitle.png",
+    "__v": 0
+  },
+  {
+    "_id": "67505c616e085652ec018f89",
+    "type": "series",
+    "seasons": [
+      {
+        "numberOfSeasons": 1,
+        "episodes": [
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/queensOfMystery/videoTrailer720.mp4"
+              },
+              "quality360": "",
+              "quality720": "",
+              "_id": "67505c616e085652ec018f8b"
+            },
+            "episodeNumber": 1,
+            "imgPreview": "http://localhost:3000/public/series/queensOfMystery/s1e1.jpg",
+            "title": "Спарринг со смертью: глава первая",
+            "_id": "67505c616e085652ec018f8a"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/queensOfMystery/videoTrailer720.mp4"
+              },
+              "quality360": "",
+              "quality720": "",
+              "_id": "67505c616e085652ec018f8d"
+            },
+            "episodeNumber": 2,
+            "imgPreview": "http://localhost:3000/public/series/queensOfMystery/s1e2.jpg",
+            "title": "Спарринг со смертью: глава последняя",
+            "_id": "67505c616e085652ec018f8c"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/queensOfMystery/videoTrailer720.mp4"
+              },
+              "quality360": "",
+              "quality720": "",
+              "_id": "67505c616e085652ec018f8f"
+            },
+            "episodeNumber": 3,
+            "imgPreview": "http://localhost:3000/public/series/queensOfMystery/s1e3.jpg",
+            "title": "Современное искусство убийства: глава первая",
+            "_id": "67505c616e085652ec018f8e"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/queensOfMystery/videoTrailer720.mp4"
+              },
+              "quality360": "",
+              "quality720": "",
+              "_id": "67505c616e085652ec018f91"
+            },
+            "episodeNumber": 4,
+            "imgPreview": "http://localhost:3000/public/series/queensOfMystery/s1e4.jpg",
+            "title": "Современное искусство убийства: глава последняя",
+            "_id": "67505c616e085652ec018f90"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/queensOfMystery/videoTrailer720.mp4"
+              },
+              "quality360": "",
+              "quality720": "",
+              "_id": "67505c616e085652ec018f93"
+            },
+            "episodeNumber": 5,
+            "imgPreview": "http://localhost:3000/public/series/queensOfMystery/s1e5.jpg",
+            "title": "Ворон: глава первая",
+            "_id": "67505c616e085652ec018f92"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/queensOfMystery/videoTrailer720.mp4"
+              },
+              "quality360": "",
+              "quality720": "",
+              "_id": "67505c616e085652ec018f95"
+            },
+            "episodeNumber": 6,
+            "imgPreview": "http://localhost:3000/public/series/queensOfMystery/s1e6.jpg",
+            "title": "Ворон: глава последняя",
+            "_id": "67505c616e085652ec018f94"
+          }
+        ],
+        "bg": {
+          "imgUrl": "http://localhost:3000/public/series/queensOfMystery/imgBg.jpg",
+          "videoUrl": null
+        },
+        "trailer": null,
+        "description": "Атмосферный детективный сериал — номинант на премию «Эмми» — погружает зрителей в мир семейных тайн и хитроумных преступлений, балансируя между теплой комедией и социальной драмой. Матильда Стоун и ее три эпатажные тетушки, которые пишут криминальные романы, расследуют несколько любопытных дел: убийство в оздоровительном центре, загадку из мира современного искусства и кражу рукописи Эдгара Аллана По. Несмотря на то, что в личной жизни Матильды не всё гладко, она добивается значительного успеха в деле о пропаже своей матери. Тетушкам явно это не по душе, и они делают всё, чтобы девушка не узнала шокирующую правду…"
+      }
+    ],
+    "data": {
+      "title": {
+        "value": "Королевы тайн",
+        "originalTitle": "Queens of Mystery",
+        "linkTitle": "queens-of-mystery"
+      },
+      "badge": null,
+      "description": {
+        "mainDescription": "Атмосферный детективный сериал — номинант на премию «Эмми» — погружает зрителей в мир семейных тайн и хитроумных преступлений, балансируя между теплой комедией и социальной драмой. Матильда Стоун и ее три эпатажные тетушки, которые пишут криминальные романы, расследуют несколько любопытных дел: убийство в оздоровительном центре, загадку из мира современного искусства и кражу рукописи Эдгара Аллана По. Несмотря на то, что в личной жизни Матильды не всё гладко, она добивается значительного успеха в деле о пропаже своей матери. Тетушкам явно это не по душе, и они делают всё, чтобы девушка не узнала шокирующую правду…",
+        "prewiewDescription": "Детективный сериал — номинант на премию «Эмми» — погружает зрителей в мир семейных тайн и хитроумных преступлений, балансируя между комедией и социальной драмой"
+      },
+      "about": null,
+      "ageRestriction": 18,
+      "dateRelease": "2023",
+      "genres": [
+        "Драма",
+        "Детектив",
+        "Криминал"
+      ],
+      "actors": [
+        "Флоренс Холл",
+        "Шиван Редмонд",
+        "Сара Вудворд",
+        "Джули Грэм",
+        "Мартин Тренаман"
+      ],
+      "directors": [
+        "Джейми Магнус Стоун"
+      ],
+      "country": "Великобритания",
+      "production": "AMC"
+    },
+    "rating": {
+      "raitingAmediateka": 8.3,
+      "ratingImdb": 7.3,
+      "ratingKinopoisk": 6.2
+    },
+    "actionsData": {
+      "liked": [],
+      "disliked": []
+    },
+    "bg": {
+      "imgUrl": "http://localhost:3000/public/series/queensOfMystery/imgBg.jpg",
+      "videoUrl": null,
+      "imgResizeUrl": "http://localhost:3000/public/series/queensOfMystery/resizeImgBgS1.jpg",
+      "sourceUrls": [
+        "http://localhost:3000/public/series/queensOfMystery/resize/1440x720.jpg",
+        "http://localhost:3000/public/series/queensOfMystery/resize/1366x682.jpg",
+        "http://localhost:3000/public/series/queensOfMystery/resize/1024x512.jpg",
+        "http://localhost:3000/public/series/queensOfMystery/resize/768x384.jpg",
+        "http://localhost:3000/public/series/queensOfMystery/resize/720x873.jpg",
+        "http://localhost:3000/public/series/queensOfMystery/resize/360x436.jpg"
+      ]
+    },
+    "trailer": {
+      "img": "http://localhost:3000/public/series/queensOfMystery/imgTrailer.jpg",
+      "quality360": "http://localhost:3000/public/series/queensOfMystery/videoTrailer360.mp4",
+      "quality720": "http://localhost:3000/public/series/queensOfMystery/videoTrailer720.mp4"
+    },
+    "logoImg": "http://localhost:3000/public/series/queensOfMystery/imgTitle.png",
+    "__v": 0
+  },
+  {
+    "_id": "6751b791bc89441d15183116",
+    "type": "series",
+    "seasons": [
+      {
+        "numberOfSeasons": 1,
+        "episodes": [
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/normalPeople/videoTrailer720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/normalPeople/videoTrailer360.mp4",
+              "quality720": "http://localhost:3000/public/series/normalPeople/videoTrailer720.mp4",
+              "_id": "6751c0a4c37a0807fac8c438"
+            },
+            "episodeNumber": 1,
+            "imgPreview": "http://localhost:3000/public/series/normalPeople/s1e1.jpg",
+            "title": "Серия 1",
+            "_id": "6751c0a4c37a0807fac8c437"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/normalPeople/videoTrailer720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/normalPeople/videoTrailer360.mp4",
+              "quality720": "http://localhost:3000/public/series/normalPeople/videoTrailer720.mp4",
+              "_id": "6751c0a4c37a0807fac8c43a"
+            },
+            "episodeNumber": 2,
+            "imgPreview": "http://localhost:3000/public/series/normalPeople/s1e2.jpg",
+            "title": "Серия 2",
+            "_id": "6751c0a4c37a0807fac8c439"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/normalPeople/videoTrailer720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/normalPeople/videoTrailer360.mp4",
+              "quality720": "http://localhost:3000/public/series/normalPeople/videoTrailer720.mp4",
+              "_id": "6751c0a4c37a0807fac8c43c"
+            },
+            "episodeNumber": 3,
+            "imgPreview": "http://localhost:3000/public/series/normalPeople/s1e3.jpg",
+            "title": "Серия 3",
+            "_id": "6751c0a4c37a0807fac8c43b"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/normalPeople/videoTrailer720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/normalPeople/videoTrailer360.mp4",
+              "quality720": "http://localhost:3000/public/series/normalPeople/videoTrailer720.mp4",
+              "_id": "6751c0a4c37a0807fac8c43e"
+            },
+            "episodeNumber": 4,
+            "imgPreview": "http://localhost:3000/public/series/normalPeople/s1e4.jpg",
+            "title": "Серия 4",
+            "_id": "6751c0a4c37a0807fac8c43d"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/normalPeople/videoTrailer720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/normalPeople/videoTrailer360.mp4",
+              "quality720": "http://localhost:3000/public/series/normalPeople/videoTrailer720.mp4",
+              "_id": "6751c0a4c37a0807fac8c440"
+            },
+            "episodeNumber": 5,
+            "imgPreview": "http://localhost:3000/public/series/normalPeople/s1e5.jpg",
+            "title": "Серия 5",
+            "_id": "6751c0a4c37a0807fac8c43f"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/normalPeople/videoTrailer720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/normalPeople/videoTrailer360.mp4",
+              "quality720": "http://localhost:3000/public/series/normalPeople/videoTrailer720.mp4",
+              "_id": "6751c0a4c37a0807fac8c442"
+            },
+            "episodeNumber": 6,
+            "imgPreview": "http://localhost:3000/public/series/normalPeople/s1e6.jpg",
+            "title": "Серия 6",
+            "_id": "6751c0a4c37a0807fac8c441"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/normalPeople/videoTrailer720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/normalPeople/videoTrailer360.mp4",
+              "quality720": "http://localhost:3000/public/series/normalPeople/videoTrailer720.mp4",
+              "_id": "6751c0a4c37a0807fac8c444"
+            },
+            "episodeNumber": 7,
+            "imgPreview": "http://localhost:3000/public/series/normalPeople/s1e7.jpg",
+            "title": "Серия 7",
+            "_id": "6751c0a4c37a0807fac8c443"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/normalPeople/videoTrailer720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/normalPeople/videoTrailer360.mp4",
+              "quality720": "http://localhost:3000/public/series/normalPeople/videoTrailer720.mp4",
+              "_id": "6751c0a4c37a0807fac8c446"
+            },
+            "episodeNumber": 8,
+            "imgPreview": "http://localhost:3000/public/series/normalPeople/s1e8.jpg",
+            "title": "Серия 8",
+            "_id": "6751c0a4c37a0807fac8c445"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/normalPeople/videoTrailer720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/normalPeople/videoTrailer360.mp4",
+              "quality720": "http://localhost:3000/public/series/normalPeople/videoTrailer720.mp4",
+              "_id": "6751c0a4c37a0807fac8c448"
+            },
+            "episodeNumber": 9,
+            "imgPreview": "http://localhost:3000/public/series/normalPeople/s1e9.jpg",
+            "title": "Серия 9",
+            "_id": "6751c0a4c37a0807fac8c447"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/normalPeople/videoTrailer720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/normalPeople/videoTrailer360.mp4",
+              "quality720": "http://localhost:3000/public/series/normalPeople/videoTrailer720.mp4",
+              "_id": "6751c0a4c37a0807fac8c44a"
+            },
+            "episodeNumber": 10,
+            "imgPreview": "http://localhost:3000/public/series/normalPeople/s1e10.jpg",
+            "title": "Серия 10",
+            "_id": "6751c0a4c37a0807fac8c449"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/normalPeople/videoTrailer720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/normalPeople/videoTrailer360.mp4",
+              "quality720": "http://localhost:3000/public/series/normalPeople/videoTrailer720.mp4",
+              "_id": "6751c0a4c37a0807fac8c44c"
+            },
+            "episodeNumber": 11,
+            "imgPreview": "http://localhost:3000/public/series/normalPeople/s1e11.jpg",
+            "title": "Серия 11",
+            "_id": "6751c0a4c37a0807fac8c44b"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/normalPeople/videoTrailer720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/normalPeople/videoTrailer360.mp4",
+              "quality720": "http://localhost:3000/public/series/normalPeople/videoTrailer720.mp4",
+              "_id": "6751c0a4c37a0807fac8c44e"
+            },
+            "episodeNumber": 12,
+            "imgPreview": "http://localhost:3000/public/series/normalPeople/s1e12.jpg",
+            "title": "Серия 12",
+            "_id": "6751c0a4c37a0807fac8c44d"
+          }
+        ],
+        "bg": {
+          "imgUrl": "http://localhost:3000/public/series/normalPeople/imgBgS1.jpg",
+          "videoUrl": null
+        },
+        "trailer": null,
+        "description": "«Нормальные люди» – экранизация одноименного бестселлера Салли Руни с Полом Мескалом («Гладиатор 2», «Солнце мое») и Дейзи Эдгар-Джонс («Там, где поют раки», «Безмолвный свидетель») в главных ролях. Действие сериала разворачивается в небольшом ирландском городке. Марианна – умная, богатая, но совершенно непопулярная девушка в школе, практически изгой. Конелл – звезда футбольной команды и тайная любовь всех одноклассниц. Их случайная встреча приводит не просто к первой любви, а скорее к первой настоящей близости, которую они попробуют пронести через годы и сохранить во взрослом возрасте. Героев будут ждать болезненные расставания и трогательные примирения с совершенно непредсказуемым исходом их тайного романа."
+      }
+    ],
+    "data": {
+      "title": {
+        "value": "Нормальные люди",
+        "originalTitle": "Normal People",
+        "linkTitle": "normal-people"
+      },
+      "badge": null,
+      "description": {
+        "mainDescription": "«Нормальные люди» – экранизация одноименного бестселлера Салли Руни с Полом Мескалом («Гладиатор 2», «Солнце мое») и Дейзи Эдгар-Джонс («Там, где поют раки», «Безмолвный свидетель») в главных ролях. Действие сериала разворачивается в небольшом ирландском городке. Марианна – умная, богатая, но совершенно непопулярная девушка в школе, практически изгой. Конелл – звезда футбольной команды и тайная любовь всех одноклассниц. Их случайная встреча приводит не просто к первой любви, а скорее к первой настоящей близости, которую они попробуют пронести через годы и сохранить во взрослом возрасте. Героев будут ждать болезненные расставания и трогательные примирения с совершенно непредсказуемым исходом их тайного романа.",
+        "prewiewDescription": "«Нормальные люди» – экранизация одноименного бестселлера Салли Руни с Полом Мескалом («Гладиатор 2», «Солнце мое») и Дейзи Эдгар-Джонс («Там, где поют раки», «Безмолвный свидетель») в главных ролях. Действие сериала разворачивается в небольшом ирландском городке."
+      },
+      "about": null,
+      "ageRestriction": 18,
+      "dateRelease": "2020",
+      "genres": [
+        "Драма",
+        "Мелодрама"
+      ],
+      "actors": [
+        "Пол Мескал",
+        "Дейзи Эдгар-Джонс"
+      ],
+      "directors": [
+        "Леонард Абрахамсон",
+        "Хетти Макдональд"
+      ],
+      "country": "Ирландия",
+      "production": "Hulu"
+    },
+    "rating": {
+      "raitingAmediateka": 7.2,
+      "ratingImdb": 8.4,
+      "ratingKinopoisk": 7.6
+    },
+    "actionsData": {
+      "liked": [],
+      "disliked": []
+    },
+    "bg": {
+      "imgUrl": "http://localhost:3000/public/series/normalPeople/imgBgS1.jpg",
+      "videoUrl": null,
+      "imgResizeUrl": "http://localhost:3000/public/series/normalPeople/resizeImgBgS1.jpg",
+      "imgResizeLmUrl": "http://localhost:3000/public/series/normalPeople/resizeLmImgBgS1.jpg",
+      "sourceUrls": [
+        "http://localhost:3000/public/series/normalPeople/resize/1440x720.jpg",
+        "http://localhost:3000/public/series/normalPeople/resize/1366x682.jpg",
+        "http://localhost:3000/public/series/normalPeople/resize/1024x512.jpg",
+        "http://localhost:3000/public/series/normalPeople/resize/768x384.jpg",
+        "http://localhost:3000/public/series/normalPeople/resize/720x873.jpg",
+        "http://localhost:3000/public/series/normalPeople/resize/360x436.jpg"
+      ]
+    },
+    "trailer": {
+      "img": "http://localhost:3000/public/series/normalPeople/imgTrailer.jpg",
+      "quality360": "http://localhost:3000/public/series/normalPeople/videoTrailer360.mp4",
+      "quality720": "http://localhost:3000/public/series/normalPeople/videoTrailer720.mp4"
+    },
+    "logoImg": "http://localhost:3000/public/series/normalPeople/imgLogo.png",
+    "__v": 0
+  },
+  {
+    "_id": "6751b791bc89441d15183123",
+    "type": "series",
+    "seasons": [
+      {
+        "numberOfSeasons": 1,
+        "episodes": [
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/theMayfairWitches/videoTrailer720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/theMayfairWitches/videoTrailer360.mp4",
+              "quality720": "http://localhost:3000/public/series/theMayfairWitches/videoTrailer720.mp4",
+              "_id": "6751b791bc89441d15183125"
+            },
+            "episodeNumber": 1,
+            "imgPreview": "http://localhost:3000/public/series/theMayfairWitches/s1e1.jpg",
+            "title": "Час ведьмовства",
+            "_id": "6751b791bc89441d15183124"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/theMayfairWitches/videoTrailer720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/theMayfairWitches/videoTrailer360.mp4",
+              "quality720": "http://localhost:3000/public/series/theMayfairWitches/videoTrailer720.mp4",
+              "_id": "6751b791bc89441d15183127"
+            },
+            "episodeNumber": 2,
+            "imgPreview": "http://localhost:3000/public/series/theMayfairWitches/s1e2.jpg",
+            "title": "Во тьме",
+            "_id": "6751b791bc89441d15183126"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/theMayfairWitches/videoTrailer720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/theMayfairWitches/videoTrailer360.mp4",
+              "quality720": "http://localhost:3000/public/series/theMayfairWitches/videoTrailer720.mp4",
+              "_id": "6751b791bc89441d15183129"
+            },
+            "episodeNumber": 3,
+            "imgPreview": "http://localhost:3000/public/series/theMayfairWitches/s1e3.jpg",
+            "title": "Вторая линия",
+            "_id": "6751b791bc89441d15183128"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/theMayfairWitches/videoTrailer720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/theMayfairWitches/videoTrailer360.mp4",
+              "quality720": "http://localhost:3000/public/series/theMayfairWitches/videoTrailer720.mp4",
+              "_id": "6751b791bc89441d1518312b"
+            },
+            "episodeNumber": 4,
+            "imgPreview": "http://localhost:3000/public/series/theMayfairWitches/s1e4.jpg",
+            "title": "Всё страньше и страньше",
+            "_id": "6751b791bc89441d1518312a"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/theMayfairWitches/videoTrailer720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/theMayfairWitches/videoTrailer360.mp4",
+              "quality720": "http://localhost:3000/public/series/theMayfairWitches/videoTrailer720.mp4",
+              "_id": "6751b791bc89441d1518312d"
+            },
+            "episodeNumber": 5,
+            "imgPreview": "http://localhost:3000/public/series/theMayfairWitches/s1e5.jpg",
+            "title": "Пленница",
+            "_id": "6751b791bc89441d1518312c"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/theMayfairWitches/videoTrailer720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/theMayfairWitches/videoTrailer360.mp4",
+              "quality720": "http://localhost:3000/public/series/theMayfairWitches/videoTrailer720.mp4",
+              "_id": "6751b791bc89441d1518312f"
+            },
+            "episodeNumber": 6,
+            "imgPreview": "http://localhost:3000/public/series/theMayfairWitches/s1e6.jpg",
+            "title": "Передача",
+            "_id": "6751b791bc89441d1518312e"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/theMayfairWitches/videoTrailer720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/theMayfairWitches/videoTrailer360.mp4",
+              "quality720": "http://localhost:3000/public/series/theMayfairWitches/videoTrailer720.mp4",
+              "_id": "6751b791bc89441d15183131"
+            },
+            "episodeNumber": 7,
+            "imgPreview": "http://localhost:3000/public/series/theMayfairWitches/s1e7.jpg",
+            "title": "Тесса",
+            "_id": "6751b791bc89441d15183130"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/theMayfairWitches/videoTrailer720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/theMayfairWitches/videoTrailer360.mp4",
+              "quality720": "http://localhost:3000/public/series/theMayfairWitches/videoTrailer720.mp4",
+              "_id": "6751b791bc89441d15183133"
+            },
+            "episodeNumber": 8,
+            "imgPreview": "http://localhost:3000/public/series/theMayfairWitches/s1e8.jpg",
+            "title": "И что за чудище",
+            "_id": "6751b791bc89441d15183132"
+          }
+        ],
+        "bg": {
+          "imgUrl": "http://localhost:3000/public/series/theMayfairWitches/imgBgS1.jpg",
+          "videoUrl": null
+        },
+        "trailer": null,
+        "description": "Фэнтези-сериал, основанный на серии книг Энн Райс – именно она подарила нам культовый мистический роман «Интервью с вампиром». Действие «Мэйфейрских ведьм» разворачивается в Новом Орлеане. Главная героиня Роуэн Филдинг (Александра Даддарио), хирург по профессии, узнает, что она наследница древнего ведьминского рода, а своим экстрасенсорным даром члены ее семьи обязаны злому духу по имени Лэшер (Джек Хьюстон). Врачебный дар Роуэн помогает спасать пациентов, а вот магический – лишать жизни ее врагов. Девушка решает разобраться, что за проклятье на ней лежит, кем была ее настоящая мать и какая судьба ждет ее саму. Среди актерского состава – Аннабет Гиш («Полуночная месса»), Гарри Хэмлин («Бесстыжие») и Бет Грант («Старикам здесь не место»)."
+      }
+    ],
+    "data": {
+      "title": {
+        "value": "Мэйфейрские ведьмы",
+        "originalTitle": "Anne Rice's The Mayfair Witches",
+        "linkTitle": "the-mayfair-witches"
+      },
+      "badge": null,
+      "description": {
+        "mainDescription": "Фэнтези-сериал, основанный на серии книг Энн Райс – именно она подарила нам культовый мистический роман «Интервью с вампиром». Действие «Мэйфейрских ведьм» разворачивается в Новом Орлеане. Главная героиня Роуэн Филдинг (Александра Даддарио), хирург по профессии, узнает, что она наследница древнего ведьминского рода, а своим экстрасенсорным даром члены ее семьи обязаны злому духу по имени Лэшер (Джек Хьюстон). Врачебный дар Роуэн помогает спасать пациентов, а вот магический – лишать жизни ее врагов. Девушка решает разобраться, что за проклятье на ней лежит, кем была ее настоящая мать и какая судьба ждет ее саму. Среди актерского состава – Аннабет Гиш («Полуночная месса»), Гарри Хэмлин («Бесстыжие») и Бет Грант («Старикам здесь не место»).",
+        "prewiewDescription": "Фэнтези-сериал, основанный на серии книг Энн Райс – именно она подарила нам культовый мистический роман «Интервью с вампиром». Действие «Мэйфейрских ведьм» разворачивается в Новом Орлеане. "
+      },
+      "about": {
+        "title": "О сериале «Мэйфейрские ведьмы»",
+        "description": " В 2023 году вышла экранизация книг писательницы Энн Райс «Мэйфейрские ведьмы» (в оригинале — Mayfair witches). Этот телесериал сразу покорил как фанатов писательницы, так и не знакомых с ее творчеством зрителей. Это не типичная история доброго или злого волшебника, это нечто более интересное и глубокое. В материале рассказываем об этом сериале и делимся интересными фактами. А посмотреть сериал онлайн и в хорошем качестве можно в Амедиатеке. Роуэн Филдинг — молодой, но очень талантливый и успешный нейрохирург: она заботится о своих пациентах и у нее буквально есть дар им помогать. Однако всё в ее жизни меняется, когда у приемной матери происходит ремиссия рака. Роуэн встречается со своей темной стороной: в тщетных попытках помочь маме она какой-то силой мысли лишает жизни двух человек и понимает, что с ней что-то не так.И как оказалось, на самом деле биологическая мама Роуэн, как и она сама, принадлежит сильному и достаточно знаменитому роду Мэйфейрских ведьм. Только вот их покровитель — темный (или не совсем) дух Лэшер. Роуэн предстоит разобраться в семейных тайнах, научиться управлять своими силами и ответить на вопрос, кто же на самом деле этот Лэшер и чего он хочет. "
+      },
+      "ageRestriction": 18,
+      "dateRelease": "2023",
+      "genres": [
+        "Фэнтези",
+        "Ужасы",
+        "Драма"
+      ],
+      "actors": [
+        "Бет Грант",
+        "Гарри Хэмлин",
+        "Аннабет Гиш",
+        " Джек Хьюстон",
+        "Александра Даддарио"
+      ],
+      "directors": [
+        "Майкл Аппендаль",
+        "Алексис О. Коричински",
+        "Аксель Кэролин"
+      ],
+      "country": "США",
+      "production": "AMC"
+    },
+    "rating": {
+      "raitingAmediateka": 8.6,
+      "ratingImdb": 6.2,
+      "ratingKinopoisk": 5.8
+    },
+    "actionsData": {
+      "liked": [],
+      "disliked": []
+    },
+    "bg": {
+      "imgUrl": "http://localhost:3000/public/series/theMayfairWitches/imgBgS1.jpg",
+      "videoUrl": null,
+      "imgResizeUrl": "http://localhost:3000/public/series/theMayfairWitches/resizeImgBgS1.jpg",
+      "imgResizeLmUrl": "http://localhost:3000/public/series/theMayfairWitches/resizeLmImgBgS1.jpg",
+      "sourceUrls": [
+        "http://localhost:3000/public/series/theMayfairWitches/resize/1440x720.jpg",
+        "http://localhost:3000/public/series/theMayfairWitches/resize/1366x682.jpg",
+        "http://localhost:3000/public/series/theMayfairWitches/resize/1024x512.jpg",
+        "http://localhost:3000/public/series/theMayfairWitches/resize/768x384.jpg",
+        "http://localhost:3000/public/series/theMayfairWitches/resize/720x873.jpg",
+        "http://localhost:3000/public/series/theMayfairWitches/resize/360x436.jpg"
+      ]
+    },
+    "trailer": {
+      "img": "http://localhost:3000/public/series/theMayfairWitches/imgTrailer.jpg",
+      "quality360": "http://localhost:3000/public/series/theMayfairWitches/videoTrailer360.mp4",
+      "quality720": "http://localhost:3000/public/series/theMayfairWitches/videoTrailer720.mp4"
+    },
+    "logoImg": "http://localhost:3000/public/series/theMayfairWitches/imgLogo.png",
+    "__v": 0
+  },
+  {
+    "_id": "6765662643c9f9a641824e92",
+    "type": "series",
+    "seasons": [
+      {
+        "numberOfSeasons": 1,
+        "episodes": [
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/theOffer/videoTrailer720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/theOffer/videoTrailer360.mp4",
+              "quality720": "http://localhost:3000/public/series/theOffer/videoTrailer720.mp4",
+              "_id": "6765662643c9f9a641824e94"
+            },
+            "episodeNumber": 1,
+            "imgPreview": "http://localhost:3000/public/series/theOffer/s1e1.jpg",
+            "title": "Место за столом",
+            "_id": "6765662643c9f9a641824e93"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/theOffer/videoTrailer720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/theOffer/videoTrailer360.mp4",
+              "quality720": "http://localhost:3000/public/series/theOffer/videoTrailer720.mp4",
+              "_id": "6765662643c9f9a641824e96"
+            },
+            "episodeNumber": 2,
+            "imgPreview": "http://localhost:3000/public/series/theOffer/s1e2.jpg",
+            "title": "Предупредительные выстрелы",
+            "_id": "6765662643c9f9a641824e95"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/theOffer/videoTrailer720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/theOffer/videoTrailer360.mp4",
+              "quality720": "http://localhost:3000/public/series/theOffer/videoTrailer720.mp4",
+              "_id": "6765662643c9f9a641824e98"
+            },
+            "episodeNumber": 3,
+            "imgPreview": "http://localhost:3000/public/series/theOffer/s1e3.jpg",
+            "title": "Из ЗТМ",
+            "_id": "6765662643c9f9a641824e97"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/theOffer/videoTrailer720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/theOffer/videoTrailer360.mp4",
+              "quality720": "http://localhost:3000/public/series/theOffer/videoTrailer720.mp4",
+              "_id": "6765662643c9f9a641824e9a"
+            },
+            "episodeNumber": 4,
+            "imgPreview": "http://localhost:3000/public/series/theOffer/s1e4.jpg",
+            "title": "Нужный оттенок желтого",
+            "_id": "6765662643c9f9a641824e99"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/theOffer/videoTrailer720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/theOffer/videoTrailer360.mp4",
+              "quality720": "http://localhost:3000/public/series/theOffer/videoTrailer720.mp4",
+              "_id": "6765662643c9f9a641824e9c"
+            },
+            "episodeNumber": 5,
+            "imgPreview": "http://localhost:3000/public/series/theOffer/s1e5.jpg",
+            "title": "Целуй перстень",
+            "_id": "6765662643c9f9a641824e9b"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/theOffer/videoTrailer720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/theOffer/videoTrailer360.mp4",
+              "quality720": "http://localhost:3000/public/series/theOffer/videoTrailer720.mp4",
+              "_id": "6765662643c9f9a641824e9e"
+            },
+            "episodeNumber": 6,
+            "imgPreview": "http://localhost:3000/public/series/theOffer/s1e6.jpg",
+            "title": "Надежный парень",
+            "_id": "6765662643c9f9a641824e9d"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/theOffer/videoTrailer720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/theOffer/videoTrailer360.mp4",
+              "quality720": "http://localhost:3000/public/series/theOffer/videoTrailer720.mp4",
+              "_id": "6765662643c9f9a641824ea0"
+            },
+            "episodeNumber": 7,
+            "imgPreview": "http://localhost:3000/public/series/theOffer/s1e7.jpg",
+            "title": "Мистер продюсер",
+            "_id": "6765662643c9f9a641824e9f"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/theOffer/videoTrailer720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/theOffer/videoTrailer360.mp4",
+              "quality720": "http://localhost:3000/public/series/theOffer/videoTrailer720.mp4",
+              "_id": "6765662643c9f9a641824ea2"
+            },
+            "episodeNumber": 8,
+            "imgPreview": "http://localhost:3000/public/series/theOffer/s1e8.jpg",
+            "title": "Перейти черту",
+            "_id": "6765662643c9f9a641824ea1"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/theOffer/videoTrailer720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/theOffer/videoTrailer360.mp4",
+              "quality720": "http://localhost:3000/public/series/theOffer/videoTrailer720.mp4",
+              "_id": "6765662643c9f9a641824ea4"
+            },
+            "episodeNumber": 9,
+            "imgPreview": "http://localhost:3000/public/series/theOffer/s1e9.jpg",
+            "title": "Вот это - мы",
+            "_id": "6765662643c9f9a641824ea3"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/theOffer/videoTrailer720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/theOffer/videoTrailer360.mp4",
+              "quality720": "http://localhost:3000/public/series/theOffer/videoTrailer720.mp4",
+              "_id": "6765662643c9f9a641824ea6"
+            },
+            "episodeNumber": 10,
+            "imgPreview": "http://localhost:3000/public/series/theOffer/s1e10.jpg",
+            "title": "Мозги и яйца",
+            "_id": "6765662643c9f9a641824ea5"
+          }
+        ],
+        "bg": {
+          "imgUrl": "http://localhost:3000/public/series/theOffer/imgBgS1.jpg",
+          "videoUrl": null
+        },
+        "trailer": null,
+        "description": "От просмотра «Предложения» вы действительно не сможете отказаться – и отсылка к крылатой фразе дона Корлеоне тут неспроста. За десять эпизодов сериала вы узнаете всё о том, как создавался фильм «Крестный отец» и какие проблемы с ним были связаны. Основные роли в его создании сыграли продюсеры Альберт Радди (Майлз Теллер) и Роберт Эванс (Мэттью Гуд), которым пришлось сломать немало копий, пока режиссер Фрэнсис Форд Коппола (Дэн Фоглер) и писатель Марио Пьюзо (Патрик Галло) никак не могли найти общий язык, а студия не верила, что какой-то «местечковый романчик» про борьбу итальянских кланов в США сможет стать мировым хитом. Но мы-то с вами знаем, чем всё закончилось… А вот как начиналось – эту страницу из истории создания шедевра зрителям и предстоит открыть!"
+      }
+    ],
+    "data": {
+      "title": {
+        "value": "Предложение",
+        "originalTitle": "The Offer",
+        "linkTitle": "the-offer"
+      },
+      "badge": null,
+      "description": {
+        "mainDescription": "От просмотра «Предложения» вы действительно не сможете отказаться – и отсылка к крылатой фразе дона Корлеоне тут неспроста. За десять эпизодов сериала вы узнаете всё о том, как создавался фильм «Крестный отец» и какие проблемы с ним были связаны. Основные роли в его создании сыграли продюсеры Альберт Радди (Майлз Теллер) и Роберт Эванс (Мэттью Гуд), которым пришлось сломать немало копий, пока режиссер Фрэнсис Форд Коппола (Дэн Фоглер) и писатель Марио Пьюзо (Патрик Галло) никак не могли найти общий язык, а студия не верила, что какой-то «местечковый романчик» про борьбу итальянских кланов в США сможет стать мировым хитом. Но мы-то с вами знаем, чем всё закончилось… А вот как начиналось – эту страницу из истории создания шедевра зрителям и предстоит открыть!",
+        "prewiewDescription": "«Предложение» (The Offer) — это сериал, выпущенный компанией Paramount+, в котором рассказывается о бурном пути выхода на экраны кинематографического шедевра Фрэнсиса Форда Копполы «Крёстный отец»."
+      },
+      "about": {
+        "title": "Сюжет сериала «Предложение»",
+        "description": "«Предложение» (The Offer) — это сериал, выпущенный компанией Paramount+, в котором рассказывается о бурном пути выхода на экраны кинематографического шедевра Фрэнсиса Форда Копполы «Крёстный отец». Благодаря сочетанию исторических фактов, фантазии и криминальной драмы проект предлагает зрителям интригующий взгляд на поворотный момент в истории кино, рассказывая не только о триумфах, но и о трудностях, с которыми пришлось столкнуться в процессе производства. Давайте отправимся в сложный мир Голливуда, ведь смотреть все сезоны сериала можно онлайн в HD-качестве на сайте Amediateka с русскими субтитрами. Первые семь дней можно попробовать сервис бесплатно.\n\n        Сюжет криминальной драмы «Предложение» разворачивается в начале 1970-х годов и сосредоточен на Альберте С. Радди, продюсере, который сталкивается как со скептицизмом киноиндустрии, так и с личными дилеммами, когда он возглавил создание адаптации бестселлера Марио Пьюзо. Радди, относительно неизвестная в то время фигура в Голливуде, поначалу сталкивается с массой препятствий, включая сопротивление студии, бюджетные ограничения и нестабильные отношения с талантливыми людьми, задействованными в проекте. Но он готов и хочет достичь правосудия и истины.\n\n        Каждый эпизод подробно раскрывает многогранную драму, связанную с производством фильма, иллюстрируя неустанное стремление Радди к своему видению среди хаоса. История мафиозных связей, убийств, расследований, силы журналистики, борьбы за власть и творческих конфликтов придает повествованию глубину и сложность, превращая «Предложение» не просто в рассказ о фильме «Крёстный отец», но и в настоящий триллер о тайнах и творчестве в Голливуде."
+      },
+      "ageRestriction": 18,
+      "dateRelease": "2022",
+      "genres": [
+        "Драма",
+        "Биография"
+      ],
+      "actors": [
+        "Патрик Галло",
+        "Дэн Фоглер",
+        "Мэттью Гуд",
+        "Майлз Теллер"
+      ],
+      "directors": [
+        "Колин Бакси",
+        "Адам Аркин"
+      ],
+      "country": "США",
+      "production": "Paramount Pictures"
+    },
+    "rating": {
+      "raitingAmediateka": 9.3,
+      "ratingImdb": 8.6,
+      "ratingKinopoisk": 8.3
+    },
+    "actionsData": {
+      "liked": [],
+      "disliked": []
+    },
+    "bg": {
+      "imgUrl": "http://localhost:3000/public/series/theOffer/imgBgS1.jpg",
+      "videoUrl": null,
+      "imgResizeUrl": "http://localhost:3000/public/series/theOffer/resizeImgBgS1.jpg",
+      "sourceUrls": [
+        "http://localhost:3000/public/series/theOffer/resize/1440x720.jpg",
+        "http://localhost:3000/public/series/theOffer/resize/1366x682.jpg",
+        "http://localhost:3000/public/series/theOffer/resize/1024x512.jpg",
+        "http://localhost:3000/public/series/theOffer/resize/768x384.jpg",
+        "http://localhost:3000/public/series/theOffer/resize/720x873.jpg",
+        "http://localhost:3000/public/series/theOffer/resize/360x436.jpg"
+      ]
+    },
+    "trailer": {
+      "img": "http://localhost:3000/public/series/theOffer/imgTrailer.jpg",
+      "quality360": "http://localhost:3000/public/series/theOffer/videoTrailer360.mp4",
+      "quality720": "http://localhost:3000/public/series/theOffer/videoTrailer720.mp4"
+    },
+    "logoImg": "http://localhost:3000/public/series/theOffer/imgLogo.png\n",
+    "__v": 0
+  },
+  {
+    "_id": "677fb5ba00ece4124c1711a8",
+    "type": "series",
+    "seasons": [
+      {
+        "numberOfSeasons": 1,
+        "episodes": [
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/theNightManager/videoTrailer720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/theNightManager/videoTrailer360.mp4",
+              "quality720": "http://localhost:3000/public/series/theNightManager/videoTrailer720.mp4",
+              "_id": "677fb5ba00ece4124c1711aa"
+            },
+            "episodeNumber": 1,
+            "imgPreview": "http://localhost:3000/public/series/theNightManager/s1e1.jpg",
+            "title": "Серия 1",
+            "_id": "677fb5ba00ece4124c1711a9"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/theNightManager/videoTrailer720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/theNightManager/videoTrailer360.mp4",
+              "quality720": "http://localhost:3000/public/series/theNightManager/videoTrailer720.mp4",
+              "_id": "677fb5ba00ece4124c1711ac"
+            },
+            "episodeNumber": 2,
+            "imgPreview": "http://localhost:3000/public/series/theNightManager/s1e2.jpg",
+            "title": "Серия 2",
+            "_id": "677fb5ba00ece4124c1711ab"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/theNightManager/videoTrailer720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/theNightManager/videoTrailer360.mp4",
+              "quality720": "http://localhost:3000/public/series/theNightManager/videoTrailer720.mp4",
+              "_id": "677fb5ba00ece4124c1711ae"
+            },
+            "episodeNumber": 3,
+            "imgPreview": "http://localhost:3000/public/series/theNightManager/s1e3.jpg",
+            "title": "Серия 3",
+            "_id": "677fb5ba00ece4124c1711ad"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/theNightManager/videoTrailer720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/theNightManager/videoTrailer360.mp4",
+              "quality720": "http://localhost:3000/public/series/theNightManager/videoTrailer720.mp4",
+              "_id": "677fb5ba00ece4124c1711b0"
+            },
+            "episodeNumber": 4,
+            "imgPreview": "http://localhost:3000/public/series/theNightManager/s1e4.jpg",
+            "title": "Серия 4",
+            "_id": "677fb5ba00ece4124c1711af"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/theNightManager/videoTrailer720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/theNightManager/videoTrailer360.mp4",
+              "quality720": "http://localhost:3000/public/series/theNightManager/videoTrailer720.mp4",
+              "_id": "677fb5ba00ece4124c1711b2"
+            },
+            "episodeNumber": 5,
+            "imgPreview": "http://localhost:3000/public/series/theNightManager/s1e5.jpg",
+            "title": "Серия 5",
+            "_id": "677fb5ba00ece4124c1711b1"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/theNightManager/videoTrailer720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/theNightManager/videoTrailer360.mp4",
+              "quality720": "http://localhost:3000/public/series/theNightManager/videoTrailer720.mp4",
+              "_id": "677fb5ba00ece4124c1711b4"
+            },
+            "episodeNumber": 6,
+            "imgPreview": "http://localhost:3000/public/series/theNightManager/s1e6.jpg",
+            "title": "Серия 6",
+            "_id": "677fb5ba00ece4124c1711b3"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/theNightManager/videoTrailer720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/theNightManager/videoTrailer360.mp4",
+              "quality720": "http://localhost:3000/public/series/theNightManager/videoTrailer720.mp4",
+              "_id": "677fb5ba00ece4124c1711b6"
+            },
+            "episodeNumber": 7,
+            "imgPreview": "http://localhost:3000/public/series/theNightManager/s1e7.jpg",
+            "title": "Серия 7",
+            "_id": "677fb5ba00ece4124c1711b5"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/theNightManager/videoTrailer720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/theNightManager/videoTrailer360.mp4",
+              "quality720": "http://localhost:3000/public/series/theNightManager/videoTrailer720.mp4",
+              "_id": "677fb5ba00ece4124c1711b8"
+            },
+            "episodeNumber": 8,
+            "imgPreview": "http://localhost:3000/public/series/theNightManager/s1e8.jpg",
+            "title": "Серия 8",
+            "_id": "677fb5ba00ece4124c1711b7"
+          }
+        ],
+        "bg": {
+          "imgUrl": "http://localhost:3000/public/series/theNightManager/imgBgS1.jpg",
+          "videoUrl": null
+        },
+        "trailer": null,
+        "description": "От просмотра «Предложения» вы действительно не сможете отказаться – и отсылка к крылатой фразе дона Корлеоне тут неспроста. За десять эпизодов сериала вы узнаете всё о том, как создавался фильм «Крестный отец» и какие проблемы с ним были связаны. Основные роли в его создании сыграли продюсеры Альберт Радди (Майлз Теллер) и Роберт Эванс (Мэттью Гуд), которым пришлось сломать немало копий, пока режиссер Фрэнсис Форд Коппола (Дэн Фоглер) и писатель Марио Пьюзо (Патрик Галло) никак не могли найти общий язык, а студия не верила, что какой-то «местечковый романчик» про борьбу итальянских кланов в США сможет стать мировым хитом. Но мы-то с вами знаем, чем всё закончилось… А вот как начиналось – эту страницу из истории создания шедевра зрителям и предстоит открыть!"
+      }
+    ],
+    "data": {
+      "title": {
+        "value": "Ночной администратор",
+        "originalTitle": "The Night Manager",
+        "linkTitle": "the-night-manager"
+      },
+      "badge": null,
+      "description": {
+        "mainDescription": "Основанный на одноименном романе Джона ле Карре, «Ночной администратор» — интеллектуальный шпионский детектив, воплощенный великолепным актерским тандемом Хью Лори («Доктор Хаус», «Дживс и Вустер») и Тома Хиддлстона («Мстители», «Выживут только любовники»). Бывший британский солдат Джонатан Пайн работает администратором в роскошном отеле, но его жизнь кардинально меняется, когда его втягивают в мир шпионажа. Пайн соглашается помочь разведке в слежке за международным бизнесменом, подозреваемым в создании преступного союза между сетью нелегальной торговли оружием и службами разведки. Чтобы приблизиться к этому опасному человеку, Пайн вынужден сам стать преступником и вести двойную жизнь, скрывая свои истинные намерения от коллег и близких. Он оказывается в смертельной игре, где доверие — роскошь, а каждый шаг может стоить ему жизни.",
+        "prewiewDescription": "Основанный на одноименном романе Джона ле Карре, «Ночной администратор» — интеллектуальный шпионский детектив, воплощенный великолепным актерским тандемом Хью Лори («Доктор Хаус», «Дживс и Вустер») и Тома Хиддлстона («Мстители», «Выживут только любовники»)."
+      },
+      "about": null,
+      "ageRestriction": 18,
+      "dateRelease": "2016",
+      "genres": [
+        "Криминал",
+        "Триллер",
+        "Драма"
+      ],
+      "actors": [
+        "Том Хиддлстон",
+        "Хью Лори",
+        "Элизабет Дебики"
+      ],
+      "directors": [
+        "Элизабет Дебики"
+      ],
+      "country": "США",
+      "production": "AMC"
+    },
+    "rating": {
+      "raitingAmediateka": 9.2,
+      "ratingImdb": 8,
+      "ratingKinopoisk": 7.4
+    },
+    "actionsData": {
+      "liked": [],
+      "disliked": []
+    },
+    "bg": {
+      "imgUrl": "http://localhost:3000/public/series/theNightManager/imgBgS1.jpg",
+      "videoUrl": null,
+      "imgResizeUrl": "http://localhost:3000/public/series/theNightManager/resizeImgBgS1.jpg",
+      "imgResizeLmUrl": "http://localhost:3000/public/series/theNightManager/resizeLmImgBgS1.jpg",
+      "sourceUrls": [
+        "http://localhost:3000/public/series/theNightManager/resize/1440x720.jpg",
+        "http://localhost:3000/public/series/theNightManager/resize/1366x682.jpg",
+        "http://localhost:3000/public/series/theNightManager/resize/1024x512.jpg",
+        "http://localhost:3000/public/series/theNightManager/resize/768x384.jpg",
+        "http://localhost:3000/public/series/theNightManager/resize/720x873.jpg",
+        "http://localhost:3000/public/series/theNightManager/resize/360x436.jpg"
+      ]
+    },
+    "trailer": {
+      "img": "http://localhost:3000/public/series/theNightManager/imgTrailer.jpg",
+      "quality360": "http://localhost:3000/public/series/theNightManager/videoTrailer360.mp4",
+      "quality720": "http://localhost:3000/public/series/theNightManager/videoTrailer720.mp4"
+    },
+    "logoImg": "http://localhost:3000/public/series/theNightManager/imgLogo.png",
+    "__v": 0
+  },
+  {
+    "_id": "677fbcdd1ca84b2602b22d8d",
+    "type": "series",
+    "seasons": [
+      {
+        "numberOfSeasons": 1,
+        "episodes": [
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/theYoungPope/videoTrailer720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/theYoungPope/videoTrailer360.mp4",
+              "quality720": "http://localhost:3000/public/series/theYoungPope/videoTrailer720.mp4",
+              "_id": "677fbcdd1ca84b2602b22d8f"
+            },
+            "episodeNumber": 1,
+            "imgPreview": "http://localhost:3000/public/series/theYoungPope/s1e1.jpg",
+            "title": "Серия 1",
+            "_id": "677fbcdd1ca84b2602b22d8e"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/theYoungPope/videoTrailer720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/theYoungPope/videoTrailer360.mp4",
+              "quality720": "http://localhost:3000/public/series/theYoungPope/videoTrailer720.mp4",
+              "_id": "677fbcdd1ca84b2602b22d91"
+            },
+            "episodeNumber": 2,
+            "imgPreview": "http://localhost:3000/public/series/theYoungPope/s1e2.jpg",
+            "title": "Серия 2",
+            "_id": "677fbcdd1ca84b2602b22d90"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/theYoungPope/videoTrailer720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/theYoungPope/videoTrailer360.mp4",
+              "quality720": "http://localhost:3000/public/series/theYoungPope/videoTrailer720.mp4",
+              "_id": "677fbcdd1ca84b2602b22d93"
+            },
+            "episodeNumber": 3,
+            "imgPreview": "http://localhost:3000/public/series/theYoungPope/s1e3.jpg",
+            "title": "Серия 3",
+            "_id": "677fbcdd1ca84b2602b22d92"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/theYoungPope/videoTrailer720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/theYoungPope/videoTrailer360.mp4",
+              "quality720": "http://localhost:3000/public/series/theYoungPope/videoTrailer720.mp4",
+              "_id": "677fbcdd1ca84b2602b22d95"
+            },
+            "episodeNumber": 4,
+            "imgPreview": "http://localhost:3000/public/series/theYoungPope/s1e4.jpg",
+            "title": "Серия 4",
+            "_id": "677fbcdd1ca84b2602b22d94"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/theYoungPope/videoTrailer720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/theYoungPope/videoTrailer360.mp4",
+              "quality720": "http://localhost:3000/public/series/theYoungPope/videoTrailer720.mp4",
+              "_id": "677fbcdd1ca84b2602b22d97"
+            },
+            "episodeNumber": 5,
+            "imgPreview": "http://localhost:3000/public/series/theYoungPope/s1e5.jpg",
+            "title": "Серия 5",
+            "_id": "677fbcdd1ca84b2602b22d96"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/theYoungPope/videoTrailer720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/theYoungPope/videoTrailer360.mp4",
+              "quality720": "http://localhost:3000/public/series/theYoungPope/videoTrailer720.mp4",
+              "_id": "677fbcdd1ca84b2602b22d99"
+            },
+            "episodeNumber": 6,
+            "imgPreview": "http://localhost:3000/public/series/theYoungPope/s1e6.jpg",
+            "title": "Серия 6",
+            "_id": "677fbcdd1ca84b2602b22d98"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/theYoungPope/videoTrailer720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/theYoungPope/videoTrailer360.mp4",
+              "quality720": "http://localhost:3000/public/series/theYoungPope/videoTrailer720.mp4",
+              "_id": "677fbcdd1ca84b2602b22d9b"
+            },
+            "episodeNumber": 7,
+            "imgPreview": "http://localhost:3000/public/series/theYoungPope/s1e7.jpg",
+            "title": "Серия 7",
+            "_id": "677fbcdd1ca84b2602b22d9a"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/theYoungPope/videoTrailer720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/theYoungPope/videoTrailer360.mp4",
+              "quality720": "http://localhost:3000/public/series/theYoungPope/videoTrailer720.mp4",
+              "_id": "677fbcdd1ca84b2602b22d9d"
+            },
+            "episodeNumber": 8,
+            "imgPreview": "http://localhost:3000/public/series/theYoungPope/s1e8.jpg",
+            "title": "Серия 8",
+            "_id": "677fbcdd1ca84b2602b22d9c"
+          }
+        ],
+        "bg": {
+          "imgUrl": "http://localhost:3000/public/series/theYoungPope/imgBgS1.jpg",
+          "videoUrl": null
+        },
+        "trailer": null,
+        "description": "От просмотра «Предложения» вы действительно не сможете отказаться – и отсылка к крылатой фразе дона Корлеоне тут неспроста. За десять эпизодов сериала вы узнаете всё о том, как создавался фильм «Крестный отец» и какие проблемы с ним были связаны. Основные роли в его создании сыграли продюсеры Альберт Радди (Майлз Теллер) и Роберт Эванс (Мэттью Гуд), которым пришлось сломать немало копий, пока режиссер Фрэнсис Форд Коппола (Дэн Фоглер) и писатель Марио Пьюзо (Патрик Галло) никак не могли найти общий язык, а студия не верила, что какой-то «местечковый романчик» про борьбу итальянских кланов в США сможет стать мировым хитом. Но мы-то с вами знаем, чем всё закончилось… А вот как начиналось – эту страницу из истории создания шедевра зрителям и предстоит открыть!"
+      }
+    ],
+    "data": {
+      "title": {
+        "value": "Молодой Папа",
+        "originalTitle": "The Young Pope",
+        "linkTitle": "the-young-pope"
+      },
+      "badge": null,
+      "description": {
+        "mainDescription": "Провокационный сериал про первого американца на престоле и самого молодого папу за всю историю Ватикана, придуманный и снятый успешным итальянским режиссером Паоло Соррентино («Великая красота», «Молодость»). Главный герой, блестяще сыгранный британцем Джудом Лоу, – новоизбранный глава католической церкви папа римский Пий XIII, в миру известный как Ленни Белардо. Этот пост достался ему благодаря интригам влиятельных кардиналов, избравшим молодого и не имеющего связей американца итальянского происхождения с расчетом манипулировать им в своих интересах. Но с первых же часов правления нового понтифика все их надежды рушатся. Белардо – человек эксцентричный, противоречивый, непредсказуемый. То ли интриган, то ли святой. Что замышляют кардиналы – понятно, а вот что на уме у одержимого манией величия скромника – совсем нет. Помимо мощной интриги, сериал увлекает своим вторым планом – повседневная жизнь Ватикана и его обитателей с их экзотическими ритуалами, воссозданная вплоть до малейших деталей.",
+        "prewiewDescription": "Провокационный сериал про первого американца на престоле и самого молодого папу за всю историю Ватикана, придуманный и снятый успешным итальянским режиссером Паоло Соррентино («Великая красота», «Молодость»). Главный герой, блестяще сыгранный британцем Джудом Лоу, – новоизбранный глава католической церкви папа римский Пий XIII, в миру известный как Ленни Белардо. "
+      },
+      "about": null,
+      "ageRestriction": 18,
+      "dateRelease": "2016",
+      "genres": [
+        "Драма"
+      ],
+      "actors": [
+        "Джуд Лоу",
+        "Дайан Китон",
+        "Сильвио Орландо",
+        "Скотт Шеперд"
+      ],
+      "directors": [
+        "Паоло Соррентино"
+      ],
+      "country": "Великобритания",
+      "production": "Fremantle"
+    },
+    "rating": {
+      "raitingAmediateka": 7.8,
+      "ratingImdb": 8.4,
+      "ratingKinopoisk": 8.2
+    },
+    "actionsData": {
+      "liked": [],
+      "disliked": []
+    },
+    "bg": {
+      "imgUrl": "http://localhost:3000/public/series/theYoungPope/imgBgS1.jpg",
+      "videoUrl": null,
+      "imgResizeUrl": "http://localhost:3000/public/series/theYoungPope/resizeImgBgS1.jpg",
+      "imgResizeLmUrl": "http://localhost:3000/public/series/theYoungPope/resizeLmImgBgS1.jpg",
+      "sourceUrls": [
+        "http://localhost:3000/public/series/theYoungPope/resize/1440x720.jpg",
+        "http://localhost:3000/public/series/theYoungPope/resize/1366x682.jpg",
+        "http://localhost:3000/public/series/theYoungPope/resize/1024x512.jpg",
+        "http://localhost:3000/public/series/theYoungPope/resize/768x384.jpg",
+        "http://localhost:3000/public/series/theYoungPope/resize/720x873.jpg",
+        "http://localhost:3000/public/series/theYoungPope/resize/360x436.jpg"
+      ]
+    },
+    "trailer": {
+      "img": "http://localhost:3000/public/series/theYoungPope/imgTrailer.jpg",
+      "quality360": "http://localhost:3000/public/series/theYoungPope/videoTrailer360.mp4",
+      "quality720": "http://localhost:3000/public/series/theYoungPope/videoTrailer720.mp4"
+    },
+    "logoImg": "http://localhost:3000/public/series/theYoungPope/imgLogo.png",
+    "__v": 0
+  },
+  {
+    "_id": "677fc1415d106d6eb324714b",
+    "type": "series",
+    "seasons": [
+      {
+        "numberOfSeasons": 1,
+        "episodes": [
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/wildСards/videoTrailer720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/wildСards/videoTrailer360.mp4",
+              "quality720": "http://localhost:3000/public/series/wildСards/videoTrailer720.mp4",
+              "_id": "677fc1415d106d6eb324714d"
+            },
+            "episodeNumber": 1,
+            "imgPreview": "http://localhost:3000/public/series/wildСards/s1e1.jpg",
+            "title": "Серия 1",
+            "_id": "677fc1415d106d6eb324714c"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/wildСards/videoTrailer720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/wildСards/videoTrailer360.mp4",
+              "quality720": "http://localhost:3000/public/series/wildСards/videoTrailer720.mp4",
+              "_id": "677fc1415d106d6eb324714f"
+            },
+            "episodeNumber": 2,
+            "imgPreview": "http://localhost:3000/public/series/wildСards/s1e2.jpg",
+            "title": "Серия 2",
+            "_id": "677fc1415d106d6eb324714e"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/wildСards/videoTrailer720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/wildСards/videoTrailer360.mp4",
+              "quality720": "http://localhost:3000/public/series/wildСards/videoTrailer720.mp4",
+              "_id": "677fc1415d106d6eb3247151"
+            },
+            "episodeNumber": 3,
+            "imgPreview": "http://localhost:3000/public/series/wildСards/s1e3.jpg",
+            "title": "Серия 3",
+            "_id": "677fc1415d106d6eb3247150"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/wildСards/videoTrailer720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/wildСards/videoTrailer360.mp4",
+              "quality720": "http://localhost:3000/public/series/wildСards/videoTrailer720.mp4",
+              "_id": "677fc1415d106d6eb3247153"
+            },
+            "episodeNumber": 4,
+            "imgPreview": "http://localhost:3000/public/series/wildСards/s1e4.jpg",
+            "title": "Серия 4",
+            "_id": "677fc1415d106d6eb3247152"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/wildСards/videoTrailer720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/wildСards/videoTrailer360.mp4",
+              "quality720": "http://localhost:3000/public/series/wildСards/videoTrailer720.mp4",
+              "_id": "677fc1415d106d6eb3247155"
+            },
+            "episodeNumber": 5,
+            "imgPreview": "http://localhost:3000/public/series/wildСards/s1e5.jpg",
+            "title": "Серия 5",
+            "_id": "677fc1415d106d6eb3247154"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/wildСards/videoTrailer720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/wildСards/videoTrailer360.mp4",
+              "quality720": "http://localhost:3000/public/series/wildСards/videoTrailer720.mp4",
+              "_id": "677fc1415d106d6eb3247157"
+            },
+            "episodeNumber": 6,
+            "imgPreview": "http://localhost:3000/public/series/wildСards/s1e6.jpg",
+            "title": "Серия 6",
+            "_id": "677fc1415d106d6eb3247156"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/wildСards/videoTrailer720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/wildСards/videoTrailer360.mp4",
+              "quality720": "http://localhost:3000/public/series/wildСards/videoTrailer720.mp4",
+              "_id": "677fc1415d106d6eb3247159"
+            },
+            "episodeNumber": 7,
+            "imgPreview": "http://localhost:3000/public/series/wildСards/s1e7.jpg",
+            "title": "Серия 7",
+            "_id": "677fc1415d106d6eb3247158"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/wildСards/videoTrailer720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/wildСards/videoTrailer360.mp4",
+              "quality720": "http://localhost:3000/public/series/wildСards/videoTrailer720.mp4",
+              "_id": "677fc1415d106d6eb324715b"
+            },
+            "episodeNumber": 8,
+            "imgPreview": "http://localhost:3000/public/series/wildСards/s1e8.jpg",
+            "title": "Серия 8",
+            "_id": "677fc1415d106d6eb324715a"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/wildСards/videoTrailer720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/wildСards/videoTrailer360.mp4",
+              "quality720": "http://localhost:3000/public/series/wildСards/videoTrailer720.mp4",
+              "_id": "677fc1425d106d6eb324715d"
+            },
+            "episodeNumber": 9,
+            "imgPreview": "http://localhost:3000/public/series/wildСards/s1e9.jpg",
+            "title": "Серия 9",
+            "_id": "677fc1425d106d6eb324715c"
+          },
+          {
+            "link": {
+              "_current": {
+                "type": "720p",
+                "value": "http://localhost:3000/public/series/wildСards/videoTrailer720.mp4"
+              },
+              "quality360": "http://localhost:3000/public/series/wildСards/videoTrailer360.mp4",
+              "quality720": "http://localhost:3000/public/series/wildСards/videoTrailer720.mp4",
+              "_id": "677fc1425d106d6eb324715f"
+            },
+            "episodeNumber": 10,
+            "imgPreview": "http://localhost:3000/public/series/wildСards/s1e10.jpg",
+            "title": "Серия 10",
+            "_id": "677fc1425d106d6eb324715e"
+          }
+        ],
+        "bg": {
+          "imgUrl": "http://localhost:3000/public/series/wildСards/imgBgS1.jpg",
+          "videoUrl": null
+        },
+        "trailer": null,
+        "description": "От просмотра «Предложения» вы действительно не сможете отказаться – и отсылка к крылатой фразе дона Корлеоне тут неспроста. За десять эпизодов сериала вы узнаете всё о том, как создавался фильм «Крестный отец» и какие проблемы с ним были связаны. Основные роли в его создании сыграли продюсеры Альберт Радди (Майлз Теллер) и Роберт Эванс (Мэттью Гуд), которым пришлось сломать немало копий, пока режиссер Фрэнсис Форд Коппола (Дэн Фоглер) и писатель Марио Пьюзо (Патрик Галло) никак не могли найти общий язык, а студия не верила, что какой-то «местечковый романчик» про борьбу итальянских кланов в США сможет стать мировым хитом. Но мы-то с вами знаем, чем всё закончилось… А вот как начиналось – эту страницу из истории создания шедевра зрителям и предстоит открыть!"
+      }
+    ],
+    "data": {
+      "title": {
+        "value": "Шальные карты",
+        "originalTitle": "Wild Cards",
+        "linkTitle": "wild-cards"
+      },
+      "badge": null,
+      "description": {
+        "mainDescription": "Остроумная криминальная история от режиссера «Хорошего доктора» Джеймса Дженна. Пониженный в должности детектив Эллис (Джакомо Джианниотти, «Анатомия страсти») провел последний год на службе в морском патруле, в то время как Макс (Ванесса Морган, «В надежде на спасение») вела кочевой образ жизни, искусно обманывая всех, кто попадался ей на пути. Но судьба сводит их вместе, когда Макс неожиданно помогает Эллису раскрыть местное преступление. Теперь у них появляется шанс на искупление: мужчина может снова стать детективом, а девушка — избежать тюрьмы. Однако есть одно но: им предстоит работать в команде, используя свои уникальные навыки для раскрытия преступлений. Эллис полагается на привычные методы расследования, а Макс — на обаяние, интриги и хитроумные схемы, которые регулярно выводят героя из себя. Им обоим предстоит научиться доверять друг другу и, возможно, стать настоящими напарниками.",
+        "prewiewDescription": "Остроумная криминальная история от режиссера «Хорошего доктора» Джеймса Дженна. Пониженный в должности детектив Эллис (Джакомо Джианниотти, «Анатомия страсти») провел последний год на службе в морском патруле, в то время как Макс (Ванесса Морган, «В надежде на спасение») вела кочевой образ жизни, искусно обманывая всех, кто попадался ей на пути."
+      },
+      "about": null,
+      "ageRestriction": 18,
+      "dateRelease": "2024",
+      "genres": [
+        "Комедия",
+        "Криминал",
+        "Драма"
+      ],
+      "actors": [
+        "Ванесса Морган",
+        "Джакомо Джианниотти",
+        "Майкл Ксавьер",
+        "Терри Чэнь"
+      ],
+      "directors": [
+        "Джеймс Дженн"
+      ],
+      "country": "Канада",
+      "production": "Fifth Season"
+    },
+    "rating": {
+      "raitingAmediateka": 7.1,
+      "ratingImdb": 7,
+      "ratingKinopoisk": 6.8
+    },
+    "actionsData": {
+      "liked": [],
+      "disliked": []
+    },
+    "bg": {
+      "imgUrl": "http://localhost:3000/public/series/wildСards/imgBgS1.jpg",
+      "videoUrl": null,
+      "imgResizeUrl": "http://localhost:3000/public/series/wildСards/resizeImgBgS1.jpg",
+      "imgResizeLmUrl": "http://localhost:3000/public/series/wildСards/resizeLmImgBgS1.jpg",
+      "sourceUrls": [
+        "http://localhost:3000/public/series/wildСards/resize/1440x720.jpg",
+        "http://localhost:3000/public/series/wildСards/resize/1366x682.jpg",
+        "http://localhost:3000/public/series/wildСards/resize/1024x512.jpg",
+        "http://localhost:3000/public/series/wildСards/resize/768x384.jpg",
+        "http://localhost:3000/public/series/wildСards/resize/720x873.jpg",
+        "http://localhost:3000/public/series/wildСards/resize/360x436.jpg"
+      ]
+    },
+    "trailer": {
+      "img": "http://localhost:3000/public/series/wildСards/imgTrailer.jpg",
+      "quality360": "http://localhost:3000/public/series/wildСards/videoTrailer360.mp4",
+      "quality720": "http://localhost:3000/public/series/wildСards/videoTrailer720.mp4"
+    },
+    "logoImg": "http://localhost:3000/public/series/wildСards/imgLogo.png",
+    "__v": 0
+  }
+]

@@ -1,0 +1,28 @@
+[
+  {
+    "_id": "68385ee63ad2211a2a5cfb4d",
+    "userData": {
+      "firstName": null,
+      "lastName": null,
+      "profileName": "Мой профиль",
+      "userBirthDay": null,
+      "userGender": null,
+      "userAvatar": null
+    },
+    "userPersonalData": {
+      "email": "test@gmail.com",
+      "password": "$2b$10$17dE7WKs4isH7t.Qe.NLEOqr028k2HnmOLeWemcoOsJrBNEfLJ3qi",
+      "userCard": null
+    },
+    "userActionsData": {
+      "liked": [],
+      "disliked": [],
+      "favoritList": [],
+      "historyList": [],
+      "purchase": []
+    },
+    "userRole": "user",
+    "userSubscriptions": [],
+    "__v": 0
+  }
+]
