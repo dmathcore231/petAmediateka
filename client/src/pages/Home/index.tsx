@@ -60,7 +60,7 @@ export function Home(): JSX.Element {
     sliderSettings: {
       typeSlider: "default",
       pagenation: !mainSlider.loading,
-      autoSwipe: false,
+      autoSwipe: true,
       lastSwipe: false,
       quantityListItems: 1,
       mediaPlayerHandler: false
