@@ -1,44 +1,78 @@
-import { useState, useEffect, MouseEvent, JSX } from "react"
+import { useState, useEffect, MouseEvent, JSX, act } from "react"
 import { Link, NavLink } from "react-router-dom"
-import { useAppSelector, useAppDispatch, useCheckBreakpoint } from "../../hooks"
+import { useAppDispatch, useCheckBreakpoint } from "../../hooks"
 import { fetchLogout } from "../../services/auth/authThunk"
 import { Btn } from "../Btn"
 import { Avatar } from "../Avatar"
 import { BurgerMenuItem } from "../../types/interfaces/BurgerMenuItem"
+import { BurgerMenuProps } from "../../types/interfaces/BurgerMenuProps"
 import { BurgerMenuIcon } from "../../assets/icons/BurgerMenuIcon"
 import { CloseIcon } from "../../assets/icons/CloseIcon"
 import { PlusIcon } from "../../assets/icons/PlusIcon"
 import { Logo } from "../../assets/icons/Logo"
 
-
-export function BurgerMenu(): JSX.Element {
+export function BurgerMenu({ user }: BurgerMenuProps): JSX.Element {
   const dispatch = useAppDispatch()
-  const BREAKPOINR_LG = useCheckBreakpoint(768)
-  const { user } = useAppSelector(state => state.my)
+  const BREAKPOINT_XL = useCheckBreakpoint(1200)
+  const BREAKPOINT_LG = useCheckBreakpoint(768)
   const [isActive, setIsActive] = useState(false)
-  const baseClasss = "burger-menu"
+  const BASE_CLASS = "burger-menu"
+  const ASIDE_BASE_CLASS = `${BASE_CLASS}-aside`
+  const ASIDE_HEADER_BASE_CLASS = `${ASIDE_BASE_CLASS}-header`
+  const ASIDE_NAV_BAR_BASE_CLASS = `${ASIDE_BASE_CLASS}-nav-bar`
+  const ASIDE_SUBSCRIPTION_BASE_CLASS = `${ASIDE_BASE_CLASS}-subscription`
   const CLASSES = {
-    isActive: isActive ? ` ${baseClasss}_active` : "",
+    isActive: isActive ? ` ${BASE_CLASS}_active` : "",
     aside: {
-      base: "burger-menu-aside",
       header: {
-        base: "burger-menu-aside-header",
-        item: "burger-menu-aside-header__item",
-        marginBottomItem: "burger-menu-aside-header__item_margin_bottom",
-        title: "burger-menu-aside-header__title",
-        btnClose: "burger-menu-aside-header__close-btn",
-        wrapper: "burger-menu-aside-header__wrapper",
+        item: `${ASIDE_HEADER_BASE_CLASS}__item`,
+        marginBottomItem: `${ASIDE_HEADER_BASE_CLASS}__item_margin_bottom`,
+        jc: `${ASIDE_HEADER_BASE_CLASS}__item_jc`,
+        title: `${ASIDE_HEADER_BASE_CLASS}__title`,
+        btnClose: `${ASIDE_HEADER_BASE_CLASS}__btn-close`,
+        wrapper: `${ASIDE_HEADER_BASE_CLASS}__wrapper`,
+        logo: `${ASIDE_HEADER_BASE_CLASS}__logo`,
+        newProfile: `${ASIDE_HEADER_BASE_CLASS}__new-profile`,
+        profileName: `${ASIDE_HEADER_BASE_CLASS}__profile-name`,
       },
-      body: "burger-menu-aside-body",
+      body: `${ASIDE_BASE_CLASS}-body`,
       navBar: {
-        base: "burger-menu-aside-nav-bar",
-        list: "burger-menu-aside-nav-bar-list",
-        listItem: "burger-menu-aside-nav-bar-list__item",
-        link: "burger-menu-aside-nav-bar-list__link",
-        linkActive: "burger-menu-aside-nav-bar-list__link_active",
+        list: `${ASIDE_NAV_BAR_BASE_CLASS}-list`,
+        listItem: `${ASIDE_NAV_BAR_BASE_CLASS}-list__item`,
+        link: `${ASIDE_NAV_BAR_BASE_CLASS}-list__link`,
+        linkActive: `${ASIDE_NAV_BAR_BASE_CLASS}-list__link_active`,
       },
+      subscription: {
+        title: `${ASIDE_SUBSCRIPTION_BASE_CLASS}__title`,
+        banner: `${ASIDE_SUBSCRIPTION_BASE_CLASS}__banner`,
+      },
+      activePromo: `${ASIDE_BASE_CLASS}__active-promo`
     },
-    wrapper: `${baseClasss}__wrapper`,
+    wrapper: `${BASE_CLASS}__wrapper`,
+    overlay: `${BASE_CLASS}__overlay`,
+    title: {
+      base: "title",
+      sizeM: "title_size_m",
+      sizeXM: "title_size_xm",
+      colorGray: "title_color_gray",
+    }
+  }
+  const TEXT = {
+    btn: {
+      signIn: "Войти",
+      signUp: "Попробовать за 1₽",
+      promoCode: "Ввести промокод",
+    },
+    burgerMenu: {
+      titleHeader: "Выбор профиля",
+      createProfile: "Новый профиль",
+      activatePromo: "Активировать промокод",
+    },
+    banner: {
+      preTitle: "Подписка",
+      title: "Амедиатека",
+      btn: "Оформить подписку",
+    }
   }
   const menuItems: BurgerMenuItem[] = [
     {
@@ -77,7 +111,7 @@ export function BurgerMenu(): JSX.Element {
       typeLink: "link",
     }
   ]
-  const menyItemsMobaile: BurgerMenuItem[] = [
+  const menuItemsMobile: BurgerMenuItem[] = [
     {
       to: "/collection-series",
       text: "Сериалы",
@@ -159,19 +193,18 @@ export function BurgerMenu(): JSX.Element {
     ))
   }
 
-  const renderBurgerMenu = (mobaileBreakpoint: boolean, userAuth: boolean): JSX.Element => {
-
-    if (mobaileBreakpoint && !userAuth) {
+  const renderBurgerMenu = (mobileBreakpoint: boolean, userAuth: boolean): JSX.Element => {
+    if (mobileBreakpoint && !userAuth) {
       return (
-        <div className={`${baseClasss}${CLASSES.isActive}`}
+        <div className={`${BASE_CLASS}${CLASSES.isActive}`}
           onClick={handleClickBurgerMenu}>
           <BurgerMenuIcon width={34} height={34} />
           <div className={CLASSES.wrapper}>
-            <aside className={CLASSES.aside.base}>
-              <div className={CLASSES.aside.header.base}>
+            <aside className={ASIDE_BASE_CLASS}>
+              <div className={ASIDE_HEADER_BASE_CLASS}>
                 <div className={`${CLASSES.aside.header.item} ${CLASSES.aside.header.marginBottomItem}`}>
                   <div className={CLASSES.aside.header.wrapper}>
-                    <div className={CLASSES.aside.header.title}>
+                    <div className={CLASSES.aside.header.logo}>
                       <Logo width={120} height={16} />
                     </div>
                     <div className={CLASSES.aside.header.btnClose}>
@@ -187,24 +220,24 @@ export function BurgerMenu(): JSX.Element {
                 </div>
                 <div className={CLASSES.aside.header.item}>
                   <Link to={'/auth/signin'} className="btn btn_secondary btn_size_sm">
-                    Войти
+                    {TEXT.btn.signIn}
                   </Link>
                 </div>
                 <div className={CLASSES.aside.header.item}>
                   <Link to={'/auth/signup'} className="btn btn_primary btn_size_sm">
-                    Попробовать за 1₽
+                    {TEXT.btn.signUp}
                   </Link>
                 </div>
                 <div className={CLASSES.aside.header.item}>
                   <Link to={'/'} className="btn btn_secondary btn_size_sm">
-                    Ввести промокод
+                    {TEXT.btn.promoCode}
                   </Link>
                 </div>
               </div>
               <div className={CLASSES.aside.body}>
-                <nav className={CLASSES.aside.navBar.base}>
+                <nav className={ASIDE_NAV_BAR_BASE_CLASS}>
                   <ul className={CLASSES.aside.navBar.list}>
-                    {renderBurgerMenuItems(menyItemsMobaile)}
+                    {renderBurgerMenuItems(menuItemsMobile)}
                   </ul>
                 </nav>
               </div>
@@ -215,28 +248,28 @@ export function BurgerMenu(): JSX.Element {
     }
 
     return (
-      <div className={`${baseClasss}${CLASSES.isActive}`}
+      <div className={`${BASE_CLASS}${CLASSES.isActive}`}
         onClick={handleClickBurgerMenu}>
         <BurgerMenuIcon width={34} height={34} />
-        <div className="burger-menu__wrapper">
-          <div className="burger-menu__overlay"></div>
-          <aside className="burger-menu-aside">
-            <div className="burger-menu-aside-header">
-              <div className="burger-menu-aside-header__item burger-menu-aside-header__item_jc">
-                <div className="burger-menu-aside-header__title title title_size_m title_color_gray">
-                  Выбор профиля
+        <div className={CLASSES.wrapper}>
+          <div className={CLASSES.overlay} />
+          <aside className={ASIDE_BASE_CLASS}>
+            <div className={ASIDE_HEADER_BASE_CLASS}>
+              <div className={`${CLASSES.aside.header.item} ${CLASSES.aside.header.jc}`}>
+                <div className={`${CLASSES.aside.header.title} ${CLASSES.title.base} ${CLASSES.title.sizeM} ${CLASSES.title.colorGray}`}>
+                  {TEXT.burgerMenu.titleHeader}
                 </div>
-                <div className="burger-menu-aside-header__close-btn">
+                <div className={CLASSES.aside.header.btnClose}>
                   <Btn
                     type="button"
                     className="btn_transparent"
                     onClick={(event) => handleClickCloseBtn(event)}
                   >
-                    <CloseIcon width={24} height={24} />
+                    <CloseIcon width={BREAKPOINT_XL ? 20 : 24} height={BREAKPOINT_XL ? 20 : 24} />
                   </Btn>
                 </div>
               </div>
-              <div className="burger-menu-aside-header__item">
+              <div className={CLASSES.aside.header.item}>
                 <Link
                   to="/profile"
                   className="burger-menu-aside-header__avatar"
@@ -252,43 +285,50 @@ export function BurgerMenu(): JSX.Element {
                   {user?.userData.profileName}
                 </Link>
               </div>
-              <div className="burger-menu-aside-header__item">
-                <span className="burger-menu-aside-header__new-profile">
+              <div className={CLASSES.aside.header.item}>
+                <span className={CLASSES.aside.header.newProfile}>
                   <PlusIcon width={36} height={36} />
                 </span>
-                <span className="burger-menu-aside-header__profile-name title title_size_xm">
-                  Новый профиль
+                <span className={`${CLASSES.aside.header.profileName} ${CLASSES.title.base} ${CLASSES.title.sizeXM}`}>
+                  {TEXT.burgerMenu.createProfile}
                 </span>
               </div>
             </div>
-            <div className="burger-menu-aside-body">
-              <div className="burger-menu-aside-subscription">
-                <div className="burger-menu-aside-subscription__title">
-                  <span className="title">Подписка</span>
-                  <span className="title">Амедиатека</span>
+            <div className={CLASSES.aside.body}>
+              <div className={ASIDE_SUBSCRIPTION_BASE_CLASS}>
+                <div className={CLASSES.aside.subscription.title}>
+                  <span className="text">{TEXT.banner.preTitle}</span>
+                  <span className="text">{TEXT.banner.title}</span>
                   <img src="/BuyButtonBanner.png"
-                    alt="banner" className="burger-menu-aside-subscription__banner" />
+                    alt="banner" className={CLASSES.aside.subscription.banner} />
                 </div>
                 <Btn
                   type="button"
                   className="btn_primary btn_size_sm"
                   onClick={() => console.log('click')}
                 >
-                  Оформить Подписку
+                  {TEXT.banner.btn}
                 </Btn>
               </div>
-              <div className="burger-menu-aside__active-promo">
+              <div className={CLASSES.aside.activePromo}>
                 <Btn
                   type="button"
                   className="btn_secondary btn_size_sm"
                   onClick={() => console.log('click')}
                 >
-                  Активировать промокод
+                  {TEXT.burgerMenu.activatePromo}
                 </Btn>
               </div>
-              <nav className="burger-menu-aside-nav-bar">
-                <ul className="burger-menu-aside-nav-bar-list">
+              <nav className={ASIDE_NAV_BAR_BASE_CLASS}>
+                <ul className={CLASSES.aside.navBar.list}>
                   {renderBurgerMenuItems(menuItems)}
+                </ul>
+              </nav>
+            </div>
+            <div className={CLASSES.aside.body}>
+              <nav className={ASIDE_NAV_BAR_BASE_CLASS}>
+                <ul className={CLASSES.aside.navBar.list}>
+                  {renderBurgerMenuItems(menuItemsMobile)}
                 </ul>
               </nav>
             </div>
@@ -300,7 +340,7 @@ export function BurgerMenu(): JSX.Element {
 
   return (
     <>
-      {renderBurgerMenu(BREAKPOINR_LG, Boolean(user))}
+      {renderBurgerMenu(BREAKPOINT_LG, Boolean(user))}
     </>
   )
 }

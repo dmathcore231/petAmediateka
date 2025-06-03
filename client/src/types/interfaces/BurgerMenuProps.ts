@@ -1,5 +1,5 @@
-import { JSX } from "react"
+import { UserData } from "./User"
 
 export interface BurgerMenuProps {
-  children: JSX.Element
+  user: UserData | null
 }

@@ -1,6 +1,6 @@
 import { useState, useEffect, JSX } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
-import { useAppDispatch, useAppSelector } from "../../hooks"
+import { useAppDispatch, useAppSelector, useCheckBreakpoint } from "../../hooks"
 import { fetchSignUp, fetchSignIn } from '../../services/auth/authThunk'
 import { AuthProps } from '../../types/interfaces/AuthProps'
 import { AuthEmail } from './AuthEmail'
@@ -10,6 +10,8 @@ import { Logo } from '../../assets/icons/Logo'
 
 export function Auth({ pageState }: AuthProps): JSX.Element {
   const dispatch = useAppDispatch()
+  const BREAKPOINT_LG = useCheckBreakpoint(992)
+  const BREAKPOINT_MD = useCheckBreakpoint(768)
   const navigate = useNavigate()
   const defaultAuthState: AuthState = {
     email: null,
@@ -87,7 +89,7 @@ export function Auth({ pageState }: AuthProps): JSX.Element {
     <div className="auth">
       <div className="auth__content">
         <Link to="/" className='auth__logo'>
-          <Logo width={168} height={16} />
+          <Logo width={BREAKPOINT_LG ? 100 : 140} height={16} />
         </Link>
         <div className="auth__bg">
           <picture className="auth__bg-picture">
@@ -95,7 +97,7 @@ export function Auth({ pageState }: AuthProps): JSX.Element {
           </picture>
         </div>
       </div>
-      <article className="auth__side-bar">
+      <div className={BREAKPOINT_MD ? "auth__side-bar container" : "auth__side-bar"}>
         {authState.visibleContent === 'email' && (
           <AuthEmail
             setEmailValue={setAuthState}
@@ -105,7 +107,7 @@ export function Auth({ pageState }: AuthProps): JSX.Element {
         {authState.visibleContent === 'password' && authState.email && (
           <AuthPass setPassValue={setAuthState} email={authState.email} type={pageState} />
         )}
-      </article>
+      </div>
     </div>
   )
 }

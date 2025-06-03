@@ -1,7 +1,7 @@
 import { useRef, useEffect, useState, MouseEvent, RefObject, JSX } from "react"
 import { RootState } from "../../redux/store"
-import { useAppDispatch, useAppSelector } from "../../hooks"
-import { updatePlayerStatus, toggleShow, resetPlayerStatus, setSrc, setError, setCurrentSrc } from "../../redux/MediaPlayerSlice"
+import { useAppDispatch, useAppSelector, useCheckBreakpoint } from "../../hooks"
+import { updatePlayerStatus, toggleShow, resetPlayerStatus, setError, setCurrentSrc } from "../../redux/MediaPlayerSlice"
 import { Btn } from "../Btn"
 import { Spinner } from "../Spinner"
 import { TrackSetting } from "../../types/TrackSetting"
@@ -23,6 +23,8 @@ import { HdIcon } from "../../assets/icons/HdIcon"
 
 export function MediaPlayer(): JSX.Element {
   const dispatch = useAppDispatch()
+  const BREAKPOINT_XXL = useCheckBreakpoint(1400)
+  const BREAKPOINT_MD = useCheckBreakpoint(768)
   const TIME_FORWARD: number = 10
   const TIME_REWIND: number = 10
 
@@ -51,6 +53,28 @@ export function MediaPlayer(): JSX.Element {
   const [inactive, setInactive] = useState<boolean>(true)
   const [isShowHdList, setIsShowHdList] = useState<boolean>(false)
   const inactiveTime: number = 3000
+
+  const getIconSize = (isHd: boolean): { width: number; height: number } => {
+    const sizeAdjustments = BREAKPOINT_XXL
+      ? (BREAKPOINT_MD ? -10 : -5)
+      : 0
+
+    return {
+      width: (isHd ? 40 : 35) + sizeAdjustments,
+      height: 35 + sizeAdjustments,
+    }
+  }
+  const iconsJSX = {
+    close: <CloseIcon {...getIconSize(false)} />,
+    muted: (<MutedIcon {...getIconSize(false)} />),
+    unmuted: (<UnmutedIcon {...getIconSize(false)} />),
+    rewind: (<Rewind10Icon {...getIconSize(false)} />),
+    forward: (<Forward10Icon {...getIconSize(false)} />),
+    pause: (<PauseIcon {...getIconSize(false)} />),
+    play: (<PlayerStartIcon {...getIconSize(false)} />),
+    fullScreen: (<FullScreenIcon {...getIconSize(false)} />),
+    hd: (<HdIcon {...getIconSize(true)} />),
+  }
 
   useEffect(() => {
     const hasError = Boolean(error)
@@ -137,9 +161,9 @@ export function MediaPlayer(): JSX.Element {
 
   const renderBtnPlayOrPauseIcon = (): JSX.Element => {
     if (playerStatus.status === "play") {
-      return <PauseIcon width={35} height={35} />
+      return iconsJSX.pause
     } else {
-      return <PlayerStartIcon width={35} height={35} />
+      return iconsJSX.play
     }
   }
 
@@ -471,13 +495,13 @@ export function MediaPlayer(): JSX.Element {
     const renderTimeBar = (): JSX.Element => {
       const classes: Record<string, string> = {
         base: "media-player-time-bar",
-        timeDisplay: "title title_size_m media-player-time",
+        timeDisplay: "media-player__time title title_size_m ",
         track: "media-player-time-bar__track",
         tooltip: "media-player-time-bar__tooltip",
         tooltipVisible: "media-player-time-bar__tooltip_show",
         progress: "media-player-time-bar__progress",
         thumb: "media-player-time-bar__thumb",
-        timeText: "text text_size_xs"
+        title: "title"
       }
       const tooltipPosition: number = (trackSetting.currentMouseX.time / playerStatus.time.total) * 100
       const trackProgress: number = (playerStatus.time.current / playerStatus.time.total) * 100
@@ -506,7 +530,7 @@ export function MediaPlayer(): JSX.Element {
             <div
               className={`${classes.tooltip}${isShowTooltipClass}`}
               style={{ left: `${tooltipPosition}%` }}>
-              <span className={classes.timeText}>
+              <span className={classes.title}>
                 {hoverTime}
               </span>
             </div>
@@ -548,8 +572,6 @@ export function MediaPlayer(): JSX.Element {
       }
       const tooltipPosition: number = trackSetting.currentMouseX.volume
       const trackProgress: number = playerStatus.volume.value
-      const textClass = "text"
-      const textSizeXsClass = `${textClass} ${textClass}_size_xs`
       const titleClass = "title"
       const titleSizeMClass = `${titleClass} ${titleClass}_size_m`
       const titleQualityMenu = "Качество"
@@ -611,8 +633,8 @@ export function MediaPlayer(): JSX.Element {
         }
 
         const toggleIconMuted = (): JSX.Element => playerStatus.volume.isMuted
-          ? (<MutedIcon width={35} height={35} />)
-          : (<UnmutedIcon width={35} height={35} />)
+          ? iconsJSX.muted
+          : iconsJSX.unmuted
 
         return (
           <div className={`${mainClasses.item} ${mainClasses.itemPaddingLeft}`}>
@@ -632,7 +654,7 @@ export function MediaPlayer(): JSX.Element {
                 <div className={classes.track} ref={trackVolumeRef}>
                   <div className={classes.tooltip}
                     style={{ left: `${tooltipPosition}%` }}>
-                    <span className={textSizeXsClass}>
+                    <span className={titleClass}>
                       {trackSetting.currentMouseX.volume}
                     </span>
                   </div>
@@ -656,7 +678,7 @@ export function MediaPlayer(): JSX.Element {
                 className="btn_transparent btn_scale_hover"
                 onClick={handleClickBtnRewind}
               >
-                <Rewind10Icon width={35} height={35} />
+                {iconsJSX.rewind}
               </Btn>
             </div>
             <div className={mainClasses.item}>
@@ -674,7 +696,7 @@ export function MediaPlayer(): JSX.Element {
                 className="btn_transparent btn_scale_hover"
                 onClick={handleClickBtnForward}
               >
-                <Forward10Icon width={35} height={35} />
+                {iconsJSX.forward}
               </Btn>
             </div>
             {renderVolume()}
@@ -692,7 +714,7 @@ export function MediaPlayer(): JSX.Element {
                 className="btn_transparent btn_scale_hover"
                 onClick={handleClickBtnQualityVideo}
               >
-                <HdIcon width={40} height={35} />
+                {iconsJSX.hd}
               </Btn>
             </div>
             <div className="media-player-control-panel__item">
@@ -701,7 +723,7 @@ export function MediaPlayer(): JSX.Element {
                 className="btn_transparent btn_scale_hover"
                 onClick={handleClickBtnFullScreen}
               >
-                <FullScreenIcon width={35} height={35} />
+                {iconsJSX.fullScreen}
               </Btn>
             </div>
           </div>
@@ -736,7 +758,7 @@ export function MediaPlayer(): JSX.Element {
                 className="btn_transparent btn_scale_hover"
                 onClick={handleClickBtnClose}
               >
-                <CloseIcon width={30} height={30} />
+                {iconsJSX.close}
               </Btn>
             </div>
           </div>
