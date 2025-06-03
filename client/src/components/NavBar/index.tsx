@@ -136,7 +136,7 @@ export function NavBar(): JSX.Element {
             {user && !loading && (
               <>
                 <ProfileSwitcher className="profile-switcher_margin" />
-                <BurgerMenu />
+                <BurgerMenu user={user} />
               </>
             )}
             {loading && (
@@ -167,7 +167,7 @@ export function NavBar(): JSX.Element {
             </NavLink>
           </li>
           <li className={CLASSES.listItem}>
-            <BurgerMenu />
+            <BurgerMenu user={user} />
           </li>
         </ul>
       </div>
