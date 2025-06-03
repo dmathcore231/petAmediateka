@@ -9,7 +9,7 @@ export async function createJwtMiddleware(req: Request, res: Response, next: Nex
   const { error } = localDataState
   const { type, email } = req.body
 
-  if (error || type !== 'authSignIn' && type !== 'authSignUp') {
+  if (error || type == 'authSignIn' && type == 'authSignUp') {
     return next()
   }
 
@@ -40,6 +40,7 @@ export async function createJwtMiddleware(req: Request, res: Response, next: Nex
     }
 
     localDataState.token = tokens
+
   }
 
   return next()

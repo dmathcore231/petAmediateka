@@ -32,6 +32,7 @@ const text: Record<string, string> = {
   signUp: "Попробовать за 1₽",
 }
 
+
 export function NavBar(): JSX.Element {
   const location = useLocation()
   const breakpointXL = useCheckBreakpoint(1600)

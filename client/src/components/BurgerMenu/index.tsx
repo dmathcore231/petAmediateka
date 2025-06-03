@@ -10,15 +10,15 @@ import { CloseIcon } from "../../assets/icons/CloseIcon"
 import { PlusIcon } from "../../assets/icons/PlusIcon"
 import { Logo } from "../../assets/icons/Logo"
 
-
 export function BurgerMenu(): JSX.Element {
   const dispatch = useAppDispatch()
-  const BREAKPOINR_LG = useCheckBreakpoint(768)
+  const BREAKPOINT_XL = useCheckBreakpoint(1200)
+  const BREAKPOINT_LG = useCheckBreakpoint(768)
   const { user } = useAppSelector(state => state.my)
   const [isActive, setIsActive] = useState(false)
-  const baseClasss = "burger-menu"
+  const baseClass = "burger-menu"
   const CLASSES = {
-    isActive: isActive ? ` ${baseClasss}_active` : "",
+    isActive: isActive ? ` ${baseClass}_active` : "",
     aside: {
       base: "burger-menu-aside",
       header: {
@@ -28,6 +28,7 @@ export function BurgerMenu(): JSX.Element {
         title: "burger-menu-aside-header__title",
         btnClose: "burger-menu-aside-header__close-btn",
         wrapper: "burger-menu-aside-header__wrapper",
+        logo: "burger-menu-aside-header__logo",
       },
       body: "burger-menu-aside-body",
       navBar: {
@@ -38,7 +39,7 @@ export function BurgerMenu(): JSX.Element {
         linkActive: "burger-menu-aside-nav-bar-list__link_active",
       },
     },
-    wrapper: `${baseClasss}__wrapper`,
+    wrapper: `${baseClass}__wrapper`,
   }
   const menuItems: BurgerMenuItem[] = [
     {
@@ -77,7 +78,7 @@ export function BurgerMenu(): JSX.Element {
       typeLink: "link",
     }
   ]
-  const menyItemsMobaile: BurgerMenuItem[] = [
+  const menuItemsMobile: BurgerMenuItem[] = [
     {
       to: "/collection-series",
       text: "Сериалы",
@@ -159,11 +160,11 @@ export function BurgerMenu(): JSX.Element {
     ))
   }
 
-  const renderBurgerMenu = (mobaileBreakpoint: boolean, userAuth: boolean): JSX.Element => {
+  const renderBurgerMenu = (mobileBreakpoint: boolean, userAuth: boolean): JSX.Element => {
 
-    if (mobaileBreakpoint && !userAuth) {
+    if (mobileBreakpoint && !userAuth) {
       return (
-        <div className={`${baseClasss}${CLASSES.isActive}`}
+        <div className={`${baseClass}${CLASSES.isActive}`}
           onClick={handleClickBurgerMenu}>
           <BurgerMenuIcon width={34} height={34} />
           <div className={CLASSES.wrapper}>
@@ -171,7 +172,7 @@ export function BurgerMenu(): JSX.Element {
               <div className={CLASSES.aside.header.base}>
                 <div className={`${CLASSES.aside.header.item} ${CLASSES.aside.header.marginBottomItem}`}>
                   <div className={CLASSES.aside.header.wrapper}>
-                    <div className={CLASSES.aside.header.title}>
+                    <div className={CLASSES.aside.header.logo}>
                       <Logo width={120} height={16} />
                     </div>
                     <div className={CLASSES.aside.header.btnClose}>
@@ -204,7 +205,7 @@ export function BurgerMenu(): JSX.Element {
               <div className={CLASSES.aside.body}>
                 <nav className={CLASSES.aside.navBar.base}>
                   <ul className={CLASSES.aside.navBar.list}>
-                    {renderBurgerMenuItems(menyItemsMobaile)}
+                    {renderBurgerMenuItems(menuItemsMobile)}
                   </ul>
                 </nav>
               </div>
@@ -215,7 +216,7 @@ export function BurgerMenu(): JSX.Element {
     }
 
     return (
-      <div className={`${baseClasss}${CLASSES.isActive}`}
+      <div className={`${baseClass}${CLASSES.isActive}`}
         onClick={handleClickBurgerMenu}>
         <BurgerMenuIcon width={34} height={34} />
         <div className="burger-menu__wrapper">
@@ -232,7 +233,7 @@ export function BurgerMenu(): JSX.Element {
                     className="btn_transparent"
                     onClick={(event) => handleClickCloseBtn(event)}
                   >
-                    <CloseIcon width={24} height={24} />
+                    <CloseIcon width={BREAKPOINT_XL ? 20 : 24} height={BREAKPOINT_XL ? 20 : 24} />
                   </Btn>
                 </div>
               </div>
@@ -264,8 +265,8 @@ export function BurgerMenu(): JSX.Element {
             <div className="burger-menu-aside-body">
               <div className="burger-menu-aside-subscription">
                 <div className="burger-menu-aside-subscription__title">
-                  <span className="title">Подписка</span>
-                  <span className="title">Амедиатека</span>
+                  <span className="text">Подписка</span>
+                  <span className="text">Амедиатека</span>
                   <img src="/BuyButtonBanner.png"
                     alt="banner" className="burger-menu-aside-subscription__banner" />
                 </div>
@@ -292,6 +293,13 @@ export function BurgerMenu(): JSX.Element {
                 </ul>
               </nav>
             </div>
+            <div className={CLASSES.aside.body}>
+              <nav className={CLASSES.aside.navBar.base}>
+                <ul className={CLASSES.aside.navBar.list}>
+                  {renderBurgerMenuItems(menuItemsMobile)}
+                </ul>
+              </nav>
+            </div>
           </aside>
         </div>
       </div>
@@ -300,7 +308,7 @@ export function BurgerMenu(): JSX.Element {
 
   return (
     <>
-      {renderBurgerMenu(BREAKPOINR_LG, Boolean(user))}
+      {renderBurgerMenu(BREAKPOINT_LG, Boolean(user))}
     </>
   )
 }
