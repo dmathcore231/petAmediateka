@@ -5,7 +5,7 @@ import { PictureWithSources } from "../PictureWithSources"
 import { BannerProps } from "../../types/interfaces/BannerProps"
 import { PictureWithSourcesProps } from "../../types/interfaces/PictureWithSourcesProps"
 
-export function Banner({ _id, title, bannerListItem, img, titleBtn, ageRestriction, loading }: BannerProps): JSX.Element {
+export function Banner({ title, bannerListItem, img, titleBtn, ageRestriction, loading }: BannerProps): JSX.Element {
   const breakpointLg = useCheckBreakpoint(992)
   const breakpointMd = useCheckBreakpoint(768)
   const baseClass: string = 'banner'

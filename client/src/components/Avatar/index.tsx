@@ -1,9 +1,7 @@
 import { JSX } from "react"
-import { useAppSelector } from "../../hooks"
 import { AvatarProps } from "../../types/interfaces/AvatarProps"
 
-export function Avatar({ size, className }: AvatarProps): JSX.Element {
-  const { user } = useAppSelector(state => state.auth)
+export function Avatar({ size, className, user }: AvatarProps): JSX.Element {
 
   const baseClass: string = `avatar__img`
   const sizeClass: string = `avatar__img_size_${size}`
