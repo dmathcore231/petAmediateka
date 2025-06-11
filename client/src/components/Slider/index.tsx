@@ -1,136 +1,54 @@
-import { useEffect, useState, useRef, CSSProperties, JSX } from "react"
+import { useEffect, useState, useRef, CSSProperties, JSX, useCallback, memo } from "react"
 import { useAppDispatch, useCheckBreakpoint } from "../../hooks"
 import { toggleShow, setTitle, setSrc } from "../../redux/MediaPlayerSlice"
+import { fetchMyFavorite } from "../../services/my/myThunk"
+import { SliderPagination } from "./SliderPagination"
 import { Btn } from "../Btn"
 import { Card } from "../Card"
-import { Spinner } from "../Spinner"
 import { SliderProps } from "../../types/interfaces/SliderProps"
-import { SlideState, MultiSlideState } from "../../types/Slider"
+import { SlideState } from "../../types/Slider"
 import { CardData } from "../../types/Card"
-import { SliderClassBtnState } from "../../types/SliderClassBtnState"
-import { defaultCardData } from "../../helpers"
+import { UserCardProps } from "../../types/UserCardProps"
 import { ArrowLeftIcon } from "../../assets/icons/ArrowLeftIcon"
 import { ArrowRightIcon } from "../../assets/icons/ArrowRightIcon"
+import { UserData } from "../../types/interfaces/User"
+import { defaultCardData } from "../../helpers"
 
-export function Slider({ sliderSettings, sliderData: { data, cardStyles, settings, loadingData, errorData } }: SliderProps): JSX.Element {
+function SliderComponent({ sliderSettings,
+  sliderData: { data, cardStyles, settings, loadingData, errorData },
+  userState: { user } }: SliderProps): JSX.Element {
   const dispatch = useAppDispatch()
-  const BREAKPOINTMD = useCheckBreakpoint(768)
+  const BREAKPOINT_MD = useCheckBreakpoint(768)
   const ANIMATED_TIME: number = 400
-  const autoSwipeTime: number = 100
-  const sliderListGap: number = 16
-  const defSliderClassBtnState: SliderClassBtnState = {
-    prev: '',
-    next: ''
-  }
-  const { typeSlider, pagenation, autoSwipe, lastSwipe, quantityListItems, mediaPlayerHandler } = sliderSettings
-  const [stateSlider, setStateSlider] = useState<SlideState | null>(null)
-  const [multiStateSlider, setMultiStateSlider] = useState<MultiSlideState | null>(null)
-  const [progress, setProgress] = useState<number>(0)
-  const [sliderItemWidth, setSliderItemWidth] = useState<number>(0)
-  const [classBtnState, setClassBtnState] = useState<SliderClassBtnState>(defSliderClassBtnState)
+  const AUTO_SWIPE_TIME: number = 10000
+  const sliderListGap: number = BREAKPOINT_MD ? 8 : 16
+  const { typeSlider, pagination, autoSwipe, lastSwipe, quantityListItems, mediaPlayerHandler } = sliderSettings
+  const [stateSlider, setStateSlider] = useState<SlideState<number | number[]> | null>(null)
   const sliderListRef = useRef<HTMLUListElement>(null)
   const sliderItemRef = useRef<HTMLLIElement>(null)
   const sliderStyle: CSSProperties = {
     ['--slider-item-per-view' as string]: `${quantityListItems}`
   }
 
-  useEffect((): void | (() => void) => {
-    const isDataComplete: boolean = data?.length === quantityListItems
-    const isPrevSlideOutOfBounds: boolean | null = multiStateSlider
-      && multiStateSlider.prevSlide < 0
-      && lastSwipe
-    const isNextSlideOutOfBounds: boolean | null = multiStateSlider
-      && data
-      && multiStateSlider.nextSlide === data.length
-      && lastSwipe
-    const isMultiSliderType: boolean = typeSlider === 'multi' && !multiStateSlider
-
-    const classesBtn: Record<string, string> = {
-      base: "slider__btn",
-      prev: "slider__btn_prev",
-      next: "slider__btn_next",
-      disabled: "slider__btn_disabled"
-    }
-
-    type ToggleDisabledClassBtn = {
-      prevDisabled: boolean
-      nextDisabled: boolean
-      isAnimated?: boolean
-    }
-
-    const toggleDisabledClassBtn = ({ prevDisabled, nextDisabled, isAnimated }: ToggleDisabledClassBtn): void | (() => void) => {
-      if (!isAnimated) {
-        setClassBtnState({
-          prev: prevDisabled
-            ? `${classesBtn.base} ${classesBtn.prev} ${classesBtn.disabled}`
-            : `${classesBtn.base} ${classesBtn.prev}`,
-          next: nextDisabled
-            ? `${classesBtn.base} ${classesBtn.next} ${classesBtn.disabled}`
-            : `${classesBtn.base} ${classesBtn.next}`
-        })
-      }
-
-      const timerId = setTimeout((): void => {
-        setClassBtnState({
-          prev: prevDisabled
-            ? `${classesBtn.base} ${classesBtn.prev} ${classesBtn.disabled}`
-            : `${classesBtn.base} ${classesBtn.prev}`,
-          next: nextDisabled
-            ? `${classesBtn.base} ${classesBtn.next} ${classesBtn.disabled}`
-            : `${classesBtn.base} ${classesBtn.next}`
-        })
-      }, ANIMATED_TIME)
-
-      return () => clearTimeout(timerId)
-    }
-
-    if (isDataComplete) return toggleDisabledClassBtn({
-      prevDisabled: true,
-      nextDisabled: true
-    }) as void
-
-    if (isPrevSlideOutOfBounds) return toggleDisabledClassBtn({
-      prevDisabled: true,
-      nextDisabled: false,
-      isAnimated: true
-    }) as () => void
-
-    if (isNextSlideOutOfBounds) return toggleDisabledClassBtn({
-      prevDisabled: false,
-      nextDisabled: true,
-      isAnimated: true
-    }) as () => void
-
-    if (isMultiSliderType) return toggleDisabledClassBtn({
-      prevDisabled: true,
-      nextDisabled: true
-    }) as void
-
-    return toggleDisabledClassBtn({
-      prevDisabled: false,
-      nextDisabled: false
-    })
-
-  }, [data, typeSlider, multiStateSlider, lastSwipe, quantityListItems])
-
   useEffect(() => {
-    if (!data) return
+    if (!sliderItemRef.current) return
 
-    const baseState = {
+    const baseState: Pick<SlideState<number>, 'translateX' | 'indexSlide' | 'isAnimated' | 'sliderItemWidth'> = {
       translateX: 0,
       indexSlide: 0,
       isAnimated: false,
+      sliderItemWidth: sliderItemRef.current.offsetWidth,
     }
 
-    if (typeSlider === 'default') {
+    if (typeSlider === 'default' && data) {
       setStateSlider({
         ...baseState,
         prevSlide: data.length - 1,
         activeSlide: 0,
         nextSlide: data.length > 1 ? 1 : 0,
       })
-    } else if (typeSlider === 'multi') {
-      setMultiStateSlider({
+    } else {
+      setStateSlider({
         ...baseState,
         prevSlide: -1,
         activeSlide: [0, quantityListItems],
@@ -140,28 +58,18 @@ export function Slider({ sliderSettings, sliderData: { data, cardStyles, setting
   }, [data, typeSlider, quantityListItems])
 
   useEffect(() => {
-    if (sliderItemRef.current) {
-      setSliderItemWidth(sliderItemRef.current.offsetWidth)
-    }
-  }, [sliderItemRef.current])
-
-  useEffect(() => {
-    const isAnimated = typeSlider === 'default'
-      ? stateSlider?.isAnimated
-      : multiStateSlider?.isAnimated
+    const isAnimated = stateSlider?.isAnimated
 
     if (!isAnimated) return
 
     const timeoutId = setTimeout(() => {
-      if (typeSlider === 'default') {
-        return setStateSlider(prev => (prev ? { ...prev, isAnimated: false } : null))
-      } else {
-        return setMultiStateSlider(prev => (prev ? { ...prev, isAnimated: false } : null))
-      }
+      setStateSlider(prev => (prev
+        ? { ...prev, isAnimated: false }
+        : null))
     }, ANIMATED_TIME)
 
     return () => clearTimeout(timeoutId)
-  }, [stateSlider?.isAnimated, multiStateSlider?.isAnimated, ANIMATED_TIME, typeSlider])
+  }, [stateSlider?.isAnimated, ANIMATED_TIME, typeSlider])
 
   useEffect(() => {
     if (!data || !sliderListRef.current || loadingData || !stateSlider) return
@@ -198,22 +106,32 @@ export function Slider({ sliderSettings, sliderData: { data, cardStyles, setting
 
     const timerId = setTimeout(() => {
       if (shouldResetToFirstSlide) {
-        setStateSlider({
-          prevSlide: data.length - 1,
-          activeSlide: 0,
-          nextSlide: 1,
-          translateX: 0,
-          indexSlide: 0,
-          isAnimated: false,
+        setStateSlider(prev => {
+          if (!prev) return null
+
+          return {
+            ...prev,
+            prevSlide: 0,
+            activeSlide: 0,
+            nextSlide: 1,
+            translateX: 0,
+            indexSlide: 0,
+            isAnimated: false
+          }
         })
       } else if (shouldResetToLastSlide) {
-        setStateSlider({
-          prevSlide: data.length - 2,
-          activeSlide: data.length - 1,
-          nextSlide: 0,
-          translateX: (data.length - 1) * -100,
-          indexSlide: data.length - 1,
-          isAnimated: false,
+        setStateSlider(prev => {
+          if (!prev) return null
+
+          return {
+            ...prev,
+            prevSlide: data.length - 1,
+            activeSlide: data.length - 1,
+            nextSlide: data.length - 2,
+            translateX: data.length * -100,
+            indexSlide: data.length,
+            isAnimated: false
+          }
         })
       }
     }, ANIMATED_TIME)
@@ -224,18 +142,10 @@ export function Slider({ sliderSettings, sliderData: { data, cardStyles, setting
   useEffect(() => {
     if (!autoSwipe || loadingData) return
 
-    const interval: number = setInterval(() => {
-      setProgress((prevProgress) => {
-        if (prevProgress >= 100) {
-          handleClickBtn('next')
-          return 0
-        }
-        return prevProgress + 1
-      })
-    }, autoSwipeTime)
+    const timerId = setInterval(() => handleClickBtn('next'), AUTO_SWIPE_TIME - ANIMATED_TIME)
 
-    return () => clearInterval(interval)
-  }, [autoSwipe, data])
+    return () => clearInterval(timerId)
+  }, [autoSwipe, loadingData, stateSlider])
 
   const setClassSlide = (index: number): string => {
     const baseClass = "slider__item"
@@ -258,8 +168,8 @@ export function Slider({ sliderSettings, sliderData: { data, cardStyles, setting
       return `${baseClass}`
     }
 
-    if (typeSlider === 'multi' && multiStateSlider) {
-      const { prevSlide, nextSlide } = multiStateSlider
+    if (typeSlider === 'multi' && stateSlider) {
+      const { prevSlide, nextSlide } = stateSlider
 
       if (index === prevSlide) return `${baseClass} ${classes.prev}${clipPathClass}`
       if (index === nextSlide) return `${baseClass} ${classes.next}${clipPathClass}`
@@ -270,12 +180,11 @@ export function Slider({ sliderSettings, sliderData: { data, cardStyles, setting
     return baseClass
   }
 
-  const handleClickBtn = (typeBtn: 'prev' | 'next'): void => {
-    if (!typeSlider || !data) return
-
+  const handleClickBtn = useCallback((typeBtn: 'prev' | 'next'): void => {
+    if (!typeSlider || !data || !stateSlider) return
     const sliderConfig = {
       default: {
-        next: (prevState: SlideState) => ({
+        next: (prevState: SlideState<number>) => ({
           prevSlide: prevState.activeSlide,
           activeSlide: prevState.nextSlide,
           nextSlide: (prevState.nextSlide + 1) % data.length,
@@ -283,7 +192,7 @@ export function Slider({ sliderSettings, sliderData: { data, cardStyles, setting
           indexSlide: prevState.activeSlide + 1,
           isAnimated: true,
         }),
-        prev: (prevState: SlideState) => ({
+        prev: (prevState: SlideState<number>) => ({
           prevSlide: (prevState.prevSlide - 1 + data.length) % data.length,
           activeSlide: prevState.prevSlide,
           nextSlide: prevState.activeSlide,
@@ -293,19 +202,19 @@ export function Slider({ sliderSettings, sliderData: { data, cardStyles, setting
         }),
       },
       multi: {
-        next: (prevState: MultiSlideState) => ({
+        next: (prevState: SlideState<number[]>) => ({
           prevSlide: prevState.prevSlide + 1,
           activeSlide: [prevState.activeSlide[0] + 1, prevState.activeSlide[1] + 1],
           nextSlide: prevState.nextSlide + 1,
-          translateX: prevState.translateX - (sliderItemWidth + sliderListGap),
+          translateX: prevState.translateX - (stateSlider.sliderItemWidth + sliderListGap),
           indexSlide: 0,
           isAnimated: true,
         }),
-        prev: (prevState: MultiSlideState) => ({
+        prev: (prevState: SlideState<number[]>) => ({
           prevSlide: prevState.prevSlide - 1,
           activeSlide: [prevState.activeSlide[0] - 1, prevState.activeSlide[1] - 1],
           nextSlide: prevState.nextSlide - 1,
-          translateX: prevState.translateX + (sliderItemWidth + sliderListGap),
+          translateX: prevState.translateX + (stateSlider.sliderItemWidth + sliderListGap),
           indexSlide: 0,
           isAnimated: true,
         })
@@ -313,57 +222,46 @@ export function Slider({ sliderSettings, sliderData: { data, cardStyles, setting
     }
 
     if (typeSlider === 'default') {
-      setStateSlider(prev => !prev ? null : sliderConfig.default[typeBtn](prev))
-      setProgress(0)
+      setStateSlider(prev => !prev
+        ? null
+        : {
+          ...sliderConfig.default[typeBtn](prev as SlideState<number>),
+          sliderItemWidth: prev.sliderItemWidth
+        }
+      )
     } else {
-      setMultiStateSlider(prev => !prev ? null : sliderConfig.multi[typeBtn](prev))
+      setStateSlider(prev => !prev
+        ? null
+        : {
+          ...sliderConfig.multi[typeBtn](prev as SlideState<number[]>),
+          sliderItemWidth: prev.sliderItemWidth
+        }
+      )
     }
-  }
+  }, [data, stateSlider, typeSlider])
 
-  const toggleDisabledBtn = (): boolean => {
-    const isAnimated = typeSlider === 'default'
-      ? stateSlider?.isAnimated
-      : multiStateSlider?.isAnimated
+  const toggleDisabledBtn = useCallback((): boolean => {
+    const isAnimated = stateSlider?.isAnimated
 
     if (isAnimated || loadingData) {
       return true
     } else {
       return false
     }
-  }
+  }, [stateSlider?.isAnimated, loadingData])
 
-  const handleClickSliderItem = (data: CardData): void => {
+  const handleClickSliderItem = useCallback((data: CardData): void => {
     dispatch(toggleShow(true))
     dispatch(setTitle(data.title.value))
     if (data.src) {
       dispatch(setSrc(data.src))
     }
-  }
-
-  const renderTitleImg = (indexItem: number, slideItemData: CardData): JSX.Element => {
-    if (indexItem === settings.title.titleLogoImgIndex) {
-      const updateSettings = {
-        ...settings,
-        title: {
-          ...settings.title,
-          titleLogoImg: true
-        }
-      }
-
-      return (
-        <Card styles={cardStyles} data={slideItemData} settings={updateSettings} loadingCardData={loadingData} error={errorData} />
-      )
-    } else {
-      return (
-        <Card styles={cardStyles} data={slideItemData} settings={settings} loadingCardData={loadingData} error={errorData} />
-      )
-    }
-  }
+  }, [dispatch, mediaPlayerHandler])
 
   const toggleBaseClass = (typeSlider: "default" | "multi", mobileBreakpoint: boolean): string => {
     const result = {
       default: 'slider',
-      multi: 'slider slider_multi container',
+      multi: 'slider slider_multi',
     }
 
     if (mobileBreakpoint) return result[typeSlider]
@@ -371,47 +269,51 @@ export function Slider({ sliderSettings, sliderData: { data, cardStyles, setting
     return `${result[typeSlider]} container`
   }
 
+  const handleToggleFavoriteContent = useCallback(((id: string): void => {
+    const formData = new FormData()
+    formData.append('id', id)
+    dispatch(fetchMyFavorite(formData))
+  }), [dispatch])
+
   const renderList = (): JSX.Element | null => {
     if (errorData) return null
 
     const baseClass = "slider__list"
-    const multiLoadingClass = "slider__list_loading"
 
     const listStyles: CSSProperties = {
       transform: typeSlider === 'default'
         ? `translateX(${stateSlider?.translateX}%)`
-        : `translateX(${multiStateSlider?.translateX}px)`,
-      transition: typeSlider === 'default'
-        ? stateSlider?.isAnimated ? 'var(--transition)' : 'none'
-        : multiStateSlider?.isAnimated ? 'var(--transition)' : 'none',
+        : `translateX(${stateSlider?.translateX}px)`,
+      transition: stateSlider?.isAnimated ? 'var(--transition)' : 'none'
     }
 
-    const toggleListClass = () => {
-      return typeSlider === 'multi' && loadingData
-        ? `${baseClass} ${multiLoadingClass}`
-        : `${baseClass}`
-    }
+    const generateUserCardProps = (user: UserData | null, id: string): UserCardProps => {
+      const formData = new FormData()
+      formData.append('id', id)
 
-    const loadingContent = (): JSX.Element => {
-      return (
-        (
-          typeSlider === 'default'
-            ? (<Card styles={cardStyles}
-              data={defaultCardData} settings={settings}
-              loadingCardData={loadingData}
-              error={errorData} />)
-            : (<Spinner width={50} height={50} />)
-        )
-      )
+      return {
+        auth: Boolean(user),
+        isFavoriteContent: Boolean(user?.userActionsData?.favoriteList?.includes(id)),
+        handleFavoriteContent: handleToggleFavoriteContent,
+      }
     }
-
-    if (loadingData && !data) return loadingContent()
 
     return (
-      <ul className={toggleListClass()}
+      <ul className={baseClass}
         ref={sliderListRef}
         style={listStyles}
       >
+        {!data && (
+          Array(5).fill(defaultCardData).map((item, index) => (
+            <li
+              key={index}
+              className={setClassSlide(index)}
+              ref={sliderItemRef}
+            >
+              <Card styles={cardStyles} data={item} settings={settings} loading={loadingData} error={errorData} user={generateUserCardProps(user, item._id)} />
+            </li>
+          ))
+        )}
         {data && (
           data.map((slide, index) => (
             <li
@@ -420,7 +322,7 @@ export function Slider({ sliderSettings, sliderData: { data, cardStyles, setting
               ref={sliderItemRef}
               onClick={() => mediaPlayerHandler ? handleClickSliderItem(slide) : null}
             >
-              {renderTitleImg(index, slide)}
+              {(<Card styles={cardStyles} data={slide} settings={settings} loading={loadingData} error={errorData} user={generateUserCardProps(user, slide._id)} />)}
             </li>
           ))
         )}
@@ -428,48 +330,29 @@ export function Slider({ sliderSettings, sliderData: { data, cardStyles, setting
     )
   }
 
-  const renderPagenation = (): JSX.Element | null => {
-    if (!pagenation || !data || !stateSlider) return null
-    const { activeSlide } = stateSlider
-
-    const baseClass = "slider-pagination"
-    const itemClass = `${baseClass}__item`
-    const activeItemClass = `${itemClass}_active`
-    const activeLineClass = `${baseClass}__active-line`
-
-    const lineStyle: CSSProperties = {
-      width: `${progress}%`,
+  const setClassesBtn = (typeBtn: 'prev' | 'next', lastSwipe: boolean): string => {
+    const baseClass = "slider__btn"
+    const disabledClass = `${baseClass}_disabled`
+    const classes = {
+      prev: `${baseClass}_prev`,
+      next: `${baseClass}_next`,
     }
 
-    const setClassItem = (index: number): string => {
-      return activeSlide === index
-        ? `${itemClass} ${activeItemClass}`
-        : `${itemClass}`
-    }
+    const baseDisabled = loadingData || !data || !stateSlider
+    const btnDisabled =
+      (typeBtn === 'next' && lastSwipe && stateSlider?.nextSlide === data?.length) ||
+      (typeBtn === 'prev' && lastSwipe && stateSlider?.prevSlide === -1)
 
-    return (
-      <ul className={baseClass}>
-        {data.map((_, index) => (
-          <li
-            key={index}
-            className={setClassItem(index)}
-          >
-            {activeSlide === index && (
-              <div className={activeLineClass}
-                style={lineStyle}
-              />
-            )}
-          </li>
-        ))}
-      </ul>
-    )
+    if (baseDisabled || btnDisabled) return `${baseClass} ${classes[typeBtn]} ${disabledClass}`
+
+    return `${baseClass} ${classes[typeBtn]}`
   }
 
   return (
-    <div className={toggleBaseClass(typeSlider, BREAKPOINTMD)}
+    <div className={toggleBaseClass(typeSlider, BREAKPOINT_MD)}
       style={sliderStyle}
     >
-      <div className={classBtnState.prev}>
+      <div className={setClassesBtn('prev', lastSwipe)}>
         <Btn
           type="button"
           className="btn_transparent"
@@ -479,7 +362,7 @@ export function Slider({ sliderSettings, sliderData: { data, cardStyles, setting
           <ArrowLeftIcon width={48} height={48} />
         </Btn>
       </div>
-      <div className={classBtnState.next}>
+      <div className={setClassesBtn('next', lastSwipe)}>
         <Btn
           type="button"
           className="btn_transparent"
@@ -491,8 +374,12 @@ export function Slider({ sliderSettings, sliderData: { data, cardStyles, setting
       </div>
       <div className="slider__content">
         {renderList()}
-        {renderPagenation()}
+        {data && stateSlider && !loadingData && (
+          <SliderPagination isActive={pagination} pageLength={data.length} activeSlide={stateSlider?.activeSlide as number} />
+        )}
       </div>
     </div>
   )
 }
+
+export const Slider = memo(SliderComponent)

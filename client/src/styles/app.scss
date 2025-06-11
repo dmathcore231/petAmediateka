@@ -9,6 +9,7 @@
 @use "../components/NavBar/styles" as NavBar;
 @use "../components/Btn/styles" as Btn;
 @use "../components/Slider/styles" as Slider;
+@use "../components/Slider/SliderPagination/styles" as SliderPagination;
 @use "../components/Card/styles" as Card;
 @use "../components/Badge/styles" as Badge;
 @use "../components/Banner/styles" as Banner;
@@ -33,6 +34,9 @@
 @use "../components/IconSeries/styles" as IconSeries;
 @use "../components/IconButton/styles" as IconButton;
 @use "../components/MyEditMenu/styles" as MyEditMenu;
+@use "../components/Skeletons/styles" as Skeletons;
+@use "../components/Skeletons/Banner/styles" as SkeletonBanner;
+@use "../components/Skeletons/Card/styles" as SkeletonCard;
 
 @use "../pages/Home/styles" as Home;
 @use "../pages/СollectionSeries/styles" as CollectionSeries;

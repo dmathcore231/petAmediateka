@@ -2,7 +2,7 @@ import { BadgeCard } from "./BadgeCard"
 import { Bg } from "./Bg"
 import { Size } from "./Scaffold"
 import { Flex } from "./Scaffold"
-import { SrcMediaPlaer } from "./SrcMediaPlaer"
+import { SrcMediaPlayer } from "./SrcMediaPlayer"
 
 export type CardLink = {
   linkType: 'allCard' | 'title'
@@ -15,7 +15,7 @@ export type CardTitle = {
 }
 
 export type TagsCard = {
-  raiting: number
+  rating: number
   ageRestriction: number
   dateRelease: string
   genres?: string[]
@@ -35,7 +35,7 @@ export type CardData = {
   bg: Bg
   logoImg: string
   link: string
-  src?: SrcMediaPlaer
+  src?: SrcMediaPlayer
 }
 
 export type CardStyles = {

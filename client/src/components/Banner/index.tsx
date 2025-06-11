@@ -2,6 +2,7 @@ import { JSX } from "react"
 import { Link } from "react-router-dom"
 import { useCheckBreakpoint } from "../../hooks"
 import { PictureWithSources } from "../PictureWithSources"
+import { Skeletons } from "../Skeletons"
 import { BannerProps } from "../../types/interfaces/BannerProps"
 import { PictureWithSourcesProps } from "../../types/interfaces/PictureWithSourcesProps"
 
@@ -43,15 +44,7 @@ export function Banner({ title, bannerListItem, img, titleBtn, ageRestriction, l
 
   if (loading) {
     return (
-      <div className={`${baseClass} ${loadingClass}`}>
-        <div className="banner__wrapper">
-          <div className="banner__item">
-            <div className="banner__title" />
-            <div className="banner-list" />
-            <div className="banner__btn" />
-          </div>
-        </div>
-      </div>
+      <Skeletons type="banner" />
     )
   }
 

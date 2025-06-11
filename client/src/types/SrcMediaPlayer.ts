@@ -1,6 +1,6 @@
 import { VideoQuality } from "./VideoQuality"
 
-export type SrcMediaPlaer = {
+export type SrcMediaPlayer = {
   _current: {
     type: VideoQuality
     value: string

@@ -252,7 +252,7 @@ export function Series(): JSX.Element {
           typeBtn: 'addFavorite',
           propsIconBtn: {
             config: {
-              stateIcon: checkIsFavoriteContent(user?.userActionsData.favoritList ?? null, id!),
+              stateIcon: checkIsFavoriteContent(user?.userActionsData.favoriteList ?? null, id!),
               loading,
             },
             styles: {

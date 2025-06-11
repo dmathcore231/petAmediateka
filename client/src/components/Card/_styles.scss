@@ -155,7 +155,7 @@
         height: 24px;
         border-radius: 0.25rem;
         background-color: $color-secondary;
-        animation: $loading-animation;
+        animation: $skeleton-bg-animation;
       }
     }
 
@@ -219,7 +219,7 @@
         background-color: $color-secondary;
         border-radius: 0.25rem;
         padding-top: 0;
-        animation: $loading-animation;
+        animation: $skeleton-bg-animation;
       }
     }
 
@@ -271,7 +271,7 @@
 
     &_playback {
       &:hover {
-        transform: translate(3%, -3%) scale(1.02);
+        transform: var(--playback-hover-transform);
         z-index: 10;
       }
 
@@ -406,7 +406,7 @@
 
   &_loading {
     --bg-color: #{$color-secondary};
-    animation: $loading-animation;
+    animation: $skeleton-bg-animation;
   }
 
   &-icon-play {

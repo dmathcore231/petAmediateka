@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { initialStateMediaPlayer } from "../helpers/initStates"
 import { PlayerStatus } from "../types/PlayerStatus"
-import { SrcMediaPlaer } from "../types/SrcMediaPlaer"
+import { SrcMediaPlayer } from "../types/SrcMediaPlayer"
 import { VideoQuality } from "../types/VideoQuality"
 
 export const mediaPlayerSlice = createSlice({
@@ -21,7 +21,7 @@ export const mediaPlayerSlice = createSlice({
       state.playerStatus = initialStateMediaPlayer.playerStatus
     },
 
-    setSrc: (state, action: PayloadAction<SrcMediaPlaer>) => {
+    setSrc: (state, action: PayloadAction<SrcMediaPlayer>) => {
       state.src = action.payload
     },
 

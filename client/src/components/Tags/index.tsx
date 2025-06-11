@@ -4,16 +4,16 @@ import { RatingAmediateka } from "../../assets/icons/RatingAmediateka"
 
 export function Tags({ data }: TagsProps): JSX.Element {
 
-  const { raiting, ageRestriction, dateRelease, genres } = data
+  const { rating, ageRestriction, dateRelease, genres } = data
 
   return (
     <div className="tags">
       <ul className="tags-list">
-        {raiting && (
+        {rating && (
           <li className="tags-list__item">
             <span className="tags-list__badge tags-list__badge_raiting">
               <RatingAmediateka width={30} height={24} />
-              {raiting}
+              {rating}
             </span>
           </li>
         )}

@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk, PayloadAction, Dispatch } from "@reduxjs/toolkit"
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit"
 import { requestContent } from "../services/content"
 import { ResponseWithPayload, ResponseWithoutPayload } from "../types/interfaces/Response"
 import { QueryParams } from "../types/QueryParams"

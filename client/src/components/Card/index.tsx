@@ -1,30 +1,27 @@
-import { Children, JSX, useState } from "react"
+import { JSX, useState } from "react"
 import { Link } from "react-router-dom"
-import { useAppDispatch, useAppSelector, useCheckBreakpoint } from "../../hooks"
+import { useCheckBreakpoint } from "../../hooks"
 import { Btn } from "../Btn"
 import { Badge } from "../Badge"
 import { AgeRestrictionBadge } from "../AgeRestrictionBadge"
 import { Tags } from "../Tags"
 import { IconButton } from "../IconButton"
+import { Skeletons } from "../Skeletons"
 import { PictureWithSources } from "../PictureWithSources"
-import { fetchMyFavorite } from "../../services/my/myThunk"
 import { CardProps } from "../../types/interfaces/CardProps"
 import { IconButtonProps } from "../../types/interfaces/IconButtonProps"
 import { PictureWithSourcesProps } from "../../types/interfaces/PictureWithSourcesProps"
-import { checkIsFavoriteContent } from "../../helpers"
 import { MediaPlayIcon } from "../../assets/icons/MediaPlayIcon"
 import { PlayIcon } from "../../assets/icons/PlayIcon"
 import { AddFavoriteIcon } from "../../assets/icons/AddFavoriteIcon"
 import { IsFavoriteIcon } from "../../assets/icons/IsFavoriteIcon"
 
-export function Card({ data, styles, settings, loadingCardData, error }: CardProps): JSX.Element {
-  const dispatch = useAppDispatch()
+export function Card({ data, styles, settings, loading, error, user: { auth, isFavoriteContent, handleFavoriteContent } }: CardProps): JSX.Element {
   const BREAKPOINT_XL = useCheckBreakpoint(1200)
   const BREAKPOINT_MD = useCheckBreakpoint(768)
-  const { user, loading } = useAppSelector(state => state.my)
-  const { _id, type, title, badge, ageRestriction, description, bg, logoImg, link } = data
+  const { _id, title, badge, ageRestriction, description, bg, logoImg, link } = data
   const { cardSize, flex, clipPath: { value: clipPathValue, type: clipPathType }, ageRestrictionBadge, btnGroup, hover, boxShadow, bg: bgImg } = styles
-  const { title: { titleOutside, titleLogoImg, titleLogoImgIndex }, badgeVisible, link: { linkType, linkDisabled }, descriptionVisible, tags, cardSeries } = settings
+  const { title: { titleOutside, titleLogoImg }, badgeVisible, link: { linkType, linkDisabled }, descriptionVisible, tags, cardSeries } = settings
   const [isHoveredBtnAddFavorite, setIsHoveredBtnAddFavorite] = useState(false)
   const sizeIconFavorite = {
     width: BREAKPOINT_MD ? 20 : 24,
@@ -37,7 +34,7 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
 
   const iconButtonProps: IconButtonProps = {
     config: {
-      stateIcon: checkIsFavoriteContent(user?.userActionsData.favoritList ?? null, _id),
+      stateIcon: isFavoriteContent ? 'isActive' : 'default',
       loading,
     },
     styles: {
@@ -55,13 +52,10 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
     isHovered: isHoveredBtnAddFavorite
   }
 
-  const handleClickBtnAddFavorite = (id: string): void => {
-    if (!user || loading) return
-
-    const formData = new FormData()
-    formData.append('id', id)
-
-    dispatch(fetchMyFavorite(formData))
+  if (loading) {
+    return (
+      <Skeletons type="card" cardType={cardSize} />
+    )
   }
 
   const renderCardContentLinkWrapper = (children: JSX.Element, linkType: 'allCard' | 'title', linkDisabled: boolean): JSX.Element => {
@@ -82,7 +76,7 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
 
   const renderCardContent = (): JSX.Element => {
     const renderBackground = (): JSX.Element | null => {
-      if (loadingCardData || error) return null
+      if (error) return null
 
       const baseClass = 'card-bg'
       const shadowClass = boxShadow ? ' card-bg_shadow' : ''
@@ -112,7 +106,7 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
       )
     }
 
-    const renderAgeRestrictionBadge = (loading: boolean): JSX.Element | null => {
+    const renderAgeRestrictionBadge = (): JSX.Element | null => {
       if (!ageRestrictionBadge) return null
 
       const baseClass = 'card-body__age-restriction'
@@ -122,21 +116,17 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
 
       return (
         <div className={`${baseClass}${positionClass}`}>
-          {loading
-            ? (<AgeRestrictionBadge size={ageRestrictionBadge.size} loading={loadingCardData} />)
-            : (<AgeRestrictionBadge size={ageRestrictionBadge.size} data={ageRestriction} />)}
+          <AgeRestrictionBadge size={ageRestrictionBadge.size} data={ageRestriction} />
         </div>
       )
     }
 
-    const renderBadge = (loading: boolean): JSX.Element | null => {
+    const renderBadge = (): JSX.Element | null => {
       if (!badge || !badgeVisible) return null
 
       return (
         <div className="card-body__badge">
-          {!loading
-            ? (<Badge type={badge.type} title={badge.title} />)
-            : (<Badge type={'loading'} />)}
+          <Badge type={badge.type} title={badge.title} />
         </div>
       )
     }
@@ -160,12 +150,11 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
       if (!descriptionVisible) return null
 
       const baseClass = 'card-body__description'
-      const loadingClass = loadingCardData ? ' card-body__description_loading' : ''
       const alignTextClass = ' title title_align_left'
-      const descriptionValue = !loadingCardData && description ? description : ''
+      const descriptionValue = description ? description : ''
 
       return (
-        <div className={`${baseClass}${loadingClass}${alignTextClass}`}>
+        <div className={`${baseClass}${alignTextClass}`}>
           {descriptionValue}
         </div>
       )
@@ -175,31 +164,26 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
       if (!btnGroup) return null
 
       const baseClass = "card-body__btn"
-      const loadingClass = loadingCardData ? ' card-body__btn_loading' : ''
 
       return (
-        <div className={`${baseClass}${loadingClass}`}>
-          {!loadingCardData && (
-            <>
-              <Link to={link}
-                className={`btn btn_primary card-body__btn-link card-body__btn-link_size_${styles.cardSize}`}>
-                <div className="card-body__btn-wrapper">
-                  <PlayIcon width={28} height={28} />
-                  <span className="card-body__btn-text">Смотреть</span>
-                </div>
-              </Link>
-              {user && (
-                <Btn
-                  type="button"
-                  className="btn_secondary btn_transparent btn_stroke_none card-body__btn-link card-body__btn-link_size_xsm"
-                  onClick={() => handleClickBtnAddFavorite(_id)}
-                  onMouseEnter={() => setIsHoveredBtnAddFavorite(true)}
-                  onMouseLeave={() => setIsHoveredBtnAddFavorite(false)}
-                >
-                  <IconButton {...iconButtonProps} />
-                </Btn>
-              )}
-            </>
+        <div className={baseClass}>
+          <Link to={link}
+            className={`btn btn_primary card-body__btn-link card-body__btn-link_size_${styles.cardSize}`}>
+            <div className="card-body__btn-wrapper">
+              <PlayIcon width={28} height={28} />
+              <span className="card-body__btn-text">Смотреть</span>
+            </div>
+          </Link>
+          {auth && (
+            <Btn
+              type="button"
+              className="btn_secondary btn_transparent btn_stroke_none card-body__btn-link card-body__btn-link_size_xsm"
+              onClick={() => handleFavoriteContent(_id)}
+              onMouseEnter={() => setIsHoveredBtnAddFavorite(true)}
+              onMouseLeave={() => setIsHoveredBtnAddFavorite(false)}
+            >
+              <IconButton {...iconButtonProps} />
+            </Btn>
           )}
         </div>
       )
@@ -219,8 +203,8 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
       <>
         {renderBackground()}
         <div className={`card-body card-body_flex_jc_${flex.body.justifyContent}`}>
-          {renderAgeRestrictionBadge(loadingCardData)}
-          {renderBadge(loadingCardData)}
+          {renderAgeRestrictionBadge()}
+          {renderBadge()}
           {renderLogoImg()}
           {renderDescription()}
           {tags && (
@@ -246,7 +230,6 @@ export function Card({ data, styles, settings, loadingCardData, error }: CardPro
       clipPathValue && clipPathType && `card_clip-path_${clipPathType}`,
       hover?.playBack.value && 'card_hover_playback',
       hover?.playBack?.type === 'bottom-more' && 'card_hover_playback_bottom_more',
-      loadingCardData && 'card_loading',
     ]
 
     return classes.filter(Boolean).join(' ')

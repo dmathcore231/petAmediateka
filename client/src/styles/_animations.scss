@@ -24,16 +24,54 @@
   }
 }
 
-@keyframes loading {
+@keyframes skeleton-bg-pulse {
+  0% {
+    background-color: $color-dark-01;
+  }
+
+  50% {
+    background-color: $color-dark-02;
+  }
+
+  100% {
+    background-color: $color-dark-01;
+  }
+}
+
+@keyframes skeleton-title-pulse {
   0% {
     background-color: $color-secondary;
   }
 
   50% {
-    background-color: $color-secondary-active;
+    background-color: $color-secondary-hover;
   }
 
   100% {
     background-color: $color-secondary;
+  }
+}
+
+@keyframes skeleton-text-pulse {
+  0% {
+    background-color: $color-dark-02;
+  }
+
+  50% {
+    background-color: $color-dark-03;
+  }
+
+  100% {
+    background-color: $color-dark-02;
+  }
+}
+
+@keyframes progress-bar {
+  0% {
+    left: -100%;
+  }
+
+  100% {
+    left: 0;
   }
 }
