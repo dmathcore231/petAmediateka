@@ -356,7 +356,7 @@ export function PopularGenres(): JSX.Element {
   const sliderPropsPopularGenres: SliderProps = {
     sliderSettings: {
       typeSlider: 'multi',
-      pagenation: false,
+      pagination: false,
       autoSwipe: false,
       lastSwipe: true,
       quantityListItems: BREAKPOINT_MD ? 2 : BREAKPOINT_XL ? 4 : 5,
@@ -407,6 +407,9 @@ export function PopularGenres(): JSX.Element {
       loadingData: false,
       errorData: false
     },
+    userState: {
+      user: null
+    }
   }
 
   const setClassLink = (link: boolean): string => link

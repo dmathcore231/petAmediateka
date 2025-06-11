@@ -1,6 +1,7 @@
 import { Link, NavLink, useLocation } from "react-router-dom"
 import { JSX } from "react"
-import { useAppSelector, useCheckBreakpoint } from "../../hooks"
+import { useAppSelector, useCheckBreakpoint, useAppDispatch } from "../../hooks"
+import { fetchLogout } from "../../services/auth/authThunk"
 import { ProfileSwitcher } from "../ProfileSwitcher"
 import { Spinner } from "../Spinner"
 import { BurgerMenu } from "../BurgerMenu"
@@ -26,15 +27,15 @@ const toggleLinkIsActive = (isActive: boolean): string => isActive
   ? CLASSES.linkActive
   : CLASSES.link
 
-const text: Record<string, string> = {
+const TEXT: Record<string, string> = {
   promoCode: "Ввести промокод",
   signIn: "Войти",
   signUp: "Попробовать за 1₽",
 }
 
-
 export function NavBar(): JSX.Element {
   const location = useLocation()
+  const dispatch = useAppDispatch()
   const breakpointXL = useCheckBreakpoint(1600)
   const breakpointMD = useCheckBreakpoint(768)
   const { user } = useAppSelector(state => state.my)
@@ -103,6 +104,12 @@ export function NavBar(): JSX.Element {
     )
   }
 
+  const handleClickLogout = (): void => {
+    const layoutElement: HTMLElement | null = document.querySelector('.layout')
+    layoutElement?.classList.remove('layout_fixed')
+    dispatch(fetchLogout())
+  }
+
   if (!breakpointMD) {
     return (
       <nav className={`${CLASSES.base}${paddingNoneClass}`}>
@@ -118,25 +125,25 @@ export function NavBar(): JSX.Element {
               <>
                 <span className="nav-bar-wrapper__item nav-bar-wrapper__item_margin nav-bar-wrapper__item_width_lg">
                   <Link to="/" className="btn btn_secondary btn_size_sm">
-                    {text.promoCode}
+                    {TEXT.promoCode}
                   </Link>
                 </span>
                 <span className="nav-bar-wrapper__item">
                   <Link to="/auth/signin" className="btn btn_secondary btn_size_sm">
-                    {text.signIn}
+                    {TEXT.signIn}
                   </Link>
                 </span>
               </>
             )}
             <span className="nav-bar-wrapper__item nav-bar-wrapper__item_width_lg">
               <Link to="/auth/signup" className="btn btn_primary btn_size_sm">
-                {text.signUp}
+                {TEXT.signUp}
               </Link>
             </span>
             {user && !loading && (
               <>
                 <ProfileSwitcher className="profile-switcher_margin" />
-                <BurgerMenu user={user} />
+                <BurgerMenu user={user} onLogout={handleClickLogout} />
               </>
             )}
             {loading && (
@@ -167,7 +174,7 @@ export function NavBar(): JSX.Element {
             </NavLink>
           </li>
           <li className={CLASSES.listItem}>
-            <BurgerMenu user={user} />
+            <BurgerMenu user={user} onLogout={handleClickLogout} />
           </li>
         </ul>
       </div>

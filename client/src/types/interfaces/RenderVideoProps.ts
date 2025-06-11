@@ -1,7 +1,7 @@
-import { SrcMediaPlaer } from "../SrcMediaPlaer"
+import { SrcMediaPlayer } from "../SrcMediaPlayer"
 
 export interface RenderVideoProps {
   error: { number: number; message: string; } | null
-  src: SrcMediaPlaer | null,
+  src: SrcMediaPlayer | null,
   loading: boolean
 }

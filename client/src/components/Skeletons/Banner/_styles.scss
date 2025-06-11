@@ -1,0 +1,65 @@
+@use "../../../styles/mixins" as *;
+@use "../../../styles/variables" as *;
+
+.skeleton-banner {
+  --banner-height: 13rem;
+  --banner-padding: 1.375rem 3rem 1.875rem;
+
+  width: 100%;
+  height: var(--banner-height);
+  @include flex-column-start;
+  justify-content: start;
+  gap: var(--skeleton-item-gap);
+  background-color: $color-dark-01;
+  padding: var(--banner-padding);
+  border-radius: 1rem;
+  animation: $skeleton-bg-animation;
+
+  @include media (xxxl) {
+    --banner-height: 9.75rem;
+    --banner-padding: 1rem 2rem 1rem;
+  }
+
+  @include media(xxl) {
+    --banner-height: 9.063rem;
+    --banner-padding: 1.25rem 1.5rem 1.25rem;
+  }
+
+  @include media (lg) {
+    --banner-height: 7.188rem;
+    --banner-padding: 0.75rem 1.5rem 0.75rem;
+  }
+
+  @include media (md) {
+    --banner-height: 13rem;
+    --banner-padding: 1.5rem 1.438rem;
+  }
+
+  &__item {
+    height: var(--skeleton-item-height);
+    width: var(--skeleton-item-width);
+    background-color: $color-dark-02;
+    border-radius: 0.5rem;
+    animation: $skeleton-text-animation;
+
+    &_width {
+      &_md {
+        width: var(--skeleton-item-width-md);
+      }
+
+      &_sm {
+        width: var(--skeleton-item-width-sm);
+      }
+    }
+
+    &_color {
+
+      &-bg {
+        &_secondary {
+          background-color: $color-secondary;
+          animation: $skeleton-title-animation;
+        }
+      }
+    }
+  }
+}

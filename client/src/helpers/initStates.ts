@@ -2,7 +2,7 @@ import { AuthState, ContentState, MediaPlayerState, StateStatusResponse, MyState
 import { ContentTypeEnum } from "../types/interfaces/Content"
 
 const defaultState: StateStatusResponse = {
-  loading: false,
+  loading: true,
   status: null,
   error: null,
   message: null,

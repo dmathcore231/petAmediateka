@@ -1,25 +1,16 @@
-export type SlideState = {
+export type SlideState<T> = {
   prevSlide: number
-  activeSlide: number
+  activeSlide: T
   nextSlide: number
   translateX: number
   indexSlide: number
   isAnimated: boolean
-}
-
-
-export type MultiSlideState = {
-  prevSlide: number
-  activeSlide: Array<number>
-  nextSlide: number
-  translateX: number
-  indexSlide: number,
-  isAnimated: boolean
+  sliderItemWidth: number
 }
 
 export type SliderSettings = {
   typeSlider: "default" | "multi"
-  pagenation: boolean
+  pagination: boolean
   autoSwipe: boolean
   lastSwipe: boolean
   quantityListItems: number

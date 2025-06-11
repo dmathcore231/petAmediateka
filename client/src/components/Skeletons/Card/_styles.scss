@@ -1,0 +1,147 @@
+@use "../../../styles/mixins" as *;
+@use "../../../styles/variables" as *;
+
+.skeleton-card {
+  --height: 3rem;
+  --top: 0;
+  --padding: 1rem;
+  --gap: 1rem;
+  --clip-path: none;
+  --border-radius: 1.5rem;
+
+  --badge-size: 3rem;
+
+  position: relative;
+  width: 100%;
+  height: var(--height);
+  @include flex-column-start;
+  justify-content: flex-start;
+  gap: var(--gap);
+  padding: var(--padding);
+  border-radius: var(--border-radius);
+  background-color: $color-dark-01;
+  clip-path: var(--clip-path);
+  animation: $skeleton-bg-animation;
+
+  &_size {
+    &_lg {
+      --height: 53.25rem;
+      --top: 3.125rem;
+      --padding: var(--main-header-padding) 3.75rem 9rem 3.75rem;
+      --gap: 7.938rem;
+
+      --badge-size: 3rem;
+    }
+
+    &_lm {
+      --height: 520px;
+      --clip-path: #{$main-clip-path};
+      --border-radius: 0;
+      --padding: 5rem 1rem 1rem;
+      --gap: 4rem;
+      --badge-size: 2.188rem;
+    }
+
+    &_md {
+      --height: 16.375rem;
+      --padding: 1rem;
+      justify-content: flex-end;
+    }
+  }
+
+  &__badge {
+    width: var(--badge-size);
+    height: var(--badge-size);
+    border-radius: 0.5rem;
+    background-color: $color-secondary;
+    animation: $skeleton-title-animation;
+  }
+
+  &__wrapper {
+    width: 100%;
+    @include flex-column-start;
+    justify-content: flex-start;
+    gap: var(--skeleton-item-gap);
+  }
+
+  &__item {
+    height: var(--skeleton-item-height);
+    width: var(--skeleton-item-width);
+    background-color: $color-dark-02;
+    border-radius: 0.5rem;
+    animation: $skeleton-text-animation;
+
+    &_width {
+      &_md {
+        width: var(--skeleton-item-width-md);
+      }
+
+      &_sm {
+        width: var(--skeleton-item-width-sm);
+      }
+    }
+
+    &_color {
+
+      &-bg {
+        &_secondary {
+          background-color: $color-secondary;
+          animation: $skeleton-title-animation;
+        }
+      }
+    }
+  }
+
+  @include media (xxxl) {
+    --height: 38.75rem;
+    --padding: var(--main-header-padding) 2.5rem 7rem 2.5rem;
+    --gap: 6rem;
+    --badge-size: 2.5rem;
+
+    &_size {
+      &_lm {
+        --padding: 5rem 1rem 1rem;
+        --gap: 3rem;
+      }
+    }
+  }
+
+  @include media(xxl) {
+    &_size {
+      &_lg {
+        --padding: var(--main-header-padding) 2rem 6rem 2rem;
+        --gap: 4rem;
+        --badge-size: 2rem;
+      }
+
+      &_lm {
+        --height: 418px;
+        --padding: 3rem 1rem 1rem;
+        --gap: 2rem;
+      }
+    }
+  }
+
+  @include media (xl) {
+    &_size {
+      &_lg {
+        --height: 25rem;
+        --padding: var(--main-header-padding) 1.5rem 5rem 1.5rem;
+        --gap: 3rem;
+        --badge-size: 1.5rem;
+      }
+
+      &_lm {
+        --gap: 1.5rem;
+      }
+    }
+  }
+
+  @include media(md) {
+    &_size {
+      &_lg {
+        --height: 32rem;
+      }
+    }
+  }
+}

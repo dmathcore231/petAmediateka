@@ -6,7 +6,7 @@ import { Btn } from "../Btn"
 import { Spinner } from "../Spinner"
 import { TrackSetting } from "../../types/TrackSetting"
 import { VideoQuality, VideoQualityKey } from "../../types/VideoQuality"
-import { SrcMediaPlaer } from "../../types/SrcMediaPlaer"
+import { SrcMediaPlayer } from "../../types/SrcMediaPlayer"
 import { ContentStateItem } from "../../types/interfaces/InitialStatesSlice"
 import { MediaContent } from "../../types/interfaces/MediaContent"
 import { RenderVideoProps } from "../../types/interfaces/RenderVideoProps"
@@ -586,7 +586,7 @@ export function MediaPlayer(): JSX.Element {
         ? `SD ${quality}`
         : `HD ${quality}`
 
-      const renderListQualityItem = (src: SrcMediaPlaer | null) => {
+      const renderListQualityItem = (src: SrcMediaPlayer | null) => {
         if (!src) return null
 
         const videoQualityOptions = Object.entries(src)

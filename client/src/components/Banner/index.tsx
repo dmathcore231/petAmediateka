@@ -2,10 +2,11 @@ import { JSX } from "react"
 import { Link } from "react-router-dom"
 import { useCheckBreakpoint } from "../../hooks"
 import { PictureWithSources } from "../PictureWithSources"
+import { Skeletons } from "../Skeletons"
 import { BannerProps } from "../../types/interfaces/BannerProps"
 import { PictureWithSourcesProps } from "../../types/interfaces/PictureWithSourcesProps"
 
-export function Banner({ _id, title, bannerListItem, img, titleBtn, ageRestriction, loading }: BannerProps): JSX.Element {
+export function Banner({ title, bannerListItem, img, titleBtn, ageRestriction, loading }: BannerProps): JSX.Element {
   const breakpointLg = useCheckBreakpoint(992)
   const breakpointMd = useCheckBreakpoint(768)
   const baseClass: string = 'banner'
@@ -43,15 +44,7 @@ export function Banner({ _id, title, bannerListItem, img, titleBtn, ageRestricti
 
   if (loading) {
     return (
-      <div className={`${baseClass} ${loadingClass}`}>
-        <div className="banner__wrapper">
-          <div className="banner__item">
-            <div className="banner__title" />
-            <div className="banner-list" />
-            <div className="banner__btn" />
-          </div>
-        </div>
-      </div>
+      <Skeletons type="banner" />
     )
   }
 

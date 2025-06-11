@@ -1,21 +1,21 @@
-import { useState, useEffect, MouseEvent, JSX, act } from "react"
+import { useState, useEffect, MouseEvent, JSX } from "react"
 import { Link, NavLink } from "react-router-dom"
-import { useAppDispatch, useCheckBreakpoint } from "../../hooks"
-import { fetchLogout } from "../../services/auth/authThunk"
+import { useCheckBreakpoint } from "../../hooks"
 import { Btn } from "../Btn"
 import { Avatar } from "../Avatar"
 import { BurgerMenuItem } from "../../types/interfaces/BurgerMenuItem"
 import { BurgerMenuProps } from "../../types/interfaces/BurgerMenuProps"
+import { AvatarProps } from "../../types/interfaces/AvatarProps"
 import { BurgerMenuIcon } from "../../assets/icons/BurgerMenuIcon"
 import { CloseIcon } from "../../assets/icons/CloseIcon"
 import { PlusIcon } from "../../assets/icons/PlusIcon"
 import { Logo } from "../../assets/icons/Logo"
 
-export function BurgerMenu({ user }: BurgerMenuProps): JSX.Element {
-  const dispatch = useAppDispatch()
+export function BurgerMenu({ user, onLogout }: BurgerMenuProps): JSX.Element {
   const BREAKPOINT_XL = useCheckBreakpoint(1200)
   const BREAKPOINT_LG = useCheckBreakpoint(768)
   const [isActive, setIsActive] = useState(false)
+
   const BASE_CLASS = "burger-menu"
   const ASIDE_BASE_CLASS = `${BASE_CLASS}-aside`
   const ASIDE_HEADER_BASE_CLASS = `${ASIDE_BASE_CLASS}-header`
@@ -107,7 +107,7 @@ export function BurgerMenu({ user }: BurgerMenuProps): JSX.Element {
       to: "#",
       text: "Выйти из аккаунта",
       className: "link link_gray title title_size_s",
-      onClick: handleClickLogout,
+      onClick: onLogout,
       typeLink: "link",
     }
   ]
@@ -144,6 +144,12 @@ export function BurgerMenu({ user }: BurgerMenuProps): JSX.Element {
     },
   ]
 
+  const avatarProps: AvatarProps = {
+    size: "md",
+    className: "avatar__img_border_white",
+    user,
+  }
+
   useEffect((): void => {
     const layoutElement = document.querySelector('.layout')
     if (isActive) {
@@ -156,12 +162,6 @@ export function BurgerMenu({ user }: BurgerMenuProps): JSX.Element {
   function handleClickCloseBtn(event: MouseEvent<HTMLButtonElement> | MouseEvent<HTMLAnchorElement>): void {
     event.stopPropagation()
     setIsActive(false)
-  }
-
-  function handleClickLogout(): void {
-    const layoutElement: HTMLElement | null = document.querySelector('.layout')
-    layoutElement?.classList.remove('layout_fixed')
-    dispatch(fetchLogout())
   }
 
   const handleClickBurgerMenu = (): void => {
@@ -275,7 +275,7 @@ export function BurgerMenu({ user }: BurgerMenuProps): JSX.Element {
                   className="burger-menu-aside-header__avatar"
                   onClick={handleClickCloseBtn}
                 >
-                  <Avatar size="md" className="avatar__img_border_white" />
+                  <Avatar {...avatarProps} />
                 </Link>
                 <Link
                   to="/profile"

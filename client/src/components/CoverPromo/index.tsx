@@ -4,11 +4,9 @@ import { useCheckBreakpoint } from "../../hooks"
 import { CoverPromoProps } from "../../types/interfaces/CoverPromoProps"
 import { CardProps } from "../../types/interfaces/CardProps"
 import { defaultCardData } from "../../helpers"
-import { useAppSelector } from "../../hooks"
 
-export function CoverPromo({ coverPromoData }: CoverPromoProps): JSX.Element {
+export function CoverPromo({ coverPromoData, loading, error }: CoverPromoProps): JSX.Element {
   const BREAKPOINT_MD = useCheckBreakpoint(768)
-  const { coverPromo: { loading, error } } = useAppSelector(state => state.content)
 
   const cardProps: CardProps = {
     data: coverPromoData ? coverPromoData[0] : defaultCardData,
@@ -53,8 +51,13 @@ export function CoverPromo({ coverPromoData }: CoverPromoProps): JSX.Element {
       tags: null,
       cardSeries: false
     },
-    loadingCardData: loading,
-    error: error ? true : false
+    loading: loading,
+    error: error ? true : false,
+    user: {
+      auth: false,
+      isFavoriteContent: false,
+      handleFavoriteContent: () => { },
+    }
   }
 
   const cardSecondProps: CardProps = {
@@ -95,15 +98,20 @@ export function CoverPromo({ coverPromoData }: CoverPromoProps): JSX.Element {
       },
       descriptionVisible: true,
       tags: {
-        raiting: 8,
+        rating: 8,
         ageRestriction: 18,
         dateRelease: '2023',
         genres: ['Драма']
       },
       cardSeries: false
     },
-    loadingCardData: loading,
-    error: error ? true : false
+    loading: loading,
+    error: error ? true : false,
+    user: {
+      auth: false,
+      isFavoriteContent: false,
+      handleFavoriteContent: () => { },
+    }
   }
 
   const mobileCardProps: CardProps = {
@@ -147,15 +155,20 @@ export function CoverPromo({ coverPromoData }: CoverPromoProps): JSX.Element {
       },
       descriptionVisible: true,
       tags: {
-        raiting: 8,
+        rating: 8,
         ageRestriction: 18,
         dateRelease: '2023',
         genres: ['Драма']
       },
       cardSeries: false
     },
-    loadingCardData: loading,
-    error: error ? true : false
+    loading: loading,
+    error: error ? true : false,
+    user: {
+      auth: false,
+      isFavoriteContent: false,
+      handleFavoriteContent: () => { },
+    }
   }
 
   const renderItems = (mobileBreakpoint: boolean): JSX.Element => {

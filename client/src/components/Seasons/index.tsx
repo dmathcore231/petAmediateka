@@ -57,7 +57,7 @@ export function Seasons({ seasonsValue, mediaContentData }: SeasonsProps): JSX.E
     const sliderProps: SliderProps = {
       sliderSettings: {
         typeSlider: 'multi',
-        pagenation: false,
+        pagination: false,
         autoSwipe: false,
         lastSwipe: true,
         quantityListItems: setQuantityListItems(true),
@@ -106,6 +106,9 @@ export function Seasons({ seasonsValue, mediaContentData }: SeasonsProps): JSX.E
         loadingData: false,
         errorData: false
       },
+      userState: {
+        user: null
+      }
     }
 
     return <Slider {...sliderProps} />

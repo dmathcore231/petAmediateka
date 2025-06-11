@@ -33,6 +33,6 @@
     height: 1.5rem;
     @include flex-center;
     background-color: $color-secondary;
-    animation: $loading-animation;
+    animation: $skeleton-bg-animation;
   }
 }

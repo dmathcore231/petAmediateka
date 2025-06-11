@@ -1,7 +1,7 @@
 import { CardData } from "../types/Card"
 import { BannerProps } from "../types/interfaces/BannerProps"
 import { UserData } from "../types/interfaces/User"
-import { SrcMediaPlaer } from "../types/SrcMediaPlaer"
+import { SrcMediaPlayer } from "../types/SrcMediaPlayer"
 import { MediaContent } from "../types/interfaces/MediaContent"
 import { GetDataFromLocalStorageType } from "../types/GetDataFromLocalStorageType"
 import { PromoLineData } from "../types/interfaces/PromoLineData"
@@ -72,8 +72,8 @@ export const defaultPromoLineData: PromoLineData = {
   promoLineItem: ['item1', 'item2', 'item3', 'item4']
 }
 
-export const formSrcMediaContent = (mediaContentData: MediaContent): SrcMediaPlaer => {
-  const result: SrcMediaPlaer = {
+export const formSrcMediaContent = (mediaContentData: MediaContent): SrcMediaPlayer => {
+  const result: SrcMediaPlayer = {
     _current: {
       type: '360p',
       value: ''
@@ -138,7 +138,7 @@ export const setTextAuth = (type: 'signUp' | 'signIn', text: AuthTextKey): strin
   return mapText[type][text]
 }
 
-export const checkIsFavoriteContent = (favoritList: string[] | null, idMContent: string): 'isActive' | 'default' =>
-  favoritList?.includes(idMContent)
+export const checkIsFavoriteContent = (favoriteList: string[] | null, idMContent: string): 'isActive' | 'default' =>
+  favoriteList?.includes(idMContent)
     ? 'isActive'
     : 'default'

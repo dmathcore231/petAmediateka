@@ -4,7 +4,7 @@ import { PlayerStatus } from "../PlayerStatus"
 import { Content } from "./Content"
 import { MediaContent } from "./MediaContent"
 import { ContentTypeEnum } from "./Content"
-import { SrcMediaPlaer } from "../SrcMediaPlaer"
+import { SrcMediaPlayer } from "../SrcMediaPlayer"
 import { CardData } from "../Card"
 
 export type ContentTypes = Content | MediaContent | null
@@ -39,7 +39,7 @@ export interface MediaPlayerState {
     number: number
     message: string
   } | null
-  src: SrcMediaPlaer | null
+  src: SrcMediaPlayer | null
   playerStatus: PlayerStatus
   title: string | null
 }

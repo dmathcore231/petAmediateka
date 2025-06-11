@@ -103,6 +103,6 @@
   &_loading {
     --badge-bg-color: $color-secondary;
     border-color: $color-secondary;
-    animation: $loading-animation;
+    animation: $skeleton-bg-animation;
   }
 }

@@ -1,5 +1,6 @@
 import { CardStyles, CardSetting, CardData } from "../Card"
 import { SliderSettings } from "../Slider"
+import { UserData } from "./User"
 
 export interface SliderProps {
   sliderSettings: SliderSettings
@@ -9,5 +10,8 @@ export interface SliderProps {
     settings: CardSetting
     loadingData: boolean
     errorData: boolean
+  }
+  userState: {
+    user: UserData | null
   }
 }

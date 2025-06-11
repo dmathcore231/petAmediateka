@@ -4,4 +4,5 @@ import { PromoLineData } from "./PromoLineData"
 export interface PromoLineProps {
   promoLineData: PromoLineData
   sliderProps: SliderProps
+  loadingData: boolean
 }

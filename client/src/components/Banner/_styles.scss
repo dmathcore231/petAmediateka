@@ -25,12 +25,12 @@
   &_loading {
     --item-bg-color: #{$color-secondary};
     --item-border: none;
-    --item-animation: #{$loading-animation};
+    --item-animation: #{$skeleton-bg-animation};
 
     --title-width: 145px;
     --title-height: 24px;
     --title-bg-color: #{$color-secondary};
-    --title-amimation: #{$loading-animation};
+    --title-amimation: #{$skeleton-bg-animation};
 
     --list-width: 235px;
     --list-height: 24px;
