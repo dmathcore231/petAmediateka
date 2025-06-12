@@ -1,8 +1,9 @@
-import { JSX, memo, useEffect } from "react"
+import { JSX, memo, useRef } from "react"
 import { Link } from "react-router-dom"
-import { useAppSelector, useAppDispatch, useCheckBreakpoint } from "../../../hooks"
+import { useAppSelector, useAppDispatch, useCheckBreakpoint, useLazyLoad } from "../../../hooks"
 import { fetchContent } from "../../../redux/contentSlice"
 import { Slider } from "../../../components/Slider"
+import { SkeletonTitle } from "../../../components/Skeletons/Title"
 import { SliderProps } from "../../../types/interfaces/SliderProps"
 import { CardData } from "../../../types/Card"
 import { ContentTypeEnum } from "../../../types/interfaces/Content"
@@ -13,6 +14,7 @@ function NewReleaseComponent(): JSX.Element {
   const BREAKPOINT_MD = useCheckBreakpoint(768)
   const BREAKPOINT_SM = useCheckBreakpoint(576)
   const { content, loading } = useAppSelector(state => state.content.newRelease)
+  const sectionElement = useRef<HTMLDivElement>(null)
   const baseClass = "home-item"
   const titleClass = `${baseClass}__title`
   const containerClass = "container"
@@ -21,10 +23,11 @@ function NewReleaseComponent(): JSX.Element {
     title: "Новое в Амедиатеке",
     link: "Показать еще",
   }
-
-  useEffect(() => {
-    dispatch(fetchContent({ type: ContentTypeEnum.NewRelease }))
-  }, [dispatch])
+  useLazyLoad(
+    sectionElement,
+    () => dispatch(fetchContent({ type: ContentTypeEnum.NewRelease })),
+    0.7
+  )
 
   const setQuantityListItems = (maxSize: boolean) => {
     if (BREAKPOINT_SM) return 1
@@ -36,6 +39,13 @@ function NewReleaseComponent(): JSX.Element {
     return maxSize ? 5 : 4
   }
 
+  const setTitle = (loading: boolean): JSX.Element => {
+    return !loading ? (
+      <h2>{TEXT.title}</h2>
+    ) : (
+      <SkeletonTitle />
+    )
+  }
   const sliderPropsNewRelease: SliderProps = {
     sliderSettings: {
       typeSlider: 'multi',
@@ -97,9 +107,9 @@ function NewReleaseComponent(): JSX.Element {
   }
 
   return (
-    <section className={baseClass}>
+    <section className={baseClass} ref={sectionElement}>
       <div className={`${titleClass} ${containerClass}`}>
-        <h2>{TEXT.title}</h2>
+        {setTitle(loading)}
         <Link to="/#" className={linkClasses}>{TEXT.link}</Link>
       </div>
       <Slider {...sliderPropsNewRelease} />

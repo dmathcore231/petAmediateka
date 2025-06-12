@@ -1,5 +1,5 @@
-import { JSX, memo, useEffect } from "react"
-import { useAppDispatch, useAppSelector } from "../../../hooks"
+import { JSX, memo, useRef } from "react"
+import { useAppDispatch, useAppSelector, useLazyLoad } from "../../../hooks"
 import { CoverPromo } from "../../../components/CoverPromo"
 import { fetchContent } from "../../../redux/contentSlice"
 import { CardData } from "../../../types/Card"
@@ -8,11 +8,13 @@ import { ContentTypeEnum } from "../../../types/interfaces/Content"
 
 function CoverPromoComponent(): JSX.Element {
   const dispatch = useAppDispatch()
+  const sectionElement = useRef<HTMLDivElement>(null)
   const { content, loading } = useAppSelector((state) => state.content.coverPromo)
-
-  useEffect(() => {
-    dispatch(fetchContent({ type: ContentTypeEnum.CoverPromo }))
-  }, [dispatch])
+  useLazyLoad(
+    sectionElement,
+    () => dispatch(fetchContent({ type: ContentTypeEnum.CoverPromo })),
+    0.7
+  )
 
   const coverPromoProps: CoverPromoProps = {
     coverPromoData: content
@@ -23,7 +25,7 @@ function CoverPromoComponent(): JSX.Element {
   }
 
   return (
-    <section className="home-item container">
+    <section className="home-item container" ref={sectionElement}>
       <CoverPromo {...coverPromoProps} />
     </section>
   )

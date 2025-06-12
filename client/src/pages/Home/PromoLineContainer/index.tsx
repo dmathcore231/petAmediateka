@@ -1,5 +1,5 @@
-import { JSX, memo, useEffect } from "react"
-import { useAppDispatch, useAppSelector, useCheckBreakpoint } from "../../../hooks"
+import { JSX, memo, useRef } from "react"
+import { useAppDispatch, useAppSelector, useCheckBreakpoint, useLazyLoad } from "../../../hooks"
 import { fetchContent } from "../../../redux/contentSlice"
 import { PromoLine } from "../../../components/PromoLine"
 import { SliderProps } from "../../../types/interfaces/SliderProps"
@@ -14,11 +14,13 @@ function PromoLineComponent(): JSX.Element {
   const BREAKPOINT_XL = useCheckBreakpoint(1200)
   const BREAKPOINT_MD = useCheckBreakpoint(768)
   const BREAKPOINT_SM = useCheckBreakpoint(576)
+  const sectionElement = useRef<HTMLDivElement>(null)
   const { content, loading } = useAppSelector(state => state.content.promoLine)
-
-  useEffect(() => {
-    dispatch(fetchContent({ type: ContentTypeEnum.PromoLine }))
-  }, [dispatch])
+  useLazyLoad(
+    sectionElement,
+    () => dispatch(fetchContent({ type: ContentTypeEnum.PromoLine })),
+    0.7
+  )
 
   const setQuantityListItems = (maxSize: boolean) => {
     if (BREAKPOINT_SM) return 1
@@ -106,11 +108,11 @@ function PromoLineComponent(): JSX.Element {
       ? content.data as PromoLineData
       : defaultPromoLineData,
     sliderProps: sliderPropsPromoLine,
-    loadingData: true
+    loadingData: loading
   }
 
   return (
-    <section className="home-item">
+    <section className="home-item" ref={sectionElement}>
       <PromoLine {...promoLineProps} />
     </section>
   )

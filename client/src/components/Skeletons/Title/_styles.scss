@@ -1,0 +1,9 @@
+@use "../../../styles/mixins" as *;
+@use "../../../styles/variables" as *;
+
+.skeleton-title {
+  width: var(--skeleton-title-width);
+  height: var(--skeleton-title-height);
+  border-radius: 1.5rem;
+  animation: $skeleton-title-animation;
+}
