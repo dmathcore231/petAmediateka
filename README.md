@@ -12,6 +12,9 @@ Frontend-приложение с элементами FullStack:
 - Современная стилизация с использованием SCSS модулей
 - Клиентская логика с обработкой ошибок API
 - BEM
+- Container/Presentational компоненты
+- Lazy Loading для компонентов
+- Оптимизация рендера React компонентов 
 
 ⚒️ **Учебные элементы**:
 - REST API (Node.js + Express + MongoDB)
