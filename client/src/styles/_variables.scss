@@ -42,6 +42,8 @@ $skeleton-text-animation: skeleton-text-pulse 2.5s infinite;
   --skeleton-item-width-md: 25%;
   --skeleton-item-width-sm: 15%;
   --skeleton-item-gap: 1.25rem;
+  --skeleton-title-width: 40%;
+  --skeleton-title-height: 1.875rem;
 
   --playback-hover-transform: translate(3%, -3%) scale(1.02);
 
@@ -52,6 +54,10 @@ $skeleton-text-animation: skeleton-text-pulse 2.5s infinite;
 
   @media (max-width: $breakpoint-xxl) {
     --main-header-padding: 7.5rem;
+  }
+
+  @media(max-width: $breakpoint-xl) {
+    --skeleton-title-height: 1.25rem;
   }
 
   @media(max-width: $breakpoint-lg) {
@@ -68,6 +74,7 @@ $skeleton-text-animation: skeleton-text-pulse 2.5s infinite;
     --skeleton-item-width: 45%;
     --skeleton-item-width-md: 35%;
     --skeleton-item-width-sm: 25%;
+    --skeleton-title-width: 70%;
 
     --playback-hover-transform: translate(1%, -1%) scale(1);
   }
